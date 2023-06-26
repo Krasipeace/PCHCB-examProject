@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCHCB.Web", "PCHCB.Web\PCHCB.Web.csproj", "{946C1A13-5B30-4537-A9FB-1B6B04D91123}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCHCB.Common", "PCHCB.Common\PCHCB.Common.csproj", "{AD30DDEC-493A-4221-8C56-E44F35A19423}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{946C1A13-5B30-4537-A9FB-1B6B04D91123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{946C1A13-5B30-4537-A9FB-1B6B04D91123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{946C1A13-5B30-4537-A9FB-1B6B04D91123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{946C1A13-5B30-4537-A9FB-1B6B04D91123}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD30DDEC-493A-4221-8C56-E44F35A19423}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD30DDEC-493A-4221-8C56-E44F35A19423}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD30DDEC-493A-4221-8C56-E44F35A19423}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD30DDEC-493A-4221-8C56-E44F35A19423}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD7A1276-2B76-4ACF-B234-A74FBAE6D226}
+	EndGlobalSection
+EndGlobal
