@@ -1,4 +1,4 @@
-namespace PCHCB.Web.Models
+namespace PCHCB.Web.ViewModels.Home
 {
     public class ErrorViewModel
     {

@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
 
-    using PCHCB.Web.Models;
+    using PCHCB.Web.ViewModels.Home;
 
     using System.Diagnostics;
 
