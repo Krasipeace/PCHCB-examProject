@@ -2,3 +2,11 @@
 
 # PC's Hardware Compatibility Builder
 SoftUni ASP.NET Exam Project
+
+## Overview
+
+The Personal Computer's Hardware Compatibility Builder App is a software application that allows users to configure a custom PC configuration based on their specific needs and requirements. The app provides a user-friendly interface that guides users through the process of selecting the components they need for their PC, including the CPU, GPU, RAM, storage, case, motherboard, power supply, and cooling solution.
+
+## Features
+
+.. to be filled in

@@ -15,4 +15,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PCHCB.Common\PCHCB.Common.csproj" />
+    <ProjectReference Include="..\PCHCB.Data.Models\PCHCB.Data.Models.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -10,7 +10,7 @@ namespace PCHCB.Web.Data.Migrations
 
     using System;
 
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(PCHCBDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

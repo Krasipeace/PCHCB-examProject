@@ -11,7 +11,7 @@ namespace PCHCB.Web.Data.Migrations
 
     using System;
 
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(PCHCBDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {
