@@ -2,47 +2,101 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using PCHCB.Data.Models.Enums;
+
+    using static PCHCB.Common.EntityValidationConstants.Component;
+
+    /// <summary>
+    /// PC Case Component
+    /// </summary>
     public class Case
     {
+        /// <summary>
+        /// PC Case Id in app's database
+        /// </summary>
         [Key]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Case Name
+        /// </summary>
         [Required]
+        [MaxLength(NameMaxLength)]
         public string Name { get; set; } = null!;
 
+        /// <summary>
+        /// Case Price 
+        /// </summary>
         [Required]
-        public CaseSize CaseSize { get; set; } // Case compatibility check
+        public decimal Price { get; set; }
 
+        /// <summary>
+        /// Case Size (Mini, Mid, Full)
+        /// </summary>
         [Required]
-        public string FormFactor { get; set; } = null!; // Motherboard compatibility check
+        public CaseSize CaseSize { get; set; }
 
+        /// <summary>
+        /// Case Form Factor (ATX, mATX, etc.)
+        /// </summary>
         [Required]
-        public int MaxGpuLength { get; set; } // Gpu compatibility check
+        public MbFormFactor FormFactor { get; set; }
 
+        /// <summary>
+        /// Case Max GPU Length (in mm)
+        /// </summary>
         [Required]
-        public int MaxAirCpuCoolerHeight { get; set; } // Air cooler compatibility check
+        [MaxLength(GpuMaxLength)]
+        public int MaxGpuLength { get; set; }
 
+        /// <summary>
+        /// Case Max Air CPU Cooler Height (in mm)
+        /// </summary>
         [Required]
-        public int FansDimensions { get; set; } // Fans compatibility check
+        [MaxLength(CpuMaxHeight)]
+        public int MaxAirCpuCoolerHeight { get; set; }
 
+        /// <summary>
+        /// PSU Factor (ATX, SFX, etc.)
+        /// </summary>
         [Required]
-        public int PsuFactor { get; set; } // Psu compatibility check
+        public PsuFactor PsuFactor { get; set; }
 
+        /// <summary>
+        /// Case Image Url
+        /// </summary>
         [Required]
+        [MaxLength(UrlMaxLength)]
         public string ImageUrl { get; set; } = null!;
 
+        /// <summary>
+        /// Case Max Storage Device Slots (HDD, SSD, etc.)
+        /// </summary>
         [Required]
-        public int MaxStorageDevices { get; set; } // Storage compatibility check
+        public int MaxStorageDevices { get; set; }
 
-        public int MaxRadiatorLength { get; set; } // Cpu Water cooler Radiator compatibility check
+        /// <summary>
+        /// Case Max Radiator Length for Water Cooling Solution (in mm)
+        /// </summary>
+        public int MaxRadiatorLength { get; set; }
 
+        /// <summary>
+        /// Case Additional Description/Notes
+        /// </summary>
+        [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
-    }
-    
-    public enum CaseSize
-    {
-        MiniTower = 0,
-        MidTower = 1,
-        FullTower = 2
+
+        /// <summary>
+        /// Case Added On Date 
+        /// </summary>
+        public DateTime AddedOn { get; set; }
+
+        public int PcConfigurationId { get; set; }
+
+        public virtual PcConfiguration PcConfiguration { get; set; } = null!;
+
+        public Guid ProviderId { get; set; }
+
+        public virtual Provider Provider { get; set; } = null!;
     }
 }

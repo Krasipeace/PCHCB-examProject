@@ -2,14 +2,24 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using static PCHCB.Common.EntityValidationConstants.Component;
+
     /// <summary>
-    /// Hardware Provider
+    /// Hardware Provider User
     /// </summary>
     public class Provider
     {
         public Provider()
         {
             this.Id = Guid.NewGuid();
+            this.ProviderCases = new HashSet<Case>();
+            this.ProviderCoolers = new HashSet<Cooler>();
+            this.ProviderCpus = new HashSet<Cpu>();
+            this.ProviderGpus = new HashSet<Gpu>();
+            this.ProviderMotherboards = new HashSet<Motherboard>();
+            this.ProviderPsus = new HashSet<Psu>();
+            this.ProviderRams = new HashSet<Ram>();
+            this.ProviderStorages = new HashSet<Storage>();
         }
 
         [Key]
@@ -19,20 +29,62 @@
 
         public virtual ApplicationUser User { get; set; } = null!;
 
-        public virtual ICollection<Cpu> Cpus { get; set; } = null!;
+        /// <summary>
+        /// Provider's Web Page
+        /// </summary>
+        [MaxLength(UrlMaxLength)]
+        public string WebPage { get; set; } = null!;
 
-        public virtual ICollection<Gpu> Gpus { get; set; } = null!;
+        /// <summary>
+        /// Provider's Logo
+        /// </summary>
+        [MaxLength(UrlMaxLength)]
+        public string LogoUrl { get; set; } = null!;
 
-        public virtual ICollection<Motherboard> Motherboards { get; set; } = null!;
+        /// <summary>
+        /// Provider's Description
+        /// </summary>
+        [MaxLength(DescriptionMaxLength)]
+        public string Description { get; set; } = null!;
 
-        public virtual ICollection<Ram> Rams { get; set; } = null!;
+        /// <summary>
+        /// Providers's Collection of Cpus
+        /// </summary>
+        public virtual ICollection<Cpu> ProviderCpus { get; set; } = null!;
 
-        public virtual ICollection<Storage> Storages { get; set; } = null!;
+        /// <summary>
+        /// Providers's Collection of Gpus
+        /// </summary>
+        public virtual ICollection<Gpu> ProviderGpus { get; set; } = null!;
 
-        public virtual ICollection<Psu> Psus { get; set; } = null!;
+        /// <summary>
+        /// Providers's Collection of Motherboards
+        /// </summary>
+        public virtual ICollection<Motherboard> ProviderMotherboards { get; set; } = null!;
 
-        public virtual ICollection<Case> Cases { get; set; } = null!;
+        /// <summary>
+        /// Provider's Collection of Memory Sticks
+        /// </summary>
+        public virtual ICollection<Ram> ProviderRams { get; set; } = null!;
 
-        public virtual ICollection<Cooler> Coolers { get; set; } = null!;
+        /// <summary>
+        /// Provider's Collection of Storage Devices
+        /// </summary>
+        public virtual ICollection<Storage> ProviderStorages { get; set; } = null!;
+
+        /// <summary>
+        /// Provider's Collection of Power Supplies
+        /// </summary>
+        public virtual ICollection<Psu> ProviderPsus { get; set; } = null!;
+
+        /// <summary>
+        /// Provider's Collection of Pc Cases
+        /// </summary>
+        public virtual ICollection<Case> ProviderCases { get; set; } = null!;
+
+        /// <summary>
+        /// Provider's Collection of Coolers
+        /// </summary>
+        public virtual ICollection<Cooler> ProviderCoolers { get; set; } = null!;
     }
 }

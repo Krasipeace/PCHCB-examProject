@@ -1,56 +1,119 @@
 ﻿namespace PCHCB.Data.Models
 {
+    using PCHCB.Data.Models.Enums;
+
     using System.ComponentModel.DataAnnotations;
 
+    using static PCHCB.Common.EntityValidationConstants.Component;
+
+    /// <summary>
+    /// Motherboard Component
+    /// </summary>
     public class Motherboard
     {
+        /// <summary>
+        /// Motherboard Id in app's database
+        /// </summary>
         [Key]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Motherboard Name
+        /// </summary>
         [Required]
+        [MaxLength(NameMaxLength)]
         public string Name { get; set; } = null!;
 
+        /// <summary>
+        /// Motherboard Price
+        /// </summary>
         [Required]
-        public FactorType FormFactor { get; set; } // Case Compatibility check
+        public decimal Price { get; set; }
 
+        /// <summary>
+        /// Motherboard Form Factor Type (mITX, mATX, ATX, eATX)
+        /// </summary>
         [Required]
-        public string Socket { get; set; } = null!; // Cpu compatibility check
+        public MbFormFactor FormFactor { get; set; }
 
+        /// <summary>
+        /// Motherboard CPU Socket Type (AM4, LGA1200, etc.)
+        /// </summary>
         [Required]
-        public string Chipset { get; set; } = null!; // Cpu compatibility check
+        public string Socket { get; set; } = null!;
 
+        /// <summary>
+        /// Motherboard Chipset Type (B450, Z490, etc.)
+        /// </summary>
         [Required]
-        public string RamType { get; set; } = null!; // Ram compatibility check
+        public string Chipset { get; set; } = null!;
 
+        /// <summary>
+        /// Motherboard Memory Type (DDR4, etc.)
+        /// </summary>
         [Required]
-        public int RamSlots { get; set; } // Ram compatibility check
+        public string RamType { get; set; } = null!;
 
+        /// <summary>
+        /// Motherboard Memory Slots (2, 4, etc.)
+        /// </summary>
         [Required]
-        public int RamCapacity { get; set; } // Ram compatibility check
+        public int RamSlots { get; set; }
 
+        /// <summary>
+        /// Motherboard Maximum Memory Capacity (in GB)
+        /// </summary>
         [Required]
-        public int SataSlots { get; set; } // Storage compatibility check    
+        public int RamCapacity { get; set; }
 
+        /// <summary>
+        /// Motherboard Sata Slots (2, 4, etc.)
+        /// </summary>
         [Required]
-        public string PcieType { get; set; } = null!; // Gpu compatibility check
+        public int SataSlots { get; set; }
 
+        /// <summary>
+        /// Motherboard PCIE Type (3.0, 4.0, etc.)
+        /// </summary>
         [Required]
-        public int PcieSlots { get; set; } // Gpu compatibility check
+        public string PcieType { get; set; } = null!;
 
+        /// <summary>
+        /// Motherboard PCIE Slots (2, 4, etc.)
+        /// </summary>
         [Required]
-        public int M2Slots { get; set; } // m.2/nvme compatibility check
+        public int PcieSlots { get; set; }
 
+        /// <summary>
+        /// Motherboard M.2/NVME Slots (0, 1, 2, etc.)
+        /// </summary>
         [Required]
+        public int M2Slots { get; set; }
+
+        /// <summary>
+        /// Motherboard Image Url
+        /// </summary>
+        [Required]
+        [MaxLength(UrlMaxLength)]
         public string ImageUrl { get; set; } = null!;
 
+        /// <summary>
+        /// Motherboard Additional Description/Notes
+        /// </summary>
+        [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
-    }
 
-    public enum FactorType
-    {
-        mITX = 0,
-        mATX = 1,
-        ATX = 2,
-        eATX = 3
+        /// <summary>
+        /// Motherboard Added On Date 
+        /// </summary>
+        public DateTime AddedOn { get; set; }
+
+        public int PcConfigurationId { get; set; }
+
+        public virtual PcConfiguration PcConfiguration { get; set; } = null!;
+
+        public Guid ProviderId { get; set; }
+
+        public virtual Provider Provider { get; set; } = null!;
     }
 }

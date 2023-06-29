@@ -10,9 +10,12 @@
         public ApplicationUser()
         {
             this.Id = Guid.NewGuid();
-            this.PcConfigurations = new HashSet<PcConfiguration>();
+            this.SavedConfigurations = new HashSet<PcConfiguration>();
         }
 
-        public virtual ICollection<PcConfiguration> PcConfigurations { get; set; }
+        /// <summary>
+        /// User's Saved PC Configurations
+        /// </summary>
+        public virtual ICollection<PcConfiguration> SavedConfigurations { get; set; }
     }
 }
