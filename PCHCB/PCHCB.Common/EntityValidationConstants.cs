@@ -4,8 +4,8 @@
     {
         public static class PcConfiguration
         {
-            public const string PriceMinValue = "500";
-            public const string PriceMaxValue = "30000";
+            public const string PcPriceMinValue = "500";
+            public const string PcPriceMaxValue = "30000";
         }
 
         public static class Component
@@ -26,6 +26,9 @@
 
             public const string PriceMinValue = "1";
             public const string PriceMaxValue = "5000";
+
+            public const int CompatibilityMinLength = 3;
+            public const int CompatibilityMaxLength = 200;
         }
     }
 }

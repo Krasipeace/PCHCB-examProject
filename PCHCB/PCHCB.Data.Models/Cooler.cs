@@ -1,6 +1,7 @@
 ﻿namespace PCHCB.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using PCHCB.Data.Models.Enums;
 
@@ -28,6 +29,7 @@
         /// Cooler Price
         /// </summary>
         [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
         /// <summary>
@@ -46,7 +48,9 @@
         /// <summary>
         /// Cooler Compatibility List (CPU Sockets)
         /// </summary>
-        public List<string> Compatibility { get; set; } = null!;
+        [Required]
+        [MaxLength(CompatibilityMaxLength)]
+        public string Compatibility { get; set; } = null!;
 
         /// <summary>
         /// Cooler Radiator Size (Water Cooler)
@@ -84,14 +88,12 @@
         /// <summary>
         /// Cooler Added On Date 
         /// </summary>
-        public DateTime AddedOn { get; set; }
-
-        public int PcConfigurationId { get; set; }
-
-        public virtual PcConfiguration PcConfiguration { get; set; } = null!;
+        public DateTime AddedOn { get; set; } = DateTime.UtcNow;
 
         public Guid ProviderId { get; set; }
 
         public virtual Provider Provider { get; set; } = null!;
+
+        public virtual PcConfiguration PcConfiguration { get; set; } = null!;
     }
 }

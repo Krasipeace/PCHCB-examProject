@@ -1,6 +1,7 @@
 ﻿namespace PCHCB.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using static PCHCB.Common.EntityValidationConstants.Component;
 

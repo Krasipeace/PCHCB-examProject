@@ -1,6 +1,7 @@
 ﻿namespace PCHCB.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using PCHCB.Data.Models.Enums;
 
@@ -28,6 +29,7 @@
         /// CPU Price
         /// </summary>
         [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
         /// <summary>
@@ -100,14 +102,14 @@
         /// <summary>
         /// CPU Added On Date 
         /// </summary>
-        public DateTime AddedOn { get; set; }
-
-        public int PcConfigurationId { get; set; }
-
-        public virtual PcConfiguration PcConfiguration { get; set; } = null!;
+        public DateTime AddedOn { get; set; } = DateTime.UtcNow;
 
         public Guid ProviderId { get; set; }
 
         public virtual Provider Provider { get; set; } = null!;
+
+        public virtual ICollection<PcConfiguration> Builds { get; set; } = new HashSet<PcConfiguration>();
+
+        public virtual PcConfiguration PcConfiguration { get; set; } = null!;
     }
 }

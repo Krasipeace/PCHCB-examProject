@@ -1,6 +1,7 @@
 ﻿namespace PCHCB.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using PCHCB.Data.Models.Enums;
 
@@ -28,6 +29,7 @@
         /// GPU Price
         /// </summary>
         [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
         /// <summary>
@@ -71,7 +73,7 @@
         /// Gpu New Gen Nvidia Connection Requirement
         /// </summary>
         [Required]
-        public NvidiaConnector NvidiaConnector { get; set; }
+        public bool NvidiaConnector { get; set; }
 
         /// <summary>
         /// GPU Additional Description/Notes
@@ -82,14 +84,12 @@
         /// <summary>
         /// GPU Added On Date 
         /// </summary>
-        public DateTime AddedOn { get; set; }
-
-        public int PcConfigurationId { get; set; }
-
-        public virtual PcConfiguration PcConfiguration { get; set; } = null!;
+        public DateTime AddedOn { get; set; } = DateTime.UtcNow;
 
         public Guid ProviderId { get; set; }
 
         public virtual Provider Provider { get; set; } = null!;
+
+        public virtual PcConfiguration PcConfiguration { get; set; } = null!;
     }
 }

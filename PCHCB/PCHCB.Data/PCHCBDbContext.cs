@@ -4,7 +4,10 @@
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
+    using System.Reflection;
+
     using PCHCB.Data.Models;
+    using System.Reflection.Emit;
 
     public class PCHCBDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
@@ -33,9 +36,12 @@
 
         public DbSet<Provider> Providers { get; set; } = null!;
 
-        //TODO: set configuration
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            Assembly configAssembly = Assembly.GetAssembly(typeof(PCHCBDbContext)) ??
+                                      Assembly.GetExecutingAssembly();
+            builder.ApplyConfigurationsFromAssembly(configAssembly);
+
             base.OnModelCreating(builder);
         }
     }
