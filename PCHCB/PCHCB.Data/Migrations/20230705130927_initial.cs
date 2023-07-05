@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PCHCB.Data.Migrations
 {
-    public partial class first : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -155,6 +155,35 @@ namespace PCHCB.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PcConfigurations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CaseId = table.Column<int>(type: "int", nullable: false),
+                    CoolerId = table.Column<int>(type: "int", nullable: false),
+                    CpuId = table.Column<int>(type: "int", nullable: false),
+                    StorageId = table.Column<int>(type: "int", nullable: false),
+                    RamId = table.Column<int>(type: "int", nullable: false),
+                    MotherboardId = table.Column<int>(type: "int", nullable: false),
+                    GpuId = table.Column<int>(type: "int", nullable: false),
+                    PsuId = table.Column<int>(type: "int", nullable: false),
+                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PcConfigurations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PcConfigurations_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Providers",
                 columns: table => new
                 {
@@ -198,6 +227,12 @@ namespace PCHCB.Data.Migrations
                 {
                     table.PrimaryKey("PK_Cases", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Cases_PcConfigurations_Id",
+                        column: x => x.Id,
+                        principalTable: "PcConfigurations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Cases_Providers_ProviderId",
                         column: x => x.ProviderId,
                         principalTable: "Providers",
@@ -227,6 +262,12 @@ namespace PCHCB.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Coolers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Coolers_PcConfigurations_Id",
+                        column: x => x.Id,
+                        principalTable: "PcConfigurations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Coolers_Providers_ProviderId",
                         column: x => x.ProviderId,
@@ -260,46 +301,17 @@ namespace PCHCB.Data.Migrations
                 {
                     table.PrimaryKey("PK_Cpus", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Cpus_PcConfigurations_Id",
+                        column: x => x.Id,
+                        principalTable: "PcConfigurations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Cpus_Providers_ProviderId",
                         column: x => x.ProviderId,
                         principalTable: "Providers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PcConfigurations",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CaseId = table.Column<int>(type: "int", nullable: false),
-                    CoolerId = table.Column<int>(type: "int", nullable: false),
-                    CpuId = table.Column<int>(type: "int", nullable: false),
-                    StorageId = table.Column<int>(type: "int", nullable: false),
-                    RamId = table.Column<int>(type: "int", nullable: false),
-                    MotherboardId = table.Column<int>(type: "int", nullable: false),
-                    GpuId = table.Column<int>(type: "int", nullable: false),
-                    PsuId = table.Column<int>(type: "int", nullable: false),
-                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CpuId1 = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PcConfigurations", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PcConfigurations_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_PcConfigurations_Cpus_CpuId1",
-                        column: x => x.CpuId1,
-                        principalTable: "Cpus",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -543,11 +555,6 @@ namespace PCHCB.Data.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PcConfigurations_CpuId1",
-                table: "PcConfigurations",
-                column: "CpuId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Providers_UserId",
                 table: "Providers",
                 column: "UserId");
@@ -566,46 +573,10 @@ namespace PCHCB.Data.Migrations
                 name: "IX_Storages_ProviderId",
                 table: "Storages",
                 column: "ProviderId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Cases_PcConfigurations_Id",
-                table: "Cases",
-                column: "Id",
-                principalTable: "PcConfigurations",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Coolers_PcConfigurations_Id",
-                table: "Coolers",
-                column: "Id",
-                principalTable: "PcConfigurations",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Cpus_PcConfigurations_Id",
-                table: "Cpus",
-                column: "Id",
-                principalTable: "PcConfigurations",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_PcConfigurations_AspNetUsers_ApplicationUserId",
-                table: "PcConfigurations");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Providers_AspNetUsers_UserId",
-                table: "Providers");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Cpus_PcConfigurations_Id",
-                table: "Cpus");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -628,6 +599,9 @@ namespace PCHCB.Data.Migrations
                 name: "Coolers");
 
             migrationBuilder.DropTable(
+                name: "Cpus");
+
+            migrationBuilder.DropTable(
                 name: "Gpus");
 
             migrationBuilder.DropTable(
@@ -646,16 +620,13 @@ namespace PCHCB.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "PcConfigurations");
 
             migrationBuilder.DropTable(
-                name: "Cpus");
+                name: "Providers");
 
             migrationBuilder.DropTable(
-                name: "Providers");
+                name: "AspNetUsers");
         }
     }
 }

@@ -12,8 +12,8 @@ using PCHCB.Web.Data;
 namespace PCHCB.Data.Migrations
 {
     [DbContext(typeof(PCHCBDbContext))]
-    [Migration("20230705125306_first")]
-    partial class first
+    [Migration("20230705130927_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -552,9 +552,6 @@ namespace PCHCB.Data.Migrations
                     b.Property<int>("CpuId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CpuId1")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -584,8 +581,6 @@ namespace PCHCB.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("CpuId1");
 
                     b.ToTable("PcConfigurations");
                 });
@@ -912,10 +907,6 @@ namespace PCHCB.Data.Migrations
                     b.HasOne("PCHCB.Data.Models.ApplicationUser", null)
                         .WithMany("SavedConfigurations")
                         .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("PCHCB.Data.Models.Cpu", null)
-                        .WithMany("Builds")
-                        .HasForeignKey("CpuId1");
                 });
 
             modelBuilder.Entity("PCHCB.Data.Models.Provider", b =>
@@ -989,11 +980,6 @@ namespace PCHCB.Data.Migrations
             modelBuilder.Entity("PCHCB.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("SavedConfigurations");
-                });
-
-            modelBuilder.Entity("PCHCB.Data.Models.Cpu", b =>
-                {
-                    b.Navigation("Builds");
                 });
 
             modelBuilder.Entity("PCHCB.Data.Models.PcConfiguration", b =>

@@ -108,8 +108,6 @@
 
         public virtual Provider Provider { get; set; } = null!;
 
-        public virtual ICollection<PcConfiguration> Builds { get; set; } = new HashSet<PcConfiguration>();
-
         public virtual PcConfiguration PcConfiguration { get; set; } = null!;
     }
 }
