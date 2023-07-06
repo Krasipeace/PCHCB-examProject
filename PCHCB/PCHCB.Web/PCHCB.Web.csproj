@@ -19,6 +19,7 @@
     <ProjectReference Include="..\PCHCB.Common\PCHCB.Common.csproj" />
     <ProjectReference Include="..\PCHCB.Data.Models\PCHCB.Data.Models.csproj" />
     <ProjectReference Include="..\PCHCB.Data\PCHCB.Data.csproj" />
+    <ProjectReference Include="..\PCHCB.Web.Infrastructure\PCHCB.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\PCHCB.Web.ViewModels\PCHCB.Web.ViewModels.csproj" />
   </ItemGroup>
 

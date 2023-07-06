@@ -5,6 +5,7 @@ namespace PCHCB.Web
 
     using PCHCB.Data.Models;
     using PCHCB.Web.Data;
+    using PCHCB.Web.Infrastructure.ModelBinders;
 
     public class Program
     {
@@ -35,7 +36,13 @@ namespace PCHCB.Web
                 })
                 .AddEntityFrameworkStores<PCHCBDbContext>();
 
-            builder.Services.AddControllersWithViews();
+            builder.Services
+                .AddControllersWithViews()
+                .AddMvcOptions(options =>
+                {
+                    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                    options.ModelBinderProviders.Insert(1, new DoubleModelBinderProvider());
+                });
 
             WebApplication app = builder.Build();
 
