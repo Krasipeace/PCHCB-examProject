@@ -2,6 +2,9 @@
 {
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 
+    /// <summary>
+    /// Decimal Model Binder Provider
+    /// </summary>
     public class DecimalModelBinderProvider : IModelBinderProvider
     {
         public IModelBinder GetBinder(ModelBinderProviderContext context)

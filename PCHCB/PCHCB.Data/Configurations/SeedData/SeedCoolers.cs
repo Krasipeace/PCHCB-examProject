@@ -8,9 +8,9 @@
 
     public class SeedCoolers
     {
-            public static List<Cooler> GenerateCoolers()
-            {
-                var coolers = new List<Cooler>
+        public static List<Cooler> GenerateCoolers()
+        {
+            var coolers = new List<Cooler>
             {
                 new Cooler
                 {
@@ -154,8 +154,7 @@
                 }
             };
 
-                return coolers;
-            }
+            return coolers;
         }
     }
-
+}

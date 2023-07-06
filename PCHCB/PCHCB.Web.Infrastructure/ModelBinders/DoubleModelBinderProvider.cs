@@ -2,6 +2,9 @@
 {
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 
+    /// <summary>
+    /// Double Model Binder Provider
+    /// </summary>
     public class DoubleModelBinderProvider : IModelBinderProvider
     {
         public IModelBinder? GetBinder(ModelBinderProviderContext context)
@@ -11,7 +14,8 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (context.Metadata.ModelType == typeof(Double) || context.Metadata.ModelType == typeof(Double?))
+            if (context.Metadata.ModelType == typeof(Double) || 
+                context.Metadata.ModelType == typeof(Double?))
             {
                 return new DoubleModelBinder();
             }

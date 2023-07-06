@@ -4,6 +4,10 @@
 
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 
+    /// <summary>
+    /// Decimal Model Binder uses invariant culture to parse the value, which can cause issues, 
+    /// if the value is formatted differently in the request than in the invariant culture.
+    /// </summary>
     public class DecimalModelBinder : IModelBinder
     {
         public Task BindModelAsync(ModelBindingContext? bindingContext)
