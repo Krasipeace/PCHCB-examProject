@@ -7,6 +7,7 @@
     {
         PCIExpress3 = 0,
         PCIExpress4 = 1,
-        PCIExpress5 = 2
+        PCIExpress5 = 2,
+        PCIExpress6 = 3
     }
 }

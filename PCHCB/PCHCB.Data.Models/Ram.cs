@@ -54,7 +54,7 @@
         /// Ram Height in mm (Air Cooler Compatibility)
         /// </summary>
         [Required]
-        public string Height { get; set; } = null!;
+        public double Height { get; set; } 
 
         /// <summary>
         /// Production Unique Model Number (MB Compatibility)

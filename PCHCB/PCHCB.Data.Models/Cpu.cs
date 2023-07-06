@@ -81,7 +81,7 @@
         public int RamFrequency { get; set; }
 
         /// <summary>
-        /// CPU RAM Type (DDR4, etc.)
+        /// CPU RAM Type (DDR4, DDR5, etc.)
         /// </summary>
         [Required]
         public RamType RamType { get; set; }

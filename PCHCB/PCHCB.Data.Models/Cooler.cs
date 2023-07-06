@@ -65,8 +65,7 @@
         /// <summary>
         /// Cooler Height in mm
         /// </summary>
-        [MaxLength(CpuMaxHeight)]
-        public int CoolerHeight { get; set; } // case check for cooler height
+        public double CoolerHeight { get; set; } // case check for cooler height
 
         /// <summary>
         /// Cooler Thermal Design Power (TDP)

@@ -54,7 +54,7 @@
         /// Motherboard Memory Type (DDR4, etc.)
         /// </summary>
         [Required]
-        public string RamType { get; set; } = null!;
+        public RamType RamType { get; set; } 
 
         /// <summary>
         /// Motherboard Memory Slots (2, 4, etc.)
@@ -78,7 +78,7 @@
         /// Motherboard PCIE Type (3.0, 4.0, etc.)
         /// </summary>
         [Required]
-        public string PcieType { get; set; } = null!;
+        public InterfaceType PcieType { get; set; } 
 
         /// <summary>
         /// Motherboard PCIE Slots (2, 4, etc.)

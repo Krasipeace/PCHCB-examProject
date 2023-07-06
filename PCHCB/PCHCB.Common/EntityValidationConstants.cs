@@ -30,5 +30,11 @@
             public const int CompatibilityMinLength = 3;
             public const int CompatibilityMaxLength = 200;
         }
+
+        public static class Provider
+        {
+            public const int PhoneNumberMinLength = 7;
+            public const int PhoneNumberMaxLength = 20;
+        }
     }
 }

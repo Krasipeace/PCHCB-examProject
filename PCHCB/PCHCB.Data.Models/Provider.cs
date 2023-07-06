@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using static PCHCB.Common.EntityValidationConstants.Component;
+    using static PCHCB.Common.EntityValidationConstants.Provider;
 
     /// <summary>
     /// Hardware Provider User
@@ -33,8 +34,13 @@
         /// <summary>
         /// Provider's Web Page
         /// </summary>
+        [Required]
         [MaxLength(UrlMaxLength)]
         public string WebPage { get; set; } = null!;
+
+        [Required]
+        [MaxLength(PhoneNumberMaxLength)]
+        public string PhoneNumber { get; set; } = null!;
 
         /// <summary>
         /// Provider's Logo
