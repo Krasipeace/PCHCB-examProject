@@ -35,28 +35,22 @@
         /// </summary>
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
-        public int CaseId { get; set; }
-        public Case Case { get; set; } = null!;
+        public ICollection<Case> Cases { get; set; } = new HashSet<Case>();
 
-        public int CoolerId { get; set; }
-        public Cooler Cooler { get; set; } = null!;
+        public ICollection<Cpu> Cpus { get; set; } = new HashSet<Cpu>();
 
-        public int CpuId { get; set; }
-        public Cpu Cpu { get; set; } = null!;
+        public ICollection<Cooler> Coolers { get; set; } = new HashSet<Cooler>();
 
-        public int StorageId { get; set; }
-        public Storage Storage { get; set; } = null!;
+        public ICollection<Motherboard> Motherboards { get; set; } = new HashSet<Motherboard>();
 
-        public int RamId { get; set; }
-        public Ram Ram { get; set; } = null!;
+        public ICollection<Ram> Rams { get; set; } = new HashSet<Ram>();
 
-        public int MotherboardId { get; set; }
-        public Motherboard Motherboard { get; set; } = null!;
+        public ICollection<Storage> Storages { get; set; } = new HashSet<Storage>();
 
-        public int GpuId { get; set; }
-        public Gpu Gpu { get; set; } = null!;
+        public ICollection<Gpu> Gpus { get; set; } = new HashSet<Gpu>();
 
-        public int PsuId { get; set; }
-        public Psu Psu { get; set; } = null!;
+        public ICollection<Psu> Psus { get; set; } = new HashSet<Psu>();
+
+        public ICollection<ConfigurationHardware> ConfigurationHardwares { get; set; } = new HashSet<ConfigurationHardware>();
     }
 }

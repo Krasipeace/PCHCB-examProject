@@ -54,7 +54,7 @@
         /// Motherboard Memory Type (DDR4, etc.)
         /// </summary>
         [Required]
-        public RamType RamType { get; set; } 
+        public RamType RamType { get; set; }
 
         /// <summary>
         /// Motherboard Memory Slots (2, 4, etc.)
@@ -78,7 +78,7 @@
         /// Motherboard PCIE Type (3.0, 4.0, etc.)
         /// </summary>
         [Required]
-        public InterfaceType PcieType { get; set; } 
+        public InterfaceType PcieType { get; set; }
 
         /// <summary>
         /// Motherboard PCIE Slots (2, 4, etc.)
@@ -114,6 +114,6 @@
 
         public virtual Provider Provider { get; set; } = null!;
 
-        public virtual PcConfiguration PcConfiguration { get; set; } = null!;
+        public virtual ICollection<ConfigurationHardware> ConfigurationHardwares { get; set; } = new HashSet<ConfigurationHardware>();
     }
 }

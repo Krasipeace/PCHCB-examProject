@@ -7,7 +7,6 @@
     using System.Reflection;
 
     using PCHCB.Data.Models;
-    using System.Reflection.Emit;
 
     public class PCHCBDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
@@ -33,6 +32,8 @@
         public DbSet<Storage> Storages { get; set; } = null!;
 
         public DbSet<PcConfiguration> PcConfigurations { get; set; } = null!;
+
+        public DbSet<ConfigurationHardware> ConfigurationHardwares { get; set; } = null!;
 
         public DbSet<Provider> Providers { get; set; } = null!;
 

@@ -54,7 +54,7 @@
         /// Ram Height in mm (Air Cooler Compatibility)
         /// </summary>
         [Required]
-        public double Height { get; set; } 
+        public double Height { get; set; }
 
         /// <summary>
         /// Production Unique Model Number (MB Compatibility)
@@ -84,6 +84,6 @@
 
         public virtual Provider Provider { get; set; } = null!;
 
-        public virtual PcConfiguration PcConfiguration { get; set; } = null!;
+        public virtual ICollection<ConfigurationHardware> ConfigurationHardwares { get; set; } = new HashSet<ConfigurationHardware>();
     }
 }

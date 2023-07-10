@@ -226,7 +226,10 @@ namespace PCHCB.Data.Migrations
             modelBuilder.Entity("PCHCB.Data.Models.Case", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
@@ -266,6 +269,9 @@ namespace PCHCB.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("PcConfigurationId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -277,15 +283,70 @@ namespace PCHCB.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PcConfigurationId");
+
                     b.HasIndex("ProviderId");
 
                     b.ToTable("Cases");
                 });
 
+            modelBuilder.Entity("PCHCB.Data.Models.ConfigurationHardware", b =>
+                {
+                    b.Property<int>("PcConfigurationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CaseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CoolerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CpuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GpuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MotherboardId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PsuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StorageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PcConfigurationId", "CaseId", "CoolerId", "CpuId", "GpuId", "MotherboardId", "PsuId", "RamId", "StorageId");
+
+                    b.HasIndex("CaseId");
+
+                    b.HasIndex("CoolerId");
+
+                    b.HasIndex("CpuId");
+
+                    b.HasIndex("GpuId");
+
+                    b.HasIndex("MotherboardId");
+
+                    b.HasIndex("PsuId");
+
+                    b.HasIndex("RamId");
+
+                    b.HasIndex("StorageId");
+
+                    b.ToTable("ConfigurationHardwares");
+                });
+
             modelBuilder.Entity("PCHCB.Data.Models.Cooler", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
@@ -316,6 +377,9 @@ namespace PCHCB.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("PcConfigurationId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -336,6 +400,8 @@ namespace PCHCB.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PcConfigurationId");
+
                     b.HasIndex("ProviderId");
 
                     b.ToTable("Coolers");
@@ -344,7 +410,10 @@ namespace PCHCB.Data.Migrations
             modelBuilder.Entity("PCHCB.Data.Models.Cpu", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
@@ -373,6 +442,9 @@ namespace PCHCB.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("PcConfigurationId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -400,6 +472,8 @@ namespace PCHCB.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PcConfigurationId");
+
                     b.HasIndex("ProviderId");
 
                     b.ToTable("Cpus");
@@ -408,7 +482,10 @@ namespace PCHCB.Data.Migrations
             modelBuilder.Entity("PCHCB.Data.Models.Gpu", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
@@ -440,6 +517,9 @@ namespace PCHCB.Data.Migrations
                     b.Property<bool>("NvidiaConnector")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("PcConfigurationId")
+                        .HasColumnType("int");
+
                     b.Property<int>("PowerConsumption")
                         .HasColumnType("int");
 
@@ -454,6 +534,8 @@ namespace PCHCB.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PcConfigurationId");
+
                     b.HasIndex("ProviderId");
 
                     b.ToTable("Gpus");
@@ -462,7 +544,10 @@ namespace PCHCB.Data.Migrations
             modelBuilder.Entity("PCHCB.Data.Models.Motherboard", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
@@ -491,6 +576,9 @@ namespace PCHCB.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("PcConfigurationId")
+                        .HasColumnType("int");
 
                     b.Property<int>("PcieSlots")
                         .HasColumnType("int");
@@ -522,6 +610,8 @@ namespace PCHCB.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PcConfigurationId");
+
                     b.HasIndex("ProviderId");
 
                     b.ToTable("Motherboards");
@@ -538,23 +628,8 @@ namespace PCHCB.Data.Migrations
                     b.Property<Guid?>("ApplicationUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CaseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CoolerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CpuId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("GpuId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MotherboardId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -563,15 +638,6 @@ namespace PCHCB.Data.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("PsuId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StorageId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -619,7 +685,10 @@ namespace PCHCB.Data.Migrations
             modelBuilder.Entity("PCHCB.Data.Models.Psu", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
@@ -645,6 +714,9 @@ namespace PCHCB.Data.Migrations
                     b.Property<bool>("NvidiaConnector")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("PcConfigurationId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -656,6 +728,8 @@ namespace PCHCB.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PcConfigurationId");
+
                     b.HasIndex("ProviderId");
 
                     b.ToTable("Psus");
@@ -664,7 +738,10 @@ namespace PCHCB.Data.Migrations
             modelBuilder.Entity("PCHCB.Data.Models.Ram", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
@@ -697,6 +774,9 @@ namespace PCHCB.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("PcConfigurationId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -708,6 +788,8 @@ namespace PCHCB.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PcConfigurationId");
+
                     b.HasIndex("ProviderId");
 
                     b.ToTable("Rams");
@@ -716,7 +798,10 @@ namespace PCHCB.Data.Migrations
             modelBuilder.Entity("PCHCB.Data.Models.Storage", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
@@ -739,6 +824,9 @@ namespace PCHCB.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("PcConfigurationId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -749,6 +837,8 @@ namespace PCHCB.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PcConfigurationId");
 
                     b.HasIndex("ProviderId");
 
@@ -808,11 +898,9 @@ namespace PCHCB.Data.Migrations
 
             modelBuilder.Entity("PCHCB.Data.Models.Case", b =>
                 {
-                    b.HasOne("PCHCB.Data.Models.PcConfiguration", "PcConfiguration")
-                        .WithOne("Case")
-                        .HasForeignKey("PCHCB.Data.Models.Case", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("PCHCB.Data.Models.PcConfiguration", null)
+                        .WithMany("Cases")
+                        .HasForeignKey("PcConfigurationId");
 
                     b.HasOne("PCHCB.Data.Models.Provider", "Provider")
                         .WithMany("ProviderCases")
@@ -820,18 +908,89 @@ namespace PCHCB.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Provider");
+                });
+
+            modelBuilder.Entity("PCHCB.Data.Models.ConfigurationHardware", b =>
+                {
+                    b.HasOne("PCHCB.Data.Models.Case", "Case")
+                        .WithMany("ConfigurationHardwares")
+                        .HasForeignKey("CaseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PCHCB.Data.Models.Cooler", "Cooler")
+                        .WithMany("ConfigurationHardwares")
+                        .HasForeignKey("CoolerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PCHCB.Data.Models.Cpu", "Cpu")
+                        .WithMany("ConfigurationHardwares")
+                        .HasForeignKey("CpuId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PCHCB.Data.Models.Gpu", "Gpu")
+                        .WithMany("ConfigurationHardwares")
+                        .HasForeignKey("GpuId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PCHCB.Data.Models.Motherboard", "Motherboard")
+                        .WithMany("ConfigurationHardwares")
+                        .HasForeignKey("MotherboardId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PCHCB.Data.Models.PcConfiguration", "PcConfiguration")
+                        .WithMany("ConfigurationHardwares")
+                        .HasForeignKey("PcConfigurationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PCHCB.Data.Models.Psu", "Psu")
+                        .WithMany("ConfigurationHardwares")
+                        .HasForeignKey("PsuId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PCHCB.Data.Models.Ram", "Ram")
+                        .WithMany("ConfigurationHardwares")
+                        .HasForeignKey("RamId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PCHCB.Data.Models.Storage", "Storage")
+                        .WithMany("ConfigurationHardwares")
+                        .HasForeignKey("StorageId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Case");
+
+                    b.Navigation("Cooler");
+
+                    b.Navigation("Cpu");
+
+                    b.Navigation("Gpu");
+
+                    b.Navigation("Motherboard");
+
                     b.Navigation("PcConfiguration");
 
-                    b.Navigation("Provider");
+                    b.Navigation("Psu");
+
+                    b.Navigation("Ram");
+
+                    b.Navigation("Storage");
                 });
 
             modelBuilder.Entity("PCHCB.Data.Models.Cooler", b =>
                 {
-                    b.HasOne("PCHCB.Data.Models.PcConfiguration", "PcConfiguration")
-                        .WithOne("Cooler")
-                        .HasForeignKey("PCHCB.Data.Models.Cooler", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("PCHCB.Data.Models.PcConfiguration", null)
+                        .WithMany("Coolers")
+                        .HasForeignKey("PcConfigurationId");
 
                     b.HasOne("PCHCB.Data.Models.Provider", "Provider")
                         .WithMany("ProviderCoolers")
@@ -839,18 +998,14 @@ namespace PCHCB.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PcConfiguration");
-
                     b.Navigation("Provider");
                 });
 
             modelBuilder.Entity("PCHCB.Data.Models.Cpu", b =>
                 {
-                    b.HasOne("PCHCB.Data.Models.PcConfiguration", "PcConfiguration")
-                        .WithOne("Cpu")
-                        .HasForeignKey("PCHCB.Data.Models.Cpu", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("PCHCB.Data.Models.PcConfiguration", null)
+                        .WithMany("Cpus")
+                        .HasForeignKey("PcConfigurationId");
 
                     b.HasOne("PCHCB.Data.Models.Provider", "Provider")
                         .WithMany("ProviderCpus")
@@ -858,18 +1013,14 @@ namespace PCHCB.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PcConfiguration");
-
                     b.Navigation("Provider");
                 });
 
             modelBuilder.Entity("PCHCB.Data.Models.Gpu", b =>
                 {
-                    b.HasOne("PCHCB.Data.Models.PcConfiguration", "PcConfiguration")
-                        .WithOne("Gpu")
-                        .HasForeignKey("PCHCB.Data.Models.Gpu", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("PCHCB.Data.Models.PcConfiguration", null)
+                        .WithMany("Gpus")
+                        .HasForeignKey("PcConfigurationId");
 
                     b.HasOne("PCHCB.Data.Models.Provider", "Provider")
                         .WithMany("ProviderGpus")
@@ -877,26 +1028,20 @@ namespace PCHCB.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PcConfiguration");
-
                     b.Navigation("Provider");
                 });
 
             modelBuilder.Entity("PCHCB.Data.Models.Motherboard", b =>
                 {
-                    b.HasOne("PCHCB.Data.Models.PcConfiguration", "PcConfiguration")
-                        .WithOne("Motherboard")
-                        .HasForeignKey("PCHCB.Data.Models.Motherboard", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("PCHCB.Data.Models.PcConfiguration", null)
+                        .WithMany("Motherboards")
+                        .HasForeignKey("PcConfigurationId");
 
                     b.HasOne("PCHCB.Data.Models.Provider", "Provider")
                         .WithMany("ProviderMotherboards")
                         .HasForeignKey("ProviderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("PcConfiguration");
 
                     b.Navigation("Provider");
                 });
@@ -921,11 +1066,9 @@ namespace PCHCB.Data.Migrations
 
             modelBuilder.Entity("PCHCB.Data.Models.Psu", b =>
                 {
-                    b.HasOne("PCHCB.Data.Models.PcConfiguration", "PcConfiguration")
-                        .WithOne("Psu")
-                        .HasForeignKey("PCHCB.Data.Models.Psu", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("PCHCB.Data.Models.PcConfiguration", null)
+                        .WithMany("Psus")
+                        .HasForeignKey("PcConfigurationId");
 
                     b.HasOne("PCHCB.Data.Models.Provider", "Provider")
                         .WithMany("ProviderPsus")
@@ -933,18 +1076,14 @@ namespace PCHCB.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PcConfiguration");
-
                     b.Navigation("Provider");
                 });
 
             modelBuilder.Entity("PCHCB.Data.Models.Ram", b =>
                 {
-                    b.HasOne("PCHCB.Data.Models.PcConfiguration", "PcConfiguration")
-                        .WithOne("Ram")
-                        .HasForeignKey("PCHCB.Data.Models.Ram", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("PCHCB.Data.Models.PcConfiguration", null)
+                        .WithMany("Rams")
+                        .HasForeignKey("PcConfigurationId");
 
                     b.HasOne("PCHCB.Data.Models.Provider", "Provider")
                         .WithMany("ProviderRams")
@@ -952,26 +1091,20 @@ namespace PCHCB.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PcConfiguration");
-
                     b.Navigation("Provider");
                 });
 
             modelBuilder.Entity("PCHCB.Data.Models.Storage", b =>
                 {
-                    b.HasOne("PCHCB.Data.Models.PcConfiguration", "PcConfiguration")
-                        .WithOne("Storage")
-                        .HasForeignKey("PCHCB.Data.Models.Storage", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("PCHCB.Data.Models.PcConfiguration", null)
+                        .WithMany("Storages")
+                        .HasForeignKey("PcConfigurationId");
 
                     b.HasOne("PCHCB.Data.Models.Provider", "Provider")
                         .WithMany("ProviderStorages")
                         .HasForeignKey("ProviderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("PcConfiguration");
 
                     b.Navigation("Provider");
                 });
@@ -981,31 +1114,50 @@ namespace PCHCB.Data.Migrations
                     b.Navigation("SavedConfigurations");
                 });
 
+            modelBuilder.Entity("PCHCB.Data.Models.Case", b =>
+                {
+                    b.Navigation("ConfigurationHardwares");
+                });
+
+            modelBuilder.Entity("PCHCB.Data.Models.Cooler", b =>
+                {
+                    b.Navigation("ConfigurationHardwares");
+                });
+
+            modelBuilder.Entity("PCHCB.Data.Models.Cpu", b =>
+                {
+                    b.Navigation("ConfigurationHardwares");
+                });
+
+            modelBuilder.Entity("PCHCB.Data.Models.Gpu", b =>
+                {
+                    b.Navigation("ConfigurationHardwares");
+                });
+
+            modelBuilder.Entity("PCHCB.Data.Models.Motherboard", b =>
+                {
+                    b.Navigation("ConfigurationHardwares");
+                });
+
             modelBuilder.Entity("PCHCB.Data.Models.PcConfiguration", b =>
                 {
-                    b.Navigation("Case")
-                        .IsRequired();
+                    b.Navigation("Cases");
 
-                    b.Navigation("Cooler")
-                        .IsRequired();
+                    b.Navigation("ConfigurationHardwares");
 
-                    b.Navigation("Cpu")
-                        .IsRequired();
+                    b.Navigation("Coolers");
 
-                    b.Navigation("Gpu")
-                        .IsRequired();
+                    b.Navigation("Cpus");
 
-                    b.Navigation("Motherboard")
-                        .IsRequired();
+                    b.Navigation("Gpus");
 
-                    b.Navigation("Psu")
-                        .IsRequired();
+                    b.Navigation("Motherboards");
 
-                    b.Navigation("Ram")
-                        .IsRequired();
+                    b.Navigation("Psus");
 
-                    b.Navigation("Storage")
-                        .IsRequired();
+                    b.Navigation("Rams");
+
+                    b.Navigation("Storages");
                 });
 
             modelBuilder.Entity("PCHCB.Data.Models.Provider", b =>
@@ -1025,6 +1177,21 @@ namespace PCHCB.Data.Migrations
                     b.Navigation("ProviderRams");
 
                     b.Navigation("ProviderStorages");
+                });
+
+            modelBuilder.Entity("PCHCB.Data.Models.Psu", b =>
+                {
+                    b.Navigation("ConfigurationHardwares");
+                });
+
+            modelBuilder.Entity("PCHCB.Data.Models.Ram", b =>
+                {
+                    b.Navigation("ConfigurationHardwares");
+                });
+
+            modelBuilder.Entity("PCHCB.Data.Models.Storage", b =>
+                {
+                    b.Navigation("ConfigurationHardwares");
                 });
 #pragma warning restore 612, 618
         }

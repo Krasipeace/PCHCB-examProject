@@ -72,6 +72,6 @@
 
         public virtual Provider Provider { get; set; } = null!;
 
-        public virtual PcConfiguration PcConfiguration { get; set; } = null!;
+        public virtual ICollection<ConfigurationHardware> ConfigurationHardwares { get; set; } = new HashSet<ConfigurationHardware>();
     }
 }
