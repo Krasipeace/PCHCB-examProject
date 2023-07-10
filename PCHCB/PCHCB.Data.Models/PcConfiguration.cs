@@ -35,22 +35,6 @@
         /// </summary>
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
-        public ICollection<Case> Cases { get; set; } = new HashSet<Case>();
-
-        public ICollection<Cpu> Cpus { get; set; } = new HashSet<Cpu>();
-
-        public ICollection<Cooler> Coolers { get; set; } = new HashSet<Cooler>();
-
-        public ICollection<Motherboard> Motherboards { get; set; } = new HashSet<Motherboard>();
-
-        public ICollection<Ram> Rams { get; set; } = new HashSet<Ram>();
-
-        public ICollection<Storage> Storages { get; set; } = new HashSet<Storage>();
-
-        public ICollection<Gpu> Gpus { get; set; } = new HashSet<Gpu>();
-
-        public ICollection<Psu> Psus { get; set; } = new HashSet<Psu>();
-
         public ICollection<ConfigurationHardware> ConfigurationHardwares { get; set; } = new HashSet<ConfigurationHardware>();
     }
 }
