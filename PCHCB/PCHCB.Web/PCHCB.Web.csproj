@@ -23,4 +23,8 @@
     <ProjectReference Include="..\PCHCB.Web.ViewModels\PCHCB.Web.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\exampleImages\" />
+  </ItemGroup>
+
 </Project>
