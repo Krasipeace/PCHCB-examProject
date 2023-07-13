@@ -25,7 +25,7 @@ namespace PCHCB.Web
                 {
                     options.SignIn.RequireConfirmedAccount =
                         builder.Configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
-                    options.Password.RequireLowercase = 
+                    options.Password.RequireLowercase =
                         builder.Configuration.GetValue<bool>("Identity:Password:RequireLowercase");
                     options.Password.RequireUppercase =
                         builder.Configuration.GetValue<bool>("Identity:Password:RequireUppercase");
@@ -54,7 +54,8 @@ namespace PCHCB.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Home/Error/500");
+                app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
                 app.UseHsts();
             }
 

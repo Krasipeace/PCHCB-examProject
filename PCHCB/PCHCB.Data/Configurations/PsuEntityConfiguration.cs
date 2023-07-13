@@ -5,6 +5,7 @@
 
     using PCHCB.Data.Models;
     using PCHCB.Data.Models.Enums;
+    using PCHCB.Web.Data;
 
     public class PsuEntityConfiguration : IEntityTypeConfiguration<Psu>
     {
@@ -219,6 +220,6 @@
             psus.Add(psu);
 
             return psus.ToArray();
-        }
+        }       
     }
 }
