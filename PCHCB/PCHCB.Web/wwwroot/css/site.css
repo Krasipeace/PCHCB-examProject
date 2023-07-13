@@ -16,3 +16,28 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#btn-back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    z-index: 99;
+    font-size: 30px;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    background-color: ghostwhite;
+    color: black;
+    cursor: pointer;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    transition: all ease-in-out 0.1s;
+}
+
+#btn-back-to-top:hover {
+    background-color: rebeccapurple;
+    color: goldenrod;
+}

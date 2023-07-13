@@ -1,4 +1,18 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿// Back to top button functionality - start
+window.onscroll = function () { 
+    scrollFunction() 
+    };
 
-// Write your JavaScript code.
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("btn-back-to-top").style.display = "block";
+    } else {
+        document.getElementById("btn-back-to-top").style.display = "none";
+    }
+}
+
+function toTopFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+// Back to top button functionality - end
