@@ -35,6 +35,12 @@
         {
             public const int PhoneNumberMinLength = 7;
             public const int PhoneNumberMaxLength = 20;
+
+            public const int UrlMinLength = 7;
+            public const int UrlMaxLength = 2048;
+
+            public const int DescriptionMinLength = 10;
+            public const int DescriptionMaxLength = 500;
         }
     }
 }

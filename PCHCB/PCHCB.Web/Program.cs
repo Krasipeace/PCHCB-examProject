@@ -4,7 +4,9 @@ namespace PCHCB.Web
     using Microsoft.EntityFrameworkCore;
 
     using PCHCB.Data.Models;
+    using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
+    using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.Infrastructure.ModelBinders;
 
     public class Program
@@ -35,6 +37,8 @@ namespace PCHCB.Web
                         builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
                 })
                 .AddEntityFrameworkStores<PCHCBDbContext>();
+
+            builder.Services.AddApplicationServices(typeof(IProviderService));
 
             builder.Services
                 .AddControllersWithViews()

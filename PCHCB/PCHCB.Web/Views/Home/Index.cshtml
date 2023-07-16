@@ -1,8 +1,16 @@
-﻿@{
+﻿@using PCHCB.Services.Data.Contracts;
+@using PCHCB.Web.Infrastructure.Extensions;
+@{
     ViewData["Title"] = "Home Page";
+}
+
+@inject IProviderService ProviderService
+@{
+    ViewData["Title"] = "Home Page";
+    bool isUserProvider = await this.ProviderService.ProviderExistsByUserIdAsync(this.User.GetId()!);
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>   
+    <p>Build your PC today!</p>   
 </div>

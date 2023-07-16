@@ -3,7 +3,6 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    using static PCHCB.Common.EntityValidationConstants.Component;
     using static PCHCB.Common.EntityValidationConstants.Provider;
 
     /// <summary>
@@ -45,12 +44,14 @@
         /// <summary>
         /// Provider's Logo
         /// </summary>
+        [Required]
         [MaxLength(UrlMaxLength)]
         public string LogoUrl { get; set; } = null!;
 
         /// <summary>
         /// Provider's Description
         /// </summary>
+        [Required]
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
 

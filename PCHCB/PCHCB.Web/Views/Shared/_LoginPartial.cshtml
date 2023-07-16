@@ -1,17 +1,29 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using PCHCB.Data.Models;
+@using PCHCB.Services.Data.Contracts;
+@using System.Security.Claims;
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+
+@inject IProviderService ProviderService
+@{
+    string? userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+    bool isUserProvider = await this.ProviderService.ProviderExistsByUserIdAsync(userId);
+    //bool isUserProvider = await this.ProviderService.ProviderExistsByUserIdAsync(UserManager.GetUserId(User));
+}
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @User.Identity?.Name!</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Provider" asp-action="Become">Become Provider</a>
-        </li>
+        @if (!isUserProvider)
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Provider" asp-action="BecomeProvider">Become Provider</a>
+            </li>         
+        }
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="nav-link btn btn-link text-dark">Sign Out</button>
@@ -24,7 +36,7 @@
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Sign Up</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Sign in</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Sign In</a>
         </li>
     }
 </ul>

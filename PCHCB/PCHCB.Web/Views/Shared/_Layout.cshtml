@@ -1,4 +1,14 @@
 ﻿@using static PCHCB.Common.GeneralAppConstants;
+@using PCHCB.Services.Data;
+@using PCHCB.Web.Infrastructure.Extensions;
+@using PCHCB.Services.Data.Contracts;
+@using System.Security.Claims;
+
+@*@inject IProviderService providerService
+@{
+    string? userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+    bool isUserProvider = await this.ProviderService.ProviderExistsByUserIdAsync(userId);
+}*@
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +34,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @if (this.User.Identity?.IsAuthenticated ?? false)
+                        {
+                            // to do -> add drop-down menu for user
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

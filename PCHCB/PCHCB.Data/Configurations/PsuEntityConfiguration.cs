@@ -218,8 +218,8 @@
                 ProviderId = Guid.Parse("e92e7beb-55d6-4d18-a99d-3ed3411058f5")
             };
             psus.Add(psu);
-
+            
             return psus.ToArray();
-        }       
+        }
     }
 }

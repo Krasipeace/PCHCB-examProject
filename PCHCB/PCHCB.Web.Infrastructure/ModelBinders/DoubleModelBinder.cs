@@ -16,6 +16,7 @@
             ValueProviderResult valueResult = bindingContext
             .ValueProvider
             .GetValue(bindingContext.ModelName);
+
             if (valueResult != ValueProviderResult.None && !String.IsNullOrEmpty(valueResult.FirstValue))
             {
                 double actualValue = 0;
@@ -32,6 +33,7 @@
                 {
                     bindingContext.ModelState.AddModelError(bindingContext.ModelName, fe, bindingContext.ModelMetadata);
                 }
+
                 if (success)
                 {
                     bindingContext.Result = ModelBindingResult.Success(actualValue);

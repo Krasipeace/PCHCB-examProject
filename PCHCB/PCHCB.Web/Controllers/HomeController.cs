@@ -4,8 +4,6 @@
 
     using PCHCB.Web.ViewModels.Home;
 
-    using System.Diagnostics;
-
     public class HomeController : Controller
     {       
         public IActionResult Index()

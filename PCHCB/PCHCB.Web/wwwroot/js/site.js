@@ -1,18 +1,22 @@
 ﻿// Back to top button functionality - start
+const backToTopButton = document.getElementById("btn-back-to-top");
+
 window.onscroll = function () { 
     scrollFunction() 
-    };
+};
 
 function scrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        document.getElementById("btn-back-to-top").style.display = "block";
+        backToTopButton.style.display = "block";
     } else {
-        document.getElementById("btn-back-to-top").style.display = "none";
+        backToTopButton.style.display = "none";
     }
 }
 
 function toTopFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 // Back to top button functionality - end

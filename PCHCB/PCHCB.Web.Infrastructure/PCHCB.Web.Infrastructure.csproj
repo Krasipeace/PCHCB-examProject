@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PCHCB.Common\PCHCB.Common.csproj" />
+    <ProjectReference Include="..\PCHCB.Services.Data\PCHCB.Services.Data.csproj" />
   </ItemGroup>
 
 </Project>

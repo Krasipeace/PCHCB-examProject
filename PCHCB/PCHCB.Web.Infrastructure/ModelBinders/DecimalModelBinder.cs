@@ -17,8 +17,7 @@
                 throw new ArgumentNullException(nameof(bindingContext));
             }
 
-            ValueProviderResult valueResult =
-                bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+            ValueProviderResult valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
             if (valueResult != ValueProviderResult.None && !string.IsNullOrWhiteSpace(valueResult.FirstValue))
             {
                 decimal parsedValue = 0m;
