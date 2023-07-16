@@ -19,11 +19,6 @@
             public const int UrlMinLength = 7;
             public const int UrlMaxLength = 2048;
 
-            public const int GpuMinLength = 7;
-            public const int GpuMaxLength = 600;
-
-            public const int CpuMaxHeight = 200;
-
             public const string PriceMinValue = "1";
             public const string PriceMaxValue = "5000";
 

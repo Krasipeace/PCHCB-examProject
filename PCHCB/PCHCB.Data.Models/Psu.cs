@@ -60,6 +60,7 @@
         /// <summary>
         /// PSU Additional Description/Notes
         /// </summary>
+        [Required]
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
 

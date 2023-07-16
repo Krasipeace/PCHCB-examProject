@@ -96,6 +96,7 @@
         /// <summary>
         /// CPU Additional Description/Notes
         /// </summary>
+        [Required]
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
 

@@ -48,14 +48,12 @@
         /// Case Max GPU Length (in mm)
         /// </summary>
         [Required]
-        [MaxLength(GpuMaxLength)]
         public int MaxGpuLength { get; set; }
 
         /// <summary>
         /// Case Max Air CPU Cooler Height (in mm)
         /// </summary>
         [Required]
-        [MaxLength(CpuMaxHeight)]
         public int MaxAirCpuCoolerHeight { get; set; }
 
         /// <summary>
@@ -80,11 +78,13 @@
         /// <summary>
         /// Case Max Radiator Length for Water Cooling Solution (in mm)
         /// </summary>
+        [Required]
         public int MaxRadiatorLength { get; set; }
 
         /// <summary>
         /// Case Additional Description/Notes
         /// </summary>
+        [Required]
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
