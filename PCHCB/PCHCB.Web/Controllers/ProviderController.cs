@@ -1,13 +1,13 @@
 ﻿namespace PCHCB.Web.Controllers
 {
-    using System.Security.Claims;
-
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.Infrastructure.Extensions;
+
+    using static PCHCB.Common.NotificationMessages;
 
     [Authorize]
     public class ProviderController : Controller
@@ -28,7 +28,7 @@
 
             if (isProviderExists)
             {
-                this.TempData["Error"] = "You are already a provider!";
+                this.TempData[ErrorMessage] = "You are already a provider!";
 
                 return this.RedirectToAction("Index", "Home");
             }
@@ -45,7 +45,7 @@
 
             if (isProviderExists)
             {
-                this.TempData["Error"] = "You are already a provider!";
+                this.TempData[ErrorMessage] = "You are already a provider!";
 
                 return this.RedirectToAction("Index", "Home");
             }
@@ -88,7 +88,7 @@
             }
             catch (Exception)
             {
-                this.TempData["Error"] = "Something went wrong!";
+                this.TempData[ErrorMessage] = "Oops, something went wrong! Try again later!";
 
                 return this.RedirectToAction("Index", "Home");
             }
