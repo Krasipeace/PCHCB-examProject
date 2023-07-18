@@ -2,11 +2,15 @@
 {
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-    /// <summary>
-    /// Decimal Model Binder Provider
-    /// </summary>
     public class DecimalModelBinderProvider : IModelBinderProvider
     {
+        /// <summary>
+        /// Returns an instance of the DecimalModelBinder class if the model type is decimal or decimal?, 
+        /// otherwise returns null. This method is used to provide a custom model binder for decimal and decimal?.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns>DecimalModelBinder</returns>
+        /// <exception cref="ArgumentNullException">context</exception>
         public IModelBinder GetBinder(ModelBinderProviderContext context)
         {
             if (context == null)

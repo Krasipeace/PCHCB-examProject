@@ -2,11 +2,20 @@
 {
     public static class ErrorMessages
     {
+        public static class General
+        {
+            public const string SomethingWentWrong = "Oops, something went wrong! Try again later or contact administrator!";
+        }
+
         public static class Provider
         {
             public const string ProviderAlreadyExists = "You are already a provider!";
 
-            public const string ProviderWithPhoneNumberAlreadyExists = "Provider with such phone number already exists!";
+            public const string ProviderWithPhoneNumberAlreadyExists = "Provider with such Phone Number already exists!";
+
+            public const string ProviderWithSuchLogoUrlAlreadyExists = "Provider with such Logo Image already exists!";
+
+            public const string ProviderWithSuchWebPageAlreadyExists = "Provider with such Web Page already exists!";
         }
     }
 }

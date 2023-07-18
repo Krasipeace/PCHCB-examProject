@@ -8,8 +8,11 @@
     using PCHCB.Web.Infrastructure.Extensions;
 
     using static PCHCB.Common.NotificationMessages;
+    using static PCHCB.Common.ErrorMessages.Provider;
+    using static PCHCB.Common.ErrorMessages.General;
 
-    public class ProviderController : BaseController
+    [Authorize]
+    public class ProviderController : Controller
     {
         private readonly IProviderService providerService;
 
@@ -27,7 +30,7 @@
 
             if (isProviderExists)
             {
-                this.TempData[ErrorMessage] = "You are already a provider!";
+                this.TempData[ErrorMessage] = ProviderAlreadyExists;
 
                 return this.RedirectToAction("Index", "Home");
             }
@@ -44,7 +47,7 @@
 
             if (isProviderExists)
             {
-                this.TempData[ErrorMessage] = "You are already a provider!";
+                this.TempData[ErrorMessage] = "Provider";
 
                 return this.RedirectToAction("Index", "Home");
             }
@@ -53,7 +56,7 @@
                 .ProviderExistsByPhoneNumber(model.PhoneNumber);
             if (isPhoneNumberExists)
             {
-                this.ModelState.AddModelError(nameof(model.PhoneNumber), "Provider with such phone number already exists!");
+                this.ModelState.AddModelError(nameof(model.PhoneNumber), ProviderWithPhoneNumberAlreadyExists);
 
                 return this.View(model);
             }
@@ -62,7 +65,7 @@
                 .ProviderExistsByWebSite(model.WebPage);
             if (isWebPageExists)
             {
-                this.ModelState.AddModelError(nameof(model.WebPage), "Provider with such web page already exists!");
+                this.ModelState.AddModelError(nameof(model.WebPage), ProviderWithSuchWebPageAlreadyExists);
 
                 return this.View(model);
             }
@@ -71,7 +74,7 @@
                 .ProviderExistsByLogoUrl(model.LogoUrl);
             if (isLogoUrlExists)
             {
-                this.ModelState.AddModelError(nameof(model.LogoUrl), "Provider with such logo url already exists!");
+                this.ModelState.AddModelError(nameof(model.LogoUrl), ProviderWithSuchLogoUrlAlreadyExists);
 
                 return this.View(model);
             }
@@ -87,7 +90,7 @@
             }
             catch (Exception)
             {
-                this.TempData[ErrorMessage] = "Oops, something went wrong! Try again later!";
+                this.TempData[ErrorMessage] = SomethingWentWrong;
 
                 return this.RedirectToAction("Index", "Home");
             }
