@@ -9,8 +9,7 @@
 
     using static PCHCB.Common.NotificationMessages;
 
-    [Authorize]
-    public class ProviderController : Controller
+    public class ProviderController : BaseController
     {
         private readonly IProviderService providerService;
 
