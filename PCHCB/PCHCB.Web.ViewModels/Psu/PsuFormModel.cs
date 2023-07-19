@@ -1,0 +1,45 @@
+﻿namespace PCHCB.Web.ViewModels.Psu
+{
+    using System.ComponentModel.DataAnnotations;
+
+    using static PCHCB.Common.EntityValidationConstants.Component;
+    using static PCHCB.Common.EntityValidationConstants.Psu;
+    using static PCHCB.Common.InputValidationDataMessages.General;
+    using static PCHCB.Common.InputValidationDataMessages.Psu;
+
+    public class PsuFormModel
+    {
+        [Required(ErrorMessage = RequiredFieldMessage)]
+        [Display(Name = "Power Supply Unit Name")]
+        [StringLength(NameMaxLength, MinimumLength = NameMinLength, ErrorMessage = NameLengthErrorMessage)]
+        public string Name { get; set; } = null!;
+
+        [Required(ErrorMessage = RequiredFieldMessage)]
+        [Range(typeof(decimal), PriceMinValue, PriceMaxValue, ErrorMessage = PriceRangeErrorMessage)]
+        [Display(Name = "Power Supply Unit Price")]
+        public decimal Price { get; set; }
+
+        [Required(ErrorMessage = RequiredFieldMessage)]
+        [Range(WattsMinValue, WattsMaxValue, ErrorMessage = WattsRangeErrorMessage)]
+        [Display(Name = "Power Supply Unit Wattage")]
+        public int Wattage { get; set; }
+
+        [Required(ErrorMessage = RequiredFieldMessage)]
+        [Range(FactorRangeMinValue, FactorRangeMaxValue, ErrorMessage = FactorRangeErrorMessage)]
+        public int Factor { get; set; } 
+
+        [Required]
+        public bool NvidiaConnector { get; set; }
+
+        [Required(ErrorMessage = RequiredFieldMessage)]
+        [Url]
+        [Display(Name = "Image Link")]
+        [StringLength(UrlMaxLength, MinimumLength = UrlMinLength, ErrorMessage = UrlLengthErrorMessage)]
+        public string ImageUrl { get; set; } = null!;
+
+        [Required(ErrorMessage = RequiredFieldMessage)]
+        [Display(Name = "Description")]
+        [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = DescriptionLengthErrorMessage)]
+        public string Description { get; set; } = null!;
+    }
+}

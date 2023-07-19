@@ -22,13 +22,13 @@
         [Required(ErrorMessage = RequiredFieldMessage)]
         [StringLength(UrlMaxLength, MinimumLength = UrlMinLength, ErrorMessage = WebPageLengthErrorMessage)]
         [Url]
-        [Display(Name = "Web Page URL")]
+        [Display(Name = "Web Site Link")]
         public string WebPage { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [StringLength(UrlMaxLength, MinimumLength = UrlMinLength, ErrorMessage = LogoUrlLengthErrorMessage)]
         [Url]
-        [Display(Name = "Logo Image URL")]
+        [Display(Name = "Logo Image Link")]
         public string LogoUrl { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredFieldMessage)]
