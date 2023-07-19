@@ -1,6 +1,6 @@
 namespace PCHCB.Web
 {
-    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
     using PCHCB.Data.Models;
@@ -46,6 +46,7 @@ namespace PCHCB.Web
                 {
                     options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
                     options.ModelBinderProviders.Insert(1, new DoubleModelBinderProvider());
+                    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
                 });
 
             WebApplication app = builder.Build();
