@@ -6,6 +6,7 @@
     using PCHCB.Data.Models.Enums;
 
     using static PCHCB.Common.EntityValidationConstants.Component;
+    using static PCHCB.Common.EntityValidationConstants.Cpu;
 
     /// <summary>
     /// CPU Component
@@ -36,6 +37,7 @@
         /// CPU Socket Type (AM4, LGA1200, etc.)
         /// </summary>
         [Required]
+        [MaxLength(SocketMaxLength)]
         public string Socket { get; set; } = null!;
 
         /// <summary>

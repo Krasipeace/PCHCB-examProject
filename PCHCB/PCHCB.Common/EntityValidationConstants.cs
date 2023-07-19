@@ -37,5 +37,54 @@
             public const int DescriptionMinLength = 10;
             public const int DescriptionMaxLength = 500;
         }
+
+        public static class Case
+        {
+            public const string MaxCpuCoolerHeight = "200";
+            public const string MinCpuCoolerHeight = "50";
+
+            public const int StorageSlotsMinValue = 0;
+            public const int StorageSlotsMaxValue = 20;
+
+            public const int GpuLengthMinValue = 100;
+            public const int GpuLengthMaxValue = 1000;
+
+            public const int PsuFactorMinValue = 0;
+            public const int PsuFactorMaxValue = 5;
+
+            public const int RadiatorLengthMinValue = 120;
+            public const int RadiatorLengthMaxValue = 960;
+
+            public const int FormFactorMinValue = 0;
+            public const int FormFactorMaxValue = 3;
+        }
+
+        public static class Cooler
+        {
+            public const int CoolerTypeMinValue = 0;
+            public const int CoolerTypeMaxValue = 1;
+
+            public const int RadiatorSizeMinValue = 0;
+            public const int RadiatorSizeMaxValue = 4;
+
+            public const int FanSizeMinValue = 80;
+            public const int FanSizeMaxValue = 200;
+
+            public const int CoolerHeightMinValue = 30;
+            public const int CoolerHeightMaxValue = 200;
+
+            public const int TdpMinValue = 35;
+            public const int TdpMaxValue = 500;
+
+            public const int WidthMinValue = 30;
+            public const int WidthMaxValue = 200;
+        }
+
+        public static class Cpu
+        {
+            public const int SocketMaxLength = 20;
+
+            public const string ExclusiveCpuMaxPrice = "9999";
+        }
     }
 }

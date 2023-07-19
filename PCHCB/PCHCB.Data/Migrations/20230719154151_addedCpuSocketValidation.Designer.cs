@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PCHCB.Web.Data;
 
@@ -11,9 +12,10 @@ using PCHCB.Web.Data;
 namespace PCHCB.Data.Migrations
 {
     [DbContext(typeof(PCHCBDbContext))]
-    partial class PCHCBDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230719154151_addedCpuSocketValidation")]
+    partial class addedCpuSocketValidation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
