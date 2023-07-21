@@ -1,0 +1,66 @@
+﻿@model CaseFormModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Name...">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" placeholder="Price...">
+                <span asp-validation-for="Price" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CaseSize"></label>
+                <input asp-for="CaseSize" class="form-control" placeholder="Choose Case Form Factor Type...">
+                <span asp-validation-for="CaseSize" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormFactor"></label>
+                <input asp-for="FormFactor" class="form-control" placeholder="Choose Max Motherboard Form Factor...">
+                <span asp-validation-for="FormFactor" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxGpuLength"></label>
+                <input asp-for="MaxGpuLength" class="form-control" placeholder="Max Graphic Card Length in mm...">
+                <span asp-validation-for="MaxGpuLength" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxAirCpuCoolerHeight"></label>
+                <input asp-for="MaxAirCpuCoolerHeight" class="form-control" placeholder="Air cooler Height in mm...">
+                <span asp-validation-for="MaxAirCpuCoolerHeight" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PsuFactor"></label>
+                <input asp-for="PsuFactor" class="form-control" placeholder="Choose PSU Factor">
+                <span asp-validation-for="PsuFactor" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxStorageDevices"></label>
+                <input asp-for="MaxStorageDevices" class="form-control" placeholder="Max Storage Disk Drives in Case...">
+                <span asp-validation-for="MaxStorageDevices" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxRadiatorLength"></label>
+                <input asp-for="MaxRadiatorLength" class="form-control" placeholder="Max Possible Length of Graphic card...">
+                <span asp-validation-for="MaxRadiatorLength" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="Your Image URL here...">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" rows="4" class="form-control" placeholder="Write additional info..."></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -34,20 +34,12 @@
             {
                 this.TempData[ErrorMessage] = ProviderCannotAddCasesErrorMessage;
 
-                return this.RedirectToAction("Become", "Provider");
+                return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            try
-            {
-                CaseFormModel model = new();
-                await this.caseService.CreateCaseAsync(this.User.GetId()!, model);
-
-                return View(model);
-            }
-            catch (Exception)
-            {
-                return this.GeneralError();
-            }
+            CaseFormModel model = new CaseFormModel();        
+                
+            return this.View(model);
         }
 
         [HttpPost]
@@ -60,7 +52,7 @@
             {
                 this.TempData[ErrorMessage] = ProviderCannotAddCasesErrorMessage;
 
-                return this.RedirectToAction("Become", "Provider");
+                return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
             if (!this.ModelState.IsValid)

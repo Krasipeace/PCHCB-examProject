@@ -1,0 +1,14 @@
+﻿@model CaseFormModel
+@{
+    ViewData["Title"] = "Add Case";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_CaseFormPartial" model="@Model"/>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}

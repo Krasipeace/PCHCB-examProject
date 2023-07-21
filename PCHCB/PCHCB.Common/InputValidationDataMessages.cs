@@ -12,7 +12,7 @@
 
             public const string NameLengthErrorMessage = "The Name must be at least {2} and at max {1} characters long.";
 
-            public const string PriceRangeErrorMessage = "The Price must be at least {1} and at max {2} characters long.";
+            public const string PriceRangeErrorMessage = "The Price must be between ${1} and ${2}";
         }
 
         public static class Provider
