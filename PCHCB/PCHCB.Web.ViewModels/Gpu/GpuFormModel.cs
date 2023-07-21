@@ -10,8 +10,8 @@
     public class GpuFormModel
     {
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Graphic Card Name")]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength, ErrorMessage = NameLengthErrorMessage)]
+        [Display(Name = "Graphic Card Name")]
         public string Name { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredFieldMessage)]
@@ -46,8 +46,8 @@
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Url]
-        [Display(Name = "Image Link")]
         [StringLength(UrlMaxLength, MinimumLength = UrlMinLength, ErrorMessage = UrlLengthErrorMessage)]
+        [Display(Name = "Image Link")]
         public string ImageUrl { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredFieldMessage)]
@@ -55,8 +55,8 @@
         public bool NvidiaConnector { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Description")]
         [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = DescriptionLengthErrorMessage)]
+        [Display(Name = "Description")]
         public string Description { get; set; } = null!;
     }
 }

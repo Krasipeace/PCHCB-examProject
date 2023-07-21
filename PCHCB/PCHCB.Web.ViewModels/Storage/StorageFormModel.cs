@@ -10,8 +10,8 @@
     public class StorageFormModel
     {
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Storage Drive Name")]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength, ErrorMessage = NameLengthErrorMessage)]
+        [Display(Name = "Storage Drive Name")]
         public string Name { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredFieldMessage)]
@@ -26,17 +26,18 @@
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Range(TypeMinValue, TypeMaxValue, ErrorMessage = TypeRangeErrorMessage)]
+        [Display(Name = "Storage Drive Type")]
         public int Type { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Url]
-        [Display(Name = "Image Link")]
         [StringLength(UrlMaxLength, MinimumLength = UrlMinLength, ErrorMessage = UrlLengthErrorMessage)]
+        [Display(Name = "Image Link")]
         public string ImageUrl { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Description")]
         [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = DescriptionLengthErrorMessage)]
+        [Display(Name = "Description")]
         public string Description { get; set; } = null!;
     }
 }

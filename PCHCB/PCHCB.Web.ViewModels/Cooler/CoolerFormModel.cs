@@ -20,44 +20,44 @@
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Cooler Type")]
         [Range(CoolerTypeMinValue, CoolerTypeMaxValue, ErrorMessage = CoolerTypeErrorMessage)]
+        [Display(Name = "Cooler Type")]
         public int Type { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Url]
-        [Display(Name = "Image Link")]
-        [StringLength(UrlMaxLength, MinimumLength = UrlMinLength, ErrorMessage = UrlLengthErrorMessage)]
-        public string ImageUrl { get; set; } = null!;
-
-        [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Cooler's Cpu Socket Compatibility")]
         [StringLength(CompatibilityMaxLength, MinimumLength = CompatibilityMinLength, ErrorMessage = CoolerCompatibilityLengthMessage)]
+        [Display(Name = "Cooler's Cpu Socket Compatibility")]
         public string Compatibility { get; set; } = null!;
 
-        [Display(Name = "Water Cooler Radiator Length Size (in mm)")]
         [Range(RadiatorSizeMinValue, RadiatorSizeMaxValue)]
+        [Display(Name = "Water Cooler Radiator Length Size (in mm)")]
         public int RadiatorSize { get; set; }
 
-        [Display(Name = "Fan Size (in mm)")]
         [Range(FanSizeMinValue, FanSizeMaxValue)]
+        [Display(Name = "Fan Size (in mm)")]
         public int FanSize { get; set; }
 
-        [Display(Name = "Cooler Height (in mm)")]
         [Range(CoolerHeightMinValue, CoolerHeightMaxValue)]
+        [Display(Name = "Cooler Height (in mm)")]
         public double CoolerHeight { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Cooler Thermal Design Point(TDP)")]
         [Range(TdpMinValue, TdpMaxValue)]
+        [Display(Name = "Cooler Thermal Design Point(TDP)")]
         public int Tdp { get; set; }
 
-        [Display(Name = "Cooler Width (in mm)")]
         [Range(WidthMinValue, WidthMaxValue)]
+        [Display(Name = "Cooler Width (in mm)")]
         public int Width { get; set; }
 
-        [Display(Name = "Description")]
+        [Required(ErrorMessage = RequiredFieldMessage)]
+        [Url]
+        [StringLength(UrlMaxLength, MinimumLength = UrlMinLength, ErrorMessage = UrlLengthErrorMessage)]
+        [Display(Name = "Image Link")]
+        public string ImageUrl { get; set; } = null!;
+
         [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = DescriptionLengthErrorMessage)]
+        [Display(Name = "Description")]
         public string Description { get; set; } = null!;
     }
 }

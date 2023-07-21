@@ -1,6 +1,5 @@
 ﻿namespace PCHCB.Web.ViewModels.Cpu
 {
-    using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
 
     using static PCHCB.Common.EntityValidationConstants.Component;
@@ -11,8 +10,8 @@
     public class CpuFormModel
     {
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Processor Name")]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength, ErrorMessage = NameLengthErrorMessage)]
+        [Display(Name = "Processor Name")]
         public string Name { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredFieldMessage)]
@@ -67,13 +66,13 @@
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Url]
-        [Display(Name = "Image Link")]
         [StringLength(UrlMaxLength, MinimumLength = UrlMinLength, ErrorMessage = UrlLengthErrorMessage)]
+        [Display(Name = "Image Link")]
         public string ImageUrl { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Description")]
         [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = DescriptionLengthErrorMessage)]
+        [Display(Name = "Description")]
         public string Description { get; set; } = null!;
     }
 }

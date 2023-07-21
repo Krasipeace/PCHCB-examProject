@@ -10,8 +10,8 @@
     public class MotherboardFormModel
     {
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Motherboard Name")]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength, ErrorMessage = NameLengthErrorMessage)]
+        [Display(Name = "Motherboard Name")]
         public string Name { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredFieldMessage)]
@@ -71,13 +71,13 @@
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Url]
-        [Display(Name = "Image Link")]
         [StringLength(UrlMaxLength, MinimumLength = UrlMinLength, ErrorMessage = UrlLengthErrorMessage)]
+        [Display(Name = "Image Link")]
         public string ImageUrl { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Description")]
         [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = DescriptionLengthErrorMessage)]
+        [Display(Name = "Description")]
         public string Description { get; set; } = null!;
     }
 }

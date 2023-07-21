@@ -8,13 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\images\exampleImages\**" />
-    <Content Remove="wwwroot\images\exampleImages\**" />
-    <EmbeddedResource Remove="wwwroot\images\exampleImages\**" />
-    <None Remove="wwwroot\images\exampleImages\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" />
@@ -33,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Case\" />
+	<Folder Include="Views\Case\"/>
     <Folder Include="Views\Cooler\" />
     <Folder Include="Views\Cpu\" />
     <Folder Include="Views\Gpu\" />

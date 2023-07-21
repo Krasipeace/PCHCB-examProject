@@ -23,43 +23,43 @@
         public int CaseSize { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Motherboard Form Factor in Case")]
         [Range(FormFactorMinValue, FormFactorMaxValue)]
+        [Display(Name = "Motherboard Form Factor in Case")]
         public int FormFactor { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Case Max Graphic Card Length(in mm)")]
         [Range(GpuLengthMinValue, GpuLengthMaxValue)]
+        [Display(Name = "Case Max Graphic Card Length(in mm)")]
         public int MaxGpuLength { get; set; }
 
-        [Display(Name = "Case Max Air CPU Cooler Height(in mm)")]
         [Range(typeof(double), MinCpuCoolerHeight, MaxCpuCoolerHeight)]
+        [Display(Name = "Case Max Air CPU Cooler Height(in mm)")]
         public double MaxAirCpuCoolerHeight { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Case PSU Factor")]
         [Range(PsuFactorMinValue, PsuFactorMaxValue)]
+        [Display(Name = "Case PSU Factor")]
         public int PsuFactor { get; set; } 
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Url]
-        [Display(Name = "Case Image Link")]
         [StringLength(UrlMaxLength, MinimumLength = UrlMinLength, ErrorMessage = UrlLengthErrorMessage)]
+        [Display(Name = "Case Image Link")]
         public string ImageUrl { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Max Storage Devices in Case")]
         [Range(StorageSlotsMinValue, StorageSlotsMaxValue)]
+        [Display(Name = "Max Storage Devices in Case")]
         public int MaxStorageDevices { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Max Radiator Length(in mm) in Case")]
         [Range(RadiatorLengthMinValue, RadiatorLengthMaxValue)]
+        [Display(Name = "Max Radiator Length(in mm) in Case")]
         public int MaxRadiatorLength { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Description")]
         [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = DescriptionLengthErrorMessage)]
+        [Display(Name = "Description")]
         public string Description { get; set; } = null!;
     }
 }

@@ -16,6 +16,8 @@
             public const string ProviderWithSuchLogoUrlAlreadyExists = "Provider with such Logo Image already exists!";
 
             public const string ProviderWithSuchWebPageAlreadyExists = "Provider with such Web Page already exists!";
+
+            public const string ProviderCannotAddCasesErrorMessage = "You must be a provider to be able to add new Cases!";
         }
     }
 }

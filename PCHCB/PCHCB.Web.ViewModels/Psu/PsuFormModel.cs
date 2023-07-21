@@ -10,8 +10,8 @@
     public class PsuFormModel
     {
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Power Supply Unit Name")]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength, ErrorMessage = NameLengthErrorMessage)]
+        [Display(Name = "Power Supply Unit Name")]
         public string Name { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredFieldMessage)]
@@ -26,20 +26,22 @@
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Range(FactorRangeMinValue, FactorRangeMaxValue, ErrorMessage = FactorRangeErrorMessage)]
+        [Display(Name = "Power Supply Unit Factor Type")]
         public int Factor { get; set; } 
 
         [Required]
+        [Display(Name = "New Generation N-Vidia Power Connector")]
         public bool NvidiaConnector { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Url]
-        [Display(Name = "Image Link")]
         [StringLength(UrlMaxLength, MinimumLength = UrlMinLength, ErrorMessage = UrlLengthErrorMessage)]
+        [Display(Name = "Image Link")]
         public string ImageUrl { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Description")]
         [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = DescriptionLengthErrorMessage)]
+        [Display(Name = "Description")]
         public string Description { get; set; } = null!;
     }
 }
