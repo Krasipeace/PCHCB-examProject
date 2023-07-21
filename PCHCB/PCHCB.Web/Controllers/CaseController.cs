@@ -79,11 +79,11 @@
             }
         }
 
-        private IActionResult GeneralError()
-        {
-            this.TempData[ErrorMessage] = GeneralErrorMessage;
+        //private IActionResult GeneralError()
+        //{
+        //    this.TempData[ErrorMessage] = GeneralErrorMessage;
 
-            return this.RedirectToAction("Index", "Home");
-        }
+        //    return this.RedirectToAction("Index", "Home");
+        //}
     }
 }

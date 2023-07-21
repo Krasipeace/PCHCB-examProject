@@ -8,6 +8,8 @@
     using PCHCB.Web.Data;
     using PCHCB.Web.ViewModels.Case;
 
+    using static PCHCB.Common.GeneralAppConstants;
+
     public class CaseService : ICaseService
     {
         private readonly PCHCBDbContext dbContext;
@@ -46,7 +48,7 @@
             Case @case = await this.dbContext.Cases
                 .FirstAsync(c => c.Id == caseId);
 
-            @case.Name = "Currently Unavailable";
+            @case.Name = ComponentUnavailable;
             this.dbContext.Cases.Remove(@case);
 
             await this.dbContext.SaveChangesAsync();
@@ -57,7 +59,7 @@
             Case @case = await this.dbContext.Cases
                 .FirstAsync(c => c.Id == caseId);
 
-            return new CaseFormModel
+            return new CaseFormModel()
             {
                 Name = @case.Name,
                 Price = @case.Price,

@@ -4,7 +4,9 @@
 
     public interface ICpuService
     {
-        Task CreateCpu(string providerId, CpuFormModel model);
+        Task<int> CreateCpuAsync(string providerId, CpuFormModel model);
+
+        public Task<CpuFormModel> GetCpuForEditByIdAsync(int cpuId);
 
         Task EditCpuByIdAndFormModelAsync(int cpuId, CpuFormModel model);
 

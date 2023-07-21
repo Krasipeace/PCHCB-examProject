@@ -1,10 +1,14 @@
 ﻿namespace PCHCB.Services.Data
 {
-    using System;
+    using Microsoft.EntityFrameworkCore;
 
+    using PCHCB.Data.Models;
+    using PCHCB.Data.Models.Enums;
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
     using PCHCB.Web.ViewModels.Cpu;
+
+    using static PCHCB.Common.GeneralAppConstants;
 
     public class CpuService : ICpuService
     {
@@ -15,29 +19,103 @@
             this.dbContext = dbContext;
         }
 
-        public Task CreateCpu(string providerId, CpuFormModel model)
+        public async Task<int> CreateCpuAsync(string providerId, CpuFormModel model)
         {
-            throw new NotImplementedException();
+            Cpu cpu = new Cpu()
+            {
+                Name = model.Name,
+                Price = model.Price,
+                Socket = model.Socket,
+                Cores = model.Cores,
+                Threads = model.Threads,
+                Frequency = model.Frequency,
+                TurboFrequency = model.TurboFrequency,
+                Cache = model.Cache,
+                Tdp = model.Tdp,
+                RamFrequency = model.RamFrequency,
+                RamType = (RamType)model.RamType,
+                ImageUrl = model.ImageUrl,
+                Description = model.Description,
+                AddedOn = DateTime.UtcNow,
+                ProviderId = Guid.Parse(providerId),
+            };
+
+            await this.dbContext.Cpus.AddAsync(cpu);
+            await this.dbContext.SaveChangesAsync();
+
+            return cpu.Id;
         }
 
-        public Task DeleteCpuByIdAsync(int cpuId)
+        public async Task DeleteCpuByIdAsync(int cpuId)
         {
-            throw new NotImplementedException();
+            Cpu cpu = await this.dbContext.Cpus
+                .FirstAsync(c => c.Id == cpuId);
+
+            cpu.Name = ComponentUnavailable;
+            this.dbContext.Cpus.Remove(cpu);
+
+            await this.dbContext.SaveChangesAsync();
         }
 
-        public Task EditCpuByIdAndFormModelAsync(int cpuId, CpuFormModel model)
+        public async Task<CpuFormModel> GetCpuForEditByIdAsync(int cpuId)
         {
-            throw new NotImplementedException();
+            Cpu cpu = await this.dbContext.Cpus
+                .FirstAsync(c => c.Id == cpuId);
+
+            return new CpuFormModel()
+            {
+                Name = cpu.Name,
+                Price = cpu.Price,
+                Socket = cpu.Socket,
+                Cores = cpu.Cores,
+                Threads = cpu.Threads,
+                Frequency = cpu.Frequency,
+                TurboFrequency = cpu.TurboFrequency,
+                Cache = cpu.Cache,
+                Tdp = cpu.Tdp,
+                RamFrequency = cpu.RamFrequency,
+                RamType = (int)cpu.RamType,
+                ImageUrl = cpu.ImageUrl,
+                Description = cpu.Description,
+            };
         }
 
-        public Task<bool> IsCpuExistByIdAsync(int cpuId)
+        public async Task EditCpuByIdAndFormModelAsync(int cpuId, CpuFormModel model)
         {
-            throw new NotImplementedException();
+            Cpu cpu = await this.dbContext.Cpus
+                .FirstAsync(c => c.Id == cpuId);
+
+            cpu.Name = model.Name;
+            cpu.Price = model.Price;
+            cpu.Socket = model.Socket;
+            cpu.Cores = model.Cores;
+            cpu.Threads = model.Threads;
+            cpu.Frequency = model.Frequency;
+            cpu.TurboFrequency = model.TurboFrequency;
+            cpu.Cache = model.Cache;
+            cpu.Tdp = model.Tdp;
+            cpu.RamFrequency = model.RamFrequency;
+            cpu.RamType = (RamType)model.RamType;
+            cpu.ImageUrl = model.ImageUrl;
+            cpu.Description = model.Description;
+
+            await this.dbContext.SaveChangesAsync();
         }
 
-        public Task<bool> IsProviderIdOwnerOfCpuIdAsync(string providerId, int cpuId)
+        public async Task<bool> IsCpuExistByIdAsync(int cpuId)
         {
-            throw new NotImplementedException();
+            bool result = await this.dbContext.Cpus
+                .AnyAsync(c => c.Id == cpuId);
+
+            return result;
+        }
+
+        public async Task<bool> IsProviderIdOwnerOfCpuIdAsync(string providerId, int cpuId)
+        {
+            Cpu cpu = await this.dbContext.Cpus
+                .FirstAsync(c => c.Id == cpuId);
+
+            return cpu.ProviderId.ToString() == providerId;
         }
     }
 }

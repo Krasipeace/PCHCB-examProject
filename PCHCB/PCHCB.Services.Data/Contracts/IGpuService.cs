@@ -4,7 +4,9 @@
 
     public interface IGpuService
     {
-        Task CreateGpu(string providerId, GpuFormModel model);
+        Task<int> CreateGpuAsync(string providerId, GpuFormModel model);
+
+        public Task<GpuFormModel> GetGpuForEditByIdAsync(int gpuId);
 
         Task EditGpuByIdAndFormModelAsync(int gpuId, GpuFormModel model);
 

@@ -26,14 +26,14 @@
   </ItemGroup>
 
   <ItemGroup>
-	<Folder Include="Views\Case\"/>
-    <Folder Include="Views\Cooler\" />
-    <Folder Include="Views\Cpu\" />
-    <Folder Include="Views\Gpu\" />
-    <Folder Include="Views\Motherboard\" />
-    <Folder Include="Views\Storage\" />
-    <Folder Include="Views\Ram\" />
-    <Folder Include="Views\Psu\" />
+	  <Folder Include="Views\Case\"/>
+	  <Folder Include="Views\Cooler\" />
+	  <Folder Include="Views\Cpu\" />
+	  <Folder Include="Views\Gpu\" />
+	  <Folder Include="Views\Motherboard\" />
+	  <Folder Include="Views\Storage\" />
+	  <Folder Include="Views\Ram\" />
+	  <Folder Include="Views\Psu\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

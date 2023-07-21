@@ -1,10 +1,14 @@
 ﻿namespace PCHCB.Services.Data
 {
-    using System;
+    using Microsoft.EntityFrameworkCore;
 
+    using PCHCB.Data.Models;
+    using PCHCB.Data.Models.Enums;
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
     using PCHCB.Web.ViewModels.Cooler;
+
+    using static PCHCB.Common.GeneralAppConstants;
 
     public class CoolerService : ICoolerService
     {
@@ -15,34 +19,98 @@
             this.dbContext = dbContext;
         }
 
-        public Task CreateCooler(string providerId, CoolerFormModel model)
+        public async Task<int> CreateCoolerAsync(string providerId, CoolerFormModel model)
         {
-            throw new NotImplementedException();
+            Cooler cooler = new Cooler()
+            {
+                Name = model.Name,
+                Price = model.Price,
+                Type = (CoolerType)model.Type,
+                Compatibility = model.Compatibility,
+                RadiatorSize = (RadiatorSize)model.RadiatorSize,
+                FanSize = model.FanSize,
+                CoolerHeight = model.CoolerHeight,
+                Tdp = model.Tdp,
+                Width = model.Width,
+                ImageUrl = model.ImageUrl,
+                Description = model.Description,
+                AddedOn = DateTime.UtcNow,
+                ProviderId = Guid.Parse(providerId)
+            };
+
+            await this.dbContext.Coolers.AddAsync(cooler);
+            await this.dbContext.SaveChangesAsync();
+
+            return cooler.Id;
         }
 
-        public Task DeleteCoolerByIdAsync(int coolerId)
+        public async Task DeleteCoolerByIdAsync(int coolerId)
         {
-            throw new NotImplementedException();
+            Cooler cooler = await this.dbContext.Coolers
+                .FirstAsync(c => c.Id == coolerId);
+
+            cooler.Name = ComponentUnavailable;
+            this.dbContext.Coolers.Remove(cooler);
+
+            await this.dbContext.SaveChangesAsync();
         }
 
-        public Task EditCoolerByIdAndFormModelAsync(int coolerId, CoolerFormModel model)
+        public async Task<CoolerFormModel> GetCoolerForEditByIdAsync(int coolerId)
         {
-            throw new NotImplementedException();
+            Cooler cooler = await this.dbContext.Coolers
+                .FirstAsync(c => c.Id == coolerId);
+
+            return new CoolerFormModel()
+            {
+                Name = cooler.Name,
+                Price = cooler.Price,
+                Type = (int)cooler.Type,
+                Compatibility = cooler.Compatibility,
+                RadiatorSize = (int)cooler.RadiatorSize,
+                FanSize = cooler.FanSize,
+                CoolerHeight = cooler.CoolerHeight,
+                Tdp = cooler.Tdp,
+                Width = cooler.Width,
+                ImageUrl = cooler.ImageUrl,
+                Description = cooler.Description,
+            };
         }
 
-        public Task<CoolerFormModel> GetCoolerForEditByIdAsync(int coolerId)
+        public async Task EditCoolerByIdAndFormModelAsync(int coolerId, CoolerFormModel model)
         {
-            throw new NotImplementedException();
+            Cooler cooler = await this.dbContext.Coolers
+                .FirstAsync(c => c.Id == coolerId);
+
+            cooler.Name = model.Name;
+            cooler.Price = model.Price;
+            cooler.Type = (CoolerType)model.Type;
+            cooler.Compatibility = model.Compatibility;
+            cooler.RadiatorSize = (RadiatorSize)model.RadiatorSize;
+            cooler.FanSize = model.FanSize;
+            cooler.CoolerHeight = model.CoolerHeight;
+            cooler.Tdp = model.Tdp;
+            cooler.Width = model.Width;
+            cooler.ImageUrl = model.ImageUrl;
+            cooler.Description = model.Description;
+
+            await this.dbContext.SaveChangesAsync();
         }
 
-        public Task<bool> IsCoolerExistByIdAsync(int coolerId)
+        public async Task<bool> IsCoolerExistByIdAsync(int coolerId)
         {
-            throw new NotImplementedException();
+            bool result = await this.dbContext
+                .Coolers
+                .AnyAsync(c => c.Id == coolerId);
+
+            return result;
         }
 
-        public Task<bool> IsProviderIdOwnerOfCoolerIdAsync(string providerId, int coolerId)
+        public async Task<bool> IsProviderIdOwnerOfCoolerIdAsync(string providerId, int coolerId)
         {
-            throw new NotImplementedException();
+            Cooler cooler = await this.dbContext.Coolers
+            .FirstAsync(c => c.Id == coolerId);
+
+            return cooler.ProviderId.ToString() == providerId;
         }
     }
 }

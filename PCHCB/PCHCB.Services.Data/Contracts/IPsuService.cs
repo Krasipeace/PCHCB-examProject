@@ -4,7 +4,9 @@
 
     public interface IPsuService
     {
-        Task CreatePsu(string providerId, PsuFormModel model);
+        Task<int> CreatePsuAsync(string providerId, PsuFormModel model);
+
+        public Task<PsuFormModel> GetPsuForEditByIdAsync(int psuId);
 
         Task EditPsuByIdAndFormModelAsync(int psuId, PsuFormModel model);
 
