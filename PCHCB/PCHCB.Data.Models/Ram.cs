@@ -6,6 +6,7 @@
     using PCHCB.Data.Models.Enums;
 
     using static PCHCB.Common.EntityValidationConstants.Component;
+    using static PCHCB.Common.EntityValidationConstants.Ram;
 
     /// <summary>
     /// Memory Stick
@@ -60,6 +61,7 @@
         /// Production Unique Model Number (MB Compatibility)
         /// </summary>
         [Required]
+        [MaxLength(ModelNumberMaxLengthValue)]
         public string ModelNumber { get; set; } = null!;
 
         /// <summary>

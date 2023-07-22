@@ -190,8 +190,8 @@
             public const int HeightMinValue = 20;
             public const int HeightMaxValue = 60;
 
-            public const int ModelNumberMaxLengthValue = 4;
-            public const int ModelNumberMinLengthValue = 20;
+            public const int ModelNumberMinLengthValue = 4;
+            public const int ModelNumberMaxLengthValue = 30;
         }
 
         public static class Storage
