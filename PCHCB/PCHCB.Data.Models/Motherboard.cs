@@ -6,6 +6,7 @@
     using PCHCB.Data.Models.Enums;
 
     using static PCHCB.Common.EntityValidationConstants.Component;
+    using static PCHCB.Common.EntityValidationConstants.Motherboard;
 
     /// <summary>
     /// Motherboard Component
@@ -42,12 +43,14 @@
         /// Motherboard CPU Socket Type (AM4, LGA1200, etc.)
         /// </summary>
         [Required]
+        [MaxLength(SocketMaxLength)]
         public string Socket { get; set; } = null!;
 
         /// <summary>
         /// Motherboard Chipset Type (B450, Z490, etc.)
         /// </summary>
         [Required]
+        [MaxLength(ChipsetMaxLength)]
         public string Chipset { get; set; } = null!;
 
         /// <summary>

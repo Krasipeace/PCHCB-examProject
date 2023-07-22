@@ -161,6 +161,10 @@
 
             public const int M2SlotsMinValue = 0;
             public const int M2SlotsMaxValue = 6;
+
+            public const int SocketMaxLength = 20;
+            
+            public const int ChipsetMaxLength = 10;
         }
 
         public static class Psu
