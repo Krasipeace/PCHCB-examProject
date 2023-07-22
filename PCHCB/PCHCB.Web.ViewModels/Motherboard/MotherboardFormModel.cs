@@ -46,7 +46,7 @@
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Range(RamCapacityMinValue, RamCapacityMaxValue, ErrorMessage = RamCapacityRangeErrorMessage)]
-        [Display(Name = "Maximum Memory Capacity (in GB)")]
+        [Display(Name = "Max Memory Capacity (GB)")]
         public int RamCapacity { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]

@@ -21,16 +21,16 @@
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Range(WattsMinValue, WattsMaxValue, ErrorMessage = WattsRangeErrorMessage)]
-        [Display(Name = "Power Supply Unit Wattage")]
+        [Display(Name = "PSU Wattage")]
         public int Wattage { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Range(FactorRangeMinValue, FactorRangeMaxValue, ErrorMessage = FactorRangeErrorMessage)]
-        [Display(Name = "Power Supply Unit Factor Type")]
+        [Display(Name = "PSU Factor Type")]
         public int Factor { get; set; } 
 
         [Required]
-        [Display(Name = "New Generation N-Vidia Power Connector")]
+        [Display(Name = "Nvidia Power Connector")]
         public bool NvidiaConnector { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
