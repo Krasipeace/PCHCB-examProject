@@ -1,0 +1,103 @@
+﻿@model MotherboardFormModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group mt-2">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Name...">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" placeholder="Price...">
+                <span asp-validation-for="Price" class="small text-danger"></span>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group col-md-4">
+                    <label asp-for="FormFactor"></label>
+                    <select asp-for="FormFactor" class="form-control">
+                        <option value="0">ATX</option>
+                        <option value="1">Micro ATX</option>
+                        <option value="2">Mini ATX</option>
+                        <option value="3">E-ATX</option>
+                    </select>
+                    <span asp-validation-for="FormFactor" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Socket"></label>
+                    <input asp-for="Socket" class="form-control" placeholder="CPU Socket...">
+                    <span asp-validation-for="Socket" class="small text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Chipset"></label>
+                    <input asp-for="Chipset" class="form-control" placeholder="Chipset...">
+                    <span asp-validation-for="Chipset" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group col-md-4">
+                    <label asp-for="RamType"></label>
+                    <select asp-for="RamType" class="form-control">
+                        <option value="0">DDR 3</option>
+                        <option value="1">DDR 4</option>
+                        <option value="2">DDR 5</option>
+                    </select>
+                    <span asp-validation-for="RamType" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="RamSlots"></label>
+                    <input asp-for="RamSlots" class="form-control" placeholder="Slots for RAM...">
+                    <span asp-validation-for="RamSlots" class="small text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="RamCapacity"></label>
+                    <input asp-for="RamCapacity" class="form-control" placeholder="Max RAM Capacity...">
+                    <span asp-validation-for="RamCapacity" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <div class="form-group col-md-6">
+                    <label asp-for="PcieType"></label>
+                    <select asp-for="PcieType" class="form-control">
+                        <option value="0">PCI-e 3</option>
+                        <option value="1">PCI-e 4</option>
+                        <option value="2">PCI-e 5</option>
+                        <option value="3">PCI-e 6</option>
+                    </select>
+                    <span asp-validation-for="PcieType" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="PcieSlots"></label>
+                    <input asp-for="PcieSlots" class="form-control" placeholder="PCI-E Slots">
+                    <span asp-validation-for="PcieSlots" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group md-6">
+                    <label asp-for="SataSlots"></label>
+                    <input asp-for="SataSlots" class="form-control" placeholder="Sata Slots...">
+                    <span asp-validation-for="SataSlots" class="small text-danger"></span>
+                </div>
+                <div class="form-group md-6">
+                    <label asp-for="M2Slots"></label>
+                    <input asp-for="M2Slots" class="form-control" placeholder="M.2 Slots...">
+                    <span asp-validation-for="M2Slots" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="Your Image URL here...">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" rows="4" class="form-control" placeholder="Describe your component here..."></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-4" type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+</div>

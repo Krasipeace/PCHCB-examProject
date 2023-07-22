@@ -65,7 +65,7 @@
                 string? providerId = await this.providerService
                 .GetProviderByUserIdAsync(this.User.GetId()!);
 
-                int caseId = await this.coolerService.CreateCoolerAsync(providerId!, model);
+                int coolerId = await this.coolerService.CreateCoolerAsync(providerId!, model);
 
                 this.TempData[SuccessMessage] = CoolerAddedSuccessfully;
 

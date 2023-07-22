@@ -65,7 +65,7 @@
                 string? providerId = await this.providerService
                 .GetProviderByUserIdAsync(this.User.GetId()!);
 
-                int caseId = await this.gpuService.CreateGpuAsync(providerId!, model);
+                int gpuId = await this.gpuService.CreateGpuAsync(providerId!, model);
 
                 this.TempData[SuccessMessage] = GpuAddedSuccessfully;
 

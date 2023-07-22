@@ -25,12 +25,12 @@
         public int FormFactor { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Range(SocketMinValue, SocketMaxValue, ErrorMessage = SocketRangeErrorMessage)]
+        [StringLength(SocketMaxValue, MinimumLength = SocketMinValue, ErrorMessage = SocketLengthErrorMessage)]
         [Display(Name = "CPU Socket")]
         public string Socket { get; set; } = null!;
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Range(ChipsetMinValue, ChipsetMaxValue, ErrorMessage = ChipsetRangeErrorMessage)]
+        [StringLength(ChipsetMaxValue, MinimumLength = ChipsetMinValue, ErrorMessage = ChipsetLengthErrorMessage)]
         [Display(Name = "Chipset")]
         public string Chipset { get; set; } = null!;
 

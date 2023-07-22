@@ -135,7 +135,7 @@
             public const int FormFactorMinValue = 0;
             public const int FormFactorMaxValue = 3;
 
-            public const int SocketMinValue = 2;
+            public const int SocketMinValue = 1;
             public const int SocketMaxValue = 20;
 
             public const int ChipsetMinValue = 2;

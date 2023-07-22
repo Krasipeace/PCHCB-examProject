@@ -65,7 +65,7 @@
                 string? providerId = await this.providerService
                 .GetProviderByUserIdAsync(this.User.GetId()!);
 
-                int caseId = await this.cpuService.CreateCpuAsync(providerId!, model);
+                int cpuId = await this.cpuService.CreateCpuAsync(providerId!, model);
 
                 this.TempData[SuccessMessage] = CpuAddedSuccessfully;
 

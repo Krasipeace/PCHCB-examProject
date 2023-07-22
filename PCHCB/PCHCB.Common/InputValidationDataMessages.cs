@@ -69,9 +69,9 @@
         {
             public const string FormFactorRangeErrorMessage = "Motherboard Form Factor must be either ATX/mATX/mITX/EATX!";
 
-            public const string SocketRangeErrorMessage = "Motherboard Socket Type must be between {1} and {2} characters long!";
+            public const string SocketLengthErrorMessage = "Motherboard Socket Type must be between {2} and {1} characters long!";
 
-            public const string ChipsetRangeErrorMessage = "Motherboard Chipset must be between {1} and {2} characters long!";
+            public const string ChipsetLengthErrorMessage = "Motherboard Chipset must be between {2} and {1} characters long!";
 
             public const string RamTypeRangeErrorMessage = "Motherboard Ram Type must be either DDR3/DDR4/DDR5!";
 
