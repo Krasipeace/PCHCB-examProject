@@ -1,0 +1,88 @@
+﻿@model CpuFormModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group mt-2">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Name...">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" placeholder="Price...">
+                <span asp-validation-for="Price" class="small text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Socket"></label>
+                <input asp-for="Socket" class="form-control" placeholder="CPU Socket...">
+                <span asp-validation-for="Socket" class="small text-danger"></span>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group col-md-6">
+                    <label asp-for="Cores"></label>
+                    <input asp-for="Cores" class="form-control" placeholder="Physical Cores...">
+                    <span asp-validation-for="Cores" class="small text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Threads"></label>
+                    <input asp-for="Threads" class="form-control" placeholder="Logical Cores...">
+                    <span asp-validation-for="Threads" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group col-md-6">
+                    <label asp-for="Frequency"></label>
+                    <input asp-for="Frequency" class="form-control" placeholder="Base Frequency...">
+                    <span asp-validation-for="Frequency" class="small text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="TurboFrequency"></label>
+                    <input asp-for="TurboFrequency" class="form-control" placeholder="Turbo Frequency...">
+                    <span asp-validation-for="TurboFrequency" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group col-md-6">
+                    <label asp-for="RamFrequency"></label>
+                    <input asp-for="RamFrequency" class="form-control" placeholder="RAM Frequency...">
+                    <span asp-validation-for="RamFrequency" class="small text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="RamType"></label>
+                    <select asp-for="RamType" class="form-control">
+                        <option value="0">DDR 3</option>
+                        <option value="1">DDR 4</option>
+                        <option value="2">DDR 5</option>
+                    </select>
+                    <span asp-validation-for="RamType" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group mt-2 col-md-6">
+                    <label asp-for="Cache"></label>
+                    <input asp-for="Cache" class="form-control" placeholder="Cache...">
+                    <span asp-validation-for="Cache" class="small text-danger"></span>
+                </div>
+                <div class="form-group mt-2 col-md-6">
+                    <label asp-for="Tdp"></label>
+                    <input asp-for="Tdp" class="form-control" placeholder="TDP...">
+                    <span asp-validation-for="Tdp" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="Your Image URL here...">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" rows="4" class="form-control" placeholder="Describe your component here..."></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-4" type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+</div>

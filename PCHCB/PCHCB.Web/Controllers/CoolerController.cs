@@ -32,7 +32,7 @@
 
             if (!isProvider)
             {
-                this.TempData[ErrorMessage] = ProviderCannotAddCoolersErrorMessage;
+                this.TempData[ErrorMessage] = UserCannotAddCoolersErrorMessage;
 
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
@@ -50,7 +50,7 @@
 
             if (!isProvider)
             {
-                this.TempData[ErrorMessage] = ProviderCannotAddCasesErrorMessage;
+                this.TempData[ErrorMessage] = UserCannotAddCasesErrorMessage;
 
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }

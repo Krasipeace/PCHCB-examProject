@@ -43,7 +43,7 @@
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Range(TdpMinValue, TdpMaxValue)]
-        [Display(Name = "Cooler Thermal Design Point(TDP)")]
+        [Display(Name = "Max Cooler Thermal Design Point(TDP)")]
         public int Tdp { get; set; }
 
         [Range(WidthMinValue, WidthMaxValue)]
