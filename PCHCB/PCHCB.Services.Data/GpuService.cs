@@ -91,7 +91,6 @@
             this.dbContext.Gpus.Remove(gpu);
 
             await this.dbContext.SaveChangesAsync();
-
         }
 
         public async Task<bool> IsGpuExistByIdAsync(int gpuId)

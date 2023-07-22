@@ -19,12 +19,12 @@
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
-        [Display(Name = "Case Size")]
+        [Display(Name = "Select Case Size")]
         public int CaseSize { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Range(FormFactorMinValue, FormFactorMaxValue)]
-        [Display(Name = "Motherboard Form Factor in Case")]
+        [Display(Name = "Select MB Form Factor")]
         public int FormFactor { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]
@@ -38,7 +38,7 @@
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Range(PsuFactorMinValue, PsuFactorMaxValue)]
-        [Display(Name = "Case PSU Factor")]
+        [Display(Name = "Select PSU Factor")]
         public int PsuFactor { get; set; } 
 
         [Required(ErrorMessage = RequiredFieldMessage)]

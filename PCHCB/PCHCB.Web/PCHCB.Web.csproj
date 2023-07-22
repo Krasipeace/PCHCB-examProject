@@ -1,40 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-PCHCB.Web-083d5c3b-59b9-4915-ac10-2cc87e0deae3</UserSecretsId>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>aspnet-PCHCB.Web-083d5c3b-59b9-4915-ac10-2cc87e0deae3</UserSecretsId>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.16" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.16" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.16" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.16" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.16" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.16" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.16" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.16" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.16" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.16" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PCHCB.Common\PCHCB.Common.csproj" />
-    <ProjectReference Include="..\PCHCB.Data.Models\PCHCB.Data.Models.csproj" />
-    <ProjectReference Include="..\PCHCB.Data\PCHCB.Data.csproj" />
-    <ProjectReference Include="..\PCHCB.Services.Data\PCHCB.Services.Data.csproj" />
-    <ProjectReference Include="..\PCHCB.Web.Infrastructure\PCHCB.Web.Infrastructure.csproj" />
-    <ProjectReference Include="..\PCHCB.Web.ViewModels\PCHCB.Web.ViewModels.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\PCHCB.Common\PCHCB.Common.csproj" />
+		<ProjectReference Include="..\PCHCB.Data.Models\PCHCB.Data.Models.csproj" />
+		<ProjectReference Include="..\PCHCB.Data\PCHCB.Data.csproj" />
+		<ProjectReference Include="..\PCHCB.Services.Data\PCHCB.Services.Data.csproj" />
+		<ProjectReference Include="..\PCHCB.Web.Infrastructure\PCHCB.Web.Infrastructure.csproj" />
+		<ProjectReference Include="..\PCHCB.Web.ViewModels\PCHCB.Web.ViewModels.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-	  <Folder Include="Views\Case\"/>
-	  <Folder Include="Views\Cooler\" />
-	  <Folder Include="Views\Cpu\" />
-	  <Folder Include="Views\Gpu\" />
-	  <Folder Include="Views\Motherboard\" />
-	  <Folder Include="Views\Storage\" />
-	  <Folder Include="Views\Ram\" />
-	  <Folder Include="Views\Psu\" />
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Views\Case\"/>
+		<Folder Include="Views\Cooler\" />
+		<Folder Include="Views\Cpu\" />
+		<Folder Include="Views\Gpu\" />
+		<Folder Include="Views\Motherboard\" />
+		<Folder Include="Views\Storage\" />
+		<Folder Include="Views\Ram\" />
+		<Folder Include="Views\Psu\" />
+		<Folder Include="wwwroot\images\" />
+	</ItemGroup>
 
 </Project>
