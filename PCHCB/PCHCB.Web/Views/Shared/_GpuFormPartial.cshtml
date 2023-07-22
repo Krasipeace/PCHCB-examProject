@@ -1,0 +1,75 @@
+﻿@model GpuFormModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group mt-2">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Name...">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" placeholder="Price...">
+                <span asp-validation-for="Price" class="small text-danger"></span>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group col-md-6">
+                    <label asp-for="Memory"></label>
+                    <input asp-for="Memory" class="form-control" placeholder="Video Memory...">
+                    <span asp-validation-for="Memory" class="small text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="PowerConsumption"></label>
+                    <input asp-for="PowerConsumption" class="form-control" placeholder="Wattage Required...">
+                    <span asp-validation-for="PowerConsumption" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group col-md-6">
+                <label asp-for="NvidiaConnector"></label>
+                    <select asp-for="NvidiaConnector" class="form-control">
+                    <option value="False">No</option>
+                    <option value="True">Yes</option>
+                </select>
+                    <span asp-validation-for="NvidiaConnector" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Interface"></label>
+                    <select asp-for="Interface" class="form-control">
+                        <option value="0">PCI-e 3.0</option>
+                        <option value="1">PCI-e 4.0</option>
+                        <option value="2">PCI-e 5.0</option>
+                        <option value="6">PCI-e 6.0</option>
+                    </select>
+                    <span asp-validation-for="Interface" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group mt-2 col-md-6">
+                    <label asp-for="Length"></label>
+                    <input asp-for="Length" class="form-control" placeholder="Length in mm...">
+                    <span asp-validation-for="Length" class="small text-danger"></span>
+                </div>
+                <div class="form-group mt-2 col-md-6">
+                    <label asp-for="SlotsRequired"></label>
+                    <input asp-for="SlotsRequired" class="form-control" placeholder="Width in Slots...">
+                    <span asp-validation-for="SlotsRequired" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="Your Image URL here...">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" rows="4" class="form-control" placeholder="Describe your component here..."></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-4" type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+</div>

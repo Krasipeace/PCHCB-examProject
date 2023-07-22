@@ -14,7 +14,7 @@
                 <span asp-validation-for="Price" class="small text-danger"></span>
             </div>
             <div class="row mt-2">
-                <div class="form-group col-md-6">
+                <div class="form-group">
                     <label asp-for="Type"></label>
                     <select asp-for="Type" class="form-control" onchange="updateForm()">
                         <option value="0" selected>Air</option>
@@ -22,13 +22,13 @@
                     </select>
                     <span asp-validation-for="Type" class="text-danger"></span>
                 </div>
-                <div id="airForm">
-                    <div class="form-group col-md-6 mt-2">
+                <div id="airForm" class="row mt-2">
+                    <div class="form-group col-md-6">
                         <label asp-for="CoolerHeight"></label>
                         <input asp-for="CoolerHeight" class="form-control" value="30" placeholder="Cooler Height">
                         <span asp-validation-for="CoolerHeight" class="small text-danger"></span>
                     </div>
-                    <div class="form-group col-md-6 mt-2">
+                    <div class="form-group col-md-6">
                         <label asp-for="Width"></label>
                         <input asp-for="Width" class="form-control" value="30" placeholder="Cooler Width">
                         <span asp-validation-for="Width" class="small text-danger"></span>
