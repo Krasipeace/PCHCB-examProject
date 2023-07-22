@@ -1,0 +1,62 @@
+﻿@model RamFormModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group mt-2">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Name...">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" placeholder="Price...">
+                <span asp-validation-for="Price" class="small text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Capacity"></label>
+                <input asp-for="Capacity" class="form-control" placeholder="RAM Capacity (in GB)...">
+                <span asp-validation-for="Capacity" class="small text-danger"></span>
+            </div>
+            <div class="row mt-2">
+                <div class="form-group col-md-4">
+                    <label asp-for="Type"></label>
+                    <select asp-for="Type" class="form-control">
+                        <option value="0">DDR 3</option>
+                        <option value="1">DDR 4</option>
+                        <option value="2">DDR 5</option>
+                    </select>
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Frequency"></label>
+                    <input asp-for="Frequency" class="form-control" placeholder="Frequency...">
+                    <span asp-validation-for="Frequency" class="small text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Height"></label>
+                    <input asp-for="Height" class="form-control" placeholder="RAM Stick Height...">
+                    <span asp-validation-for="Height" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="ModelNumber"></label>
+                <input asp-for="ModelNumber" class="form-control" placeholder="Model Number...">
+                <span asp-validation-for="ModelNumber" class="small text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="Your Image URL here...">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" rows="4" class="form-control" placeholder="Describe your component here..."></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-4" type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+</div>
