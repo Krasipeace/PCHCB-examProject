@@ -21,7 +21,7 @@
 
         [Required(ErrorMessage = RequiredFieldMessage)]
         [Range(CapacityMinValue, CapacityMaxValue, ErrorMessage = CapacityRangeErrorMessage)]
-        [Display(Name = "Storage Drive Capacity (MB)")]
+        [Display(Name = "Storage Drive Capacity (GB)")]
         public int Capacity { get; set; }
 
         [Required(ErrorMessage = RequiredFieldMessage)]

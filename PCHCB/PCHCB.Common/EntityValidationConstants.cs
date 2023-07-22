@@ -196,8 +196,8 @@
 
         public static class Storage
         {
-            public const int CapacityMinValue = 128;
-            public const int CapacityMaxValue = 22_000_000;
+            public const int CapacityMinValue = 64;
+            public const int CapacityMaxValue = 22528;
 
             public const int TypeMinValue = 0;
             public const int TypeMaxValue = 2;
