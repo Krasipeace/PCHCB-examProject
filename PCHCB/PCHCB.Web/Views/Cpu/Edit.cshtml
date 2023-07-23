@@ -1,0 +1,14 @@
+﻿@model CpuFormModel
+@{
+    ViewData["Title"] = "Edit CPU";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_CpuFormPartial" model="@Model" />
+
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}

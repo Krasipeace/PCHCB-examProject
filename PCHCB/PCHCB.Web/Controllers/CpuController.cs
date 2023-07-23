@@ -9,6 +9,7 @@
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ErrorMessages.Provider;
+    using static PCHCB.Common.ErrorMessages.Cpu;
     using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
 
@@ -37,8 +38,8 @@
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            CpuFormModel model = new CpuFormModel();       
-                
+            CpuFormModel model = new CpuFormModel();
+
             return this.View(model);
         }
 
@@ -69,7 +70,7 @@
 
                 this.TempData[SuccessMessage] = CpuAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Cooler");
+                return this.RedirectToAction("Details", "Cpu");
             }
             catch (Exception)
             {
@@ -77,6 +78,113 @@
 
                 return this.View(model);
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            bool cpuExists = await cpuService
+                .IsCpuExistByIdAsync(id);
+            if (!cpuExists)
+            {
+                TempData[ErrorMessage] = CpuWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Components");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotEditCpusErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await cpuService
+                .IsProviderIdOwnerOfCpuIdAsync(providerId!, id);
+
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotEditCpuHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                CpuFormModel formModel = await cpuService
+                    .GetCpuForEditByIdAsync(id);
+
+                return View(formModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, CpuFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            bool cpuExists = await cpuService
+                .IsCpuExistByIdAsync(id);
+            if (!cpuExists)
+            {
+                TempData[ErrorMessage] = CpuWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Components");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotEditCpusErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await cpuService
+                .IsProviderIdOwnerOfCpuIdAsync(providerId!, id);
+
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotEditCpuHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                await cpuService.EditCpuByIdAndFormModelAsync(id, model);
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(string.Empty,
+                    GeneralErrorMessage);
+
+                return View(model);
+            }
+
+            TempData[SuccessMessage] = CpuEditedSuccessfully;
+
+            return RedirectToAction("Details", "Cpu", new { id });
+        }
+
+        private IActionResult GeneralError()
+        {
+            this.TempData[ErrorMessage] = GeneralErrorMessage;
+
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }
