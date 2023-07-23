@@ -10,6 +10,7 @@
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ExceptionMessages;
     using static PCHCB.Common.ErrorMessages.Provider;
+    using static PCHCB.Common.ErrorMessages.Case;
     using static PCHCB.Common.SuccessMessages;
 
     [Authorize]
@@ -37,8 +38,8 @@
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            CaseFormModel model = new CaseFormModel();        
-                
+            CaseFormModel model = new CaseFormModel();
+
             return this.View(model);
         }
 
@@ -79,11 +80,111 @@
             }
         }
 
-        //private IActionResult GeneralError()
-        //{
-        //    this.TempData[ErrorMessage] = GeneralErrorMessage;
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            bool caseExists = await caseService
+                .IsCaseExistByIdAsync(id);
+            if (!caseExists)
+            {
+                TempData[ErrorMessage] = CaseWithIdDoesNotExist;
 
-        //    return this.RedirectToAction("Index", "Home");
-        //}
+                return RedirectToAction("All", "Components");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotEditCasesErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await caseService
+                .IsProviderIdOwnerOfCaseIdAsync(providerId!, id);
+
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotEditCaseHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                CaseFormModel formModel = await caseService
+                    .GetCaseForEditByIdAsync(id);
+
+                return View(formModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, CaseFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            bool caseExists = await caseService
+                .IsCaseExistByIdAsync(id);
+            if (!caseExists)
+            {
+                TempData[ErrorMessage] = CaseWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Components");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotEditCasesErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await caseService
+                .IsProviderIdOwnerOfCaseIdAsync(providerId!, id);
+
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotEditCaseHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                await caseService.EditCaseByIdAndFormModelAsync(id, model);
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(string.Empty,
+                    GeneralErrorMessage);
+
+                return View(model);
+            }
+
+            TempData[SuccessMessage] = CaseEditedSuccessfully;
+
+            return RedirectToAction("Details", "Case", new { id });
+        }
+
+        private IActionResult GeneralError()
+        {
+            this.TempData[ErrorMessage] = GeneralErrorMessage;
+
+            return this.RedirectToAction("Index", "Home");
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿// Back to top button functionality - start
+﻿// #region Back-to-Top button
 const backToTopButton = document.getElementById("btn-back-to-top");
 
 window.onscroll = function () { 
@@ -19,4 +19,4 @@ function toTopFunction() {
         behavior: "smooth"
     });
 }
-// Back to top button functionality - end
+// #endregion 
