@@ -6,6 +6,7 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.ViewModels.Cooler;
+    using PCHCB.Web.ViewModels.Provider;
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ErrorMessages.Provider;
@@ -178,6 +179,97 @@
             TempData[SuccessMessage] = CoolerEditedSuccessfully;
 
             return RedirectToAction("Details", "Cooler", new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool coolerExists = await coolerService
+                .IsCoolerExistByIdAsync(id);
+            if (!coolerExists)
+            {
+                TempData[ErrorMessage] = CoolerWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Cooler");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotDeleteCoolersErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await coolerService
+                .IsProviderIdOwnerOfCoolerIdAsync(providerId!, id);
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotDeleteCoolerHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                DeleteDetailsViewModel viewModel =
+                    await coolerService.GetCoolerForDeleteByIdAsync(id);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, DeleteDetailsViewModel model)
+        {
+            bool coolerExists = await coolerService
+                .IsCoolerExistByIdAsync(id);
+            if (!coolerExists)
+            {
+                TempData[ErrorMessage] = CoolerWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Cooler");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotDeleteCoolersErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await coolerService
+                .IsProviderIdOwnerOfCoolerIdAsync(providerId!, id);
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotDeleteCoolerHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                await coolerService.DeleteCoolerByIdAsync(id);
+
+                TempData[WarningMessage] = CoolerDeletedSuccessfully;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         private IActionResult GeneralError()

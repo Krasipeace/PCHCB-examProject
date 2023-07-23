@@ -7,6 +7,7 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
     using PCHCB.Web.ViewModels.Cpu;
+    using PCHCB.Web.ViewModels.Provider;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -44,17 +45,6 @@
             await this.dbContext.SaveChangesAsync();
 
             return cpu.Id;
-        }
-
-        public async Task DeleteCpuByIdAsync(int cpuId)
-        {
-            Cpu cpu = await this.dbContext.Cpus
-                .FirstAsync(c => c.Id == cpuId);
-
-            cpu.Name = ComponentUnavailable;
-            this.dbContext.Cpus.Remove(cpu);
-
-            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<CpuFormModel> GetCpuForEditByIdAsync(int cpuId)
@@ -116,6 +106,31 @@
                 .FirstAsync(c => c.Id == cpuId);
 
             return cpu.ProviderId.ToString() == providerId;
+        }
+
+        public async Task<DeleteDetailsViewModel> GetCpuForDeleteByIdAsync(int cpuId)
+        {
+            Cpu cooler = await dbContext
+                .Cpus
+                .FirstAsync(c => c.Id == cpuId);
+
+            return new DeleteDetailsViewModel
+            {
+                Name = cooler.Name,
+                Description = cooler.Description,
+                ImageUrl = cooler.ImageUrl
+            };
+        }
+
+        public async Task DeleteCpuByIdAsync(int cpuId)
+        {
+            Cpu cpu = await this.dbContext.Cpus
+                .FirstAsync(c => c.Id == cpuId);
+
+            cpu.Name = ComponentUnavailable;
+            this.dbContext.Cpus.Remove(cpu);
+
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }

@@ -6,6 +6,7 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.ViewModels.Psu;
+    using PCHCB.Web.ViewModels.Provider;
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ErrorMessages.Provider;
@@ -178,6 +179,96 @@
             TempData[SuccessMessage] = PowerSupplyEditedSuccessfully;
 
             return RedirectToAction("Details", "Psu", new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool psuExists = await psuService
+                .IsPsuExistByIdAsync(id);
+            if (!psuExists)
+            {
+                TempData[ErrorMessage] = PsuWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Psu");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotDeletePowerSuppliesErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await psuService
+                .IsProviderIdOwnerOfPsuIdAsync(providerId!, id);
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotDeletePowerSupplyHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+            try
+            {
+                DeleteDetailsViewModel viewModel =
+                    await psuService.GetPsuForDeleteByIdAsync(id);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, DeleteDetailsViewModel model)
+        {
+            bool psuExists = await psuService
+                .IsPsuExistByIdAsync(id);
+            if (!psuExists)
+            {
+                TempData[ErrorMessage] = PsuWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Psu");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotDeletePowerSuppliesErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await psuService
+                .IsProviderIdOwnerOfPsuIdAsync(providerId!, id);
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotDeletePowerSupplyHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                await psuService.DeletePsuByIdAsync(id);
+
+                TempData[WarningMessage] = PowerSupplyDeletedSuccessfully;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         private IActionResult GeneralError()

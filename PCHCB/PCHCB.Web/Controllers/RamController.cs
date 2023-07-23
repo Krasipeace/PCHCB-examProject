@@ -6,6 +6,7 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.ViewModels.Ram;
+    using PCHCB.Web.ViewModels.Provider;
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ErrorMessages.Provider;
@@ -178,6 +179,96 @@
             TempData[SuccessMessage] = RamEditedSuccessfully;
 
             return RedirectToAction("Details", "Ram", new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool ramExists = await ramService
+                .IsRamExistByIdAsync(id);
+            if (!ramExists)
+            {
+                TempData[ErrorMessage] = RamWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Ram");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotDeleteRamsErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await ramService
+                .IsProviderIdOwnerOfRamIdAsync(providerId!, id);
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotDeleteRamHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+            try
+            {
+                DeleteDetailsViewModel viewModel =
+                    await ramService.GetRamForDeleteByIdAsync(id);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, DeleteDetailsViewModel model)
+        {
+            bool ramExists = await ramService
+                .IsRamExistByIdAsync(id);
+            if (!ramExists)
+            {
+                TempData[ErrorMessage] = RamWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Ram");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotDeleteRamsErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await ramService
+                .IsProviderIdOwnerOfRamIdAsync(providerId!, id);
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotDeleteRamHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                await ramService.DeleteRamByIdAsync(id);
+
+                TempData[WarningMessage] = RamDeletedSuccessfully;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         private IActionResult GeneralError()

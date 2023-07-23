@@ -6,6 +6,7 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.ViewModels.Case;
+    using PCHCB.Web.ViewModels.Provider;
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ExceptionMessages;
@@ -178,6 +179,96 @@
             TempData[SuccessMessage] = CaseEditedSuccessfully;
 
             return RedirectToAction("Details", "Case", new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool caseExists = await caseService
+                .IsCaseExistByIdAsync(id);
+            if (!caseExists)
+            {
+                TempData[ErrorMessage] = CaseWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Case");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotDeleteCasesErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await caseService
+                .IsProviderIdOwnerOfCaseIdAsync(providerId!, id);
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotDeleteCaseHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                DeleteDetailsViewModel viewModel =
+                    await caseService.GetCaseForDeleteByIdAsync(id);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, DeleteDetailsViewModel model)
+        {
+            bool caseExists = await caseService
+                .IsCaseExistByIdAsync(id);
+            if (!caseExists)
+            {
+                TempData[ErrorMessage] = CaseWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Case");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotDeleteCasesErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await caseService
+                .IsProviderIdOwnerOfCaseIdAsync(providerId!, id);
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotDeleteCaseHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                await caseService.DeleteCaseByIdAsync(id);
+
+                TempData[WarningMessage] = CaseDeletedSuccessfully;
+                return RedirectToAction("Mine", "Provider");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         private IActionResult GeneralError()

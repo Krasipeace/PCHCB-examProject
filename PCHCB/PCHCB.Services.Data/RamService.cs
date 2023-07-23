@@ -6,6 +6,7 @@
     using PCHCB.Data.Models.Enums;
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
+    using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Ram;
 
     using static PCHCB.Common.GeneralAppConstants;
@@ -40,17 +41,6 @@
             await this.dbContext.SaveChangesAsync();
 
             return ram.Id;
-        }
-
-        public async Task DeleteRamByIdAsync(int ramId)
-        {
-            Ram ram = await this.dbContext.Rams
-                .FirstAsync(r => r.Id == ramId);
-
-            ram.Name = ComponentUnavailable;
-            this.dbContext.Rams.Remove(ram);
-
-            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<RamFormModel> GetRamForEditByIdAsync(int ramId)
@@ -104,6 +94,31 @@
                 .AnyAsync(r => r.Id == ramId);
 
             return result;
+        }
+
+        public async Task<DeleteDetailsViewModel> GetRamForDeleteByIdAsync(int ramId)
+        {
+            Ram ram = await dbContext
+                .Rams
+                .FirstAsync(r => r.Id == ramId);
+
+            return new DeleteDetailsViewModel
+            {
+                Name = ram.Name,
+                Description = ram.Description,
+                ImageUrl = ram.ImageUrl
+            };
+        }
+
+        public async Task DeleteRamByIdAsync(int ramId)
+        {
+            Ram ram = await this.dbContext.Rams
+                .FirstAsync(r => r.Id == ramId);
+
+            ram.Name = ComponentUnavailable;
+            this.dbContext.Rams.Remove(ram);
+
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }

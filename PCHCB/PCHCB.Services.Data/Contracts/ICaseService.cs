@@ -1,6 +1,7 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
     using PCHCB.Web.ViewModels.Case;
+    using PCHCB.Web.ViewModels.Provider;
 
     public interface ICaseService
     {
@@ -10,18 +11,16 @@
 
         public Task EditCaseByIdAndFormModelAsync(int caseId, CaseFormModel formModel);
 
-        Task DeleteCaseByIdAsync(int caseId);
-
         Task<bool> IsCaseExistByIdAsync(int caseId);
 
         Task<bool> IsProviderIdOwnerOfCaseIdAsync(string providerId, int caseId);
 
-        //Task<CaseDeleteDetailsViewModel> GetCaseForDeleteByIdAsync(int caseId);
+        Task<DeleteDetailsViewModel> GetCaseForDeleteByIdAsync(int caseId);
 
-        //Task<CaseDetailsViewModel> GetCaseDetailsAsync(int caseId);
-
-        //Task<IEnumerable<CaseAllViewModel>> AllByProviderIdAsync(string providerId);
+        Task DeleteCaseByIdAsync(int caseId);
 
         //Task<IEnumerable<CaseAllViewModel>> AllAvailableCases(string caseId);
+
+        //Task<IEnumerable<CaseAllViewModel>> AllByProviderIdAsync(string providerId);
     }
 }

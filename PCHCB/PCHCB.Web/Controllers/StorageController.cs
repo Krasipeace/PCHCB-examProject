@@ -6,6 +6,7 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.ViewModels.Storage;
+    using PCHCB.Web.ViewModels.Provider;
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ErrorMessages.Provider;
@@ -178,6 +179,96 @@
             TempData[SuccessMessage] = StorageEditedSuccessfully;
 
             return RedirectToAction("Details", "Storage", new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool storageExists = await storageService
+                .IsStorageExistByIdAsync(id);
+            if (!storageExists)
+            {
+                TempData[ErrorMessage] = StorageWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Storage");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotDeleteStorageDevicesErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await storageService
+                .IsProviderIdOwnerOfStorageIdAsync(providerId!, id);
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotDeleteStorageDeviceHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+            try
+            {
+                DeleteDetailsViewModel viewModel =
+                    await storageService.GetStorageForDeleteByIdAsync(id);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, DeleteDetailsViewModel model)
+        {
+            bool storageExists = await storageService
+                .IsStorageExistByIdAsync(id);
+            if (!storageExists)
+            {
+                TempData[ErrorMessage] = StorageWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Storage");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotDeleteStorageDevicesErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await storageService
+                .IsProviderIdOwnerOfStorageIdAsync(providerId!, id);
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotDeleteStorageDeviceHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                await storageService.DeleteStorageByIdAsync(id);
+
+                TempData[WarningMessage] = StorageDeletedSuccessfully;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         private IActionResult GeneralError()

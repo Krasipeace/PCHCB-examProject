@@ -1,6 +1,7 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
     using PCHCB.Web.ViewModels.Motherboard;
+    using PCHCB.Web.ViewModels.Provider;
 
     public interface IMotherboardService
     {
@@ -9,6 +10,8 @@
         public Task<MotherboardFormModel> GetMotherboardForEditByIdAsync(int motherboardId);
 
         Task EditMotherboardByIdAndFormModelAsync(int motherboardId, MotherboardFormModel model);
+
+        Task<DeleteDetailsViewModel> GetMotherboardForDeleteByIdAsync(int motherboardId);
 
         Task DeleteMotherboardByIdAsync(int motherboardId);
 

@@ -7,6 +7,7 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
     using PCHCB.Web.ViewModels.Cooler;
+    using PCHCB.Web.ViewModels.Provider;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -42,17 +43,6 @@
             await this.dbContext.SaveChangesAsync();
 
             return cooler.Id;
-        }
-
-        public async Task DeleteCoolerByIdAsync(int coolerId)
-        {
-            Cooler cooler = await this.dbContext.Coolers
-                .FirstAsync(c => c.Id == coolerId);
-
-            cooler.Name = ComponentUnavailable;
-            this.dbContext.Coolers.Remove(cooler);
-
-            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<CoolerFormModel> GetCoolerForEditByIdAsync(int coolerId)
@@ -111,6 +101,31 @@
             .FirstAsync(c => c.Id == coolerId);
 
             return cooler.ProviderId.ToString() == providerId;
+        }
+
+        public async Task<DeleteDetailsViewModel> GetCoolerForDeleteByIdAsync(int coolerId)
+        {
+            Cooler cooler = await dbContext
+                .Coolers
+                .FirstAsync(c => c.Id == coolerId);
+
+            return new DeleteDetailsViewModel
+            {
+                Name = cooler.Name,
+                Description = cooler.Description,
+                ImageUrl = cooler.ImageUrl
+            };
+        }
+
+        public async Task DeleteCoolerByIdAsync(int coolerId)
+        {
+            Cooler cooler = await this.dbContext.Coolers
+                .FirstAsync(c => c.Id == coolerId);
+
+            cooler.Name = ComponentUnavailable;
+            this.dbContext.Coolers.Remove(cooler);
+
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }

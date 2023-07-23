@@ -7,6 +7,7 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
     using PCHCB.Web.ViewModels.Case;
+    using PCHCB.Web.ViewModels.Provider;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -41,17 +42,6 @@
             await this.dbContext.SaveChangesAsync();
 
             return newCase.Id;
-        }
-
-        public async Task DeleteCaseByIdAsync(int caseId)
-        {
-            Case @case = await this.dbContext.Cases
-                .FirstAsync(c => c.Id == caseId);
-
-            @case.Name = ComponentUnavailable;
-            this.dbContext.Cases.Remove(@case);
-
-            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<CaseFormModel> GetCaseForEditByIdAsync(int caseId)
@@ -114,6 +104,31 @@
                 .FirstAsync(c => c.Id == caseId);
 
             return @case.ProviderId.ToString() == providerId;
+        }
+
+        public async Task<DeleteDetailsViewModel> GetCaseForDeleteByIdAsync(int caseId)
+        {
+            Case @case = await dbContext
+                .Cases
+                .FirstAsync(c => c.Id == caseId);
+
+            return new DeleteDetailsViewModel
+            {
+                Name = @case.Name,
+                Description = @case.Description,
+                ImageUrl = @case.ImageUrl
+            };
+        }
+
+        public async Task DeleteCaseByIdAsync(int caseId)
+        {
+            Case @case = await this.dbContext.Cases
+                .FirstAsync(c => c.Id == caseId);
+
+            @case.Name = ComponentUnavailable;
+            this.dbContext.Cases.Remove(@case);
+
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }

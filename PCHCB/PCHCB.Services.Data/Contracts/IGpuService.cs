@@ -1,6 +1,7 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
     using PCHCB.Web.ViewModels.Gpu;
+    using PCHCB.Web.ViewModels.Provider;
 
     public interface IGpuService
     {
@@ -10,13 +11,13 @@
 
         Task EditGpuByIdAndFormModelAsync(int gpuId, GpuFormModel model);
 
+        Task<DeleteDetailsViewModel> GetGpuForDeleteByIdAsync(int gpuId);
+
         Task DeleteGpuByIdAsync(int gpuId);
 
         Task<bool> IsGpuExistByIdAsync(int gpuId);
 
         Task<bool> IsProviderIdOwnerOfGpuIdAsync(string providerId, int gpuId);
-
-        //Task<GpuDeleteDetailsViewModel> GetGpuForDeleteByIdAsync(int gpuId);
 
         //Task<GpuDetailsViewModel> GetGpuDetailsAsync(int gpuId);
 

@@ -2,6 +2,7 @@
 {
     using PCHCB.Web.ViewModels.Case;
     using PCHCB.Web.ViewModels.Cooler;
+    using PCHCB.Web.ViewModels.Provider;
 
     public interface ICoolerService
     {
@@ -11,13 +12,13 @@
 
         Task EditCoolerByIdAndFormModelAsync(int coolerId, CoolerFormModel model);
 
+        Task<DeleteDetailsViewModel> GetCoolerForDeleteByIdAsync(int coolerId);
+
         Task DeleteCoolerByIdAsync(int coolerId);
 
         Task<bool> IsCoolerExistByIdAsync(int coolerId);
 
         Task<bool> IsProviderIdOwnerOfCoolerIdAsync(string providerId, int coolerId);
-
-        //Task<CoolerDeleteDetailsViewModel> GetCoolerForDeleteByIdAsync(int coolerId);
 
         //Task<CoolerDetailsViewModel> GetCoolerDetailsAsync(int coolerId);
 

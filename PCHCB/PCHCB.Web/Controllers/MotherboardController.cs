@@ -6,6 +6,7 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.ViewModels.Motherboard;
+    using PCHCB.Web.ViewModels.Provider;
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ErrorMessages.Provider;
@@ -38,8 +39,8 @@
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            MotherboardFormModel model = new MotherboardFormModel();        
-                
+            MotherboardFormModel model = new MotherboardFormModel();
+
             return this.View(model);
         }
 
@@ -178,6 +179,96 @@
             TempData[SuccessMessage] = MotherboardEditedSuccessfully;
 
             return RedirectToAction("Details", "Motherboard", new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool motherboardExists = await motherboardService
+                .IsMotherboardExistByIdAsync(id);
+            if (!motherboardExists)
+            {
+                TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Motherboard");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotDeleteMotherboardsErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await motherboardService
+                .IsProviderIdOwnerOfMotherboardIdAsync(providerId!, id);
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotDeleteMotherboardHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+            try
+            {
+                DeleteDetailsViewModel viewModel =
+                    await motherboardService.GetMotherboardForDeleteByIdAsync(id);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, DeleteDetailsViewModel model)
+        {
+            bool motherboardExists = await motherboardService
+                .IsMotherboardExistByIdAsync(id);
+            if (!motherboardExists)
+            {
+                TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Motherboard");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotDeleteMotherboardsErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await motherboardService
+                .IsProviderIdOwnerOfMotherboardIdAsync(providerId!, id);
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotDeleteMotherboardHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                await motherboardService.DeleteMotherboardByIdAsync(id);
+
+                TempData[WarningMessage] = MotherboardDeletedSuccessfully;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         private IActionResult GeneralError()

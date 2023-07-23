@@ -1,5 +1,6 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
+    using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Psu;
 
     public interface IPsuService
@@ -9,6 +10,8 @@
         public Task<PsuFormModel> GetPsuForEditByIdAsync(int psuId);
 
         Task EditPsuByIdAndFormModelAsync(int psuId, PsuFormModel model);
+
+        Task<DeleteDetailsViewModel> GetPsuForDeleteByIdAsync(int psuId);
 
         Task DeletePsuByIdAsync(int psuId);
 

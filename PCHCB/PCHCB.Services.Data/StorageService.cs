@@ -6,6 +6,7 @@
     using PCHCB.Data.Models.Enums;
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
+    using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Storage;
 
     using static PCHCB.Common.GeneralAppConstants;
@@ -95,6 +96,20 @@
                 .AnyAsync(s => s.Id == storageId);
 
             return result;
+        }
+
+        public async Task<DeleteDetailsViewModel> GetStorageForDeleteByIdAsync(int storageId)
+        {
+            Storage storage = await dbContext
+                .Storages
+                .FirstAsync(s => s.Id == storageId);
+
+            return new DeleteDetailsViewModel
+            {
+                Name = storage.Name,
+                Description = storage.Description,
+                ImageUrl = storage.ImageUrl
+            };
         }
     }
 }

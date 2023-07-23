@@ -1,5 +1,6 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
+    using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Ram;
 
     public interface IRamService
@@ -9,6 +10,8 @@
         public Task<RamFormModel> GetRamForEditByIdAsync(int ramId);
 
         Task EditRamByIdAndFormModelAsync(int ramId, RamFormModel model);
+
+        Task<DeleteDetailsViewModel> GetRamForDeleteByIdAsync(int ramId);
 
         Task DeleteRamByIdAsync(int ramId);
 

@@ -1,5 +1,6 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
+    using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Storage;
 
     public interface IStorageService
@@ -9,6 +10,8 @@
         public Task<StorageFormModel> GetStorageForEditByIdAsync(int storageId);
 
         Task EditStorageByIdAndFormModelAsync(int storageId, StorageFormModel model);
+
+        Task<DeleteDetailsViewModel> GetStorageForDeleteByIdAsync(int storageId);
 
         Task DeleteStorageByIdAsync(int storageId);
 

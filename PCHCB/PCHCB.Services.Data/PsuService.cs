@@ -6,6 +6,7 @@
     using PCHCB.Data.Models.Enums;
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
+    using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Psu;
 
     using static PCHCB.Common.GeneralAppConstants;
@@ -73,17 +74,6 @@
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task DeletePsuByIdAsync(int psuId)
-        {
-            Psu psu = await this.dbContext.Psus
-                .FirstAsync(p => p.Id == psuId);
-
-            psu.Name = ComponentUnavailable;
-            this.dbContext.Psus.Remove(psu);
-
-            await this.dbContext.SaveChangesAsync();
-        }
-
         public async Task<bool> IsProviderIdOwnerOfPsuIdAsync(string providerId, int psuId)
         {
             Psu psu = await this.dbContext.Psus
@@ -98,6 +88,31 @@
                 .AnyAsync(p => p.Id == psuId);
 
             return result;
+        }
+
+        public async Task<DeleteDetailsViewModel> GetPsuForDeleteByIdAsync(int psuId)
+        {
+            Psu psu = await dbContext
+                .Psus
+                .FirstAsync(p => p.Id == psuId);
+
+            return new DeleteDetailsViewModel
+            {
+                Name = psu.Name,
+                Description = psu.Description,
+                ImageUrl = psu.ImageUrl
+            };
+        }
+
+        public async Task DeletePsuByIdAsync(int psuId)
+        {
+            Psu psu = await this.dbContext.Psus
+                .FirstAsync(p => p.Id == psuId);
+
+            psu.Name = ComponentUnavailable;
+            this.dbContext.Psus.Remove(psu);
+
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }

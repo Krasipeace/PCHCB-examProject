@@ -39,21 +39,8 @@
                         </li>
                         @if (this.User.Identity?.IsAuthenticated ?? false)
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    PC Components
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Case" asp-action="All">Cases</a></li>
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Cooler" asp-action="All">Coolers</a></li>
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Cpu" asp-action="All">Processors</a></li>
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Gpu" asp-action="All">Graphic cards</a></li>
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Motherboard" asp-action="All">Motherboards</a></li>
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Psu" asp-action="All">Power Supplies</a></li>
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Ram" asp-action="All">Memory Sticks</a></li>
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Storage" asp-action="All">Storages</a></li>
-                                </ul>
-
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Components" asp-action="All">PC Components</a>
                             </li>
                             @if (isUserProvider)
                             {

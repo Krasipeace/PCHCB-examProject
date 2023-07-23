@@ -7,6 +7,7 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
     using PCHCB.Web.ViewModels.Motherboard;
+    using PCHCB.Web.ViewModels.Provider;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -91,17 +92,6 @@
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteMotherboardByIdAsync(int motherboardId)
-        {
-            Motherboard motherboard = await this.dbContext.Motherboards
-                .FirstAsync(m => m.Id == motherboardId);
-
-            motherboard.Name = ComponentUnavailable;
-            this.dbContext.Motherboards.Remove(motherboard);
-
-            await this.dbContext.SaveChangesAsync();
-        }
-
         public async Task<bool> IsMotherboardExistByIdAsync(int motherboardId)
         {
             bool result = await this.dbContext.Motherboards
@@ -116,6 +106,31 @@
                 .FirstAsync(m => m.Id == motherboardId);
 
             return motherboard.ProviderId.ToString() == providerId;
+        }
+
+        public async Task<DeleteDetailsViewModel> GetMotherboardForDeleteByIdAsync(int motherboardId)
+        {
+            Motherboard motherboard = await dbContext
+                .Motherboards
+                .FirstAsync(m => m.Id == motherboardId);
+
+            return new DeleteDetailsViewModel
+            {
+                Name = motherboard.Name,
+                Description = motherboard.Description,
+                ImageUrl = motherboard.ImageUrl
+            };
+        }
+
+        public async Task DeleteMotherboardByIdAsync(int motherboardId)
+        {
+            Motherboard motherboard = await this.dbContext.Motherboards
+                .FirstAsync(m => m.Id == motherboardId);
+
+            motherboard.Name = ComponentUnavailable;
+            this.dbContext.Motherboards.Remove(motherboard);
+
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }

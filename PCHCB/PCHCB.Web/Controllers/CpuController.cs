@@ -6,6 +6,7 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.ViewModels.Cpu;
+    using PCHCB.Web.ViewModels.Provider;
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ErrorMessages.Provider;
@@ -139,7 +140,7 @@
             {
                 TempData[ErrorMessage] = CpuWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Cpu");
             }
 
             bool isUserProvider = await providerService
@@ -178,6 +179,96 @@
             TempData[SuccessMessage] = CpuEditedSuccessfully;
 
             return RedirectToAction("Details", "Cpu", new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool cpuExists = await cpuService
+                .IsCpuExistByIdAsync(id);
+            if (!cpuExists)
+            {
+                TempData[ErrorMessage] = CpuWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Cpu");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotDeleteCpusErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await cpuService
+                .IsProviderIdOwnerOfCpuIdAsync(providerId!, id);
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotDeleteCpuHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+            try
+            {
+                DeleteDetailsViewModel viewModel =
+                    await cpuService.GetCpuForDeleteByIdAsync(id);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, DeleteDetailsViewModel model)
+        {
+            bool cpuExists = await cpuService
+                .IsCpuExistByIdAsync(id);
+            if (!cpuExists)
+            {
+                TempData[ErrorMessage] = CpuWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Cpu");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotDeleteCpusErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await cpuService
+                .IsProviderIdOwnerOfCpuIdAsync(providerId!, id);
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotDeleteCpuHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                await cpuService.DeleteCpuByIdAsync(id);
+
+                TempData[WarningMessage] = CpuDeletedSuccessfully;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         private IActionResult GeneralError()
