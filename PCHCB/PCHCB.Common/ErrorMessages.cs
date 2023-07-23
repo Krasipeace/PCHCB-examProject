@@ -54,5 +54,40 @@
         {
             public const string CaseWithIdDoesNotExist = "Case with such Id does not exist!";
         }
+
+        public static class Cooler
+        {
+            public const string CoolerWithIdDoesNotExist = "Cooler with such Id does not exist!";
+        }
+
+        public static class Cpu
+        {
+            public const string CpuWithIdDoesNotExist = "CPU with such Id does not exist!";
+        }
+
+        public static class Gpu
+        {
+            public const string GpuWithIdDoesNotExist = "GPU with such Id does not exist!";
+        }
+
+        public static class Motherboard
+        {
+            public const string MotherboardWithIdDoesNotExist = "Motherboard with such Id does not exist!";
+        }
+
+        public static class Psu
+        {
+            public const string PsuWithIdDoesNotExist = "Power Supply with such Id does not exist!";
+        }
+
+        public static class Ram
+        {
+            public const string RamWithIdDoesNotExist = "RAM with such Id does not exist!";
+        }
+
+        public static class Storage
+        {
+            public const string StorageWithIdDoesNotExist = "Storage Device with such Id does not exist!";
+        }
     }
 }

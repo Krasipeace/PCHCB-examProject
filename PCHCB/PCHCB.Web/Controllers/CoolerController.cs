@@ -9,6 +9,7 @@
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ErrorMessages.Provider;
+    using static PCHCB.Common.ErrorMessages.Cooler;
     using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
 
@@ -37,8 +38,8 @@
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            CoolerFormModel model = new CoolerFormModel();       
-                
+            CoolerFormModel model = new CoolerFormModel();
+
             return this.View(model);
         }
 
@@ -50,7 +51,7 @@
 
             if (!isProvider)
             {
-                this.TempData[ErrorMessage] = UserCannotAddCasesErrorMessage;
+                this.TempData[ErrorMessage] = UserCannotAddCoolersErrorMessage;
 
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
@@ -77,6 +78,113 @@
 
                 return this.View(model);
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            bool coolerExists = await coolerService
+                .IsCoolerExistByIdAsync(id);
+            if (!coolerExists)
+            {
+                TempData[ErrorMessage] = CoolerWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Components");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotEditCoolersErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await coolerService
+                .IsProviderIdOwnerOfCoolerIdAsync(providerId!, id);
+
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotEditCoolerHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                CoolerFormModel formModel = await coolerService
+                    .GetCoolerForEditByIdAsync(id);
+
+                return View(formModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, CoolerFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            bool coolerExists = await coolerService
+                .IsCoolerExistByIdAsync(id);
+            if (!coolerExists)
+            {
+                TempData[ErrorMessage] = CoolerWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Components");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotEditCoolersErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await coolerService
+                .IsProviderIdOwnerOfCoolerIdAsync(providerId!, id);
+
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotEditCoolerHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                await coolerService.EditCoolerByIdAndFormModelAsync(id, model);
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(string.Empty,
+                    GeneralErrorMessage);
+
+                return View(model);
+            }
+
+            TempData[SuccessMessage] = CoolerEditedSuccessfully;
+
+            return RedirectToAction("Details", "Cooler", new { id });
+        }
+
+        private IActionResult GeneralError()
+        {
+            this.TempData[ErrorMessage] = GeneralErrorMessage;
+
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }
