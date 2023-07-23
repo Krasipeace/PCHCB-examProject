@@ -1,0 +1,14 @@
+﻿@model PsuFormModel
+@{
+    ViewData["Title"] = "Edit Power Supply Unit";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_PsuFormPartial" model="@Model" />
+
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}

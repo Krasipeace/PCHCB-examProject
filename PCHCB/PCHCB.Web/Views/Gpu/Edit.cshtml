@@ -1,0 +1,14 @@
+﻿@model GpuFormModel
+@{
+    ViewData["Title"] = "Edit Graphic Card";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_GpuFormPartial" model="@Model" />
+
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -9,6 +9,7 @@
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ErrorMessages.Provider;
+    using static PCHCB.Common.ErrorMessages.Ram;
     using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
 
@@ -37,8 +38,8 @@
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            RamFormModel model = new RamFormModel();       
-                
+            RamFormModel model = new RamFormModel();
+
             return this.View(model);
         }
 
@@ -77,6 +78,113 @@
 
                 return this.View(model);
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            bool ramExists = await ramService
+                .IsRamExistByIdAsync(id);
+            if (!ramExists)
+            {
+                TempData[ErrorMessage] = RamWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Components");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotEditRamsErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await ramService
+                .IsProviderIdOwnerOfRamIdAsync(providerId!, id);
+
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotEditRamHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                RamFormModel formModel = await ramService
+                    .GetRamForEditByIdAsync(id);
+
+                return View(formModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, RamFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            bool ramExists = await ramService
+                .IsRamExistByIdAsync(id);
+            if (!ramExists)
+            {
+                TempData[ErrorMessage] = RamWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Components");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotEditRamsErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await ramService
+                .IsProviderIdOwnerOfRamIdAsync(providerId!, id);
+
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotEditRamHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                await ramService.EditRamByIdAndFormModelAsync(id, model);
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(string.Empty,
+                    GeneralErrorMessage);
+
+                return View(model);
+            }
+
+            TempData[SuccessMessage] = RamEditedSuccessfully;
+
+            return RedirectToAction("Details", "Ram", new { id });
+        }
+
+        private IActionResult GeneralError()
+        {
+            this.TempData[ErrorMessage] = GeneralErrorMessage;
+
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

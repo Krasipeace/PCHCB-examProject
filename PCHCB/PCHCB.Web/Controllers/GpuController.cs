@@ -9,6 +9,7 @@
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ErrorMessages.Provider;
+    using static PCHCB.Common.ErrorMessages.Gpu;
     using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
 
@@ -37,8 +38,8 @@
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            GpuFormModel model = new GpuFormModel();       
-                
+            GpuFormModel model = new GpuFormModel();
+
             return this.View(model);
         }
 
@@ -77,6 +78,113 @@
 
                 return this.View(model);
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            bool gpuExists = await gpuService
+                .IsGpuExistByIdAsync(id);
+            if (!gpuExists)
+            {
+                TempData[ErrorMessage] = GpuWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Components");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotEditGpusErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await gpuService
+                .IsProviderIdOwnerOfGpuIdAsync(providerId!, id);
+
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotEditGpuHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                GpuFormModel formModel = await gpuService
+                    .GetGpuForEditByIdAsync(id);
+
+                return View(formModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, GpuFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            bool gpuExists = await gpuService
+                .IsGpuExistByIdAsync(id);
+            if (!gpuExists)
+            {
+                TempData[ErrorMessage] = GpuWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Components");
+            }
+
+            bool isUserProvider = await providerService
+                .ProviderExistsByUserIdAsync(User.GetId()!);
+            if (!isUserProvider)
+            {
+                TempData[ErrorMessage] = UserCannotEditGpusErrorMessage;
+
+                return RedirectToAction("BecomeProvider", "Provider");
+            }
+
+            string? providerId =
+                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            bool isProviderOwner = await gpuService
+                .IsProviderIdOwnerOfGpuIdAsync(providerId!, id);
+
+            if (!isProviderOwner)
+            {
+                TempData[ErrorMessage] = ProviderCannotEditGpuHeDoesNotOwnErrorMessage;
+
+                return RedirectToAction("Mine", "Provider");
+            }
+
+            try
+            {
+                await gpuService.EditGpuByIdAndFormModelAsync(id, model);
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(string.Empty,
+                    GeneralErrorMessage);
+
+                return View(model);
+            }
+
+            TempData[SuccessMessage] = GpuEditedSuccessfully;
+
+            return RedirectToAction("Details", "Gpu", new { id });
+        }
+
+        private IActionResult GeneralError()
+        {
+            this.TempData[ErrorMessage] = GeneralErrorMessage;
+
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

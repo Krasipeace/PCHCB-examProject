@@ -1,0 +1,14 @@
+﻿@model RamFormModel
+@{
+    ViewData["Title"] = "Edit RAM";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_RamFormPartial" model="@Model" />
+
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}

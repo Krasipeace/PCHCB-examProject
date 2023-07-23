@@ -1,0 +1,14 @@
+﻿@model StorageFormModel
+@{
+    ViewData["Title"] = "Edit Storage Drive";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr/>
+
+<partial name="_StorageFormPartial" model="@Model" />
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
