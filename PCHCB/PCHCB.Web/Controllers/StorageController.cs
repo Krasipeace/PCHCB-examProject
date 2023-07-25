@@ -65,7 +65,7 @@
             try
             {
                 string? providerId = await this.providerService
-                .GetProviderByUserIdAsync(this.User.GetId()!);
+                    .GetProviderByUserIdAsync(this.User.GetId()!);
 
                 int storageId = await this.storageService.CreateStorageAsync(providerId!, model);
 
@@ -90,7 +90,7 @@
             {
                 TempData[ErrorMessage] = StorageWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Storage");
             }
 
             bool isUserProvider = await providerService
@@ -101,8 +101,8 @@
 
                 return RedirectToAction("BecomeProvider", "Provider");
             }
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await storageService
                 .IsProviderIdOwnerOfStorageIdAsync(providerId!, id);
 
@@ -110,7 +110,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditStorageDeviceHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Storage");
             }
 
             try
@@ -140,7 +140,7 @@
             {
                 TempData[ErrorMessage] = StorageWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Storage");
             }
 
             bool isUserProvider = await providerService
@@ -152,8 +152,8 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await storageService
                 .IsProviderIdOwnerOfStorageIdAsync(providerId!, id);
 
@@ -161,7 +161,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditStorageDeviceHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Storage");
             }
 
             try
@@ -202,8 +202,8 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await storageService
                 .IsProviderIdOwnerOfStorageIdAsync(providerId!, id);
             if (!isProviderOwner)
@@ -212,10 +212,11 @@
 
                 return RedirectToAction("Mine", "Provider");
             }
+
             try
             {
-                DeleteDetailsViewModel viewModel =
-                    await storageService.GetStorageForDeleteByIdAsync(id);
+                DeleteDetailsViewModel viewModel = await storageService
+                    .GetStorageForDeleteByIdAsync(id);
 
                 return View(viewModel);
             }
@@ -246,15 +247,15 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await storageService
                 .IsProviderIdOwnerOfStorageIdAsync(providerId!, id);
             if (!isProviderOwner)
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteStorageDeviceHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Storage");
             }
 
             try
@@ -263,7 +264,7 @@
 
                 TempData[WarningMessage] = StorageDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Storage");
             }
             catch (Exception)
             {

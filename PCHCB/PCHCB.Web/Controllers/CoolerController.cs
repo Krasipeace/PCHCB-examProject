@@ -65,7 +65,7 @@
             try
             {
                 string? providerId = await this.providerService
-                .GetProviderByUserIdAsync(this.User.GetId()!);
+                    .GetProviderByUserIdAsync(this.User.GetId()!);
 
                 int coolerId = await this.coolerService.CreateCoolerAsync(providerId!, model);
 
@@ -90,7 +90,7 @@
             {
                 TempData[ErrorMessage] = CoolerWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Cooler");
             }
 
             bool isUserProvider = await providerService
@@ -101,6 +101,7 @@
 
                 return RedirectToAction("BecomeProvider", "Provider");
             }
+
             string? providerId =
                 await providerService.GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await coolerService
@@ -110,7 +111,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditCoolerHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Cooler");
             }
 
             try
@@ -140,7 +141,7 @@
             {
                 TempData[ErrorMessage] = CoolerWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Cooler");
             }
 
             bool isUserProvider = await providerService
@@ -152,8 +153,8 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await coolerService
                 .IsProviderIdOwnerOfCoolerIdAsync(providerId!, id);
 
@@ -210,7 +211,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCoolerHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Cooler");
             }
 
             try
@@ -240,6 +241,7 @@
 
             bool isUserProvider = await providerService
                 .ProviderExistsByUserIdAsync(User.GetId()!);
+
             if (!isUserProvider)
             {
                 TempData[ErrorMessage] = UserCannotDeleteCoolersErrorMessage;
@@ -251,11 +253,12 @@
                 await providerService.GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await coolerService
                 .IsProviderIdOwnerOfCoolerIdAsync(providerId!, id);
+
             if (!isProviderOwner)
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCoolerHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Cooler");
             }
 
             try
@@ -264,7 +267,7 @@
 
                 TempData[WarningMessage] = CoolerDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Cooler");
             }
             catch (Exception)
             {

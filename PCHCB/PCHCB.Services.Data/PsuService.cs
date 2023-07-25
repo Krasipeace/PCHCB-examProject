@@ -6,8 +6,11 @@
     using PCHCB.Data.Models.Enums;
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Psu;
+
+    using System.Collections.Generic;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -92,8 +95,7 @@
 
         public async Task<DeleteDetailsViewModel> GetPsuForDeleteByIdAsync(int psuId)
         {
-            Psu psu = await dbContext
-                .Psus
+            Psu psu = await dbContext.Psus
                 .FirstAsync(p => p.Id == psuId);
 
             return new DeleteDetailsViewModel
@@ -113,6 +115,20 @@
             this.dbContext.Psus.Remove(psu);
 
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<AllViewModel>> GetAllPsusAsync()
+        {
+            return await this.dbContext.Psus
+                .Where(p => p.Name != ComponentUnavailable)
+                .Select(p => new AllViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price,
+                    ImageUrl = p.ImageUrl
+                })
+                .ToListAsync();
         }
     }
 }

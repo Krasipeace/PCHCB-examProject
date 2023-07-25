@@ -90,7 +90,7 @@
             {
                 TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Motherboard");
             }
 
             bool isUserProvider = await providerService
@@ -101,8 +101,8 @@
 
                 return RedirectToAction("BecomeProvider", "Provider");
             }
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await motherboardService
                 .IsProviderIdOwnerOfMotherboardIdAsync(providerId!, id);
 
@@ -110,7 +110,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditMotherboardHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Motherboard");
             }
 
             try
@@ -140,7 +140,7 @@
             {
                 TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Motherboard");
             }
 
             bool isUserProvider = await providerService
@@ -152,8 +152,8 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await motherboardService
                 .IsProviderIdOwnerOfMotherboardIdAsync(providerId!, id);
 
@@ -161,7 +161,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditMotherboardHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Motherboard");
             }
 
             try
@@ -170,8 +170,7 @@
             }
             catch (Exception)
             {
-                ModelState.AddModelError(string.Empty,
-                    GeneralErrorMessage);
+                ModelState.AddModelError(string.Empty, GeneralErrorMessage);
 
                 return View(model);
             }
@@ -202,16 +201,17 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await motherboardService
                 .IsProviderIdOwnerOfMotherboardIdAsync(providerId!, id);
             if (!isProviderOwner)
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteMotherboardHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Motherboard");
             }
+
             try
             {
                 DeleteDetailsViewModel viewModel =
@@ -254,7 +254,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteMotherboardHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Motherboard");
             }
 
             try
@@ -263,7 +263,7 @@
 
                 TempData[WarningMessage] = MotherboardDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Motherboard");
             }
             catch (Exception)
             {

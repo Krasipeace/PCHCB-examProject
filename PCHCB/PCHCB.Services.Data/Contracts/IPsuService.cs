@@ -1,5 +1,6 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Psu;
 
@@ -18,6 +19,8 @@
         Task<bool> IsPsuExistByIdAsync(int psuId);
 
         Task<bool> IsProviderIdOwnerOfPsuIdAsync(string providerId, int psuId);
+
+        Task<IEnumerable<AllViewModel>> GetAllPsusAsync();
 
         //Task<PsuDeleteDetailsViewModel> GetPsuForDeleteByIdAsync(int psuId);
 

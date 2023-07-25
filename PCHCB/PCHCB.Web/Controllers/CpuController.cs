@@ -65,9 +65,10 @@
             try
             {
                 string? providerId = await this.providerService
-                .GetProviderByUserIdAsync(this.User.GetId()!);
+                    .GetProviderByUserIdAsync(this.User.GetId()!);
 
-                int cpuId = await this.cpuService.CreateCpuAsync(providerId!, model);
+                int cpuId = await this.cpuService
+                    .CreateCpuAsync(providerId!, model);
 
                 this.TempData[SuccessMessage] = CpuAddedSuccessfully;
 
@@ -90,7 +91,7 @@
             {
                 TempData[ErrorMessage] = CpuWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Cpu");
             }
 
             bool isUserProvider = await providerService
@@ -101,8 +102,8 @@
 
                 return RedirectToAction("BecomeProvider", "Provider");
             }
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await cpuService
                 .IsProviderIdOwnerOfCpuIdAsync(providerId!, id);
 
@@ -110,7 +111,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditCpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Cpu");
             }
 
             try
@@ -152,8 +153,8 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await cpuService
                 .IsProviderIdOwnerOfCpuIdAsync(providerId!, id);
 
@@ -161,7 +162,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditCpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Cpu");
             }
 
             try
@@ -170,8 +171,7 @@
             }
             catch (Exception)
             {
-                ModelState.AddModelError(string.Empty,
-                    GeneralErrorMessage);
+                ModelState.AddModelError(string.Empty, GeneralErrorMessage);
 
                 return View(model);
             }
@@ -202,20 +202,20 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await cpuService
                 .IsProviderIdOwnerOfCpuIdAsync(providerId!, id);
             if (!isProviderOwner)
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Cpu");
             }
             try
             {
-                DeleteDetailsViewModel viewModel =
-                    await cpuService.GetCpuForDeleteByIdAsync(id);
+                DeleteDetailsViewModel viewModel = await cpuService
+                    .GetCpuForDeleteByIdAsync(id);
 
                 return View(viewModel);
             }
@@ -246,15 +246,15 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await cpuService
                 .IsProviderIdOwnerOfCpuIdAsync(providerId!, id);
             if (!isProviderOwner)
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Cpu");
             }
 
             try
@@ -263,7 +263,7 @@
 
                 TempData[WarningMessage] = CpuDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Cpu");
             }
             catch (Exception)
             {

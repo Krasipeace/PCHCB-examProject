@@ -1,5 +1,6 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Ram;
 
@@ -18,6 +19,8 @@
         Task<bool> IsRamExistByIdAsync(int ramId);
 
         Task<bool> IsProviderIdOwnerOfRamIdAsync(string providerId, int ramId);
+
+        Task<IEnumerable<AllViewModel>> GetAllRamsAsync();
 
         //Task<RamDeleteDetailsViewModel> GetRamForDeleteByIdAsync(int ramId);
 

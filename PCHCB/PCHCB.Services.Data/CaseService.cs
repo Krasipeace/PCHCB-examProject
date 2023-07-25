@@ -7,7 +7,11 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
     using PCHCB.Web.ViewModels.Case;
+    using PCHCB.Web.ViewModels.Enums;
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
+
+    using System.Collections.Generic;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -90,8 +94,7 @@
 
         public async Task<bool> IsCaseExistByIdAsync(int caseId)
         {
-            bool result = await this.dbContext
-                .Cases
+            bool result = await this.dbContext.Cases
                 .AnyAsync(c => c.Id == caseId);
 
             return result;
@@ -99,8 +102,7 @@
 
         public async Task<bool> IsProviderIdOwnerOfCaseIdAsync(string providerId, int caseId)
         {
-            Case @case = await this.dbContext
-                .Cases
+            Case @case = await this.dbContext.Cases
                 .FirstAsync(c => c.Id == caseId);
 
             return @case.ProviderId.ToString() == providerId;
@@ -108,8 +110,7 @@
 
         public async Task<DeleteDetailsViewModel> GetCaseForDeleteByIdAsync(int caseId)
         {
-            Case @case = await dbContext
-                .Cases
+            Case @case = await dbContext.Cases
                 .FirstAsync(c => c.Id == caseId);
 
             return new DeleteDetailsViewModel
@@ -129,6 +130,20 @@
             this.dbContext.Cases.Remove(@case);
 
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<AllViewModel>> GetAllCasesAsync()
+        {
+            return await this.dbContext.Cases
+                .Where(c => c.Name != ComponentUnavailable)
+                .Select(c => new AllViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Price = c.Price,
+                    ImageUrl = c.ImageUrl
+                })
+                .ToListAsync();
         }
     }
 }

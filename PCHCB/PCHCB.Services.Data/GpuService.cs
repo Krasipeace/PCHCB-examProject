@@ -7,7 +7,10 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
     using PCHCB.Web.ViewModels.Gpu;
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
+
+    using System.Collections.Generic;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -85,8 +88,7 @@
 
         public async Task<DeleteDetailsViewModel> GetGpuForDeleteByIdAsync(int gpuId)
         {
-            Gpu gpu = await dbContext
-                .Gpus
+            Gpu gpu = await dbContext.Gpus
                 .FirstAsync(g => g.Id == gpuId);
 
             return new DeleteDetailsViewModel
@@ -122,6 +124,20 @@
                 .FirstAsync(g => g.Id == gpuId);
 
             return gpu.ProviderId.ToString() == providerId;
+        }
+
+        public async Task<IEnumerable<AllViewModel>> GetAllGpusAsync()
+        {
+            return await this.dbContext.Gpus
+                .Where(g => g.Name != ComponentUnavailable)
+                .Select(g => new AllViewModel()
+                {
+                    Id = g.Id,
+                    Name = g.Name,
+                    Price = g.Price,
+                    ImageUrl = g.ImageUrl,
+                })
+                .ToListAsync();
         }
     }
 }

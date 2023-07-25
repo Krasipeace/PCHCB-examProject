@@ -10,15 +10,34 @@
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ErrorMessages.Provider;
     using static PCHCB.Common.ErrorMessages.General;
+    using static PCHCB.Common.ErrorMessages.Case;
+    using static PCHCB.Common.SuccessMessages;
+    using static PCHCB.Common.ExceptionMessages;
 
     [Authorize]
     public class ProviderController : Controller
     {
         private readonly IProviderService providerService;
+        private readonly ICoolerService coolerService;
+        private readonly ICpuService cpuService;
+        private readonly ICaseService caseService;
+        private readonly IGpuService gpuService;
+        private readonly IMotherboardService motherboardService;
+        private readonly IPsuService psuService;
+        private readonly IRamService ramService;
+        private readonly IStorageService storageService;
 
-        public ProviderController(IProviderService providerService)
+        public ProviderController(IProviderService providerService, ICoolerService coolerService, ICpuService cpuService, ICaseService caseService, IGpuService gpuService, IMotherboardService motherboardService, IPsuService psuService, IRamService ramService, IStorageService storageService)
         {
             this.providerService = providerService;
+            this.storageService = storageService;
+            this.ramService = ramService;
+            this.psuService = psuService;
+            this.motherboardService = motherboardService;
+            this.gpuService = gpuService;
+            this.caseService = caseService;
+            this.cpuService = cpuService;
+            this.coolerService = coolerService;
         }
 
         [HttpGet]
@@ -47,7 +66,7 @@
 
             if (isProviderExists)
             {
-                this.TempData[ErrorMessage] = "Provider";
+                this.TempData[ErrorMessage] = ProviderAlreadyExists;
 
                 return this.RedirectToAction("Index", "Home");
             }
@@ -96,6 +115,6 @@
             }
 
             return this.RedirectToAction("Index", "Home");
-        }
+        }         
     }
 }

@@ -67,7 +67,8 @@
                 string? providerId = await this.providerService
                     .GetProviderByUserIdAsync(this.User.GetId()!);
 
-                int caseId = await this.caseService.CreateCaseAsync(providerId!, model);
+                int caseId = await this.caseService
+                    .CreateCaseAsync(providerId!, model);
 
                 this.TempData[SuccessMessage] = CaseAddedSuccessfully;
 
@@ -90,7 +91,7 @@
             {
                 TempData[ErrorMessage] = CaseWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Case");
             }
 
             bool isUserProvider = await providerService
@@ -110,7 +111,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditCaseHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Case");
             }
 
             try
@@ -140,7 +141,7 @@
             {
                 TempData[ErrorMessage] = CaseWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Case");
             }
 
             bool isUserProvider = await providerService
@@ -161,7 +162,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditCaseHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Case");
             }
 
             try
@@ -170,8 +171,7 @@
             }
             catch (Exception)
             {
-                ModelState.AddModelError(string.Empty,
-                    GeneralErrorMessage);
+                ModelState.AddModelError(string.Empty, GeneralErrorMessage);
 
                 return View(model);
             }
@@ -202,21 +202,22 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await caseService
                 .IsProviderIdOwnerOfCaseIdAsync(providerId!, id);
+
             if (!isProviderOwner)
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCaseHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Case");
             }
 
             try
             {
-                DeleteDetailsViewModel viewModel =
-                    await caseService.GetCaseForDeleteByIdAsync(id);
+                DeleteDetailsViewModel viewModel = await caseService
+                    .GetCaseForDeleteByIdAsync(id);
 
                 return View(viewModel);
             }
@@ -240,6 +241,7 @@
 
             bool isUserProvider = await providerService
                 .ProviderExistsByUserIdAsync(User.GetId()!);
+
             if (!isUserProvider)
             {
                 TempData[ErrorMessage] = UserCannotDeleteCasesErrorMessage;
@@ -247,15 +249,16 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await caseService
                 .IsProviderIdOwnerOfCaseIdAsync(providerId!, id);
+
             if (!isProviderOwner)
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCaseHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Case");
             }
 
             try
@@ -263,7 +266,8 @@
                 await caseService.DeleteCaseByIdAsync(id);
 
                 TempData[WarningMessage] = CaseDeletedSuccessfully;
-                return RedirectToAction("Mine", "Provider");
+
+                return RedirectToAction("Mine", "Case");
             }
             catch (Exception)
             {

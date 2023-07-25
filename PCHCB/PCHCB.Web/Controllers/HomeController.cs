@@ -2,10 +2,12 @@
 {
     using Microsoft.AspNetCore.Mvc;
 
-    using PCHCB.Web.ViewModels.Home;
-
     public class HomeController : Controller
     {
+        public HomeController()
+        {
+        }
+        
         public IActionResult Index()
         {
             return View();

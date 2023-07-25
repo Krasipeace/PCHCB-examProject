@@ -1,6 +1,7 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
     using PCHCB.Web.ViewModels.Cpu;
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
 
     public interface ICpuService
@@ -18,6 +19,8 @@
         Task<bool> IsCpuExistByIdAsync(int cpuId);
 
         Task<bool> IsProviderIdOwnerOfCpuIdAsync(string providerId, int cpuId);
+
+        Task<IEnumerable<AllViewModel>> GetAllCpusAsync();
 
         //Task<CpuDetailsViewModel> GetCpuDetailsAsync(int cpuId);
 

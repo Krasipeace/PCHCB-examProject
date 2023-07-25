@@ -65,7 +65,7 @@
             try
             {
                 string? providerId = await this.providerService
-                .GetProviderByUserIdAsync(this.User.GetId()!);
+                    .GetProviderByUserIdAsync(this.User.GetId()!);
 
                 int gpuId = await this.gpuService.CreateGpuAsync(providerId!, model);
 
@@ -90,7 +90,7 @@
             {
                 TempData[ErrorMessage] = GpuWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Gpu");
             }
 
             bool isUserProvider = await providerService
@@ -101,8 +101,8 @@
 
                 return RedirectToAction("BecomeProvider", "Provider");
             }
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await gpuService
                 .IsProviderIdOwnerOfGpuIdAsync(providerId!, id);
 
@@ -110,7 +110,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditGpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Gpu");
             }
 
             try
@@ -140,7 +140,7 @@
             {
                 TempData[ErrorMessage] = GpuWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Gpu");
             }
 
             bool isUserProvider = await providerService
@@ -152,8 +152,8 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await gpuService
                 .IsProviderIdOwnerOfGpuIdAsync(providerId!, id);
 
@@ -161,7 +161,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditGpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Gpu");
             }
 
             try
@@ -170,8 +170,7 @@
             }
             catch (Exception)
             {
-                ModelState.AddModelError(string.Empty,
-                    GeneralErrorMessage);
+                ModelState.AddModelError(string.Empty, GeneralErrorMessage);
 
                 return View(model);
             }
@@ -202,20 +201,21 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await gpuService
                 .IsProviderIdOwnerOfGpuIdAsync(providerId!, id);
             if (!isProviderOwner)
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteGpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Gpu");
             }
+
             try
             {
-                DeleteDetailsViewModel viewModel =
-                    await gpuService.GetGpuForDeleteByIdAsync(id);
+                DeleteDetailsViewModel viewModel = await gpuService
+                    .GetGpuForDeleteByIdAsync(id);
 
                 return View(viewModel);
             }
@@ -246,15 +246,15 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await gpuService
                 .IsProviderIdOwnerOfGpuIdAsync(providerId!, id);
             if (!isProviderOwner)
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteGpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Gpu");
             }
 
             try
@@ -263,7 +263,7 @@
 
                 TempData[WarningMessage] = GpuDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Gpu");
             }
             catch (Exception)
             {

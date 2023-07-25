@@ -1,5 +1,6 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Motherboard;
     using PCHCB.Web.ViewModels.Provider;
 
@@ -18,6 +19,8 @@
         Task<bool> IsMotherboardExistByIdAsync(int motherboardId);
 
         Task<bool> IsProviderIdOwnerOfMotherboardIdAsync(string providerId, int motherboardId);
+
+        Task<IEnumerable<AllViewModel>> GetAllMotherboardsAsync();
 
         //Task<MotherboardDeleteDetailsViewModel> GetMotherboardForDeleteByIdAsync(int motherboardId);
 

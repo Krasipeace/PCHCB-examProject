@@ -1,7 +1,7 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
-    using PCHCB.Web.ViewModels.Case;
     using PCHCB.Web.ViewModels.Cooler;
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
 
     public interface ICoolerService
@@ -20,10 +20,10 @@
 
         Task<bool> IsProviderIdOwnerOfCoolerIdAsync(string providerId, int coolerId);
 
+        Task<IEnumerable<AllViewModel>> GetAllCoolersAsync();
+
         //Task<CoolerDetailsViewModel> GetCoolerDetailsAsync(int coolerId);
 
         //Task<IEnumerable<CoolerAllViewModel>> AllByProviderIdAsync(string providerId);
-
-        //Task<IEnumerable<CoolerAllViewModel>> AllAvailableCoolers(int coolerId);
     }
 }

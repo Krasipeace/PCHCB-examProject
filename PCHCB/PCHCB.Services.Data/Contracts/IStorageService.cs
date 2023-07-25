@@ -1,5 +1,6 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Storage;
 
@@ -18,6 +19,8 @@
         Task<bool> IsStorageExistByIdAsync(int storageId);
 
         Task<bool> IsProviderIdOwnerOfStorageIdAsync(string providerId, int storageId);
+
+        Task<IEnumerable<AllViewModel>> GetAllStoragesAsync();
 
         //Task<StorageDeleteDetailsViewModel> GetStorageForDeleteByIdAsync(int storageId);
 

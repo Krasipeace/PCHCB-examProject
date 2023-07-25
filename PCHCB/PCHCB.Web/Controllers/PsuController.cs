@@ -65,7 +65,7 @@
             try
             {
                 string? providerId = await this.providerService
-                .GetProviderByUserIdAsync(this.User.GetId()!);
+                    .GetProviderByUserIdAsync(this.User.GetId()!);
 
                 int psuId = await this.psuService.CreatePsuAsync(providerId!, model);
 
@@ -90,7 +90,7 @@
             {
                 TempData[ErrorMessage] = PsuWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Psu");
             }
 
             bool isUserProvider = await providerService
@@ -101,8 +101,8 @@
 
                 return RedirectToAction("BecomeProvider", "Provider");
             }
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await psuService
                 .IsProviderIdOwnerOfPsuIdAsync(providerId!, id);
 
@@ -110,7 +110,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditPowerSupplyHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Psu");
             }
 
             try
@@ -140,7 +140,7 @@
             {
                 TempData[ErrorMessage] = PsuWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Psu");
             }
 
             bool isUserProvider = await providerService
@@ -152,8 +152,8 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await psuService
                 .IsProviderIdOwnerOfPsuIdAsync(providerId!, id);
 
@@ -161,7 +161,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditPowerSupplyHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Psu");
             }
 
             try
@@ -170,8 +170,7 @@
             }
             catch (Exception)
             {
-                ModelState.AddModelError(string.Empty,
-                    GeneralErrorMessage);
+                ModelState.AddModelError(string.Empty, GeneralErrorMessage);
 
                 return View(model);
             }
@@ -202,20 +201,21 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await psuService
                 .IsProviderIdOwnerOfPsuIdAsync(providerId!, id);
             if (!isProviderOwner)
             {
                 TempData[ErrorMessage] = ProviderCannotDeletePowerSupplyHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Psu");
             }
+
             try
             {
-                DeleteDetailsViewModel viewModel =
-                    await psuService.GetPsuForDeleteByIdAsync(id);
+                DeleteDetailsViewModel viewModel = await psuService
+                    .GetPsuForDeleteByIdAsync(id);
 
                 return View(viewModel);
             }
@@ -246,15 +246,15 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await psuService
                 .IsProviderIdOwnerOfPsuIdAsync(providerId!, id);
             if (!isProviderOwner)
             {
                 TempData[ErrorMessage] = ProviderCannotDeletePowerSupplyHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Psu");
             }
 
             try
@@ -263,7 +263,7 @@
 
                 TempData[WarningMessage] = PowerSupplyDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Psu");
             }
             catch (Exception)
             {

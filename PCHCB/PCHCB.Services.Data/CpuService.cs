@@ -7,7 +7,10 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
     using PCHCB.Web.ViewModels.Cpu;
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
+
+    using System.Collections.Generic;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -110,8 +113,7 @@
 
         public async Task<DeleteDetailsViewModel> GetCpuForDeleteByIdAsync(int cpuId)
         {
-            Cpu cooler = await dbContext
-                .Cpus
+            Cpu cooler = await dbContext.Cpus
                 .FirstAsync(c => c.Id == cpuId);
 
             return new DeleteDetailsViewModel
@@ -131,6 +133,20 @@
             this.dbContext.Cpus.Remove(cpu);
 
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<AllViewModel>> GetAllCpusAsync()
+        {
+            return await this.dbContext.Cpus
+                .Where(c => c.Name != ComponentUnavailable)
+                .Select(c => new AllViewModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Price = c.Price,
+                    ImageUrl = c.ImageUrl,
+                })
+                .ToListAsync();
         }
     }
 }

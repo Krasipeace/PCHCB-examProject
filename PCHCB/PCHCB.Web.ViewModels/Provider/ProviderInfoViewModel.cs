@@ -3,13 +3,11 @@
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// Short info about provider
+    /// Short Info about provider
     /// </summary>
     public class ProviderInfoViewModel
     {
-        public string LogoUrl { get; set; } = null!;
-
-        [Display(Name = "Web Site")]
+        [Display(Name = "Provided by ")]
         public string WebPage { get; set; } = null!;
     }
 }

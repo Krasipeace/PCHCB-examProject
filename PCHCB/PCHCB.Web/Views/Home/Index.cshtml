@@ -1,16 +1,10 @@
 ﻿@using PCHCB.Services.Data.Contracts;
 @using PCHCB.Web.Infrastructure.Extensions;
-@{
-    ViewData["Title"] = "Home Page";
-}
 
-@inject IProviderService ProviderService
 @{
-    ViewData["Title"] = "Home Page";
-    bool isUserProvider = await this.ProviderService.ProviderExistsByUserIdAsync(this.User.GetId()!);
+    ViewData["Title"] = "Home";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Build your PC today!</p>   
+    <h3 class="mt-5">Build your PC today!</h3>
 </div>

@@ -65,9 +65,10 @@
             try
             {
                 string? providerId = await this.providerService
-                .GetProviderByUserIdAsync(this.User.GetId()!);
+                    .GetProviderByUserIdAsync(this.User.GetId()!);
 
-                int ramId = await this.ramService.CreateRamAsync(providerId!, model);
+                int ramId = await this.ramService
+                    .CreateRamAsync(providerId!, model);
 
                 this.TempData[SuccessMessage] = RamAddedSuccessfully;
 
@@ -90,7 +91,7 @@
             {
                 TempData[ErrorMessage] = RamWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Ram");
             }
 
             bool isUserProvider = await providerService
@@ -101,8 +102,8 @@
 
                 return RedirectToAction("BecomeProvider", "Provider");
             }
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await ramService
                 .IsProviderIdOwnerOfRamIdAsync(providerId!, id);
 
@@ -140,7 +141,7 @@
             {
                 TempData[ErrorMessage] = RamWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Components");
+                return RedirectToAction("All", "Ram");
             }
 
             bool isUserProvider = await providerService
@@ -152,8 +153,8 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await ramService
                 .IsProviderIdOwnerOfRamIdAsync(providerId!, id);
 
@@ -161,7 +162,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditRamHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Ram");
             }
 
             try
@@ -170,8 +171,7 @@
             }
             catch (Exception)
             {
-                ModelState.AddModelError(string.Empty,
-                    GeneralErrorMessage);
+                ModelState.AddModelError(string.Empty, GeneralErrorMessage);
 
                 return View(model);
             }
@@ -202,16 +202,17 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await ramService
                 .IsProviderIdOwnerOfRamIdAsync(providerId!, id);
             if (!isProviderOwner)
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteRamHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Ram");
             }
+
             try
             {
                 DeleteDetailsViewModel viewModel =
@@ -246,15 +247,15 @@
                 return RedirectToAction("BecomeProvider", "Provider");
             }
 
-            string? providerId =
-                await providerService.GetProviderByUserIdAsync(User.GetId()!);
+            string? providerId = await providerService
+                .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await ramService
                 .IsProviderIdOwnerOfRamIdAsync(providerId!, id);
             if (!isProviderOwner)
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteRamHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Ram");
             }
 
             try
@@ -263,7 +264,7 @@
 
                 TempData[WarningMessage] = RamDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("Mine", "Ram");
             }
             catch (Exception)
             {

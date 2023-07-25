@@ -7,6 +7,7 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
     using PCHCB.Web.ViewModels.Cooler;
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
 
     using static PCHCB.Common.GeneralAppConstants;
@@ -88,8 +89,7 @@
 
         public async Task<bool> IsCoolerExistByIdAsync(int coolerId)
         {
-            bool result = await this.dbContext
-                .Coolers
+            bool result = await this.dbContext.Coolers
                 .AnyAsync(c => c.Id == coolerId);
 
             return result;
@@ -105,8 +105,7 @@
 
         public async Task<DeleteDetailsViewModel> GetCoolerForDeleteByIdAsync(int coolerId)
         {
-            Cooler cooler = await dbContext
-                .Coolers
+            Cooler cooler = await dbContext.Coolers
                 .FirstAsync(c => c.Id == coolerId);
 
             return new DeleteDetailsViewModel
@@ -126,6 +125,19 @@
             this.dbContext.Coolers.Remove(cooler);
 
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<AllViewModel>> GetAllCoolersAsync()
+        {
+            return await this.dbContext.Coolers
+                .Select(c => new AllViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Price = c.Price,
+                    ImageUrl = c.ImageUrl
+                })
+                .ToListAsync();
         }
     }
 }

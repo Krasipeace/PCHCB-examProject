@@ -6,8 +6,11 @@
     using PCHCB.Data.Models.Enums;
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Motherboard;
     using PCHCB.Web.ViewModels.Provider;
+
+    using System.Collections.Generic;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -110,8 +113,7 @@
 
         public async Task<DeleteDetailsViewModel> GetMotherboardForDeleteByIdAsync(int motherboardId)
         {
-            Motherboard motherboard = await dbContext
-                .Motherboards
+            Motherboard motherboard = await dbContext.Motherboards
                 .FirstAsync(m => m.Id == motherboardId);
 
             return new DeleteDetailsViewModel
@@ -131,6 +133,20 @@
             this.dbContext.Motherboards.Remove(motherboard);
 
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<AllViewModel>> GetAllMotherboardsAsync()
+        {
+            return await this.dbContext.Motherboards
+                .Where(m => m.Name != ComponentUnavailable)
+                .Select(m => new AllViewModel
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                    Price = m.Price,
+                    ImageUrl = m.ImageUrl,
+                })
+                .ToListAsync();
         }
     }
 }

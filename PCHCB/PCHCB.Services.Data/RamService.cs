@@ -6,8 +6,11 @@
     using PCHCB.Data.Models.Enums;
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Ram;
+
+    using System.Collections.Generic;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -98,8 +101,7 @@
 
         public async Task<DeleteDetailsViewModel> GetRamForDeleteByIdAsync(int ramId)
         {
-            Ram ram = await dbContext
-                .Rams
+            Ram ram = await dbContext.Rams
                 .FirstAsync(r => r.Id == ramId);
 
             return new DeleteDetailsViewModel
@@ -119,6 +121,20 @@
             this.dbContext.Rams.Remove(ram);
 
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<AllViewModel>> GetAllRamsAsync()
+        {
+            return await this.dbContext.Rams
+                .Where(r => r.Name != ComponentUnavailable)
+                .Select(r => new AllViewModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Price = r.Price,
+                    ImageUrl = r.ImageUrl
+                })
+                .ToListAsync();
         }
     }
 }

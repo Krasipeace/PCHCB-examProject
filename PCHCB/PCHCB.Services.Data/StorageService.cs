@@ -6,8 +6,11 @@
     using PCHCB.Data.Models.Enums;
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Data;
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Storage;
+
+    using System.Collections.Generic;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -38,17 +41,6 @@
             await this.dbContext.SaveChangesAsync();
 
             return storage.Id;
-        }
-
-        public async Task DeleteStorageByIdAsync(int storageId)
-        {
-            Storage storage = await this.dbContext.Storages
-                .FirstAsync(s => s.Id == storageId);
-
-            storage.Name = ComponentUnavailable;
-            this.dbContext.Storages.Remove(storage);
-
-            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<StorageFormModel> GetStorageForEditByIdAsync(int storageId)
@@ -100,8 +92,7 @@
 
         public async Task<DeleteDetailsViewModel> GetStorageForDeleteByIdAsync(int storageId)
         {
-            Storage storage = await dbContext
-                .Storages
+            Storage storage = await dbContext.Storages
                 .FirstAsync(s => s.Id == storageId);
 
             return new DeleteDetailsViewModel
@@ -110,6 +101,31 @@
                 Description = storage.Description,
                 ImageUrl = storage.ImageUrl
             };
+        }
+
+        public async Task DeleteStorageByIdAsync(int storageId)
+        {
+            Storage storage = await this.dbContext.Storages
+                .FirstAsync(s => s.Id == storageId);
+
+            storage.Name = ComponentUnavailable;
+            this.dbContext.Storages.Remove(storage);
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<AllViewModel>> GetAllStoragesAsync()
+        {
+            return await this.dbContext.Storages
+                .Where(s => s.Name != ComponentUnavailable)
+                .Select(s => new AllViewModel
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Price = s.Price,
+                    ImageUrl = s.ImageUrl
+                })
+                .ToListAsync();
         }
     }
 }
