@@ -13,6 +13,7 @@
     using static PCHCB.Common.ErrorMessages.Case;
     using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
+    using PCHCB.Web.ViewModels.Psu;
 
     [Authorize]
     public class ProviderController : Controller
@@ -115,6 +116,29 @@
             }
 
             return this.RedirectToAction("Index", "Home");
-        }         
+        }   
+        
+        [HttpGet]
+        public async Task<IActionResult> ProviderDetails(string id)
+        {           
+            try
+            {
+                ProviderDetailsViewModel viewModel = await this.providerService
+                    .GetProviderDetailsByIdAsync(id);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+    
+        private IActionResult GeneralError()
+        {
+            this.TempData[ErrorMessage] = GeneralErrorMessage;
+
+            return this.RedirectToAction("Index", "Home");
+        }
     }
 }

@@ -1,0 +1,25 @@
+﻿@model ProviderDetailsViewModel
+@{
+    ViewData["Title"] = "Provider Details";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div class="container text-center">
+    <div class="card mb-3" style="max-width: 700px; margin: 0 auto;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="@Model.LogoUrl" alt="Logo URL" class="card-img" style="height: 10rem;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body text-left">
+                    <p class="card-text mb-0"><strong>Web Site:</strong> @Model.WebPage</p>
+                    <p class="card-text mb-0"><strong>Phone Number:</strong> @Model.PhoneNumber</p>
+                    <p class="card-text"><strong>Description:</strong></p>
+                    <p class="card-text">@Model.Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

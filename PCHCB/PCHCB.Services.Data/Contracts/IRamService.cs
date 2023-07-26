@@ -25,7 +25,5 @@
         Task<RamDetailsViewModel> GetRamDetailsAsync(int ramId);
 
         //Task<IEnumerable<RamAllViewModel>> AllByProviderIdAsync(string providerId);
-
-        //Task<IEnumerable<RamAllViewModel>> AllAvailableRams(int ramId);
     }
 }

@@ -179,7 +179,14 @@
                 Description = cpu.Description,
                 Provider = new ProviderInfoViewModel()
                 {
+                    Id = cpu.Provider.Id,
                     WebPage = cpu.Provider.WebPage,
+                    ProviderDetails = new ProviderDetailsViewModel()
+                    {
+                        PhoneNumber = cpu.Provider.User.PhoneNumber,
+                        LogoUrl = cpu.Provider.LogoUrl,
+                        WebPage = cpu.Provider.WebPage,
+                    }
                 }
             };
         }

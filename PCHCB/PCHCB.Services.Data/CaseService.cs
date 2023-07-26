@@ -167,7 +167,14 @@
                 Description = @case.Description,
                 Provider = new ProviderInfoViewModel()
                 {
+                    Id = @case.Provider.Id,
                     WebPage = @case.Provider.WebPage,
+                    ProviderDetails = new ProviderDetailsViewModel()
+                    {
+                        PhoneNumber = @case.Provider.User.PhoneNumber,
+                        LogoUrl = @case.Provider.LogoUrl,
+                        WebPage = @case.Provider.WebPage,
+                    }
                 }
             };
         }

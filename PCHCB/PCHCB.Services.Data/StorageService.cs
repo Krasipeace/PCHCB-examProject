@@ -151,7 +151,14 @@
                 Description = storage.Description,
                 Provider = new ProviderInfoViewModel()
                 {
+                    Id = storage.Provider.Id,
                     WebPage = storage.Provider.WebPage,
+                    ProviderDetails = new ProviderDetailsViewModel()
+                    {
+                        PhoneNumber = storage.Provider.User.PhoneNumber,
+                        LogoUrl = storage.Provider.LogoUrl,
+                        WebPage = storage.Provider.WebPage,
+                    }
                 }
             };
         }

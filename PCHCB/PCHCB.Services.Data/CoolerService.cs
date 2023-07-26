@@ -169,7 +169,14 @@
                 Description = cooler.Description,
                 Provider = new ProviderInfoViewModel()
                 {
+                    Id = cooler.Provider.Id,
                     WebPage = cooler.Provider.WebPage,
+                    ProviderDetails = new ProviderDetailsViewModel()
+                    {
+                        PhoneNumber = cooler.Provider.User.PhoneNumber,
+                        LogoUrl = cooler.Provider.LogoUrl,
+                        WebPage = cooler.Provider.WebPage,
+                    }
                 }
             };
         }

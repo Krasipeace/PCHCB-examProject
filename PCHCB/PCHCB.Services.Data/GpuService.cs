@@ -167,7 +167,14 @@
                 Description = gpu.Description,
                 Provider = new ProviderInfoViewModel()
                 {
+                    Id = gpu.Provider.Id,
                     WebPage = gpu.Provider.WebPage,
+                    ProviderDetails = new ProviderDetailsViewModel()
+                    {
+                        PhoneNumber = gpu.Provider.User.PhoneNumber,
+                        LogoUrl = gpu.Provider.LogoUrl,
+                        WebPage = gpu.Provider.WebPage,
+                    }
                 }
             };
         }

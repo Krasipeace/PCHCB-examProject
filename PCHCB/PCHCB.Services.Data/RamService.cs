@@ -165,7 +165,14 @@
                 Description = ram.Description,
                 Provider = new ProviderInfoViewModel()
                 {
+                    Id = ram.Provider.Id,
                     WebPage = ram.Provider.WebPage,
+                    ProviderDetails = new ProviderDetailsViewModel()
+                    {
+                        PhoneNumber = ram.Provider.User.PhoneNumber,
+                        LogoUrl = ram.Provider.LogoUrl,
+                        WebPage = ram.Provider.WebPage,
+                    }
                 }
             };
         }

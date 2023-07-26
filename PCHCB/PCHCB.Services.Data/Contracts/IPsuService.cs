@@ -25,7 +25,5 @@
         Task<PsuDetailsViewModel> GetPsuDetailsAsync(int psuId);
 
         //Task<IEnumerable<PsuAllViewModel>> AllByProviderIdAsync(string providerId);
-
-        //Task<IEnumerable<PsuAllViewModel>> AllAvailablePsus(int psuId);
     }
 }

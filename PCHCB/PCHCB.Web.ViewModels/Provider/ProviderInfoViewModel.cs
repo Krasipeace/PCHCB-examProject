@@ -7,7 +7,11 @@
     /// </summary>
     public class ProviderInfoViewModel
     {
+        public Guid Id { get; set; } 
+
         [Display(Name = "Provided by ")]
         public string WebPage { get; set; } = null!;
+
+        public ProviderDetailsViewModel ProviderDetails { get; set; } = null!;
     }
 }

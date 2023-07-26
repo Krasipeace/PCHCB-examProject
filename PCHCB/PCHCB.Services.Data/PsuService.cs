@@ -155,7 +155,14 @@
                 Description = psu.Description,
                 Provider = new ProviderInfoViewModel()
                 {
+                    Id = psu.Provider.Id,
                     WebPage = psu.Provider.WebPage,
+                    ProviderDetails = new ProviderDetailsViewModel()
+                    {
+                        PhoneNumber = psu.Provider.User.PhoneNumber,
+                        LogoUrl = psu.Provider.LogoUrl,
+                        WebPage = psu.Provider.WebPage,
+                    }
                 }
             };
         }

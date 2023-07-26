@@ -15,5 +15,7 @@
         Task CreateProvider(string userId, BecomeProviderFormModel model);
 
         Task<string?> GetProviderByUserIdAsync(string userId);
+
+        Task<ProviderDetailsViewModel> GetProviderDetailsByIdAsync(string providerId);
     }
 }

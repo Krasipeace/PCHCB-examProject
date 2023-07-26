@@ -44,6 +44,20 @@
             return provider.Id.ToString();
         }
 
+        public async Task<ProviderDetailsViewModel> GetProviderDetailsByIdAsync(string providerId)
+        {
+            return await this.dbContext.Providers 
+                .Select(p => new ProviderDetailsViewModel()
+                {
+                    Id = p.Id,
+                    PhoneNumber = p.PhoneNumber,
+                    WebPage = p.WebPage,
+                    LogoUrl = p.LogoUrl,
+                    Description = p.Description
+                })
+                .FirstAsync(p => p.Id.ToString().ToLower() == providerId.ToLower());
+        }
+
         public async Task<bool> ProviderExistsByLogoUrl(string logoUrl)
         {
             bool result = await this.dbContext.Providers

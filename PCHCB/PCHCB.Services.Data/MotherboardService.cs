@@ -178,7 +178,14 @@
                 Description = motherboard.Description,
                 Provider = new ProviderInfoViewModel()
                 {
+                    Id = motherboard.Provider.Id,
                     WebPage = motherboard.Provider.WebPage,
+                    ProviderDetails = new ProviderDetailsViewModel()
+                    {
+                        PhoneNumber = motherboard.Provider.User.PhoneNumber,
+                        LogoUrl = motherboard.Provider.LogoUrl,
+                        WebPage = motherboard.Provider.WebPage,
+                    }
                 }
             };
         }

@@ -25,7 +25,5 @@
         Task<StorageDetailsViewModel> GetStorageDetailsAsync(int storageId);
 
         //Task<IEnumerable<StorageAllViewModel>> AllByProviderIdAsync(string providerId);
-
-        //Task<IEnumerable<StorageAllViewModel>> AllAvailableStorages(int storageId);
     }
 }

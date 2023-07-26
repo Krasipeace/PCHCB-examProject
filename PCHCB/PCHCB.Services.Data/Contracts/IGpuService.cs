@@ -25,7 +25,5 @@
         Task<GpuDetailsViewModel> GetGpuDetailsAsync(int gpuId);
 
         //Task<IEnumerable<GpuAllViewModel>> AllByProviderIdAsync(string providerId);
-
-        //Task<IEnumerable<GpuAllViewModel>> AllAvailableGpus(int gpuId);
     }
 }
