@@ -68,7 +68,7 @@
             <div class="form-inline">
                 @if (User.Identity?.IsAuthenticated ?? false)
                 {
-                    @if (isUserProvider && isProviderOwnerOfGpu)
+                    @if (isUserProvider && !isProviderOwnerOfGpu)
                     {
                         <a class="btn btn-warning" asp-controller="Gpu" asp-action="Edit"
                            asp-route-id="@Model.Id">Edit</a>

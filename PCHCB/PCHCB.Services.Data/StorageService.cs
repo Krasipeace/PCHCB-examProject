@@ -74,10 +74,16 @@
 
         public async Task<bool> IsProviderIdOwnerOfStorageIdAsync(string providerId, int storageId)
         {
-            Storage storage = await this.dbContext.Storages
-                .FirstAsync(s => s.Id == storageId);
+            Provider? provider = await this.dbContext.Providers
+                .Include(p => p.ProviderStorages)
+                .FirstOrDefaultAsync(p => p.Id.ToString().ToLower() == providerId.ToLower());
 
-            return storage.ProviderId.ToString() == providerId;
+            if (provider == null)
+            {
+                return false;
+            }
+
+            return provider.ProviderStorages.Any(ps => ps.Id == storageId);
         }
 
         public async Task<bool> IsStorageExistByIdAsync(int storageId)

@@ -103,10 +103,16 @@
 
         public async Task<bool> IsProviderIdOwnerOfMotherboardIdAsync(string providerId, int motherboardId)
         {
-            Motherboard motherboard = await this.dbContext.Motherboards
-                .FirstAsync(m => m.Id == motherboardId);
+            Provider? provider = await this.dbContext.Providers
+                .Include(p => p.ProviderMotherboards)
+                .FirstOrDefaultAsync(p => p.Id.ToString().ToLower() == providerId.ToLower());
 
-            return motherboard.ProviderId.ToString() == providerId;
+            if (provider == null)
+            {
+                return false;
+            }
+
+            return provider.ProviderMotherboards.Any(pc => pc.Id == motherboardId);
         }
 
         public async Task<DeleteDetailsViewModel> GetMotherboardForDeleteByIdAsync(int motherboardId)

@@ -118,10 +118,16 @@
 
         public async Task<bool> IsProviderIdOwnerOfGpuIdAsync(string providerId, int gpuId)
         {
-            Gpu gpu = await this.dbContext.Gpus
-                .FirstAsync(g => g.Id == gpuId);
+            Provider? provider = await this.dbContext.Providers
+                .Include(p => p.ProviderGpus)
+                .FirstOrDefaultAsync(p => p.Id.ToString().ToLower() == providerId.ToLower());
 
-            return gpu.ProviderId.ToString() == providerId;
+            if (provider == null)
+            {
+                return false;
+            }
+
+            return provider.ProviderGpus.Any(pg => pg.Id == gpuId);
         }
 
         public async Task<IEnumerable<AllViewModel>> GetAllGpusAsync()

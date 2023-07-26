@@ -103,10 +103,16 @@
 
         public async Task<bool> IsProviderIdOwnerOfCpuIdAsync(string providerId, int cpuId)
         {
-            Cpu cpu = await this.dbContext.Cpus
-                .FirstAsync(c => c.Id == cpuId);
+            Provider? provider = await this.dbContext.Providers
+                .Include(p => p.ProviderCpus)
+                .FirstOrDefaultAsync(p => p.Id.ToString().ToLower() == providerId.ToLower());
 
-            return cpu.ProviderId.ToString() == providerId;
+            if (provider == null)
+            {
+                return false;
+            }
+
+            return provider.ProviderCpus.Any(pc => pc.Id == cpuId);
         }
 
         public async Task<DeleteDetailsViewModel> GetCpuForDeleteByIdAsync(int cpuId)

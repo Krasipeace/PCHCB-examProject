@@ -58,7 +58,7 @@
             <div class="form-inline">
                 @if (User.Identity?.IsAuthenticated ?? false)
                 {
-                    @if (isUserProvider && isProviderOwnerOfCpu)
+                    @if (isUserProvider && !isProviderOwnerOfCpu)
                     {
                         <a class="btn btn-warning" asp-controller="Cpu" asp-action="Edit"
                            asp-route-id="@Model.Id">Edit</a>

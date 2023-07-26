@@ -97,10 +97,16 @@
 
         public async Task<bool> IsProviderIdOwnerOfCoolerIdAsync(string providerId, int coolerId)
         {
-            Cooler cooler = await this.dbContext.Coolers
-            .FirstAsync(c => c.Id == coolerId);
+            Provider? provider = await this.dbContext.Providers
+                .Include(p => p.ProviderCoolers)
+                .FirstOrDefaultAsync(p => p.Id.ToString().ToLower() == providerId.ToLower());
 
-            return cooler.ProviderId.ToString() == providerId;
+            if (provider == null)
+            {
+                return false;
+            }
+
+            return provider.ProviderCoolers.Any(pc => pc.Id == coolerId);
         }
 
         public async Task<DeleteDetailsViewModel> GetCoolerForDeleteByIdAsync(int coolerId)

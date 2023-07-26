@@ -94,10 +94,16 @@
 
         public async Task<bool> IsProviderIdOwnerOfCaseIdAsync(string providerId, int caseId)
         {
-            Case @case = await this.dbContext.Cases
-                .FirstAsync(c => c.Id == caseId);
+            Provider? provider = await this.dbContext.Providers
+                .Include(p => p.ProviderCases)
+                .FirstOrDefaultAsync(p => p.Id.ToString().ToLower() == providerId.ToLower());
 
-            return @case.ProviderId.ToString() == providerId;
+            if (provider == null)
+            {
+                return false;
+            }
+
+            return provider.ProviderCases.Any(pc => pc.Id == caseId);
         }
 
         public async Task<DeleteDetailsViewModel> GetCaseForDeleteByIdAsync(int caseId)

@@ -94,7 +94,7 @@
             <div class="form-inline">
                 @if (User.Identity?.IsAuthenticated ?? false)
                 {
-                    @if (isUserProvider && isProviderOwnerOfMotherboard)
+                    @if (isUserProvider && !isProviderOwnerOfMotherboard)
                     {
                         <a class="btn btn-warning" asp-controller="Motherboard" asp-action="Edit"
                            asp-route-id="@Model.Id">Edit</a>

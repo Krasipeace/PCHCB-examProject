@@ -68,7 +68,7 @@
             <div class="form-inline">
                 @if (User.Identity?.IsAuthenticated ?? false)
                 {
-                    @if (isUserProvider && isProviderOwnerOfCooler)
+                    @if (isUserProvider && !isProviderOwnerOfCooler)
                     {
                         <a class="btn btn-warning" asp-controller="Cooler" asp-action="Edit"
                            asp-route-id="@Model.Id">Edit</a>

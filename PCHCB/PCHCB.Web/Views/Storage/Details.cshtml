@@ -51,7 +51,7 @@
             <div class="form-inline">
                 @if (User.Identity?.IsAuthenticated ?? false)
                 {
-                    @if (isUserProvider && isProviderOwnerOfStorage)
+                    @if (isUserProvider && !isProviderOwnerOfStorage)
                     {
                         <a class="btn btn-warning" asp-controller="Storage" asp-action="Edit"
                            asp-route-id="@Model.Id">Edit</a>

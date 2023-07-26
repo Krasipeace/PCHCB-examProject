@@ -85,10 +85,16 @@
 
         public async Task<bool> IsProviderIdOwnerOfRamIdAsync(string providerId, int ramId)
         {
-            Ram ram = await this.dbContext.Rams
-                .FirstAsync(r => r.Id == ramId);
+            Provider? provider = await this.dbContext.Providers
+                .Include(p => p.ProviderRams)
+                .FirstOrDefaultAsync(p => p.Id.ToString().ToLower() == providerId.ToLower());
 
-            return ram.ProviderId.ToString() == providerId;
+            if (provider == null)
+            {
+                return false;
+            }
+
+            return provider.ProviderRams.Any(pc => pc.Id == ramId);
         }
 
         public async Task<bool> IsRamExistByIdAsync(int ramId)

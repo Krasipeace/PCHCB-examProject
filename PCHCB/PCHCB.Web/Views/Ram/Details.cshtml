@@ -55,7 +55,7 @@
             <div class="form-inline">
                 @if (User.Identity?.IsAuthenticated ?? false)
                 {
-                    @if (isUserProvider && isProviderOwnerOfRam)
+                    @if (isUserProvider && !isProviderOwnerOfRam)
                     {
                         <a class="btn btn-warning" asp-controller="Ram" asp-action="Edit"
                            asp-route-id="@Model.Id">Edit</a>

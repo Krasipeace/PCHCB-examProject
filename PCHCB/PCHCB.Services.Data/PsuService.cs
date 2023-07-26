@@ -77,10 +77,16 @@
 
         public async Task<bool> IsProviderIdOwnerOfPsuIdAsync(string providerId, int psuId)
         {
-            Psu psu = await this.dbContext.Psus
-                .FirstAsync(p => p.Id == psuId);
+            Provider? provider = await this.dbContext.Providers
+                .Include(p => p.ProviderPsus)
+                .FirstOrDefaultAsync(p => p.Id.ToString().ToLower() == providerId.ToLower());
 
-            return psu.ProviderId.ToString() == providerId;
+            if (provider == null)
+            {
+                return false;
+            }
+
+            return provider.ProviderPsus.Any(pc => pc.Id == psuId);
         }
 
         public async Task<bool> IsPsuExistByIdAsync(int psuId)
