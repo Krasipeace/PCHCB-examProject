@@ -159,6 +159,7 @@
             {
                 Id = cpu.Id,
                 Name = cpu.Name,
+                Socket = cpu.Socket,
                 Price = cpu.Price,
                 Cores = cpu.Cores,
                 Threads = cpu.Threads,
