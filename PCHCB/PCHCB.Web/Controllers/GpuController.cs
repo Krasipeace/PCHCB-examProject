@@ -271,6 +271,32 @@
             }
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            bool gpuExists = await gpuService
+                .IsGpuExistByIdAsync(id);
+            if (!gpuExists)
+            {
+                TempData[ErrorMessage] = GpuWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Gpu");
+            }
+
+            try
+            {
+                GpuDetailsViewModel viewModel = await gpuService
+                    .GetGpuDetailsAsync(id);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
         private IActionResult GeneralError()
         {
             this.TempData[ErrorMessage] = GeneralErrorMessage;

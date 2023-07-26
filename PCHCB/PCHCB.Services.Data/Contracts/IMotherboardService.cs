@@ -22,9 +22,7 @@
 
         Task<IEnumerable<AllViewModel>> GetAllMotherboardsAsync();
 
-        //Task<MotherboardDeleteDetailsViewModel> GetMotherboardForDeleteByIdAsync(int motherboardId);
-
-        //Task<MotherboardDetailsViewModel> GetMotherboardDetailsAsync(int motherboardId);
+        Task<MotherboardDetailsViewModel> GetMotherboardDetailsAsync(int motherboardId);
 
         //Task<IEnumerable<MotherboardAllViewModel>> AllByProviderIdAsync(string providerId);
 

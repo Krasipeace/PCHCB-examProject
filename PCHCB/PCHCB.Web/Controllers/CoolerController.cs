@@ -275,6 +275,32 @@
             }
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            bool coolerExists = await coolerService
+                .IsCoolerExistByIdAsync(id);
+            if (!coolerExists)
+            {
+                TempData[ErrorMessage] = CoolerWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Cooler");
+            }
+
+            try
+            {
+                CoolerDetailsViewModel viewModel = await coolerService
+                    .GetCoolerDetailsAsync(id);               
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
         private IActionResult GeneralError()
         {
             this.TempData[ErrorMessage] = GeneralErrorMessage;

@@ -22,9 +22,7 @@
 
         Task<IEnumerable<AllViewModel>> GetAllPsusAsync();
 
-        //Task<PsuDeleteDetailsViewModel> GetPsuForDeleteByIdAsync(int psuId);
-
-        //Task<PsuDetailsViewModel> GetPsuDetailsAsync(int psuId);
+        Task<PsuDetailsViewModel> GetPsuDetailsAsync(int psuId);
 
         //Task<IEnumerable<PsuAllViewModel>> AllByProviderIdAsync(string providerId);
 

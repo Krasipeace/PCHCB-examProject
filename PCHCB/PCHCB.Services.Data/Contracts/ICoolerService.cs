@@ -22,7 +22,7 @@
 
         Task<IEnumerable<AllViewModel>> GetAllCoolersAsync();
 
-        //Task<CoolerDetailsViewModel> GetCoolerDetailsAsync(int coolerId);
+        Task<CoolerDetailsViewModel> GetCoolerDetailsAsync(int coolerId);
 
         //Task<IEnumerable<CoolerAllViewModel>> AllByProviderIdAsync(string providerId);
     }

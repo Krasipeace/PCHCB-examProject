@@ -10,8 +10,6 @@
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
 
-    using System.Collections.Generic;
-
     using static PCHCB.Common.GeneralAppConstants;
 
     public class CaseService : ICaseService
@@ -86,11 +84,6 @@
             await this.dbContext.SaveChangesAsync();
         }
 
-        public Task<CaseFormModel> GetCaseDetailsAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<bool> IsCaseExistByIdAsync(int caseId)
         {
             bool result = await this.dbContext.Cases
@@ -143,6 +136,34 @@
                     ImageUrl = c.ImageUrl
                 })
                 .ToListAsync();
+        }
+
+        public async Task<CaseDetailsViewModel> GetCaseDetailsAsync(int caseId)
+        {
+            Case @case = await dbContext.Cases
+                .Include(c => c.Provider)
+                .ThenInclude(u => u.User)
+                .Where(c => c.Name != ComponentUnavailable)
+                .FirstAsync(c => c.Id == caseId);
+
+            return new CaseDetailsViewModel
+            {
+                Id = @case.Id,
+                Name = @case.Name,
+                Price = @case.Price,
+                CaseSize = (int)@case.CaseSize,
+                FormFactor = (int)@case.FormFactor,
+                MaxGpuLength = @case.MaxGpuLength,
+                MaxAirCpuCoolerHeight = @case.MaxAirCpuCoolerHeight,
+                PsuFactor = (int)@case.PsuFactor,
+                ImageUrl = @case.ImageUrl,
+                MaxRadiatorLength = @case.MaxRadiatorLength,
+                Description = @case.Description,
+                Provider = new ProviderInfoViewModel()
+                {
+                    WebPage = @case.Provider.WebPage,
+                }
+            };
         }
     }
 }

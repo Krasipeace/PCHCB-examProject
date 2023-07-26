@@ -10,8 +10,6 @@
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
 
-    using System.Collections.Generic;
-
     using static PCHCB.Common.GeneralAppConstants;
 
     public class CpuService : ICpuService
@@ -147,6 +145,36 @@
                     ImageUrl = c.ImageUrl,
                 })
                 .ToListAsync();
+        }
+
+        public async Task<CpuDetailsViewModel> GetCpuDetailsAsync(int cpuId)
+        {
+            Cpu cpu = await dbContext.Cpus
+                .Include(c => c.Provider)
+                .ThenInclude(u => u.User)
+                .Where(c => c.Name != ComponentUnavailable)
+                .FirstAsync(c => c.Id == cpuId);
+
+            return new CpuDetailsViewModel
+            {
+                Id = cpu.Id,
+                Name = cpu.Name,
+                Price = cpu.Price,
+                Cores = cpu.Cores,
+                Threads = cpu.Threads,
+                Frequency = cpu.Frequency,
+                TurboFrequency = cpu.TurboFrequency,
+                Cache = cpu.Cache,
+                Tdp = cpu.Tdp,
+                RamFrequency = cpu.RamFrequency,
+                RamType = (int)cpu.RamType,
+                ImageUrl = cpu.ImageUrl,
+                Description = cpu.Description,
+                Provider = new ProviderInfoViewModel()
+                {
+                    WebPage = cpu.Provider.WebPage,
+                }
+            };
         }
     }
 }

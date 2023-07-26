@@ -271,6 +271,32 @@
             }
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            bool cpuExists = await cpuService
+                .IsCpuExistByIdAsync(id);
+            if (!cpuExists)
+            {
+                TempData[ErrorMessage] = CpuWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Cpu");
+            }
+
+            try
+            {
+                CpuDetailsViewModel viewModel = await cpuService
+                    .GetCpuDetailsAsync(id);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
         private IActionResult GeneralError()
         {
             this.TempData[ErrorMessage] = GeneralErrorMessage;

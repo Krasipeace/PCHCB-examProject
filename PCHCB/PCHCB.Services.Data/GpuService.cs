@@ -10,8 +10,6 @@
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
 
-    using System.Collections.Generic;
-
     using static PCHCB.Common.GeneralAppConstants;
 
     public class GpuService : IGpuService
@@ -138,6 +136,33 @@
                     ImageUrl = g.ImageUrl,
                 })
                 .ToListAsync();
+        }
+
+        public async Task<GpuDetailsViewModel> GetGpuDetailsAsync(int gpuId)
+        {
+            Gpu gpu = await dbContext.Gpus
+                .Include(g => g.Provider)
+                .ThenInclude(u => u.User)
+                .Where(g => g.Name != ComponentUnavailable)
+                .FirstAsync(g => g.Id == gpuId);
+
+            return new GpuDetailsViewModel
+            {
+                Id = gpu.Id,
+                Name = gpu.Name,
+                Price = gpu.Price,
+                Interface = (int)gpu.Interface,
+                Length = gpu.Length,
+                SlotsRequired = gpu.SlotsRequired,
+                PowerConsumption = gpu.PowerConsumption,
+                NvidiaConnector = gpu.NvidiaConnector,
+                ImageUrl = gpu.ImageUrl,
+                Description = gpu.Description,
+                Provider = new ProviderInfoViewModel()
+                {
+                    WebPage = gpu.Provider.WebPage,
+                }
+            };
         }
     }
 }

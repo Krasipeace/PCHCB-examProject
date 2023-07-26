@@ -272,6 +272,32 @@
             }
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            bool storageExists = await storageService
+                .IsStorageExistByIdAsync(id);
+            if (!storageExists)
+            {
+                TempData[ErrorMessage] = StorageWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Storage");
+            }
+
+            try
+            {
+                StorageDetailsViewModel viewModel = await storageService
+                    .GetStorageDetailsAsync(id);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
         private IActionResult GeneralError()
         {
             this.TempData[ErrorMessage] = GeneralErrorMessage;

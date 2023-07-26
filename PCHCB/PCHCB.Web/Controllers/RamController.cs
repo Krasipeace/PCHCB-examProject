@@ -13,6 +13,8 @@
     using static PCHCB.Common.ErrorMessages.Ram;
     using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
+    using PCHCB.Services.Data;
+    using PCHCB.Web.ViewModels.Psu;
 
     [Authorize]
     public class RamController : Controller
@@ -265,6 +267,32 @@
                 TempData[WarningMessage] = RamDeletedSuccessfully;
 
                 return RedirectToAction("Mine", "Ram");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            bool ramExists = await ramService
+                .IsRamExistByIdAsync(id);
+            if (!ramExists)
+            {
+                TempData[ErrorMessage] = RamWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Ram");
+            }
+
+            try
+            {
+                RamDetailsViewModel viewModel = await ramService
+                    .GetRamDetailsAsync(id);
+
+                return View(viewModel);
             }
             catch (Exception)
             {

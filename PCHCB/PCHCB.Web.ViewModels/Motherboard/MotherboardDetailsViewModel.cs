@@ -1,5 +1,7 @@
 ﻿namespace PCHCB.Web.ViewModels.Motherboard
 {
+    using PCHCB.Web.ViewModels.Provider;
+
     public class MotherboardDetailsViewModel : MotherboardAllViewModel
     {
         public string Socket { get; set; } = null!;
@@ -23,5 +25,7 @@
         public int M2Slots { get; set; }
 
         public string Description { get; set; } = null!;
+
+        public ProviderInfoViewModel Provider { get; set; } = null!;
     }
 }

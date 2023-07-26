@@ -10,8 +10,6 @@
     using PCHCB.Web.ViewModels.Motherboard;
     using PCHCB.Web.ViewModels.Provider;
 
-    using System.Collections.Generic;
-
     using static PCHCB.Common.GeneralAppConstants;
 
     public class MotherboardService : IMotherboardService
@@ -147,6 +145,36 @@
                     ImageUrl = m.ImageUrl,
                 })
                 .ToListAsync();
+        }
+
+        public async Task<MotherboardDetailsViewModel> GetMotherboardDetailsAsync(int motherboardId)
+        {
+            Motherboard motherboard = await dbContext.Motherboards
+                .Include(m => m.Provider)
+                .ThenInclude(u => u.User)
+                .Where(m => m.Name != ComponentUnavailable)
+                .FirstAsync(m => m.Id == motherboardId);
+
+            return new MotherboardDetailsViewModel
+            {
+                Id = motherboard.Id,
+                Name = motherboard.Name,
+                Price = motherboard.Price,
+                Socket = motherboard.Socket,
+                Chipset = motherboard.Chipset,
+                RamType = (int)motherboard.RamType,
+                RamSlots = motherboard.RamSlots,
+                RamCapacity = motherboard.RamCapacity,
+                SataSlots = motherboard.SataSlots,
+                PcieType = (int)motherboard.PcieType,
+                M2Slots = motherboard.M2Slots,
+                ImageUrl = motherboard.ImageUrl,
+                Description = motherboard.Description,
+                Provider = new ProviderInfoViewModel()
+                {
+                    WebPage = motherboard.Provider.WebPage,
+                }
+            };
         }
     }
 }

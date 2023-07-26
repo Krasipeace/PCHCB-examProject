@@ -39,8 +39,15 @@
                 <p>Storage Type: M.2</p>
             }
 
+            <p>Description: @Model.Description</p>
+
+            <div class="card" style="width: 10rem;">
+                <div class="card-body">
+                    <p>Provided by: @Model.Provider.WebPage</p>
+                </div>
+            </div>
+
             <p>Price: <b>@($"{Model.Price:f2}") $</b></p>
-            <p>@Model.Description</p>
             <div class="form-inline">
                 @if (User.Identity?.IsAuthenticated ?? false)
                 {

@@ -139,5 +139,33 @@
                 })
                 .ToListAsync();
         }
+
+        public async Task<CoolerDetailsViewModel> GetCoolerDetailsAsync(int coolerId)
+        {
+            Cooler cooler = await dbContext.Coolers
+                .Include(c => c.Provider)
+                .ThenInclude(u => u.User)
+                .Where(c => c.Name != ComponentUnavailable)
+                .FirstAsync(c => c.Id == coolerId);
+
+            return new CoolerDetailsViewModel
+            {
+                Id = cooler.Id,
+                Name = cooler.Name,
+                Price = cooler.Price,
+                Type = (int)cooler.Type,
+                FanSize = cooler.FanSize,
+                RadiatorSize = (int)cooler.RadiatorSize,
+                CoolerHeight = cooler.CoolerHeight,
+                Tdp = cooler.Tdp,
+                Width = cooler.Width,
+                ImageUrl = cooler.ImageUrl,
+                Description = cooler.Description,
+                Provider = new ProviderInfoViewModel()
+                {
+                    WebPage = cooler.Provider.WebPage,
+                }
+            };
+        }
     }
 }

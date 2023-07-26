@@ -1,5 +1,7 @@
 ﻿namespace PCHCB.Web.ViewModels.Cpu
 {
+    using PCHCB.Web.ViewModels.Provider;
+
     public class CpuDetailsViewModel : CpuAllViewModel
     {
         public string Socket { get; set; } = null!;
@@ -21,5 +23,7 @@
         public int RamType { get; set; }
 
         public string Description { get; set; } = null!;
+
+        public ProviderInfoViewModel Provider { get; set; } = null!;
     }
 }

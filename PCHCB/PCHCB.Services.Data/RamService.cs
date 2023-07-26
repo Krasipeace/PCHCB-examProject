@@ -136,5 +136,32 @@
                 })
                 .ToListAsync();
         }
+
+        public async Task<RamDetailsViewModel> GetRamDetailsAsync(int ramId)
+        {
+            Ram ram = await dbContext.Rams
+                .Include(r => r.Provider)
+                .ThenInclude(u => u.User)
+                .Where(r => r.Name != ComponentUnavailable)
+                .FirstAsync(r => r.Id == ramId);
+
+            return new RamDetailsViewModel
+            {
+                Id = ram.Id,
+                Name = ram.Name,
+                Price = ram.Price,
+                Type = (int)ram.Type,
+                Frequency = ram.Frequency,
+                Capacity = ram.Capacity,
+                Height = ram.Height,
+                ModelNumber = ram.ModelNumber,
+                ImageUrl = ram.ImageUrl,
+                Description = ram.Description,
+                Provider = new ProviderInfoViewModel()
+                {
+                    WebPage = ram.Provider.WebPage,
+                }
+            };
+        }
     }
 }

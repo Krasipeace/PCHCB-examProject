@@ -275,6 +275,32 @@
             }
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            bool caseExists = await caseService
+                .IsCaseExistByIdAsync(id);
+            if (!caseExists)
+            {
+                TempData[ErrorMessage] = CaseWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Case");
+            }
+
+            try
+            {
+                CaseDetailsViewModel viewModel = await caseService
+                    .GetCaseDetailsAsync(id);               
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
         private IActionResult GeneralError()
         {
             this.TempData[ErrorMessage] = GeneralErrorMessage;

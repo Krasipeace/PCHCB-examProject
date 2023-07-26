@@ -1,5 +1,7 @@
 ﻿namespace PCHCB.Web.ViewModels.Case
 {
+    using PCHCB.Web.ViewModels.Provider;
+
     public class CaseDetailsViewModel : CaseAllViewModel
     {
         public int FormFactor { get; set; } 
@@ -17,5 +19,7 @@
         public int MaxRadiatorLength { get; set; }
 
         public string Description { get; set; } = null!;
+
+        public ProviderInfoViewModel Provider { get; set; } = null!;
     }
 }

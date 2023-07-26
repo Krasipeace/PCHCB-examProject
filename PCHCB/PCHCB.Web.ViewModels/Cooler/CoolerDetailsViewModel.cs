@@ -1,5 +1,7 @@
 ﻿namespace PCHCB.Web.ViewModels.Cooler
 {
+    using PCHCB.Web.ViewModels.Provider;
+
     public class CoolerDetailsViewModel : CoolerAllViewModel
     {
         public int Type { get; set; }
@@ -17,5 +19,7 @@
         public int Width { get; set; }
 
         public string Description { get; set; } = null!;
+
+        public ProviderInfoViewModel Provider { get; set; } = null!;
     }
 }

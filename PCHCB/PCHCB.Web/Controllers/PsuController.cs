@@ -271,6 +271,32 @@
             }
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            bool psuExists = await psuService
+                .IsPsuExistByIdAsync(id);
+            if (!psuExists)
+            {
+                TempData[ErrorMessage] = PsuWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Psu");
+            }
+
+            try
+            {
+                PsuDetailsViewModel viewModel = await psuService
+                    .GetPsuDetailsAsync(id);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
         private IActionResult GeneralError()
         {
             this.TempData[ErrorMessage] = GeneralErrorMessage;

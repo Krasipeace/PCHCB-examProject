@@ -22,9 +22,7 @@
 
         Task<IEnumerable<AllViewModel>> GetAllStoragesAsync();
 
-        //Task<StorageDeleteDetailsViewModel> GetStorageForDeleteByIdAsync(int storageId);
-
-        //Task<StorageDetailsViewModel> GetStorageDetailsAsync(int storageId);
+        Task<StorageDetailsViewModel> GetStorageDetailsAsync(int storageId);
 
         //Task<IEnumerable<StorageAllViewModel>> AllByProviderIdAsync(string providerId);
 

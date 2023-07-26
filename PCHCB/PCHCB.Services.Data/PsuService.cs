@@ -10,8 +10,6 @@
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Psu;
 
-    using System.Collections.Generic;
-
     using static PCHCB.Common.GeneralAppConstants;
 
     public class PsuService : IPsuService
@@ -129,6 +127,31 @@
                     ImageUrl = p.ImageUrl
                 })
                 .ToListAsync();
+        }
+
+        public async Task<PsuDetailsViewModel> GetPsuDetailsAsync(int psuId)
+        {
+            Psu psu = await dbContext.Psus
+                .Include(p => p.Provider)
+                .ThenInclude(u => u.User)
+                .Where(p => p.Name != ComponentUnavailable)
+                .FirstAsync(p => p.Id == psuId);
+
+            return new PsuDetailsViewModel
+            {
+                Id = psu.Id,
+                Name = psu.Name,
+                Price = psu.Price,
+                Wattage = psu.Wattage,
+                Factor = (int)psu.Factor,
+                NvidiaConnector = psu.NvidiaConnector,
+                ImageUrl = psu.ImageUrl,
+                Description = psu.Description,
+                Provider = new ProviderInfoViewModel()
+                {
+                    WebPage = psu.Provider.WebPage,
+                }
+            };
         }
     }
 }

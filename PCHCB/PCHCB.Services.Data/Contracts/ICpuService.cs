@@ -22,7 +22,7 @@
 
         Task<IEnumerable<AllViewModel>> GetAllCpusAsync();
 
-        //Task<CpuDetailsViewModel> GetCpuDetailsAsync(int cpuId);
+        Task<CpuDetailsViewModel> GetCpuDetailsAsync(int cpuId);
 
         //Task<IEnumerable<CpuAllViewModel>> AllByProviderIdAsync(string providerId);
 

@@ -10,8 +10,6 @@
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Storage;
 
-    using System.Collections.Generic;
-
     using static PCHCB.Common.GeneralAppConstants;
 
     public class StorageService : IStorageService
@@ -126,6 +124,30 @@
                     ImageUrl = s.ImageUrl
                 })
                 .ToListAsync();
+        }
+
+        public async Task<StorageDetailsViewModel> GetStorageDetailsAsync(int storageId)
+        {
+            Storage storage = await dbContext.Storages
+                .Include(s => s.Provider)
+                .ThenInclude(u => u.User)
+                .Where(s => s.Name != ComponentUnavailable)
+                .FirstAsync(s => s.Id == storageId);
+
+            return new StorageDetailsViewModel
+            {
+                Id = storage.Id,
+                Name = storage.Name,
+                Price = storage.Price,
+                Capacity = storage.Capacity,
+                Type = (int)storage.Type,
+                ImageUrl = storage.ImageUrl,
+                Description = storage.Description,
+                Provider = new ProviderInfoViewModel()
+                {
+                    WebPage = storage.Provider.WebPage,
+                }
+            };
         }
     }
 }

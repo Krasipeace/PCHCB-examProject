@@ -13,6 +13,8 @@
     using static PCHCB.Common.ErrorMessages.Motherboard;
     using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
+    using PCHCB.Services.Data;
+    using PCHCB.Web.ViewModels.Gpu;
 
     [Authorize]
     public class MotherboardController : Controller
@@ -264,6 +266,32 @@
                 TempData[WarningMessage] = MotherboardDeletedSuccessfully;
 
                 return RedirectToAction("Mine", "Motherboard");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            bool motherboardExists = await motherboardService
+                .IsMotherboardExistByIdAsync(id);
+            if (!motherboardExists)
+            {
+                TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
+
+                return RedirectToAction("All", "Motherboard");
+            }
+
+            try
+            {
+                MotherboardDetailsViewModel viewModel = await motherboardService
+                    .GetMotherboardDetailsAsync(id);
+
+                return View(viewModel);
             }
             catch (Exception)
             {
