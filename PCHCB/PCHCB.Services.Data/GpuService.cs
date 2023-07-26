@@ -151,6 +151,7 @@
                 Id = gpu.Id,
                 Name = gpu.Name,
                 Price = gpu.Price,
+                Memory = gpu.Memory,
                 Interface = (int)gpu.Interface,
                 Length = gpu.Length,
                 SlotsRequired = gpu.SlotsRequired,
