@@ -7,7 +7,6 @@
     /// </summary>
     public class DeleteDetailsViewModel
     {
-        [Display(Name = "Hardware Component Name")]
         public string Name { get; set; } = null!;
 
         [Display(Name = "Image Link")]

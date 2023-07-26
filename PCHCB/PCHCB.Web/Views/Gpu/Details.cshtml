@@ -1,0 +1,75 @@
+﻿@using PCHCB.Services.Data.Contracts
+@using PCHCB.Web.Infrastructure.Extensions
+@model GpuDetailsViewModel
+
+@inject IProviderService ProviderService
+@inject IGpuService GpuService
+@{
+    bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
+    bool isProviderOwnerOfGpu = await GpuService.IsProviderIdOwnerOfGpuIdAsync(User.GetId()!, Model.Id);
+}
+
+@{
+    ViewBag.Title = "Graphic Card Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="GPU Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Name</u></p>
+            <p>GPU Memory(GB): @Model.Memory</p>
+            <p>GPU Power Consumption(watts): @Model.PowerConsumption</p>
+
+            @if (Model.Interface == 0)
+            {
+                <p>Interface Type: PCI-Express 3</p>
+            }
+            else if (Model.Interface == 1)
+            {
+                <p>Interface Type: PCI-Express 4</p>
+            }
+            else if (Model.Interface == 2)
+            {
+                <p>Interface Type: PCI-Express 5</p>
+            }
+            else
+            {
+                <p>Interface Type: PCI-Express 6</p>
+            }
+
+            <p>Gpu Length: @Model.Length</p>
+            <p>GPU Width(slots required): @Model.SlotsRequired</p>
+
+            @if (!Model.NvidiaConnector)
+            {
+                <p>New Generation Nvidia Power Connector: No</p>
+            }
+            else
+            {
+                <p>New Generation Nvidia Power Connector: Yes</p>
+            }
+
+            <p>Price: <b>@($"{Model.Price:f2}") $</b></p>
+            <p>@Model.Description</p>
+            <div class="form-inline">
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    @if (isUserProvider && isProviderOwnerOfGpu)
+                    {
+                        <a class="btn btn-warning" asp-controller="Gpu" asp-action="Edit"
+                           asp-route-id="@Model.Id">Edit</a>
+                        <a class="ml-2 btn btn-danger" asp-controller="Gpu" asp-action="Delete"
+                           asp-route-id="@Model.Id">Delete</a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

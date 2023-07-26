@@ -1,0 +1,66 @@
+﻿@using PCHCB.Services.Data.Contracts
+@using PCHCB.Web.Infrastructure.Extensions
+@model CpuDetailsViewModel
+
+@inject IProviderService ProviderService
+@inject ICpuService CpuService
+@{
+    bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
+    bool isProviderOwnerOfCpu = await CpuService.IsProviderIdOwnerOfCpuIdAsync(User.GetId()!, Model.Id);
+}
+
+@{
+    ViewBag.Title = "CPU Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="CPU Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Name</u></p>
+            <p>Socket Type: @Model.Socket</p>
+            <p>Physical Cores: @Model.Cores</p>
+            <p>Logical Cores: @Model.Threads</p>
+            <p>Base Clock Frequency (MHz): @Model.Frequency</p>
+            <p>Turbo Boost Clock Frequency (MHz): @Model.TurboFrequency</p>
+            <p>CPU Cache (MB): @Model.Cache</p>
+            <p>Base TDP (watts): @Model.Tdp</p>     
+
+            @if (Model.RamType == 0)
+            {
+                <p>Compatible RAM Type: DDR 3</p>
+            }
+            else if (Model.RamType == 1)
+            {
+                <p>Compatible RAM Type: DDR 4</p>
+            }
+            else
+            {
+                <p>Compatible RAM Type: DDR 5</p>
+            }
+
+            <p>Ram Frequency (MHz): @Model.RamFrequency</p>
+
+            <p>Price: <b>@($"{Model.Price:f2}") $</b></p>
+            <p>@Model.Description</p>
+            <div class="form-inline">
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    @if (isUserProvider && isProviderOwnerOfCpu)
+                    {
+                        <a class="btn btn-warning" asp-controller="Cpu" asp-action="Edit"
+                           asp-route-id="@Model.Id">Edit</a>
+                        <a class="ml-2 btn btn-danger" asp-controller="Cpu" asp-action="Delete"
+                           asp-route-id="@Model.Id">Delete</a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

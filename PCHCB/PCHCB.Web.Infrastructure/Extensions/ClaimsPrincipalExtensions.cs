@@ -5,7 +5,7 @@
     public static class ClaimsPrincipalExtensions
     {
         /// <summary>
-        /// Extentsion method to get the user's id from the claims principal
+        /// Extension method to get the user's id from the claims principal
         /// </summary>
         /// <param name="user"></param>
         /// <returns>Value of NameIdentifier as string</returns>

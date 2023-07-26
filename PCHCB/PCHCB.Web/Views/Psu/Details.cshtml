@@ -1,0 +1,79 @@
+﻿@using PCHCB.Services.Data.Contracts
+@using PCHCB.Web.Infrastructure.Extensions
+@model PsuDetailsViewModel
+
+@inject IProviderService ProviderService
+@inject IPsuService PsuService
+@{
+    bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
+    bool isProviderOwnerOfPsu = await PsuService.IsProviderIdOwnerOfPsuIdAsync(User.GetId()!, Model.Id);
+}
+
+@{
+    ViewBag.Title = "Power Supply Unit Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="PSU Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Name</u></p>
+            <p>Power Wattage: @Model.Wattage</p>
+
+            @if (Model.Factor == 0)
+            {
+                <p>Power Supply Form Factor: ATX</p>
+            }
+            else if (Model.Factor == 1)
+            {
+                <p>Power Supply Form Factor: LFX</p>
+            }
+            else if (Model.Factor == 2)
+            {
+                <p>Power Supply Form Factor: SFX</p>
+            }
+            else if (Model.Factor == 3)
+            {
+                <p>Power Supply Form Factor: CFX</p>
+            }
+            else if (Model.Factor == 4)
+            {
+                <p>Power Supply Form Factor: TFX</p>
+            }
+            else
+            {
+                <p>Power Supply Form Factor: Flex ATX</p>
+            }
+
+            @if (!Model.NvidiaConnector)
+            {
+                <p>New Gen. Nvidia Power Connector: No</p>
+            }
+            else
+            {
+                <p>New Gen. Nvidia Power Connector: Yes</p>
+            }
+
+            <p>Price: <b>@($"{Model.Price:f2}") $</b></p>
+            <p>@Model.Description</p>
+            <div class="form-inline">
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    @if (isUserProvider && isProviderOwnerOfPsu)
+                    {
+                        <a class="btn btn-warning" asp-controller="Psu" asp-action="Edit"
+                           asp-route-id="@Model.Id">Edit</a>
+                        <a class="ml-2 btn btn-danger" asp-controller="Psu" asp-action="Delete"
+                           asp-route-id="@Model.Id">Delete</a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

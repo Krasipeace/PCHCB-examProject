@@ -1,0 +1,62 @@
+﻿@using PCHCB.Services.Data.Contracts
+@using PCHCB.Web.Infrastructure.Extensions
+@model RamDetailsViewModel
+
+@inject IProviderService ProviderService
+@inject IRamService RamService
+@{
+    bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
+    bool isProviderOwnerOfRam = await RamService.IsProviderIdOwnerOfRamIdAsync(User.GetId()!, Model.Id);
+}
+
+@{
+    ViewBag.Title = "RAM Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="RAM Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Name</u></p>
+            <p>RAM Frequency: @Model.Frequency</p>
+            <p>RAM Capacity: @Model.Capacity</p>
+
+            @if (Model.Type == 0)
+            {
+                <p>RAM Type: DDR 3</p>
+            }
+            else if (Model.Type == 1)
+            {
+                <p>RAM Type: DDR 4</p>
+            }
+            else
+            {
+                <p>RAM Type: DDR 5</p>
+            }         
+
+            <p>Model Number: @Model.ModelNumber</p>
+            <p>RAM Height(mm): @Model.Height</p>
+
+            <p>Price: <b>@($"{Model.Price:f2}") $</b></p>
+            <p>@Model.Description</p>
+            <div class="form-inline">
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    @if (isUserProvider && isProviderOwnerOfRam)
+                    {
+                        <a class="btn btn-warning" asp-controller="Ram" asp-action="Edit"
+                           asp-route-id="@Model.Id">Edit</a>
+                        <a class="ml-2 btn btn-danger" asp-controller="Ram" asp-action="Delete"
+                           asp-route-id="@Model.Id">Delete</a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

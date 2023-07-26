@@ -1,0 +1,103 @@
+﻿@using PCHCB.Services.Data.Contracts
+@using PCHCB.Web.Infrastructure.Extensions
+@model CaseDetailsViewModel
+
+@inject IProviderService ProviderService
+@inject ICaseService CaseService
+@{
+    bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
+    bool isProviderOwnerOfCase = await CaseService.IsProviderIdOwnerOfCaseIdAsync(User.GetId()!, Model.Id);
+}
+
+@{
+    ViewBag.Title = "Case Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="Case Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Name</u></p>
+            <p>Max Air Cpu Cooler Height: @Model.MaxAirCpuCoolerHeight</p>
+            <p>Max Gpu Length: @Model.MaxGpuLength</p>
+            <p>Max Radiator Length: @Model.MaxRadiatorLength</p>
+            <p>Max Storage Devices: @Model.MaxStorageDevices</p>
+
+            @if (Model.CaseSize == 0)
+            {
+                <p>Case Size: Mini Tower</p>
+            }
+            else if (Model.CaseSize == 1)
+            {
+                <p>Case Size: Mid Tower</p>
+            }
+            else
+            {
+                <p>Case Size: Full Tower</p>
+            }
+            
+            @if (Model.FormFactor == 0)
+            {
+                <p>Max Motherboard Form Factor: ATX</p>
+            }
+            else if(Model.FormFactor == 1)
+            {
+                <p>Max Motherboard Form Factor: Micro ATX</p>
+            }
+            else if(Model.FormFactor == 2)
+            {
+                <p>Max Motherboard Form Factor: Mini ITX</p>
+            }
+            else
+            {
+                <p>Max Motherboard Form Factor: Extended ATX</p>
+            }
+
+            @if (Model.PsuFactor == 0)
+            {
+                <p>Power Supply Form Factor: ATX</p>
+            }
+            else if (Model.PsuFactor == 1)
+            {
+                <p>Power Supply Form Factor: LFX</p>
+            }
+            else if (Model.PsuFactor == 2)
+            {
+                <p>Power Supply Form Factor: SFX</p>
+            }
+            else if (Model.PsuFactor == 3)
+            {
+                <p>Power Supply Form Factor: CFX</p>
+            }
+            else if (Model.PsuFactor == 4)
+            {
+                <p>Power Supply Form Factor: TFX</p>
+            }
+            else
+            {
+                <p>Power Supply Form Factor: Flex ATX</p>
+            }
+
+            <p>Price: <b>@($"{Model.Price:f2}") $</b></p>
+            <p>@Model.Description</p>
+            <div class="form-inline">
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    @if (isUserProvider && isProviderOwnerOfCase)
+                    {
+                        <a class="btn btn-warning" asp-controller="Case" asp-action="Edit"
+                           asp-route-id="@Model.Id">Edit</a>
+                        <a class="ml-2 btn btn-danger" asp-controller="Case" asp-action="Delete"
+                           asp-route-id="@Model.Id">Delete</a>
+                    }                   
+                }
+            </div>
+        </div>
+    </div>
+</div>

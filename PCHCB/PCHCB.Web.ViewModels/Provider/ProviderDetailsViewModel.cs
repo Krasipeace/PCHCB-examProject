@@ -5,11 +5,8 @@
     /// <summary>
     /// Full info about provider
     /// </summary>
-    public class ProviderDetailsViewModel
+    public class ProviderDetailsViewModel : ProviderInfoViewModel
     {
-        [Display(Name = "Web Site")]
-        public string WebPage { get; set; } = null!;
-
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; } = null!;
         

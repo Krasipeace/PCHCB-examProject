@@ -1,0 +1,75 @@
+﻿@using PCHCB.Services.Data.Contracts
+@using PCHCB.Web.Infrastructure.Extensions
+@model CoolerDetailsViewModel
+
+@inject IProviderService ProviderService
+@inject ICoolerService CoolerService
+@{
+    bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
+    bool isProviderOwnerOfCooler = await CoolerService.IsProviderIdOwnerOfCoolerIdAsync(User.GetId()!, Model.Id);
+}
+
+@{
+    ViewBag.Title = "Cooler Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="Cooler Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Name</u></p>
+            @if (Model.Type == 0)
+            {
+                <p>Cooler Type: Air</p>
+                <p>Max Air Cpu Cooler Height(mm): @Model.CoolerHeight</p>
+                <p>Cooler Fan Size(mm): @Model.FanSize</p>
+                <p>Cooler Width (mm): @Model.Width</p>
+            }
+            else
+            {
+                <p>Cooler Type: Water</p>
+                if (Model.RadiatorSize == 0)
+                {
+                    <p>Radiator Size: 120mm</p>
+                }
+                else if (Model.RadiatorSize == 1)
+                {
+                    <p>Radiator Size: 240mm</p>
+                }
+                else if (Model.RadiatorSize == 2)
+                {
+                    <p>Radiator Size: 360mm</p>
+                }
+                else if (Model.RadiatorSize == 3)
+                {
+                    <p>Radiator Size: 280mm</p>
+                }
+                else
+                {
+                    <p>Radiator Size: 420mm</p>
+                }
+            }
+            <p>Max TDP: @Model.Tdp watts.</p>
+            <p>CPU Sockets Compatibility: @Model.Compatibility</p>
+            <p>Price: <b>@($"{Model.Price:f2}") $</b></p>
+            <p>@Model.Description</p>
+            <div class="form-inline">
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    @if (isUserProvider && isProviderOwnerOfCooler)
+                    {
+                        <a class="btn btn-warning" asp-controller="Cooler" asp-action="Edit"
+                           asp-route-id="@Model.Id">Edit</a>
+                        <a class="ml-2 btn btn-danger" asp-controller="Cooler" asp-action="Delete"
+                           asp-route-id="@Model.Id">Delete</a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

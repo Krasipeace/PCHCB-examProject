@@ -1,0 +1,101 @@
+﻿@using PCHCB.Services.Data.Contracts
+@using PCHCB.Web.Infrastructure.Extensions
+@model MotherboardDetailsViewModel
+
+@inject IProviderService ProviderService
+@inject IMotherboardService MotherboardService
+@{
+    bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
+    bool isProviderOwnerOfMotherboard = await MotherboardService.IsProviderIdOwnerOfMotherboardIdAsync(User.GetId()!, Model.Id);
+}
+
+@{
+    ViewBag.Title = "Motherboard Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="Motherboard Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Name</u></p>
+
+            @if (Model.FormFactor == 0)
+            {
+                <p>Max Motherboard Form Factor: ATX</p>
+            }
+            else if (Model.FormFactor == 1)
+            {
+                <p>Max Motherboard Form Factor: Micro ATX</p>
+            }
+            else if (Model.FormFactor == 2)
+            {
+                <p>Max Motherboard Form Factor: Mini ITX</p>
+            }
+            else
+            {
+                <p>Max Motherboard Form Factor: Extended ATX</p>
+            }
+
+            <p>Chipset: @Model.Chipset</p>
+            <p>CPU Socket: @Model.Socket</p>
+
+            @if (Model.PcieType == 0)
+            {
+                <p>Interface Type: PCI-Express 3.0</p>
+            }
+            else if (Model.PcieType == 1)
+            {
+                <p>Interface Type: PCI-Express 4.0</p>
+            }
+            else if (Model.PcieType == 2)
+            {
+                <p>Interface Type: PCI-Express 5.0</p>
+            }
+            else
+            {
+                <p>Interface Type: PCI-Express 6.0</p>
+            }
+
+            <p>Pci-e Slots: @Model.PcieSlots</p>
+
+            <p>Max Memory Capacity: @Model.RamCapacity</p>
+            <p>RAM Slots: @Model.RamSlots</p>
+            @if (Model.RamType == 0)
+            {
+                <p>RAM Type: DDR 3</p>
+            }
+            else if (Model.RamType == 1)
+            {
+                <p>RAM Type: DDR 4</p>
+            }
+            else
+            {
+                <p>RAM Type: DDR 5</p>
+            }
+
+            <p>SATA Slots: @Model.SataSlots</p>
+            <p>M.2 Slots: @Model.M2Slots</p>
+
+            <p>Price: <b>@($"{Model.Price:f2}") $</b></p>
+            <p>@Model.Description</p>
+            <div class="form-inline">
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    @if (isUserProvider && isProviderOwnerOfMotherboard)
+                    {
+                        <a class="btn btn-warning" asp-controller="Motherboard" asp-action="Edit"
+                           asp-route-id="@Model.Id">Edit</a>
+                        <a class="ml-2 btn btn-danger" asp-controller="Motherboard" asp-action="Delete"
+                           asp-route-id="@Model.Id">Delete</a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
