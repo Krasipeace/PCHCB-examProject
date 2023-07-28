@@ -110,7 +110,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditPowerSupplyHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Psu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -161,7 +161,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditPowerSupplyHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Psu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -209,7 +209,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeletePowerSupplyHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Psu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -254,7 +254,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeletePowerSupplyHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Psu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -263,7 +263,7 @@
 
                 TempData[WarningMessage] = PowerSupplyDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Psu");
+                return RedirectToAction("Mine", "Provider");
             }
             catch (Exception)
             {

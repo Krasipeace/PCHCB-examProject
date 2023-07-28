@@ -163,7 +163,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditMotherboardHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Motherboard");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -211,7 +211,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteMotherboardHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Motherboard");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -256,7 +256,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteMotherboardHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Motherboard");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -265,7 +265,7 @@
 
                 TempData[WarningMessage] = MotherboardDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Motherboard");
+                return RedirectToAction("Mine", "Provider");
             }
             catch (Exception)
             {

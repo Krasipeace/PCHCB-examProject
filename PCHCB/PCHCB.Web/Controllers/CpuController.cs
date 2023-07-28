@@ -111,7 +111,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditCpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Cpu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -162,7 +162,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditCpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Cpu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -210,7 +210,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Cpu");
+                return RedirectToAction("Mine", "Provider");
             }
             try
             {
@@ -254,7 +254,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Cpu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -263,7 +263,7 @@
 
                 TempData[WarningMessage] = CpuDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Cpu");
+                return RedirectToAction("Mine", "Provider");
             }
             catch (Exception)
             {

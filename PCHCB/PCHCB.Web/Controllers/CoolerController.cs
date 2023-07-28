@@ -111,7 +111,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditCoolerHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Cooler");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -211,7 +211,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCoolerHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Cooler");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -258,7 +258,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCoolerHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Cooler");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -267,7 +267,7 @@
 
                 TempData[WarningMessage] = CoolerDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Cooler");
+                return RedirectToAction("Mine", "Provider");
             }
             catch (Exception)
             {

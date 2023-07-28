@@ -110,7 +110,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditStorageDeviceHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Storage");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -161,7 +161,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditStorageDeviceHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Storage");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -255,7 +255,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteStorageDeviceHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Storage");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -264,7 +264,7 @@
 
                 TempData[WarningMessage] = StorageDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Storage");
+                return RedirectToAction("Mine", "Provider");
             }
             catch (Exception)
             {

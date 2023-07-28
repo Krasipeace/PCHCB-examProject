@@ -111,7 +111,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditCaseHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Case");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -162,7 +162,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditCaseHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Case");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -211,7 +211,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCaseHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Case");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -258,7 +258,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCaseHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Case");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -267,7 +267,7 @@
 
                 TempData[WarningMessage] = CaseDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Case");
+                return RedirectToAction("Mine", "Provider");
             }
             catch (Exception)
             {

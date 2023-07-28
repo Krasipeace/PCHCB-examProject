@@ -110,7 +110,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditGpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Gpu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -161,7 +161,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditGpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Gpu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -209,7 +209,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteGpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Gpu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -254,7 +254,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteGpuHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Gpu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -263,7 +263,7 @@
 
                 TempData[WarningMessage] = GpuDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Gpu");
+                return RedirectToAction("Mine", "Provider");
             }
             catch (Exception)
             {

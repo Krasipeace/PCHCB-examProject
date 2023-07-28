@@ -162,7 +162,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditRamHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Ram");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -210,7 +210,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteRamHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Ram");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -255,7 +255,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteRamHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Ram");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
@@ -264,7 +264,7 @@
 
                 TempData[WarningMessage] = RamDeletedSuccessfully;
 
-                return RedirectToAction("Mine", "Ram");
+                return RedirectToAction("Mine", "Provider");
             }
             catch (Exception)
             {
