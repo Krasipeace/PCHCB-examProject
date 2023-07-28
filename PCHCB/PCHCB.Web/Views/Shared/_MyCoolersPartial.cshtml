@@ -1,19 +1,19 @@
 ﻿@using PCHCB.Services.Data.Contracts;
 @using PCHCB.Web.Infrastructure.Extensions;
-@inject ICaseService CaseService
+@inject ICoolerService CoolerService
 @inject IProviderService ProviderService
 
 @model PCHCB.Web.ViewModels.Provider.MineViewModel
 @{
     bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
-    var cases = await ProviderService.AllCasesByProviderIdAsync(User.GetId()!);
+    var coolers = await ProviderService.AllCoolersByProviderIdAsync(User.GetId()!);
 }
 <div class="row">
-    @if (Model.Cases.Any())
+    @if (Model.Coolers.Any())
     {
-        <h3>Cases</h3>
+        <h3>Coolers</h3>
         <hr />
-        @foreach (var item in Model.Cases)
+        @foreach (var item in Model.Coolers)
         {
             <div class="col-md-4">
                 <div class="card mb-3">
@@ -21,7 +21,7 @@
                     <div class="card-body text-center">
                         <p>@item.Name</p>
                         <p>@item.Price</p>
-                        <p><a class="btn btn-outline-info" asp-area="" asp-controller="Case" asp-action="Details" asp-route-id="@item.Id">Details</a></p>
+                        <p><a class="btn btn-outline-info" asp-area="" asp-controller="Cooler" asp-action="Details" asp-route-id="@item.Id">Details</a></p>
                     </div>
                 </div>
             </div>
@@ -30,8 +30,8 @@
     else
     {
         <p class="mt-2">
-            You dont have any Cases Yet! Add More to be able to view them!
-            <a class="btn btn-outline-primary" asp-area="" asp-controller="Case" asp-action="Add">Add Case</a>
+            You dont have any Coolers Yet! Add More to be able to view them!
+            <a class="btn btn-outline-primary" asp-area="" asp-controller="Cpu" asp-action="Add">Add CPU</a>
         </p>
     }
 </div>

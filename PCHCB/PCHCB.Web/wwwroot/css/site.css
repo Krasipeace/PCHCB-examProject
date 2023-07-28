@@ -41,3 +41,8 @@ body {
     background-color: rebeccapurple;
     color: goldenrod;
 }
+
+.img-thumbnail {
+    height: 100px;
+    width: 100px;
+}

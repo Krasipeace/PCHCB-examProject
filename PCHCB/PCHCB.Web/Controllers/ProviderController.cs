@@ -174,7 +174,7 @@
 
                 return View(new MineViewModel
                 {
-                    Cases = cases,
+                    Cases = cases,                   
                     Cpus = cpus,
                     Coolers = coolers,
                     Gpus = gpus,
@@ -189,7 +189,6 @@
                 return GeneralError();
             }
         }
-
 
         private IActionResult GeneralError()
         {

@@ -29,5 +29,8 @@
         public List<RamAllViewModel> Rams { get; set; } = new List<RamAllViewModel>();
 
         public List<StorageAllViewModel> Storages { get; set; } = new List<StorageAllViewModel>();
+
+        public CaseDetailsViewModel CaseDetails { get; set; } = new CaseDetailsViewModel();
+
     }
 }
