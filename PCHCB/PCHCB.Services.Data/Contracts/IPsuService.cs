@@ -3,7 +3,6 @@
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Psu;
-    using PCHCB.Web.ViewModels.Ram;
 
     public interface IPsuService
     {
