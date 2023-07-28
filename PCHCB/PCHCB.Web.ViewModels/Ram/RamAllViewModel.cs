@@ -1,5 +1,8 @@
 ﻿namespace PCHCB.Web.ViewModels.Ram
 {
+    /// <summary>
+    /// Short info about RAM
+    /// </summary>
     public class RamAllViewModel
     {
         public int Id { get; set; }

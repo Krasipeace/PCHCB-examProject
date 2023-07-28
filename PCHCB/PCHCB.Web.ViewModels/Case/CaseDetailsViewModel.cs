@@ -2,6 +2,9 @@
 {
     using PCHCB.Web.ViewModels.Provider;
 
+    /// <summary>
+    /// Full info about Case
+    /// </summary>
     public class CaseDetailsViewModel : CaseAllViewModel
     {
         public int FormFactor { get; set; } 

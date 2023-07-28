@@ -1,5 +1,34 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using PCHCB.Services.Data.Contracts;
+@using PCHCB.Web.Infrastructure.Extensions;
+@inject IProviderService ProviderService
+@inject ICaseService CaseService
+@inject ICoolerService CoolerService
+@inject ICpuService CpuService
+@inject IGpuService GpuService
+@inject IMotherboardService MotherboardService
+@inject IPsuService PsuService
+@inject IRamService RamService
+@inject IStorageService StorageService
+@model MineViewModel
 @{
+    bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
+    var cases = await ProviderService.AllCasesByProviderIdAsync(User.GetId()!);
+    var coolers = await ProviderService.AllCoolersByProviderIdAsync(User.GetId()!);
+    var cpus = await ProviderService.AllCpusByProviderIdAsync(User.GetId()!);
+    var gpus = await ProviderService.AllGpusByProviderIdAsync(User.GetId()!);
+    var motherboards = await ProviderService.AllMotherboardsByProviderIdAsync(User.GetId()!);
+    var psus = await ProviderService.AllPsusByProviderIdAsync(User.GetId()!);
+    var rams = await ProviderService.AllRamsByProviderIdAsync(User.GetId()!);
+    var storages = await ProviderService.AllStoragesByProviderIdAsync(User.GetId()!);
+    ViewData["Title"] = "My Hardware";
 }
+
+
+<h3 class="text-center">@ViewData["Title"]</h3>
+<hr />
+
+    <partial name="_MyCasesPartial" />
+
+
+
+

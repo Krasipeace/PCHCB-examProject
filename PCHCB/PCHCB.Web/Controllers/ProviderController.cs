@@ -10,35 +10,25 @@
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ErrorMessages.Provider;
     using static PCHCB.Common.ErrorMessages.General;
-    using static PCHCB.Common.ErrorMessages.Case;
-    using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
+    using static PCHCB.Common.SuccessMessages;
+    using PCHCB.Web.ViewModels.Case;
+    using PCHCB.Web.ViewModels.Cpu;
+    using PCHCB.Web.ViewModels.Cooler;
+    using PCHCB.Web.ViewModels.Gpu;
+    using PCHCB.Web.ViewModels.Motherboard;
     using PCHCB.Web.ViewModels.Psu;
+    using PCHCB.Web.ViewModels.Ram;
+    using PCHCB.Web.ViewModels.Storage;
 
     [Authorize]
     public class ProviderController : Controller
     {
         private readonly IProviderService providerService;
-        private readonly ICoolerService coolerService;
-        private readonly ICpuService cpuService;
-        private readonly ICaseService caseService;
-        private readonly IGpuService gpuService;
-        private readonly IMotherboardService motherboardService;
-        private readonly IPsuService psuService;
-        private readonly IRamService ramService;
-        private readonly IStorageService storageService;
 
-        public ProviderController(IProviderService providerService, ICoolerService coolerService, ICpuService cpuService, ICaseService caseService, IGpuService gpuService, IMotherboardService motherboardService, IPsuService psuService, IRamService ramService, IStorageService storageService)
+        public ProviderController(IProviderService providerService)
         {
             this.providerService = providerService;
-            this.storageService = storageService;
-            this.ramService = ramService;
-            this.psuService = psuService;
-            this.motherboardService = motherboardService;
-            this.gpuService = gpuService;
-            this.caseService = caseService;
-            this.cpuService = cpuService;
-            this.coolerService = coolerService;
         }
 
         [HttpGet]
@@ -107,6 +97,8 @@
             try
             {
                 await this.providerService.CreateProvider(userId!, model);
+
+                this.TempData[SuccessMessage] = ProviderCreatedSuccessfully;
             }
             catch (Exception)
             {
@@ -116,11 +108,11 @@
             }
 
             return this.RedirectToAction("Index", "Home");
-        }   
-        
+        }
+
         [HttpGet]
         public async Task<IActionResult> ProviderDetails(string id)
-        {           
+        {
             try
             {
                 ProviderDetailsViewModel viewModel = await this.providerService
@@ -133,7 +125,72 @@
                 return GeneralError();
             }
         }
-    
+
+        [HttpGet]
+        public async Task<IActionResult> Mine()
+        {
+            string userId = this.User.GetId()!;
+            bool isProvider = await this.providerService
+                .ProviderExistsByUserIdAsync(userId);
+
+            List<CaseAllViewModel> cases = new List<CaseAllViewModel>();
+            List<CpuAllViewModel> cpus = new List<CpuAllViewModel>();
+            List<CoolerAllViewModel> coolers = new List<CoolerAllViewModel>();
+            List<GpuAllViewModel> gpus = new List<GpuAllViewModel>();
+            List<MotherboardAllViewModel> motherboards = new List<MotherboardAllViewModel>();
+            List<PsuAllViewModel> psus = new List<PsuAllViewModel>();
+            List<RamAllViewModel> rams = new List<RamAllViewModel>();
+            List<StorageAllViewModel> storages = new List<StorageAllViewModel>();
+
+            string? providerId = await providerService.GetProviderByUserIdAsync(userId);
+            if (providerId == null)
+            {
+                this.TempData[WarningMessage] = OnlyProviderCanViewHisHardwareErrorMessage;
+
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            try
+            {
+                if (isProvider)
+                {
+                    cases.AddRange(await this.providerService
+                        .AllCasesByProviderIdAsync(providerId));
+                    cpus.AddRange(await this.providerService
+                        .AllCpusByProviderIdAsync(providerId));
+                    coolers.AddRange(await this.providerService
+                        .AllCoolersByProviderIdAsync(providerId));
+                    gpus.AddRange(await this.providerService
+                        .AllGpusByProviderIdAsync(providerId));
+                    motherboards.AddRange(await this.providerService
+                        .AllMotherboardsByProviderIdAsync(providerId));
+                    psus.AddRange(await this.providerService
+                        .AllPsusByProviderIdAsync(providerId));
+                    rams.AddRange(await this.providerService
+                        .AllRamsByProviderIdAsync(providerId));
+                    storages.AddRange(await this.providerService
+                        .AllStoragesByProviderIdAsync(providerId));
+                }
+
+                return View(new MineViewModel
+                {
+                    Cases = cases,
+                    Cpus = cpus,
+                    Coolers = coolers,
+                    Gpus = gpus,
+                    Motherboards = motherboards,
+                    Psus = psus,
+                    Rams = rams,
+                    Storages = storages
+                });
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+
         private IActionResult GeneralError()
         {
             this.TempData[ErrorMessage] = GeneralErrorMessage;

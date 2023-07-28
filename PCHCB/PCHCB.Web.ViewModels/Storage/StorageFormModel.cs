@@ -7,6 +7,9 @@
     using static PCHCB.Common.InputValidationDataMessages.General;
     using static PCHCB.Common.InputValidationDataMessages.Storage;
 
+    /// <summary>
+    /// Create/Edit Storage
+    /// </summary>
     public class StorageFormModel
     {
         [Required(ErrorMessage = RequiredFieldMessage)]

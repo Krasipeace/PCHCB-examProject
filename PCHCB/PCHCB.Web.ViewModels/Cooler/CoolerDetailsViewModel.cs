@@ -2,6 +2,9 @@
 {
     using PCHCB.Web.ViewModels.Provider;
 
+    /// <summary>
+    /// Full info about Cooler
+    /// </summary>
     public class CoolerDetailsViewModel : CoolerAllViewModel
     {
         public int Type { get; set; }

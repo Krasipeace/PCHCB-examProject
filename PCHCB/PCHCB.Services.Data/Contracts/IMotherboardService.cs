@@ -23,9 +23,5 @@
         Task<IEnumerable<AllViewModel>> GetAllMotherboardsAsync();
 
         Task<MotherboardDetailsViewModel> GetMotherboardDetailsAsync(int motherboardId);
-
-        //Task<IEnumerable<MotherboardAllViewModel>> AllByProviderIdAsync(string providerId);
-
-        //Task<IEnumerable<MotherboardAllViewModel>> AllAvailableMotherboards(int motherboardId);
     }
 }

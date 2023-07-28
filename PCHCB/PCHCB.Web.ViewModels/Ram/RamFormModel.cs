@@ -7,6 +7,9 @@
     using static PCHCB.Common.InputValidationDataMessages.General;
     using static PCHCB.Common.InputValidationDataMessages.Ram;
 
+    /// <summary>
+    /// Create/Edit RAM
+    /// </summary>
     public class RamFormModel
     {
         [Required(ErrorMessage = RequiredFieldMessage)]

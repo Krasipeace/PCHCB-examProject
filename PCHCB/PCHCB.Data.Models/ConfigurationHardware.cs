@@ -13,13 +13,13 @@
 
         public Case Case { get; set; } = null!;
 
-        public int CoolerId { get; set; }
-
-        public Cooler Cooler { get; set; } = null!;
-
         public int CpuId { get; set; }
 
         public Cpu Cpu { get; set; } = null!;
+
+        public int CoolerId { get; set; }
+
+        public Cooler Cooler { get; set; } = null!;
 
         public int GpuId { get; set; }
 

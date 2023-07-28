@@ -33,5 +33,7 @@
         public const string StorageAddedSuccessfully = "Storage has been added successfully";
         public const string StorageEditedSuccessfully = "Storage has been edited successfully";
         public const string StorageDeletedSuccessfully = "Storage has been deleted successfully";
+
+        public const string ProviderCreatedSuccessfully = "You are now a provider!";
     }
 }

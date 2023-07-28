@@ -2,6 +2,9 @@
 {
     using PCHCB.Web.ViewModels.Provider;
 
+    /// <summary>
+    /// Full info about PSU
+    /// </summary>
     public class PsuDetailsViewModel : PsuAllViewModel
     {
         public int Wattage { get; set; }

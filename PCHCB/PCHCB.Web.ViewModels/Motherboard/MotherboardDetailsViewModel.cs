@@ -2,6 +2,9 @@
 {
     using PCHCB.Web.ViewModels.Provider;
 
+    /// <summary>
+    /// Full info about Motherboard
+    /// </summary>
     public class MotherboardDetailsViewModel : MotherboardAllViewModel
     {
         public string Socket { get; set; } = null!;

@@ -1,5 +1,8 @@
 ﻿namespace PCHCB.Web.ViewModels.Case
 {
+    /// <summary>
+    /// Short info about Case
+    /// </summary>
     public class CaseAllViewModel
     {
         public int Id { get; set; }

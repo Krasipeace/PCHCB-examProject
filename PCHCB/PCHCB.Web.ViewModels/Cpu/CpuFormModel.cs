@@ -7,6 +7,9 @@
     using static PCHCB.Common.InputValidationDataMessages.General;
     using static PCHCB.Common.InputValidationDataMessages.Cpu;
 
+    /// <summary>
+    /// Create/Edit CPU 
+    /// </summary>
     public class CpuFormModel
     {
         [Required(ErrorMessage = RequiredFieldMessage)]

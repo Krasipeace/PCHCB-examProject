@@ -7,6 +7,9 @@
     using static PCHCB.Common.InputValidationDataMessages.General;
     using static PCHCB.Common.InputValidationDataMessages.Motherboard;
 
+    /// <summary>
+    /// Create/Edit Motherboard
+    /// </summary>
     public class MotherboardFormModel
     {
         [Required(ErrorMessage = RequiredFieldMessage)]

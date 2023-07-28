@@ -6,6 +6,9 @@
     using static PCHCB.Common.InputValidationDataMessages.General;
     using static PCHCB.Common.EntityValidationConstants.Case;
 
+    /// <summary>
+    /// Create/Edit Case
+    /// </summary>
     public class CaseFormModel
     {
         [Required(ErrorMessage = RequiredFieldMessage)]

@@ -2,6 +2,9 @@
 {
     using PCHCB.Web.ViewModels.Provider;
 
+    /// <summary>
+    /// Full info about Storage
+    /// </summary>
     public class StorageDetailsViewModel : StorageAllViewModel
     {
         public int Capacity { get; set; }

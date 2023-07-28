@@ -1,5 +1,8 @@
 ﻿namespace PCHCB.Web.ViewModels.Cooler
 {
+    /// <summary>
+    /// Short info about Cooler
+    /// </summary>
     public class CoolerAllViewModel
     {
         public int Id { get; set; }

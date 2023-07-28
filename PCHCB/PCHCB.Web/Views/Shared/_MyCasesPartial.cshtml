@@ -1,0 +1,28 @@
+﻿@using PCHCB.Services.Data.Contracts;
+@using PCHCB.Web.Infrastructure.Extensions;
+@inject ICaseService CaseService
+@inject IProviderService ProviderService
+
+@model PCHCB.Web.ViewModels.Provider.MineViewModel
+@{
+    bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
+    var cases = await ProviderService.AllCasesByProviderIdAsync(User.GetId()!);
+}
+<div class="row">
+    @if (isUserProvider)
+    {
+        <h3>Cases:</h3>
+        <ul>
+            @foreach (var item in Model.Cases)
+            {
+                <li>@item.Name</li>
+                <li>@item.Price</li>
+                <li>@item.ImageUrl</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>You dont have any Cases Yet! Add More to be able to view them!</p>
+    }
+</div>

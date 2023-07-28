@@ -7,6 +7,9 @@
     using static PCHCB.Common.InputValidationDataMessages.General;
     using static PCHCB.Common.InputValidationDataMessages.Cooler;
 
+    /// <summary>
+    /// Create/Edit Cooler 
+    /// </summary>
     public class CoolerFormModel
     {
         [Required(ErrorMessage = RequiredFieldMessage)]

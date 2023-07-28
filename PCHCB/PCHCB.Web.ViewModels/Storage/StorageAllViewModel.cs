@@ -1,5 +1,8 @@
 ﻿namespace PCHCB.Web.ViewModels.Storage
 {
+    /// <summary>
+    /// Short info about Storage
+    /// </summary>
     public class StorageAllViewModel
     {
         public int Id { get; set; }

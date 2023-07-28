@@ -2,6 +2,9 @@
 {
     using PCHCB.Web.ViewModels.Provider;
 
+    /// <summary>
+    /// Full info about RAM
+    /// </summary>
     public class RamDetailsViewModel : RamAllViewModel
     {
         public int Type { get; set; }

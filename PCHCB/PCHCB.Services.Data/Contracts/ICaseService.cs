@@ -23,7 +23,5 @@
         Task<IEnumerable<AllViewModel>> GetAllCasesAsync();
 
         Task<CaseDetailsViewModel> GetCaseDetailsAsync(int caseId);
-
-        //Task<IEnumerable<CaseAllViewModel>> AllByProviderIdAsync(string providerId);
     }
 }

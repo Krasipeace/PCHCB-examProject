@@ -10,8 +10,6 @@
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Ram;
 
-    using System.Collections.Generic;
-
     using static PCHCB.Common.GeneralAppConstants;
 
     public class RamService : IRamService

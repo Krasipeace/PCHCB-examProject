@@ -1,5 +1,8 @@
 ﻿namespace PCHCB.Web.ViewModels.Motherboard
 {
+    /// <summary>
+    /// Short info about Motherboard
+    /// </summary>
     public class MotherboardAllViewModel
     {
         public int Id { get; set; }

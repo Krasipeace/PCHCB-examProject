@@ -1,5 +1,7 @@
 ﻿namespace PCHCB.Web.ViewModels.Home
 {
+    using System.Collections.Generic;
+
     using PCHCB.Web.ViewModels.Case;
     using PCHCB.Web.ViewModels.Cooler;
     using PCHCB.Web.ViewModels.Cpu;
@@ -9,10 +11,8 @@
     using PCHCB.Web.ViewModels.Ram;
     using PCHCB.Web.ViewModels.Storage;
 
-    using System.Collections.Generic;
-
     /// <summary>
-    /// currently not used
+    /// ViewModel for Home/All
     /// </summary>
     public class AllViewModel
     {

@@ -3,6 +3,7 @@
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Psu;
+    using PCHCB.Web.ViewModels.Ram;
 
     public interface IPsuService
     {
@@ -23,7 +24,5 @@
         Task<IEnumerable<AllViewModel>> GetAllPsusAsync();
 
         Task<PsuDetailsViewModel> GetPsuDetailsAsync(int psuId);
-
-        //Task<IEnumerable<PsuAllViewModel>> AllByProviderIdAsync(string providerId);
     }
 }

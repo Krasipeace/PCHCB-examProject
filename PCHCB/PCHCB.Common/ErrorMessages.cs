@@ -64,6 +64,8 @@
             public const string UserCannotDeleteStorageDevicesErrorMessage = "You must be a provider to be able to delete Storage Devices!";
             public const string ProviderCannotEditStorageDeviceHeDoesNotOwnErrorMessage = "You cannot edit a Storage Device you do not own!";
             public const string ProviderCannotDeleteStorageDeviceHeDoesNotOwnErrorMessage = "You cannot delete a Storage Device you do not own!";
+
+            public const string OnlyProviderCanViewHisHardwareErrorMessage = "Only a provider can view his hardware!";
         }
 
         public static class Case

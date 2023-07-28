@@ -2,6 +2,9 @@
 {
     using PCHCB.Web.ViewModels.Provider;
 
+    /// <summary>
+    /// Full info about CPU
+    /// </summary>
     public class CpuDetailsViewModel : CpuAllViewModel
     {
         public string Socket { get; set; } = null!;

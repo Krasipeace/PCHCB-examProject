@@ -7,9 +7,7 @@
     using static PCHCB.Common.InputValidationDataMessages.Provider;
 
     /// <summary>
-    /// Represents the model for the "Become a Provider" form. This view-model contains properties for the 
-    /// phone number, web page URL, logo image URL, and description of a provider. The properties are 
-    /// decorated with data annotations, that specify validation rules for each property.
+    /// Register User as Provider Form Model
     /// </summary>
     public class BecomeProviderFormModel
     {

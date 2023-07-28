@@ -7,6 +7,9 @@
     using static PCHCB.Common.InputValidationDataMessages.General;
     using static PCHCB.Common.InputValidationDataMessages.Gpu;
 
+    /// <summary>
+    /// Create/Edit GPU
+    /// </summary>
     public class GpuFormModel
     {
         [Required(ErrorMessage = RequiredFieldMessage)]

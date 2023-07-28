@@ -2,6 +2,9 @@
 {
     using PCHCB.Web.ViewModels.Provider;
 
+    /// <summary>
+    /// Full info about GPU
+    /// </summary>
     public class GpuDetailsViewModel : GpuAllViewModel
     {
         public int Memory { get; set; }

@@ -1,5 +1,8 @@
 ﻿namespace PCHCB.Web.ViewModels.Psu
 { 
+    /// <summary>
+    /// Short info about PSU
+    /// </summary>
     public class PsuAllViewModel
     {
         public int Id { get; set; }

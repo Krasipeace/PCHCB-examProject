@@ -1,5 +1,8 @@
 ﻿namespace PCHCB.Web.ViewModels.Cpu
 {
+    /// <summary>
+    /// Short info about CPU
+    /// </summary>
     public class CpuAllViewModel
     {
         public int Id { get; set; }

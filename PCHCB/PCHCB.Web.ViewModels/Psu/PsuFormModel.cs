@@ -7,6 +7,9 @@
     using static PCHCB.Common.InputValidationDataMessages.General;
     using static PCHCB.Common.InputValidationDataMessages.Psu;
 
+    /// <summary>
+    /// Create/Edit PSU
+    /// </summary>
     public class PsuFormModel
     {
         [Required(ErrorMessage = RequiredFieldMessage)]
