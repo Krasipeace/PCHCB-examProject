@@ -2,20 +2,36 @@
 
 @if (TempData.ContainsKey(ErrorMessage))
 {
-    <script>toastr.error('@TempData[ErrorMessage]');</script>
+    <script>
+        toastr.error('@TempData[ErrorMessage]', '', {
+            positionClass: 'toast-top-center'
+        });
+    </script>
 }
 
 @if (TempData.ContainsKey(WarningMessage))
 {
-    <script>toastr.warning('@TempData[WarningMessage]');</script>
+    <script>
+        toastr.warning('@TempData[WarningMessage]', '', {
+            positionClass: 'toast-top-center'
+        });
+    </script>
 }
 
 @if (TempData.ContainsKey(InformationMessage))
 {
-    <script>toastr.info('@TempData[InformationMessage]');</script>
+    <script>
+        toastr.info('@TempData[InformationMessage]', '', {
+            positionClass: 'toast-top-center'
+        });
+    </script>
 }
 
 @if (TempData.ContainsKey(SuccessMessage))
 {
-    <script>toastr.success('@TempData[SuccessMessage]');</script>
+    <script>
+        toastr.success('@TempData[SuccessMessage]', '', {
+            positionClass: 'toast-top-center'
+        });
+    </script>
 }
