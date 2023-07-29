@@ -12,8 +12,8 @@ using PCHCB.Data;
 namespace PCHCB.Data.Migrations
 {
     [DbContext(typeof(PCHCBDbContext))]
-    [Migration("20230716075637_addedRequiredFieldsInProvider")]
-    partial class addedRequiredFieldsInProvider
+    [Migration("20230729111710_addedFirstAndLastNamesToAppUser")]
+    partial class addedFirstAndLastNamesToAppUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -179,6 +179,16 @@ namespace PCHCB.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -253,11 +263,9 @@ namespace PCHCB.Data.Migrations
                         .HasColumnType("nvarchar(2048)");
 
                     b.Property<int>("MaxAirCpuCoolerHeight")
-                        .HasMaxLength(200)
                         .HasColumnType("int");
 
                     b.Property<int>("MaxGpuLength")
-                        .HasMaxLength(600)
                         .HasColumnType("int");
 
                     b.Property<int>("MaxRadiatorLength")
@@ -290,7 +298,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 649, DateTimeKind.Utc).AddTicks(7448),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 818, DateTimeKind.Utc).AddTicks(9044),
                             CaseSize = 1,
                             Description = "The Corsair Carbide Series 175R RGB is a mid-tower ATX case with clean lines and a minimalist design.",
                             FormFactor = 0,
@@ -307,7 +315,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 2,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 649, DateTimeKind.Utc).AddTicks(7473),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 818, DateTimeKind.Utc).AddTicks(9075),
                             CaseSize = 1,
                             Description = "The Fractal Design Meshify C is a mid-tower ATX case with a unique mesh front panel that provides excellent airflow.",
                             FormFactor = 0,
@@ -324,7 +332,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 3,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 649, DateTimeKind.Utc).AddTicks(7476),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 818, DateTimeKind.Utc).AddTicks(9078),
                             CaseSize = 1,
                             Description = "The NZXT H510 is a mid-tower ATX case with a sleek and modern design that looks great in any setup.",
                             FormFactor = 0,
@@ -341,7 +349,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 4,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 649, DateTimeKind.Utc).AddTicks(7478),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 818, DateTimeKind.Utc).AddTicks(9081),
                             CaseSize = 2,
                             Description = "The Lian Li PC-O11 Dynamic is a full-tower ATX case with a unique dual-chamber design that provides excellent cooling performance.",
                             FormFactor = 0,
@@ -358,7 +366,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 5,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 649, DateTimeKind.Utc).AddTicks(7484),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 818, DateTimeKind.Utc).AddTicks(9087),
                             CaseSize = 2,
                             Description = "The Phanteks Enthoo Evolv X is a full-tower ATX case with a premium build quality and a wide range of features.",
                             FormFactor = 0,
@@ -489,7 +497,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(241),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(1713),
                             Compatibility = "Intel LGA2066, LGA2011-0 & LGA2011-3 (Square ILM), LGA1200, LGA1156, LGA1155, LGA1151, LGA1150 & AMD AM2, AM2+, AM3, AM3+, AM4, FM1, FM2, FM2+",
                             CoolerHeight = 165.0,
                             Description = "The Noctua NH-D15 is a high-end air cooler with excellent cooling performance and low noise levels.",
@@ -506,7 +514,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 2,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(252),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(1728),
                             Compatibility = "Intel 1200, 1150, 1151, 1155, 1156, 1366, 2011, 2066 & AMD AM4, sTRX4*, TR4* (*Threadripper bracket not included)",
                             CoolerHeight = 0.0,
                             Description = "The Corsair H100i RGB Platinum is a high-end water cooler with customizable RGB lighting and excellent cooling performance.",
@@ -523,7 +531,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 3,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(254),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(1730),
                             Compatibility = "Intel: LGA 1150 / 1151 / 1155 / 1156 / 1366 / 2011(-3) Square ILM / 2066 & AMD: AM2(+) / AM3(+) / AM4 / FM1 / FM2(+)",
                             CoolerHeight = 162.80000000000001,
                             Description = "The be quiet! Dark Rock Pro 4 is a high-end air cooler with a sleek design and excellent cooling performance.",
@@ -540,7 +548,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 4,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(257),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(1733),
                             Compatibility = "Intel Socket LGA 1200, 1151, 1150, 1155, 1156, 1366, 2011, 2011-3, 2066 & AMD Socket AM4, sTRX4*, TR4* (*Threadripper bracket not included)",
                             CoolerHeight = 0.0,
                             Description = "The NZXT Kraken X63 is a high-end water cooler with a customizable LCD display and excellent cooling performance.",
@@ -557,7 +565,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 5,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(262),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(1738),
                             Compatibility = "Intel LGA 2066 / 2011-v3 / 2011 / 1366 / 1151 / 1150 / 1155 / 1156 / 775 & AMD AM4 / AM3+ / AM3 / AM2+ / AM2 / FM2+ / FM2 / FM1",
                             CoolerHeight = 159.0,
                             Description = "The Cooler Master Hyper 212 RGB Black Edition is a mid-range air cooler with customizable RGB lighting and good cooling performance.",
@@ -574,7 +582,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 6,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(265),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(1741),
                             Compatibility = "Intel LGA20XX/LGA1366/LGA115X & AMD AM4/AM3+/AM3/AM2+/AM2/FM2+/FM2/FM1",
                             CoolerHeight = 0.0,
                             Description = "The Deepcool Castle 360EX is a high-end water cooler with a unique mirror finish and excellent cooling performance.",
@@ -591,7 +599,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 7,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(267),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(1744),
                             Compatibility = "Intel Socket 115x, 2011(-3), 2066 & AMD Socket AM4",
                             CoolerHeight = 157.0,
                             Description = "The Arctic Freezer 34 eSports DUO is a mid-range air cooler with a dual-fan design and good cooling performance.",
@@ -608,7 +616,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 8,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(270),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(1746),
                             Compatibility = "Intel LGA 2066/2011-3/2011/1366/1156/1155/1151/1150 & AMD AM4/FM2/FM1/AM3+/AM3/AM2+/AM2",
                             CoolerHeight = 0.0,
                             Description = "The Thermaltake Floe Riing RGB 360 TT Premium Edition is a high-end water cooler with customizable RGB lighting and excellent cooling performance.",
@@ -625,7 +633,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 9,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(274),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(1750),
                             Compatibility = "Intel LGA2066, LGA2011-v3, LGA2011, LGA1200, LGA1151, LGA1150, LGA1156, LGA1155, LGA1366 & AMD AM4, AM3+, AM3, AM2+, AM2, FM2+, FM2, FM1",
                             CoolerHeight = 0.0,
                             Description = "The Cooler Master MasterLiquid ML240L RGB V2 is a mid-range water cooler with customizable RGB lighting and good cooling performance.",
@@ -642,7 +650,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 10,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(276),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(1752),
                             Compatibility = "Intel Socket LGA775, LGA1150, LGA1151, LGA1155, LGA1156, LGA1366, LGA2011(-3) Square ILM, LGA2066 & AMD Socket AM2(+), AM3(+), AM4, FM1, FM2(+)",
                             CoolerHeight = 154.5,
                             Description = "The Scythe Mugen 5 Rev.B is a mid-range air cooler with a quiet fan and good cooling performance.",
@@ -707,7 +715,8 @@ namespace PCHCB.Data.Migrations
 
                     b.Property<string>("Socket")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("Tdp")
                         .HasColumnType("int");
@@ -728,7 +737,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1019),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(2572),
                             Cache = 35,
                             Cores = 6,
                             Description = "The AMD Ryzen 5 5600X is a powerful 6-core processor with excellent single-threaded performance.",
@@ -747,7 +756,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 2,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1025),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(2627),
                             Cache = 12,
                             Cores = 6,
                             Description = "The Intel Core i5-11600K is a high-performance 6-core processor with excellent gaming performance.",
@@ -766,7 +775,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 3,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1028),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(2630),
                             Cache = 36,
                             Cores = 8,
                             Description = "The AMD Ryzen 7 5800X is a high-performance 8-core processor with excellent multi-threaded performance.",
@@ -785,7 +794,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 4,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1032),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(2633),
                             Cache = 16,
                             Cores = 8,
                             Description = "The Intel Core i9-11900K is a high-end 8-core processor with excellent gaming and multi-threaded performance.",
@@ -804,7 +813,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 5,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1035),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(2635),
                             Cache = 72,
                             Cores = 16,
                             Description = "The AMD Ryzen 9 5950X is a high-end 16-core processor with excellent multi-threaded performance.",
@@ -823,7 +832,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 6,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1038),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(2639),
                             Cache = 20,
                             Cores = 10,
                             Description = "The Intel Core i9-10900K is a high-end 10-core processor with excellent gaming and multi-threaded performance.",
@@ -842,7 +851,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 7,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1040),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(2641),
                             Cache = 70,
                             Cores = 12,
                             Description = "The AMD Ryzen 9 5900X is a high-end 12-core processor with excellent multi-threaded performance.",
@@ -920,7 +929,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1828),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(3504),
                             Description = "The NVIDIA GeForce RTX 3080 is a high-end graphics card with excellent gaming performance.",
                             ImageUrl = "https://example.com/nvidia-geforce-rtx-3080.jpg",
                             Interface = 1,
@@ -936,7 +945,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 2,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1835),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(3511),
                             Description = "The AMD Radeon RX 6800 XT is a high-end graphics card with excellent gaming performance.",
                             ImageUrl = "https://example.com/amd-radeon-rx-6800-xt.jpg",
                             Interface = 1,
@@ -952,7 +961,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 3,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1838),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(3514),
                             Description = "The NVIDIA GeForce RTX 3070 is a high-performance graphics card with excellent gaming performance.",
                             ImageUrl = "https://example.com/nvidia-geforce-rtx-3070.jpg",
                             Interface = 1,
@@ -968,7 +977,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 4,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1840),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(3516),
                             Description = "The AMD Radeon RX 6700 XT is a high-performance graphics card with excellent gaming performance.",
                             ImageUrl = "https://example.com/amd-radeon-rx-6700-xt.jpg",
                             Interface = 1,
@@ -984,7 +993,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 5,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1844),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(3520),
                             Description = "The NVIDIA GeForce RTX 3060 Ti is a high-performance graphics card with excellent gaming performance.",
                             ImageUrl = "https://example.com/nvidia-geforce-rtx-3060-ti.jpg",
                             Interface = 1,
@@ -1000,7 +1009,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 6,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1847),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(3523),
                             Description = "The NVIDIA GeForce RTX 3090 is a high-end graphics card with excellent gaming performance.",
                             ImageUrl = "https://example.com/nvidia-geforce-rtx-3090.jpg",
                             Interface = 1,
@@ -1016,7 +1025,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 7,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1850),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(3525),
                             Description = "The AMD Radeon RX 6900 XT is a high-end graphics card with excellent gaming performance.",
                             ImageUrl = "https://example.com/amd-radeon-rx-6900-xt.jpg",
                             Interface = 1,
@@ -1032,7 +1041,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 8,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(1852),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(3527),
                             Description = "The NVIDIA GeForce RTX 4090 is a high-end graphics card with excellent gaming performance.",
                             ImageUrl = "https://example.com/nvidia-geforce-rtx-4090.jpg",
                             Interface = 2,
@@ -1060,7 +1069,8 @@ namespace PCHCB.Data.Migrations
 
                     b.Property<string>("Chipset")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -1109,7 +1119,8 @@ namespace PCHCB.Data.Migrations
 
                     b.Property<string>("Socket")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -1121,7 +1132,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(2607),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(4298),
                             Chipset = "B550",
                             Description = "The ASUS ROG Strix B550-F Gaming is a high-end motherboard with excellent performance and features.",
                             FormFactor = 0,
@@ -1141,7 +1152,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 2,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(2617),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(4305),
                             Chipset = "B450",
                             Description = "The GIGABYTE B450 AORUS PRO WIFI is a mid-range motherboard with good performance and features.",
                             FormFactor = 0,
@@ -1161,7 +1172,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 3,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(2619),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(4308),
                             Chipset = "Z490",
                             Description = "The ASUS Prime Z490-A is a high-end motherboard with excellent performance and features.",
                             FormFactor = 0,
@@ -1181,7 +1192,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 4,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(2622),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(4310),
                             Chipset = "B550",
                             Description = "The MSI MPG B550 Gaming Edge WiFi is a high-end motherboard with excellent performance and features.",
                             FormFactor = 0,
@@ -1201,7 +1212,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 5,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(2624),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(4313),
                             Chipset = "B450",
                             Description = "The ASRock B450M PRO4 is a budget motherboard with decent performance and features.",
                             FormFactor = 1,
@@ -1221,7 +1232,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 6,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(2628),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(4316),
                             Chipset = "X570",
                             Description = "The ASUS ROG Strix X570-E Gaming is a high-end motherboard with excellent performance and features.",
                             FormFactor = 0,
@@ -1241,7 +1252,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 7,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(2632),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(4318),
                             Chipset = "B550",
                             Description = "The ASUS ROG Strix B550-I Gaming is a high-end motherboard with excellent performance and features.",
                             FormFactor = 2,
@@ -1376,7 +1387,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(3369),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5103),
                             Description = "The Corsair RM850x is a high-end power supply with excellent performance and features.",
                             Factor = 0,
                             ImageUrl = "https://example.com/corsair-rm850x.jpg",
@@ -1389,7 +1400,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 2,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(3376),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5110),
                             Description = "The EVGA SuperNOVA 750 G5 is a high-end power supply with excellent performance and features.",
                             Factor = 0,
                             ImageUrl = "https://example.com/evga-supernova-750-g5.jpg",
@@ -1402,7 +1413,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 3,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(3379),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5112),
                             Description = "The Seasonic FOCUS GX-650 is a mid-range power supply with good performance and features.",
                             Factor = 0,
                             ImageUrl = "https://example.com/seasonic-focus-gx-650.jpg",
@@ -1415,7 +1426,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 4,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(3381),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5114),
                             Description = "The be quiet! Straight Power 11 Platinum 750W is a high-end power supply with excellent performance and features.",
                             Factor = 0,
                             ImageUrl = "https://example.com/be-quiet-straight-power-11-platinum-750w.jpg",
@@ -1428,7 +1439,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 5,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(3385),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5119),
                             Description = "The Thermaltake Toughpower GF1 750W is a high-end power supply with excellent performance and features.",
                             Factor = 0,
                             ImageUrl = "https://example.com/thermaltake-toughpower-gf1-750w.jpg",
@@ -1441,7 +1452,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 6,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(3388),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5121),
                             Description = "The Corsair AX1600i is a high-end power supply with excellent performance and features.",
                             Factor = 0,
                             ImageUrl = "https://example.com/corsair-ax1600i.jpg",
@@ -1454,7 +1465,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 7,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(3390),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5168),
                             Description = "The EVGA SuperNOVA 1600 T2 is a high-end power supply with excellent performance and features.",
                             Factor = 0,
                             ImageUrl = "https://example.com/evga-supernova-1600-t2.jpg",
@@ -1467,7 +1478,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 8,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(3392),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5171),
                             Description = "The Seasonic PRIME TX-1600 is a high-end power supply with excellent performance and features.",
                             Factor = 0,
                             ImageUrl = "https://example.com/seasonic-prime-tx-1600.jpg",
@@ -1480,7 +1491,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 9,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(3396),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5175),
                             Description = "The Thermaltake Toughpower PF1 ARGB 1200W is a high-end power supply with excellent performance and features.",
                             Factor = 0,
                             ImageUrl = "https://example.com/thermaltake-toughpower-pf1-argb-1200w.jpg",
@@ -1493,7 +1504,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 10,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(3398),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5177),
                             Description = "The be quiet! Dark Power Pro 12 1500W is a high-end power supply with excellent performance and features.",
                             Factor = 0,
                             ImageUrl = "https://example.com/be-quiet-dark-power-pro-12-1500w.jpg",
@@ -1506,7 +1517,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 11,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(3401),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5180),
                             Description = "The EVGA 500 W1 is a budget power supply with decent performance and features.",
                             Factor = 0,
                             ImageUrl = "https://example.com/evga-500-w1.jpg",
@@ -1519,7 +1530,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 12,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(3403),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5182),
                             Description = "The Corsair CX450M is a mid-range power supply with good performance and features.",
                             Factor = 0,
                             ImageUrl = "https://example.com/corsair-cx450m.jpg",
@@ -1532,7 +1543,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 13,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(3405),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5184),
                             Description = "The Seasonic S12III 500 SSR-500GB3 is a budget power supply with decent performance and features.",
                             Factor = 0,
                             ImageUrl = "https://example.com/seasonic-s12iii-500-ssr-500gb3.jpg",
@@ -1576,7 +1587,8 @@ namespace PCHCB.Data.Migrations
 
                     b.Property<string>("ModelNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1602,7 +1614,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4185),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5951),
                             Capacity = 16,
                             Description = "The Corsair Vengeance LPX 16GB DDR4 3200MHz C16 is a high-performance memory stick with excellent compatibility and reliability.",
                             Frequency = 3200,
@@ -1617,7 +1629,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 2,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4226),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5958),
                             Capacity = 16,
                             Description = "The G.Skill Ripjaws V 16GB DDR4 3600MHz C16 is a high-performance memory stick with excellent compatibility and reliability.",
                             Frequency = 3600,
@@ -1632,7 +1644,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 3,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4228),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5961),
                             Capacity = 16,
                             Description = "The Crucial Ballistix 16GB DDR4 3200MHz CL16 is a high-performance memory stick with excellent compatibility and reliability.",
                             Frequency = 3200,
@@ -1647,7 +1659,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 4,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4231),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5964),
                             Capacity = 16,
                             Description = "The Kingston HyperX Fury 16GB DDR4 3200MHz CL16 is a high-performance memory stick with excellent compatibility and reliability.",
                             Frequency = 3200,
@@ -1662,7 +1674,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 5,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4235),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5969),
                             Capacity = 16,
                             Description = "The Team T-Force Vulcan Z 16GB DDR4 3200MHz CL16 is a high-performance memory stick with excellent compatibility and reliability.",
                             Frequency = 3200,
@@ -1677,7 +1689,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 6,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4238),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5971),
                             Capacity = 16,
                             Description = "The Corsair Vengeance RGB Pro 16GB DDR4 3200MHz C16 is a high-performance memory stick with excellent compatibility and reliability.",
                             Frequency = 3200,
@@ -1692,7 +1704,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 7,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4240),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5973),
                             Capacity = 16,
                             Description = "The G.Skill Trident Z RGB 16GB DDR4 3200MHz C16 is a high-performance memory stick with excellent compatibility and reliability.",
                             Frequency = 3200,
@@ -1707,7 +1719,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 8,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4243),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5976),
                             Capacity = 16,
                             Description = "The Crucial Ballistix RGB 16GB DDR4 3200MHz CL16 is a high-performance memory stick with excellent compatibility and reliability.",
                             Frequency = 3200,
@@ -1722,7 +1734,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 9,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4247),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5979),
                             Capacity = 16,
                             Description = "The Kingston HyperX Fury RGB 16GB DDR4 3200MHz CL16 is a high-performance memory stick with excellent compatibility and reliability.",
                             Frequency = 3200,
@@ -1737,7 +1749,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 10,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4249),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5982),
                             Capacity = 16,
                             Description = "The Team T-Force Delta RGB 16GB DDR4 3200MHz CL16 is a high-performance memory stick with excellent compatibility and reliability.",
                             Frequency = 3200,
@@ -1752,7 +1764,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 11,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4252),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5984),
                             Capacity = 16,
                             Description = "The Corsair Vengeance LPX 16GB DDR5 is a high-end memory stick with excellent performance and features.",
                             Frequency = 4800,
@@ -1767,7 +1779,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 12,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4254),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5987),
                             Capacity = 32,
                             Description = "The G.Skill Trident Z Royal 32GB DDR5 is a high-end memory stick with excellent performance and features.",
                             Frequency = 4800,
@@ -1782,7 +1794,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 13,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4257),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5989),
                             Capacity = 64,
                             Description = "The Kingston HyperX Predator 64GB DDR5 is a high-end memory stick with excellent performance and features.",
                             Frequency = 5200,
@@ -1797,7 +1809,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 14,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4259),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5991),
                             Capacity = 16,
                             Description = "The TeamGroup T-Force Xtreem ARGB 16GB DDR5 is a high-end memory stick with excellent performance and features.",
                             Frequency = 4800,
@@ -1812,7 +1824,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 15,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4262),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5994),
                             Capacity = 32,
                             Description = "The Crucial Ballistix MAX 32GB DDR5 is a high-end memory stick with excellent performance and features.",
                             Frequency = 4800,
@@ -1827,7 +1839,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 16,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4264),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5996),
                             Capacity = 16,
                             Description = "The Patriot Viper RGB 16GB DDR5 is a high-end memory stick with excellent performance and features.",
                             Frequency = 4800,
@@ -1842,7 +1854,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 17,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4267),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(5999),
                             Capacity = 32,
                             Description = "The ADATA XPG Spectrix D50 32GB DDR5 is a high-end memory stick with excellent performance and features.",
                             Frequency = 4800,
@@ -1857,7 +1869,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 18,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4269),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6001),
                             Capacity = 16,
                             Description = "The GeIL Orion RGB 16GB DDR5 is a high-end memory stick with excellent performance and features.",
                             Frequency = 4800,
@@ -1872,7 +1884,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 19,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4273),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6005),
                             Capacity = 32,
                             Description = "The Mushkin Redline Lumina 32GB DDR5 is a high-end memory stick with excellent performance and features.",
                             Frequency = 4800,
@@ -1887,7 +1899,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 20,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(4276),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6008),
                             Capacity = 16,
                             Description = "The ZADAK Shield RGB 16GB DDR5 is a high-end memory stick with excellent performance and features.",
                             Frequency = 4800,
@@ -1949,7 +1961,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5101),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6823),
                             Capacity = 1000,
                             Description = "The Samsung 860 EVO 1TB SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/samsung-860-evo-ssd.jpg",
@@ -1961,7 +1973,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 2,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5109),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6831),
                             Capacity = 500,
                             Description = "The Crucial MX500 500GB SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/crucial-mx500-ssd.jpg",
@@ -1973,7 +1985,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 3,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5111),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6833),
                             Capacity = 2000,
                             Description = "The Western Digital Blue 2TB SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/western-digital-blue-ssd.jpg",
@@ -1985,7 +1997,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 4,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5113),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6836),
                             Capacity = 1000,
                             Description = "The ADATA SU800 1TB SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/adata-su800-ssd.jpg",
@@ -1997,7 +2009,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 5,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5118),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6840),
                             Capacity = 2000,
                             Description = "The SanDisk Ultra 3D 2TB SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/sandisk-ultra-3d-ssd.jpg",
@@ -2009,7 +2021,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 6,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5120),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6842),
                             Capacity = 1000,
                             Description = "The Intel 665p 1TB SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/intel-665p-ssd.jpg",
@@ -2021,7 +2033,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 7,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5122),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6844),
                             Capacity = 2000,
                             Description = "The Seagate Barracuda Q1 2TB SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/seagate-barracuda-q1-ssd.jpg",
@@ -2033,7 +2045,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 8,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5125),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6847),
                             Capacity = 1000,
                             Description = "The SK hynix Gold S31 1TB SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/sk-hynix-gold-s31-ssd.jpg",
@@ -2045,7 +2057,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 9,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5128),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6850),
                             Capacity = 2000,
                             Description = "The TeamGroup T-Force Vulcan G 2TB SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/teamgroup-t-force-vulcan-g-ssd.jpg",
@@ -2057,7 +2069,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 10,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5161),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6852),
                             Capacity = 1000,
                             Description = "The PNY XLR8 CS3030 1TB SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/pny-xlr8-cs3030-ssd.jpg",
@@ -2069,7 +2081,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 11,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5164),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6854),
                             Capacity = 1000,
                             Description = "The Samsung 970 EVO Plus 1TB M.2 NVMe SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/samsung-970-evo-plus-m2.jpg",
@@ -2081,7 +2093,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 12,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5166),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6857),
                             Capacity = 2000,
                             Description = "The Crucial P5 2TB M.2 NVMe SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/crucial-p5-m2.jpg",
@@ -2093,7 +2105,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 13,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5170),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6859),
                             Capacity = 1000,
                             Description = "The Sabrent Rocket Q 1TB M.2 NVMe SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/sabrent-rocket-q-m2.jpg",
@@ -2105,7 +2117,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 14,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5172),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6862),
                             Capacity = 2000,
                             Description = "The ADATA XPG SX8200 Pro 2TB M.2 NVMe SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/adata-xpg-sx8200-pro-m2.jpg",
@@ -2117,7 +2129,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 15,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5174),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6864),
                             Capacity = 1000,
                             Description = "The Intel 660p 1TB M.2 NVMe SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/intel-660p-m2.jpg",
@@ -2129,7 +2141,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 16,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5176),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6866),
                             Capacity = 2000,
                             Description = "The Gigabyte AORUS NVMe Gen4 2TB M.2 NVMe SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/gigabyte-aorus-nvme-gen4-m2.jpg",
@@ -2141,7 +2153,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 17,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5179),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6869),
                             Capacity = 1000,
                             Description = "The Seagate FireCuda 520 1TB M.2 NVMe SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/seagate-firecuda-520-m2.jpg",
@@ -2153,7 +2165,7 @@ namespace PCHCB.Data.Migrations
                         new
                         {
                             Id = 18,
-                            AddedOn = new DateTime(2023, 7, 16, 7, 56, 36, 651, DateTimeKind.Utc).AddTicks(5182),
+                            AddedOn = new DateTime(2023, 7, 29, 11, 17, 9, 820, DateTimeKind.Utc).AddTicks(6872),
                             Capacity = 1000,
                             Description = "The SK hynix Gold P31 1TB M.2 NVMe SSD is a high-end storage device with excellent performance and features.",
                             ImageUrl = "https://example.com/sk-hynix-gold-p31-m2.jpg",
