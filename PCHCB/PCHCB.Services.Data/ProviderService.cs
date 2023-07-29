@@ -4,7 +4,7 @@
 
     using PCHCB.Data.Models;
     using PCHCB.Services.Data.Contracts;
-    using PCHCB.Web.Data;
+    using PCHCB.Data;
     using PCHCB.Web.ViewModels.Case;
     using PCHCB.Web.ViewModels.Cooler;
     using PCHCB.Web.ViewModels.Cpu;

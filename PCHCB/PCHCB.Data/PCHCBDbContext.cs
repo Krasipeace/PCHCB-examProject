@@ -1,4 +1,4 @@
-﻿namespace PCHCB.Web.Data
+﻿namespace PCHCB.Data
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

@@ -1,0 +1,45 @@
+﻿@model LoginFormModel
+
+@{
+    ViewData["Title"] = "Sign in";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <section class="align-content-center">
+            <form id="account" method="post">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-floating mt-2">
+                    <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <label asp-for="Email" class="form-label"></label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mt-2">
+                    <input asp-for="Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                    <label asp-for="Password" class="form-label"></label>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <div class="checkbox mt-2">
+                        <label asp-for="RememberMe" class="form-label">
+                            <input class="form-check-input" asp-for="RememberMe" />
+                            @Html.DisplayNameFor(m => m.RememberMe)
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary mt-4">Sign in</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -36,6 +36,9 @@
                         </li>
                         @if (this.User.Identity?.IsAuthenticated ?? false)
                         {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="All">All Components</a>
+                            </li>
                             @if (isUserProvider)
                             {
                                 <li class="nav-item">

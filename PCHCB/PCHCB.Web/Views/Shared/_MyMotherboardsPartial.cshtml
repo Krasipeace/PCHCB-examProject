@@ -3,7 +3,7 @@
 @inject IMotherboardService MotherboardService
 @inject IProviderService ProviderService
 
-@model PCHCB.Web.ViewModels.Provider.MineViewModel
+@model MineViewModel
 @{
     bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
     var motherboards = await ProviderService.AllMotherboardsByProviderIdAsync(User.GetId()!);
@@ -11,7 +11,7 @@
 <div class="row">
     @if (Model.Motherboards.Any())
     {
-        <h3>Motherboards:</h3>
+        <h3>Motherboards</h3>
         <hr />
         @foreach (var item in Model.Motherboards)
         {
@@ -20,7 +20,7 @@
                     <img class="card-img-top img-thumbnail" src="@item.ImageUrl" alt="image">
                     <div class="card-body text-center">
                         <p>@item.Name</p>
-                        <p>$@item.Price</p>
+                        <p>$@($"{item.Price:f2}")</p>
                         <p><a class="btn btn-outline-info" asp-area="" asp-controller="Motherboard" asp-action="Details" asp-route-id="@item.Id">Details</a></p>
                     </div>
                 </div>

@@ -5,7 +5,7 @@
     using PCHCB.Data.Models;
     using PCHCB.Data.Models.Enums;
     using PCHCB.Services.Data.Contracts;
-    using PCHCB.Web.Data;
+    using PCHCB.Data;
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Ram;

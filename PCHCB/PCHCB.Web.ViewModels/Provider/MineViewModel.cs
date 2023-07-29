@@ -31,6 +31,5 @@
         public List<StorageAllViewModel> Storages { get; set; } = new List<StorageAllViewModel>();
 
         public CaseDetailsViewModel CaseDetails { get; set; } = new CaseDetailsViewModel();
-
     }
 }

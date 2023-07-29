@@ -1,13 +1,29 @@
 ﻿namespace PCHCB.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+
+    using PCHCB.Services.Data;
 
     public class HomeController : Controller
     {
         public HomeController()
         {
         }
-        
+            // TODO: 
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> All([FromQuery]AllCasesQueryModel queryModel)
+        //{
+        //    AllCasesFilteredAndPagedServiceModel serviceModel =
+        //        await caseService.AllAsync(queryModel);
+
+        //    queryModel.Cases = serviceModel.Cases;
+        //    queryModel.TotalCases = serviceModel.TotalCasesCount;
+
+        //    return View(queryModel);
+        //}
+
         public IActionResult Index()
         {
             return View();

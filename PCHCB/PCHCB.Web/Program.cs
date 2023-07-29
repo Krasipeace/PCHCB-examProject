@@ -5,7 +5,7 @@ namespace PCHCB.Web
 
     using PCHCB.Data.Models;
     using PCHCB.Services.Data.Contracts;
-    using PCHCB.Web.Data;
+    using PCHCB.Data;
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.Infrastructure.ModelBinders;
 
@@ -39,6 +39,8 @@ namespace PCHCB.Web
                 .AddEntityFrameworkStores<PCHCBDbContext>();
 
             builder.Services.AddApplicationServices(typeof(IProviderService));
+
+            builder.Services.AddRecaptchaService();
 
             builder.Services
                 .AddControllersWithViews()

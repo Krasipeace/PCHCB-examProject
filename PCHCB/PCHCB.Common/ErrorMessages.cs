@@ -107,5 +107,14 @@
         {
             public const string StorageWithIdDoesNotExist = "Storage Device with such Id does not exist!";
         }
+
+        public static class User
+        {
+            public const string PasswordErrorMessage = "The {0} must be at least {2} and at max {1} characters long.";
+            public const string PasswordsDoNotMatchErrorMessage = "The password and confirmation password do not match.";
+
+            public const string FirstNameErrorMessage = "The {0} must be at least {2} and at max {1} characters long.";
+            public const string LastNameErrorMessage = "The {0} must be at least {2} and at max {1} characters long.";
+        }
     }
 }

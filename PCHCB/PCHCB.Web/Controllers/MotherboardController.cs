@@ -13,8 +13,6 @@
     using static PCHCB.Common.ErrorMessages.Motherboard;
     using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
-    using PCHCB.Services.Data;
-    using PCHCB.Web.ViewModels.Gpu;
 
     [Authorize]
     public class MotherboardController : Controller
