@@ -90,7 +90,7 @@
             {
                 TempData[ErrorMessage] = StorageWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Storage");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -140,7 +140,7 @@
             {
                 TempData[ErrorMessage] = StorageWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Storage");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -190,7 +190,7 @@
             {
                 TempData[ErrorMessage] = StorageWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Storage");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -235,7 +235,7 @@
             {
                 TempData[ErrorMessage] = StorageWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Storage");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -282,7 +282,7 @@
             {
                 TempData[ErrorMessage] = StorageWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Storage");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try

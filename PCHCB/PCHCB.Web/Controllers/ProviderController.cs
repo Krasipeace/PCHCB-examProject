@@ -6,12 +6,6 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.Infrastructure.Extensions;
-
-    using static PCHCB.Common.NotificationMessages;
-    using static PCHCB.Common.ErrorMessages.Provider;
-    using static PCHCB.Common.ErrorMessages.General;
-    using static PCHCB.Common.ExceptionMessages;
-    using static PCHCB.Common.SuccessMessages;
     using PCHCB.Web.ViewModels.Case;
     using PCHCB.Web.ViewModels.Cpu;
     using PCHCB.Web.ViewModels.Cooler;
@@ -20,6 +14,12 @@
     using PCHCB.Web.ViewModels.Psu;
     using PCHCB.Web.ViewModels.Ram;
     using PCHCB.Web.ViewModels.Storage;
+
+    using static PCHCB.Common.NotificationMessages;
+    using static PCHCB.Common.ErrorMessages.Provider;
+    using static PCHCB.Common.ErrorMessages.General;
+    using static PCHCB.Common.ExceptionMessages;
+    using static PCHCB.Common.SuccessMessages;
 
     [Authorize]
     public class ProviderController : Controller
@@ -42,7 +42,7 @@
             {
                 this.TempData[ErrorMessage] = ProviderAlreadyExists;
 
-                return this.RedirectToAction("Index", "Home");
+                return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
             return this.View();
@@ -59,7 +59,7 @@
             {
                 this.TempData[ErrorMessage] = ProviderAlreadyExists;
 
-                return this.RedirectToAction("Index", "Home");
+                return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
             bool isPhoneNumberExists = await this.providerService
@@ -104,7 +104,7 @@
             {
                 this.TempData[ErrorMessage] = SomethingWentWrong;
 
-                return this.RedirectToAction("Index", "Home");
+                return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
             return this.RedirectToAction("Index", "Home");
@@ -188,7 +188,7 @@
             {
                 return GeneralError();
             }
-        }       
+        }
 
         private IActionResult GeneralError()
         {

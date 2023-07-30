@@ -91,7 +91,7 @@
             {
                 TempData[ErrorMessage] = RamWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Ram");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -141,7 +141,7 @@
             {
                 TempData[ErrorMessage] = RamWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Ram");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -190,7 +190,7 @@
             {
                 TempData[ErrorMessage] = RamWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Ram");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -235,7 +235,7 @@
             {
                 TempData[ErrorMessage] = RamWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Ram");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -282,7 +282,7 @@
             {
                 TempData[ErrorMessage] = RamWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Ram");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try

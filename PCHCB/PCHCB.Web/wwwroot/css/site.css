@@ -46,3 +46,23 @@ body {
     height: 100px;
     width: 100px;
 }
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        flex-direction: column;
+    }
+
+    .navbar-nav .nav-item {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-nav {
+        flex-direction: column;
+    }
+
+    .navbar-nav .nav-item {
+        margin-bottom: 10px;
+    }
+}

@@ -91,7 +91,7 @@
             {
                 TempData[ErrorMessage] = CaseWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Case");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -141,7 +141,7 @@
             {
                 TempData[ErrorMessage] = CaseWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Case");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -190,7 +190,7 @@
             {
                 TempData[ErrorMessage] = CaseWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Case");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -236,7 +236,7 @@
             {
                 TempData[ErrorMessage] = CaseWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Case");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -284,7 +284,7 @@
             {
                 TempData[ErrorMessage] = CaseWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Case");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try

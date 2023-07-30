@@ -90,7 +90,7 @@
             {
                 TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Motherboard");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -140,7 +140,7 @@
             {
                 TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Motherboard");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -189,7 +189,7 @@
             {
                 TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Motherboard");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -234,7 +234,7 @@
             {
                 TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Motherboard");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -281,7 +281,7 @@
             {
                 TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Motherboard");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try

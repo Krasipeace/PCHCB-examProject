@@ -91,7 +91,7 @@
             {
                 TempData[ErrorMessage] = CpuWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Cpu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -141,7 +141,7 @@
             {
                 TempData[ErrorMessage] = CpuWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Cpu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -190,7 +190,7 @@
             {
                 TempData[ErrorMessage] = CpuWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Cpu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -234,7 +234,7 @@
             {
                 TempData[ErrorMessage] = CpuWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Cpu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             bool isUserProvider = await providerService
@@ -281,7 +281,7 @@
             {
                 TempData[ErrorMessage] = CpuWithIdDoesNotExist;
 
-                return RedirectToAction("All", "Cpu");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try
