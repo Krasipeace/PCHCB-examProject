@@ -2,6 +2,7 @@
 {
     public enum ComponentsSelector
     {
+        All = 0,
         Case = 1,
         Cooler = 2,
         CPU = 3,

@@ -1,7 +1,5 @@
 ﻿namespace PCHCB.Web.ViewModels.Home
 {
-    using System.Collections.Generic;
-
     using PCHCB.Web.ViewModels.Case;
     using PCHCB.Web.ViewModels.Cooler;
     using PCHCB.Web.ViewModels.Cpu;
@@ -9,6 +7,7 @@
     using PCHCB.Web.ViewModels.Motherboard;
     using PCHCB.Web.ViewModels.Psu;
     using PCHCB.Web.ViewModels.Ram;
+
     using PCHCB.Web.ViewModels.Storage;
 
     /// <summary>
@@ -24,13 +23,26 @@
 
         public string ImageUrl { get; set; } = null!;
 
-        public IEnumerable<CaseAllViewModel> Cases { get; set; } = null!;
-        public IEnumerable<CoolerAllViewModel> Coolers { get; set; } = null!;
-        public IEnumerable<CpuAllViewModel> Cpus { get; set; } = null!;
-        public IEnumerable<GpuAllViewModel> Gpus { get; set; } = null!;
-        public IEnumerable<MotherboardAllViewModel> Motherboards { get; set; } = null!;
-        public IEnumerable<PsuAllViewModel> Psus { get; set; } = null!;
-        public IEnumerable<RamAllViewModel> Rams { get; set; } = null!;
-        public IEnumerable<StorageAllViewModel> Storages { get; set; } = null!;
+        public string Description { get; set; } = null!;
+
+        public DateTime AddedOn { get; set; }
+
+        public string ProviderId { get; set; } = null!;
+
+        public List<CaseAllViewModel> Cases { get; set; } = new List<CaseAllViewModel>();
+
+        public List<CpuAllViewModel> Cpus { get; set; } = new List<CpuAllViewModel>();
+
+        public List<CoolerAllViewModel> Coolers { get; set; } = new List<CoolerAllViewModel>();
+
+        public List<GpuAllViewModel> Gpus { get; set; } = new List<GpuAllViewModel>();
+
+        public List<MotherboardAllViewModel> Motherboards { get; set; } = new List<MotherboardAllViewModel>();
+
+        public List<PsuAllViewModel> Psus { get; set; } = new List<PsuAllViewModel>();
+
+        public List<RamAllViewModel> Rams { get; set; } = new List<RamAllViewModel>();
+
+        public List<StorageAllViewModel> Storages { get; set; } = new List<StorageAllViewModel>();
     }
 }

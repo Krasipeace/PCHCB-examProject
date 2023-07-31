@@ -1,0 +1,15 @@
+﻿@using PCHCB.Services.Data.Contracts;
+@using PCHCB.Web.Infrastructure.Extensions;
+@model AllViewModel
+
+<div class="col-md-4">
+    <div class="card mb-3">
+        <img class="card-img-top img-thumbnail" src="@Model.ImageUrl" alt="image">
+        <div class="card-body text-center">
+            <p>@Model.Name</p>
+            <p>@Model.Description</p>
+            <p>$@($"{Model.Price:f2}")</p>
+        </div>
+    </div>
+</div>
+

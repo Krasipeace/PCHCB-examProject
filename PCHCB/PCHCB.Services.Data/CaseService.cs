@@ -139,6 +139,7 @@
                     Id = c.Id,
                     Name = c.Name,
                     Price = c.Price,
+                    Description = c.Description,
                     ImageUrl = c.ImageUrl
                 })
                 .ToListAsync();
