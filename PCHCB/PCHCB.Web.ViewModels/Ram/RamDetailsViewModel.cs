@@ -17,8 +17,6 @@
 
         public string ModelNumber { get; set; } = null!;
 
-        public string Description { get; set; } = null!;
-
         public ProviderInfoViewModel Provider { get; set; } = null!;
     }
 }

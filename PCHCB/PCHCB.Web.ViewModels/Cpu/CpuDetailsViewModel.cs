@@ -25,8 +25,6 @@
 
         public int RamType { get; set; }
 
-        public string Description { get; set; } = null!;
-
         public ProviderInfoViewModel Provider { get; set; } = null!;
     }
 }

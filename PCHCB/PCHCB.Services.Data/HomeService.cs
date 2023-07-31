@@ -148,17 +148,19 @@
                     .ThenByDescending(c => c.AddedOn)
             };
 
+            var values = Enum.GetValues(typeof(GeneralSorting));
+
             IEnumerable<AllViewModel> allComponents = await allComponentsQuery
-                .Skip((queryModel.CurrentPage - 1) * queryModel.ComponentsPerPage)
-                .Take(queryModel.ComponentsPerPage)
-                .Select(c => new AllViewModel
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Price = c.Price,
-                    Description = c.Description,
-                })
-                .ToArrayAsync();
+                   .Skip((queryModel.CurrentPage - 1) * queryModel.ComponentsPerPage)
+                   .Take(queryModel.ComponentsPerPage)
+                   .Select(c => new AllViewModel
+                   {
+                       Id = c.Id,
+                       Name = c.Name,
+                       Price = c.Price,
+                       Description = c.Description,
+                   })
+                   .ToArrayAsync();
 
             return new AllComponentsSearchResult
             {

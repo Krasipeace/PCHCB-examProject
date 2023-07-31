@@ -27,8 +27,6 @@
 
         public int M2Slots { get; set; }
 
-        public string Description { get; set; } = null!;
-
         public ProviderInfoViewModel Provider { get; set; } = null!;
     }
 }

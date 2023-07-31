@@ -10,6 +10,6 @@
     public static class SearchEngine
     {
         public const int DefaultPage = 1;
-        public const int DefaultPerPage = 3;
+        public const int DefaultPerPage = 8;
     }
 }

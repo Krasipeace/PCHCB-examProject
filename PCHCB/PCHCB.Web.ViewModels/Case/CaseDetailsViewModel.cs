@@ -21,8 +21,6 @@
 
         public int MaxRadiatorLength { get; set; }
 
-        public string Description { get; set; } = null!;
-
         public ProviderInfoViewModel Provider { get; set; } = null!;
     }
 }
