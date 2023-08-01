@@ -11,7 +11,7 @@ Table of Contents
   - [Overview](#overview)
   - [Features](#features)
   - [Get Started](#get-started)
-  - [Technologies](#technologies)
+  - [Technologies Used:](#technologies-used)
 
 =================
 
@@ -38,14 +38,18 @@ You can also register this Provider as Administrator by adding the following cre
 - Name: `Administrator`
 - NormalizedName: `ADMINISTRATOR`
 
-- As Administrator you will have full access in both client side and admin side(area) of the app.
+As Administrator you will have full access in both client side and admin side(area) of the app.
+
+You can register as new User, then you can register as Provider and change your Id in Providers Table in the database to `E92E7BEB-55D6-4D18-A99D-3ED3411058F5`. This Provider's Id has many seeded components in the database, which you can use for testing purposes.
 
 You can also register as new User and/or Provider.
 
-## Technologies
+## Technologies Used:
 
-- ASP.NET Core 6.0
-- Entity Framework Core 6.0
-- MSSQL Server
-- HTML / CSS / Bootstrap
-- JavaScript / jQuery
+- [ASP.NET Core 6.0](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-6.0)
+- [Entity Framework Core 6.0.16](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/6.0.16)
+- [MSSQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) / [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) / [Bootstrap 5.1](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
+- [JavaScript](https://www.javascript.com/) / [jQuery](https://jquery.com/)
+- [toastr.js](https://github.com/CodeSeven/toastr)
+- [Recaptcha v3](https://developers.google.com/recaptcha/docs/v3)

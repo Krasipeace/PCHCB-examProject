@@ -9,7 +9,6 @@ namespace PCHCB.Web
     using PCHCB.Data;
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.Infrastructure.ModelBinders;
-    using static PCHCB.Common.GeneralAppConstants;
 
     public class Program
     {
