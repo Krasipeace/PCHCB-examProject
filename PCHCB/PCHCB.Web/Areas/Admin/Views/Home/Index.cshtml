@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="mt-4 p-5 bg-light text-center">
+    <h2 class="display-4">Hello, Admin!</h2>
+    <p class="lead mb-1 mt-3">
+        This is your administrator area - you can <b>read</b>, <b>create</b>,
+        <b>delete</b> and <b>edit</b> hardware components.
+    </p>
+    <p class="lead mt-1">
+        You can also see <b>all users and providers</b> in the system.
+    </p>
+    <hr class="my-4">
+    <div class="btn-group">
+        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            All Components
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" asp-area="" asp-controller="Case" asp-action="All">Case</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Cooler" asp-action="All">Cooler</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Cpu" asp-action="All">Processor</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Gpu" asp-action="All">Graphic card</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Motherboard" asp-action="All">Motherboard</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Psu" asp-action="All">Power Supplies</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Ram" asp-action="All">Memory Stick</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Storage" asp-action="All">Storage</a></li>
+        </ul>
+    </div>
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Add Components
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" asp-area="" asp-controller="Case" asp-action="Add">Case</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Cooler" asp-action="Add">Cooler</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Cpu" asp-action="Add">Processor</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Gpu" asp-action="Add">Graphic card</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Motherboard" asp-action="Add">Motherboard</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Psu" asp-action="Add">Power Supplies</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Ram" asp-action="Add">Memory Stick</a></li>
+            <li><a class="dropdown-item" asp-area="" asp-controller="Storage" asp-action="Add">Storage</a></li>
+        </ul>
+    </div>
+    <a asp-area="" asp-controller="House" asp-action="Add"
+       class="btn btn-info btn-lg">Add House</a>
+    <span> | </span>
+    <a asp-area="Admin" asp-controller="Provider" asp-action="Mine"
+       class="btn btn-info btn-lg">My Components</a>
+    <span> | </span>
+    <a asp-area="Admin" asp-controller="User" asp-action="All"
+       class="btn btn-info btn-lg">All Users</a>
+</div>

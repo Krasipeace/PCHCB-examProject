@@ -5,7 +5,6 @@
 
     using PCHCB.Data.Models;
     using PCHCB.Data.Models.Enums;
-    using PCHCB.Data;
 
     public class PsuEntityConfiguration : IEntityTypeConfiguration<Psu>
     {

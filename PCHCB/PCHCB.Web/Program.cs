@@ -2,12 +2,14 @@ namespace PCHCB.Web
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Identity;
 
     using PCHCB.Data.Models;
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Data;
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.Infrastructure.ModelBinders;
+    using static PCHCB.Common.GeneralAppConstants;
 
     public class Program
     {
@@ -36,6 +38,7 @@ namespace PCHCB.Web
                     options.Password.RequiredLength =
                         builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
                 })
+                .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<PCHCBDbContext>();
 
             builder.Services.AddApplicationServices(typeof(IProviderService));
@@ -45,7 +48,7 @@ namespace PCHCB.Web
             builder.Services.ConfigureApplicationCookie(cfg =>
             {
                 cfg.LoginPath = "/User/Login";
-                cfg.AccessDeniedPath = "/Home/Error/401";
+                cfg.AccessDeniedPath = "/Home/Error/403";
             });
 
             builder.Services
@@ -71,14 +74,14 @@ namespace PCHCB.Web
                 app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
                 app.UseHsts();
             }
-
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization();            
+            app.UseAuthorization();                     
 
             app.MapDefaultControllerRoute(); // Using default route
             app.MapRazorPages();

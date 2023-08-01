@@ -8,5 +8,9 @@
 
         public const int DefaultPage = 1;
         public const int DefaultPerPage = 8;
+
+        public const string AdminAreaName = "Admin";
+        public const string AdminRoleName = "Administrator";
+        public const string AdminEmail = "admin@pchcb.com";
     }
 }
