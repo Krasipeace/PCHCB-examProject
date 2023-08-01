@@ -4,7 +4,7 @@
 
     using System.ComponentModel.DataAnnotations;
 
-    using static PCHCB.Common.SearchEngine;
+    using static PCHCB.Common.GeneralAppConstants;
 
     public class AllQueryModel
     {

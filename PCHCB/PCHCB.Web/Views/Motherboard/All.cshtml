@@ -49,9 +49,9 @@
 }
 
 <div class="row mt-4">
-    @foreach (var storage in Model.Storages)
+    @foreach (var motherboard in Model.Motherboards)
     {
-        <partial name="_MotherboardPartial" model="@storage" />
+        <partial name="_MotherboardPartial" model="@motherboard" />
     }
 </div>
 <div class="row">
