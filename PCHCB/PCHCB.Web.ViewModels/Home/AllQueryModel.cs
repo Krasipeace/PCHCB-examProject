@@ -36,9 +36,6 @@
         [Display(Name = "Sort by")]
         public GeneralSorting Sorting { get; set; }
 
-        [Display(Name = "Search by Type")]
-        public ComponentsSelector Selector { get; set; }
-
         public IEnumerable<AllViewModel> Cases { get; set; } 
 
         public IEnumerable<AllViewModel> Coolers { get; set; }

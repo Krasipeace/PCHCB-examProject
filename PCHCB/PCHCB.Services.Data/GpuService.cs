@@ -9,6 +9,7 @@
     using PCHCB.Web.ViewModels.Gpu;
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
+    using PCHCB.Web.ViewModels.Enums;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -142,6 +143,57 @@
                     ImageUrl = g.ImageUrl,
                 })
                 .ToListAsync();
+        }
+
+        public async Task<SearchResult> SearchGpusAsync(AllQueryModel queryModel)
+        {
+            IQueryable<Gpu> gpuQuery = dbContext
+                 .Gpus
+                 .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
+            {
+                string wildCard = $"%{queryModel.SearchTerm.ToLower()}%";
+
+                gpuQuery = gpuQuery
+                    .Where(g => EF.Functions.Like(g.Name, wildCard) ||
+                                EF.Functions.Like(g.Description, wildCard));
+            }
+
+            gpuQuery = queryModel.Sorting switch
+            {
+                GeneralSorting.Newest => gpuQuery
+                    .OrderByDescending(g => g.AddedOn),
+                GeneralSorting.Oldest => gpuQuery
+                    .OrderBy(g => g.AddedOn),
+                GeneralSorting.PriceAscending => gpuQuery
+                    .OrderBy(g => g.Price),
+                GeneralSorting.PriceDescending => gpuQuery
+                    .OrderByDescending(g => g.Price),
+                _ => gpuQuery
+                    .OrderByDescending(g => g.Id)
+            };
+
+            IEnumerable<AllViewModel> allGpus = await gpuQuery
+                .Where(g => g.Name != ComponentUnavailable)
+                .Skip((queryModel.CurrentPage - 1) * queryModel.ComponentsPerPage)
+                .Take(queryModel.ComponentsPerPage)
+                .Select(g => new AllViewModel
+                {
+                    Id = g.Id,
+                    Name = g.Name,
+                    ImageUrl = g.ImageUrl,
+                    Price = g.Price,
+                    Description = g.Description
+                })
+                .ToArrayAsync();
+            int totalGpus = gpuQuery.Count();
+
+            return new SearchResult()
+            {
+                TotalComponents = totalGpus,
+                Gpus = allGpus
+            };
         }
 
         public async Task<GpuDetailsViewModel> GetGpuDetailsAsync(int gpuId)

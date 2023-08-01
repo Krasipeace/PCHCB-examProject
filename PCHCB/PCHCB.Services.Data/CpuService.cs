@@ -9,6 +9,7 @@
     using PCHCB.Web.ViewModels.Cpu;
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
+    using PCHCB.Web.ViewModels.Enums;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -151,6 +152,57 @@
                     ImageUrl = c.ImageUrl,
                 })
                 .ToListAsync();
+        }
+
+        public async Task<SearchResult> SearchCpusAsync(AllQueryModel queryModel)
+        {
+            IQueryable<Cpu> cpuQuery = dbContext
+                 .Cpus
+                 .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
+            {
+                string wildCard = $"%{queryModel.SearchTerm.ToLower()}%";
+
+                cpuQuery = cpuQuery
+                    .Where(c => EF.Functions.Like(c.Name, wildCard) ||
+                                EF.Functions.Like(c.Description, wildCard));
+            }
+
+            cpuQuery = queryModel.Sorting switch
+            {
+                GeneralSorting.Newest => cpuQuery
+                    .OrderByDescending(c => c.AddedOn),
+                GeneralSorting.Oldest => cpuQuery
+                    .OrderBy(c => c.AddedOn),
+                GeneralSorting.PriceAscending => cpuQuery
+                    .OrderBy(c => c.Price),
+                GeneralSorting.PriceDescending => cpuQuery
+                    .OrderByDescending(c => c.Price),
+                _ => cpuQuery
+                    .OrderByDescending(c => c.Id)
+            };
+
+            IEnumerable<AllViewModel> allCpus = await cpuQuery
+                .Where(c => c.Name != ComponentUnavailable)
+                .Skip((queryModel.CurrentPage - 1) * queryModel.ComponentsPerPage)
+                .Take(queryModel.ComponentsPerPage)
+                .Select(c => new AllViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    ImageUrl = c.ImageUrl,
+                    Price = c.Price,
+                    Description = c.Description
+                })
+                .ToArrayAsync();
+            int totalCpus = cpuQuery.Count();
+
+            return new SearchResult()
+            {
+                TotalComponents = totalCpus,
+                Cpus = allCpus
+            };
         }
 
         public async Task<CpuDetailsViewModel> GetCpuDetailsAsync(int cpuId)

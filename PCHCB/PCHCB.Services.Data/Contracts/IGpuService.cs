@@ -22,6 +22,8 @@
 
         Task<IEnumerable<AllViewModel>> GetAllGpusAsync();
 
+        Task<SearchResult> SearchGpusAsync(AllQueryModel queryModel);
+
         Task<GpuDetailsViewModel> GetGpuDetailsAsync(int gpuId);
     }
 }

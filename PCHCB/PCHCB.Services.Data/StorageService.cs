@@ -9,6 +9,7 @@
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Storage;
+    using PCHCB.Web.ViewModels.Enums;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -130,6 +131,57 @@
                     ImageUrl = s.ImageUrl
                 })
                 .ToListAsync();
+        }
+
+        public async Task<SearchResult> SearchStoragesAsync(AllQueryModel queryModel)
+        {
+            IQueryable<Storage> storageQuery = dbContext
+                 .Storages
+                 .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
+            {
+                string wildCard = $"%{queryModel.SearchTerm.ToLower()}%";
+
+                storageQuery = storageQuery
+                    .Where(s => EF.Functions.Like(s.Name, wildCard) ||
+                                EF.Functions.Like(s.Description, wildCard));
+            }
+
+            storageQuery = queryModel.Sorting switch
+            {
+                GeneralSorting.Newest => storageQuery
+                    .OrderByDescending(s => s.AddedOn),
+                GeneralSorting.Oldest => storageQuery
+                    .OrderBy(s => s.AddedOn),
+                GeneralSorting.PriceAscending => storageQuery
+                    .OrderBy(s => s.Price),
+                GeneralSorting.PriceDescending => storageQuery
+                    .OrderByDescending(s => s.Price),
+                _ => storageQuery
+                    .OrderByDescending(s => s.Id)
+            };
+
+            IEnumerable<AllViewModel> allStorages = await storageQuery
+                .Where(s => s.Name != ComponentUnavailable)
+                .Skip((queryModel.CurrentPage - 1) * queryModel.ComponentsPerPage)
+                .Take(queryModel.ComponentsPerPage)
+                .Select(s => new AllViewModel
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    ImageUrl = s.ImageUrl,
+                    Price = s.Price,
+                    Description = s.Description
+                })
+                .ToArrayAsync();
+            int totalStorages = storageQuery.Count();
+
+            return new SearchResult()
+            {
+                TotalComponents = totalStorages,
+                Storages = allStorages
+            };
         }
 
         public async Task<StorageDetailsViewModel> GetStorageDetailsAsync(int storageId)

@@ -22,6 +22,8 @@
 
         Task<IEnumerable<AllViewModel>> GetAllCasesAsync();
 
+        Task<SearchResult> SearchCasesAsync(AllQueryModel queryModel);
+
         Task<CaseDetailsViewModel> GetCaseDetailsAsync(int caseId);
     }
 }

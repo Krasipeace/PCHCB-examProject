@@ -13,6 +13,8 @@
     using static PCHCB.Common.ErrorMessages.Cooler;
     using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
+    using PCHCB.Services.Data;
+    using PCHCB.Web.ViewModels.Home;
 
     [Authorize]
     public class CoolerController : Controller
@@ -291,7 +293,7 @@
             try
             {
                 CoolerDetailsViewModel viewModel = await coolerService
-                    .GetCoolerDetailsAsync(id);               
+                    .GetCoolerDetailsAsync(id);
 
                 return View(viewModel);
             }
@@ -299,6 +301,17 @@
             {
                 return GeneralError();
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> All([FromQuery] AllQueryModel queryModel)
+        {
+            SearchResult serviceModel = await coolerService.SearchCoolersAsync(queryModel);
+
+            queryModel.Coolers = serviceModel.Coolers;
+            queryModel.TotalComponents = serviceModel.TotalComponents;
+
+            return View(queryModel);
         }
 
         private IActionResult GeneralError()

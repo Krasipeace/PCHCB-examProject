@@ -9,6 +9,7 @@
     using PCHCB.Web.ViewModels.Cooler;
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
+    using PCHCB.Web.ViewModels.Enums;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -141,9 +142,61 @@
                     Id = c.Id,
                     Name = c.Name,
                     Price = c.Price,
+                    Description = c.Description,
                     ImageUrl = c.ImageUrl
                 })
                 .ToListAsync();
+        }
+
+        public async Task<SearchResult> SearchCoolersAsync(AllQueryModel queryModel)
+        {
+            IQueryable<Cooler> coolerQuery = dbContext
+                .Coolers
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
+            {
+                string wildCard = $"%{queryModel.SearchTerm.ToLower()}%";
+
+                coolerQuery = coolerQuery
+                    .Where(c => EF.Functions.Like(c.Name, wildCard) ||
+                                EF.Functions.Like(c.Description, wildCard));
+            }
+
+            coolerQuery = queryModel.Sorting switch
+            {
+                GeneralSorting.Newest => coolerQuery
+                    .OrderByDescending(c => c.AddedOn),
+                GeneralSorting.Oldest => coolerQuery
+                    .OrderBy(c => c.AddedOn),
+                GeneralSorting.PriceAscending => coolerQuery
+                    .OrderBy(c => c.Price),
+                GeneralSorting.PriceDescending => coolerQuery
+                    .OrderByDescending(c => c.Price),
+                _ => coolerQuery
+                    .OrderByDescending(c => c.Id)
+            };
+
+            IEnumerable<AllViewModel> allCoolers = await coolerQuery
+                .Where(c => c.Name != ComponentUnavailable)
+                .Skip((queryModel.CurrentPage - 1) * queryModel.ComponentsPerPage)
+                .Take(queryModel.ComponentsPerPage)
+                .Select(c => new AllViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    ImageUrl = c.ImageUrl,
+                    Price = c.Price,
+                    Description = c.Description
+                })
+                .ToArrayAsync();
+            int totalCoolers = coolerQuery.Count();
+
+            return new SearchResult()
+            {
+                TotalComponents = totalCoolers,
+                Coolers = allCoolers
+            };
         }
 
         public async Task<CoolerDetailsViewModel> GetCoolerDetailsAsync(int coolerId)
@@ -179,6 +232,6 @@
                     }
                 }
             };
-        }       
+        }
     }
 }

@@ -7,6 +7,7 @@
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.ViewModels.Psu;
     using PCHCB.Web.ViewModels.Provider;
+    using PCHCB.Web.ViewModels.Home;
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ErrorMessages.Provider;
@@ -295,6 +296,17 @@
             {
                 return GeneralError();
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> All([FromQuery] AllQueryModel queryModel)
+        {
+            SearchResult serviceModel = await psuService.SearchPsusAsync(queryModel);
+
+            queryModel.Psus = serviceModel.Psus;
+            queryModel.TotalComponents = serviceModel.TotalComponents;
+
+            return View(queryModel);
         }
 
         private IActionResult GeneralError()

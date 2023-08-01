@@ -13,6 +13,8 @@
     using static PCHCB.Common.ErrorMessages.Motherboard;
     using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
+    using PCHCB.Services.Data;
+    using PCHCB.Web.ViewModels.Home;
 
     [Authorize]
     public class MotherboardController : Controller
@@ -295,6 +297,17 @@
             {
                 return GeneralError();
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> All([FromQuery] AllQueryModel queryModel)
+        {
+            SearchResult serviceModel = await motherboardService.SearchMotherboardsAsync(queryModel);
+
+            queryModel.Motherboards = serviceModel.Motherboards;
+            queryModel.TotalComponents = serviceModel.TotalComponents;
+
+            return View(queryModel);
         }
 
         private IActionResult GeneralError()

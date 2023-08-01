@@ -36,8 +36,20 @@
                         </li>
                         @if (this.User.Identity?.IsAuthenticated ?? false)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="All">Search All</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    All Components
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Case" asp-action="All">Case</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Cooler" asp-action="All">Cooler</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Cpu" asp-action="All">Processor</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Gpu" asp-action="All">Graphic card</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Motherboard" asp-action="All">Motherboard</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Psu" asp-action="All">Power Supplies</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Ram" asp-action="All">Memory Stick</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Storage" asp-action="All">Storage</a></li>
+                                </ul>
                             </li>
                             @if (isUserProvider)
                             {

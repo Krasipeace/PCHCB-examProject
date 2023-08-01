@@ -22,6 +22,8 @@
 
         Task<IEnumerable<AllViewModel>> GetAllMotherboardsAsync();
 
+        Task<SearchResult> SearchMotherboardsAsync(AllQueryModel queryModel);
+
         Task<MotherboardDetailsViewModel> GetMotherboardDetailsAsync(int motherboardId);
     }
 }

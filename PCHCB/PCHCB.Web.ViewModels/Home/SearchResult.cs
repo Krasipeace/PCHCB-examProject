@@ -1,10 +1,9 @@
 ﻿namespace PCHCB.Web.ViewModels.Home
 {
-    public class AllComponentsSearchResult
+    public class SearchResult
     {
-        public AllComponentsSearchResult()
+        public SearchResult()
         {
-            AllComponents = new HashSet<AllViewModel>();
             Cases = new HashSet<AllViewModel>();
             Cpus = new HashSet<AllViewModel>();
             Gpus = new HashSet<AllViewModel>();
@@ -16,8 +15,6 @@
         }
 
         public int TotalComponents { get; set; }
-
-        public IEnumerable<AllViewModel> AllComponents { get; set; }
 
         public IEnumerable<AllViewModel> Cases { get; set; }
 

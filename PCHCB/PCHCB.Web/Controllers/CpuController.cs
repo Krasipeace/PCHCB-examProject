@@ -13,6 +13,8 @@
     using static PCHCB.Common.ErrorMessages.Cpu;
     using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
+    using PCHCB.Services.Data;
+    using PCHCB.Web.ViewModels.Home;
 
     [Authorize]
     public class CpuController : Controller
@@ -295,6 +297,17 @@
             {
                 return GeneralError();
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> All([FromQuery] AllQueryModel queryModel)
+        {
+            SearchResult serviceModel = await cpuService.SearchCpusAsync(queryModel);
+
+            queryModel.Cpus = serviceModel.Cpus;
+            queryModel.TotalComponents = serviceModel.TotalComponents;
+
+            return View(queryModel);
         }
 
         private IActionResult GeneralError()

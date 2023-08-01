@@ -9,6 +9,7 @@
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Ram;
+    using PCHCB.Web.ViewModels.Enums;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -139,6 +140,57 @@
                     ImageUrl = r.ImageUrl
                 })
                 .ToListAsync();
+        }
+
+        public async Task<SearchResult> SearchRamsAsync(AllQueryModel queryModel)
+        {
+            IQueryable<Ram> ramQuery = dbContext
+                 .Rams
+                 .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
+            {
+                string wildCard = $"%{queryModel.SearchTerm.ToLower()}%";
+
+                ramQuery = ramQuery
+                    .Where(r => EF.Functions.Like(r.Name, wildCard) ||
+                                EF.Functions.Like(r.Description, wildCard));
+            }
+
+            ramQuery = queryModel.Sorting switch
+            {
+                GeneralSorting.Newest => ramQuery
+                    .OrderByDescending(r => r.AddedOn),
+                GeneralSorting.Oldest => ramQuery
+                    .OrderBy(r => r.AddedOn),
+                GeneralSorting.PriceAscending => ramQuery
+                    .OrderBy(r => r.Price),
+                GeneralSorting.PriceDescending => ramQuery
+                    .OrderByDescending(r => r.Price),
+                _ => ramQuery
+                    .OrderByDescending(r => r.Id)
+            };
+
+            IEnumerable<AllViewModel> allRams = await ramQuery
+                .Where(r => r.Name != ComponentUnavailable)
+                .Skip((queryModel.CurrentPage - 1) * queryModel.ComponentsPerPage)
+                .Take(queryModel.ComponentsPerPage)
+                .Select(r => new AllViewModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    ImageUrl = r.ImageUrl,
+                    Price = r.Price,
+                    Description = r.Description
+                })
+                .ToArrayAsync();
+            int totalRams = ramQuery.Count();
+
+            return new SearchResult()
+            {
+                TotalComponents = totalRams,
+                Rams = allRams
+            };
         }
 
         public async Task<RamDetailsViewModel> GetRamDetailsAsync(int ramId)

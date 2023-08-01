@@ -9,6 +9,7 @@
     using PCHCB.Web.ViewModels.Case;
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
+    using PCHCB.Web.ViewModels.Enums;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -143,6 +144,57 @@
                     ImageUrl = c.ImageUrl
                 })
                 .ToListAsync();
+        }
+
+        public async Task<SearchResult> SearchCasesAsync(AllQueryModel queryModel)
+        {
+            IQueryable<Case> casesQuery = dbContext
+                .Cases
+                .AsQueryable();           
+
+            if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
+            {
+                string wildCard = $"%{queryModel.SearchTerm.ToLower()}%";
+
+                casesQuery = casesQuery
+                    .Where(c => EF.Functions.Like(c.Name, wildCard) ||
+                                EF.Functions.Like(c.Description, wildCard));
+            }
+
+            casesQuery = queryModel.Sorting switch
+            {
+                GeneralSorting.Newest => casesQuery
+                    .OrderByDescending(c => c.AddedOn),
+                GeneralSorting.Oldest => casesQuery
+                    .OrderBy(c => c.AddedOn),
+                GeneralSorting.PriceAscending => casesQuery
+                    .OrderBy(c => c.Price),
+                GeneralSorting.PriceDescending => casesQuery
+                    .OrderByDescending(c => c.Price),
+                _ => casesQuery
+                    .OrderByDescending(c => c.Id)
+            };
+
+            IEnumerable<AllViewModel> allCases = await casesQuery
+                .Where(c => c.Name != ComponentUnavailable)
+                .Skip((queryModel.CurrentPage - 1) * queryModel.ComponentsPerPage)
+                .Take(queryModel.ComponentsPerPage)
+                .Select(c => new AllViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    ImageUrl = c.ImageUrl,
+                    Price = c.Price,
+                    Description = c.Description
+                })
+                .ToArrayAsync();
+            int totalCases = casesQuery.Count();
+
+            return new SearchResult()
+            {
+                TotalComponents = totalCases,
+                Cases = allCases
+            };
         }
 
         public async Task<CaseDetailsViewModel> GetCaseDetailsAsync(int caseId)

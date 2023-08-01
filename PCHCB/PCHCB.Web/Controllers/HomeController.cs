@@ -2,36 +2,8 @@
 {
     using Microsoft.AspNetCore.Mvc;
 
-    using PCHCB.Services.Data.Contracts;
-    using PCHCB.Web.ViewModels.Home;
-
     public class HomeController : Controller
-    {
-        private readonly IHomeService homeService;
-        public HomeController(IHomeService homeService)
-        {
-            this.homeService = homeService;
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> All([FromQuery] AllQueryModel queryModel)
-        {
-            AllComponentsSearchResult serviceModel = await homeService
-                .AllAsync(queryModel);
-
-            queryModel.Cases = serviceModel.Cases;
-            queryModel.Cpus = serviceModel.Cpus;
-            queryModel.Gpus = serviceModel.Gpus;
-            queryModel.Coolers = serviceModel.Coolers;
-            queryModel.Motherboards = serviceModel.Motherboards;
-            queryModel.Psus = serviceModel.Psus;
-            queryModel.Rams = serviceModel.Rams;
-            queryModel.Storages = serviceModel.Storages;
-            queryModel.TotalComponents = serviceModel.TotalComponents;
-
-            return View(queryModel);
-        }
-
+    {   
         public IActionResult Index()
         {
             return View();

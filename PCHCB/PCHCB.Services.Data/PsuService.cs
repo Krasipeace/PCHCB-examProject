@@ -9,6 +9,7 @@
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Psu;
+    using PCHCB.Web.ViewModels.Enums;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -133,6 +134,57 @@
                     ImageUrl = p.ImageUrl
                 })
                 .ToListAsync();
+        }
+
+        public async Task<SearchResult> SearchPsusAsync(AllQueryModel queryModel)
+        {
+            IQueryable<Psu> psuQuery = dbContext
+                 .Psus
+                 .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
+            {
+                string wildCard = $"%{queryModel.SearchTerm.ToLower()}%";
+
+                psuQuery = psuQuery
+                    .Where(p => EF.Functions.Like(p.Name, wildCard) ||
+                                EF.Functions.Like(p.Description, wildCard));
+            }
+
+            psuQuery = queryModel.Sorting switch
+            {
+                GeneralSorting.Newest => psuQuery
+                    .OrderByDescending(p => p.AddedOn),
+                GeneralSorting.Oldest => psuQuery
+                    .OrderBy(p => p.AddedOn),
+                GeneralSorting.PriceAscending => psuQuery
+                    .OrderBy(p => p.Price),
+                GeneralSorting.PriceDescending => psuQuery
+                    .OrderByDescending(p => p.Price),
+                _ => psuQuery
+                    .OrderByDescending(p => p.Id)
+            };
+
+            IEnumerable<AllViewModel> allPsus = await psuQuery
+                .Where(p => p.Name != ComponentUnavailable)
+                .Skip((queryModel.CurrentPage - 1) * queryModel.ComponentsPerPage)
+                .Take(queryModel.ComponentsPerPage)
+                .Select(p => new AllViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    ImageUrl = p.ImageUrl,
+                    Price = p.Price,
+                    Description = p.Description
+                })
+                .ToArrayAsync();
+            int totalPsus = psuQuery.Count();
+
+            return new SearchResult()
+            {
+                TotalComponents = totalPsus,
+                Psus = allPsus
+            };
         }
 
         public async Task<PsuDetailsViewModel> GetPsuDetailsAsync(int psuId)

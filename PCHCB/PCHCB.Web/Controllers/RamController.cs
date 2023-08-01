@@ -13,6 +13,8 @@
     using static PCHCB.Common.ErrorMessages.Ram;
     using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
+    using PCHCB.Services.Data;
+    using PCHCB.Web.ViewModels.Home;
 
     [Authorize]
     public class RamController : Controller
@@ -296,6 +298,17 @@
             {
                 return GeneralError();
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> All([FromQuery] AllQueryModel queryModel)
+        {
+            SearchResult serviceModel = await ramService.SearchRamsAsync(queryModel);
+
+            queryModel.Rams = serviceModel.Rams;
+            queryModel.TotalComponents = serviceModel.TotalComponents;
+
+            return View(queryModel);
         }
 
         private IActionResult GeneralError()

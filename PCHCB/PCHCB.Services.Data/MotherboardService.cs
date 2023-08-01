@@ -9,6 +9,7 @@
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Motherboard;
     using PCHCB.Web.ViewModels.Provider;
+    using PCHCB.Web.ViewModels.Enums;
 
     using static PCHCB.Common.GeneralAppConstants;
 
@@ -151,6 +152,57 @@
                     ImageUrl = m.ImageUrl,
                 })
                 .ToListAsync();
+        }
+
+        public async Task<SearchResult> SearchMotherboardsAsync(AllQueryModel queryModel)
+        {
+            IQueryable<Motherboard> motherboardQuery = dbContext
+                 .Motherboards
+                 .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
+            {
+                string wildCard = $"%{queryModel.SearchTerm.ToLower()}%";
+
+                motherboardQuery = motherboardQuery
+                    .Where(m => EF.Functions.Like(m.Name, wildCard) ||
+                                EF.Functions.Like(m.Description, wildCard));
+            }
+
+            motherboardQuery = queryModel.Sorting switch
+            {
+                GeneralSorting.Newest => motherboardQuery
+                    .OrderByDescending(m => m.AddedOn),
+                GeneralSorting.Oldest => motherboardQuery
+                    .OrderBy(m => m.AddedOn),
+                GeneralSorting.PriceAscending => motherboardQuery
+                    .OrderBy(m => m.Price),
+                GeneralSorting.PriceDescending => motherboardQuery
+                    .OrderByDescending(m => m.Price),
+                _ => motherboardQuery
+                    .OrderByDescending(m => m.Id)
+            };
+
+            IEnumerable<AllViewModel> allMotherboards = await motherboardQuery
+                .Where(m => m.Name != ComponentUnavailable)
+                .Skip((queryModel.CurrentPage - 1) * queryModel.ComponentsPerPage)
+                .Take(queryModel.ComponentsPerPage)
+                .Select(m => new AllViewModel
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                    ImageUrl = m.ImageUrl,
+                    Price = m.Price,
+                    Description = m.Description
+                })
+                .ToArrayAsync();
+            int totalMotherboards = motherboardQuery.Count();
+
+            return new SearchResult()
+            {
+                TotalComponents = totalMotherboards,
+                Motherboards = allMotherboards
+            };
         }
 
         public async Task<MotherboardDetailsViewModel> GetMotherboardDetailsAsync(int motherboardId)

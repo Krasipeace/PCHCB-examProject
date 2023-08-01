@@ -22,6 +22,8 @@
 
         Task<IEnumerable<AllViewModel>> GetAllCoolersAsync();
 
+        Task<SearchResult> SearchCoolersAsync(AllQueryModel queryModel);
+
         Task<CoolerDetailsViewModel> GetCoolerDetailsAsync(int coolerId);
     }
 }

@@ -22,6 +22,8 @@
 
         Task<IEnumerable<AllViewModel>> GetAllCpusAsync();
 
+        Task<SearchResult> SearchCpusAsync(AllQueryModel queryModel);
+
         Task<CpuDetailsViewModel> GetCpuDetailsAsync(int cpuId);
     }
 }
