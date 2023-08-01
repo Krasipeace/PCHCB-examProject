@@ -1,0 +1,17 @@
+﻿@*@model AdminMineViewModel
+@{
+    ViewBag.Title = "My Hardware Components";
+}
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<h4>My Added Cases</h4>
+@if (!Model.Cases.Any())
+{
+    <h2 class="text-center">You have no added houses yet!</h2>
+}
+<div class="row">
+    @foreach (var house in Model.Cases)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_MyPartial.cshtml", house)
+    }
+</div>*@

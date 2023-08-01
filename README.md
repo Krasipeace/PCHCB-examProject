@@ -11,7 +11,7 @@ Table of Contents
   - [Overview](#overview)
   - [Features](#features)
   - [Get Started](#get-started)
-  - [Technologies Used:](#technologies-used)
+  - [Technologies Used](#technologies-used)
 
 =================
 
@@ -44,7 +44,7 @@ You can register as new User, then you can register as Provider and change your 
 
 You can also register as new User and/or Provider.
 
-## Technologies Used:
+## Technologies Used
 
 - [ASP.NET Core 6.0](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-6.0)
 - [Entity Framework Core 6.0.16](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/6.0.16)

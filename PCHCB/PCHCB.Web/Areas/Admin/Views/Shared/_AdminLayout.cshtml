@@ -1,0 +1,103 @@
+﻿@using static PCHCB.Common.GeneralAppConstants;
+@using PCHCB.Web.Infrastructure.Extensions;
+@using PCHCB.Services.Data.Contracts;
+
+@inject IProviderService providerService
+@{
+    bool isUserProvider = await this.providerService.ProviderExistsByUserIdAsync(this.User.GetId()!);
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PC's Hardware Compatibility Builder</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PCHCB.Web.styles.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css" integrity="sha512-6S2HWzVFxruDlZxI3sXOZZ4/eJ8AcxkQH1+JjSe/ONCEqR9L4Ysq5JdT5ipqtzU7WHalNwzwBv+iE51gNHJNqQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PCHCB</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="ConfigurationHardware" asp-action="Index">Assemble PC</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                All Components
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Case" asp-action="All">Case</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Cooler" asp-action="All">Cooler</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Cpu" asp-action="All">Processor</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Gpu" asp-action="All">Graphic card</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Motherboard" asp-action="All">Motherboard</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Psu" asp-action="All">Power Supplies</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Ram" asp-action="All">Memory Stick</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Storage" asp-action="All">Storage</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Provider" asp-action="Mine">My Hardware</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Add Component
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Case" asp-action="Add">Case</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Cooler" asp-action="Add">Cooler</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Cpu" asp-action="Add">Processor</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Gpu" asp-action="Add">Graphic card</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Motherboard" asp-action="Add">Motherboard</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Psu" asp-action="Add">Power Supplies</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Ram" asp-action="Add">Memory Stick</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Storage" asp-action="Add">Storage</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="PcConfiguration" asp-action="Index">My PC Builds</a>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <button onclick="toTopFunction()" id="btn-back-to-top" title="Go to top">&uarr;</button>
+    <partial name="_NotificationsPartial" />
+
+    <footer class="border-top footer text-light bg-dark">
+        <div class="container">
+            &copy; Personal Computer's Hardware Compatibility Builder @ReleaseYear | <a href="https://github.com/krasipeace">Krasipeace</a>
+            @if (DateTime.UtcNow.Year != ReleaseYear)
+            {
+                @Html.Raw($" - {DateTime.UtcNow.Year}")
+            }
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
