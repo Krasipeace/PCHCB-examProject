@@ -42,6 +42,12 @@ namespace PCHCB.Web
 
             builder.Services.AddRecaptchaService();
 
+            builder.Services.ConfigureApplicationCookie(cfg =>
+            {
+                cfg.LoginPath = "/User/Login";
+                cfg.AccessDeniedPath = "/Home/Error/401";
+            });
+
             builder.Services
                 .AddControllersWithViews()
                 .AddMvcOptions(options =>
@@ -72,7 +78,7 @@ namespace PCHCB.Web
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseAuthorization();            
 
             app.MapDefaultControllerRoute(); // Using default route
             app.MapRazorPages();

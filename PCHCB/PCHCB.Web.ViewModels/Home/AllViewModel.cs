@@ -11,7 +11,7 @@
     using PCHCB.Web.ViewModels.Storage;
 
     /// <summary>
-    /// ViewModel for Home/All
+    /// ViewModel for All
     /// </summary>
     public class AllViewModel
     {
