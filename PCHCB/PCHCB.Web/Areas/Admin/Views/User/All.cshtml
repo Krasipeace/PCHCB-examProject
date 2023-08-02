@@ -1,13 +1,10 @@
-﻿@*﻿@using PCHCB.Web.Infrastructure.Middlewares;
-@model IEnumerable<UserViewModel>
-
+﻿@model IEnumerable<UserViewModel>
 @{
     ViewBag.Title = "All Users";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
-
 <table class="table table-striped">
     <thead>
         <tr>
@@ -15,7 +12,6 @@
             <th><label>Full Name</label></th>
             <th><label>Phone Number</label></th>
             <th><label>User Is Provider</label></th>
-            <th><label>User Is Online</label></th>
         </tr>
     </thead>
     <tbody>
@@ -35,17 +31,7 @@
                         <label class="text-center">❌</label>
                     }
                 </td>
-                <td>
-                    @if (OnlineUsersMiddleware.CheckIfUserIsOnline(user.Id))
-                    {
-                        <label>✔</label>
-                    }
-                    else
-                    {
-                        <label class="text-center">❌</label>
-                    }
-                </td>
             </tr>
         }
     </tbody>
-</table>*@
+</table>

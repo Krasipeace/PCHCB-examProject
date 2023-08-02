@@ -1,17 +1,102 @@
-﻿@*@model AdminMineViewModel
+﻿@model AdminMineViewModel
 @{
     ViewBag.Title = "My Hardware Components";
 }
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
+
 <h4>My Added Cases</h4>
 @if (!Model.Cases.Any())
 {
-    <h2 class="text-center">You have no added houses yet!</h2>
+    <h2 class="text-center">You have no added Cases yet!</h2>
 }
 <div class="row">
-    @foreach (var house in Model.Cases)
+    @foreach (var @case in Model.Cases)
     {
-        @await Html.PartialAsync("~/Views/Shared/_MyPartial.cshtml", house)
+        @await Html.PartialAsync("~/Views/Shared/_CasePartial.cshtml", @case)
     }
-</div>*@
+</div>
+
+<h4>My Added Coolers</h4>
+@if (!Model.Coolers.Any())
+{
+    <h2 class="text-center">You have no added Coolers yet!</h2>
+}
+<div class="row">
+    @foreach (var cooler in Model.Coolers)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_CoolerPartial.cshtml", cooler)
+    }
+</div>
+
+<h4>My Added Processors</h4>
+@if (!Model.Cpus.Any())
+{
+    <h2 class="text-center">You have no added Processors yet!</h2>
+}
+<div class="row">
+    @foreach (var cpu in Model.Cpus)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_CpuPartial.cshtml", cpu)
+    }
+</div>
+
+<h4>My Added Graphic Cards</h4>
+@if (!Model.Gpus.Any())
+{
+    <h2 class="text-center">You have no added Graphic cards yet!</h2>
+}
+<div class="row">
+    @foreach (var gpu in Model.Gpus)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_GpuPartial.cshtml", gpu)
+    }
+</div>
+
+<h4>My Added Motherboards</h4>
+@if (!Model.Motherboards.Any())
+{
+    <h2 class="text-center">You have no added Motherboards yet!</h2>
+}
+<div class="row">
+    @foreach (var mb in Model.Motherboards)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_MotherboardPartial.cshtml", mb)
+    }
+</div>
+
+<h4>My Added Power Supplies</h4>
+@if (!Model.Psus.Any())
+{
+    <h2 class="text-center">You have no added Power Supplies yet!</h2>
+}
+<div class="row">
+    @foreach (var psu in Model.Psus)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_PsuPartial.cshtml", psu)
+    }
+</div>
+
+<h4>My Added RAMs</h4>
+@if (!Model.Rams.Any())
+{
+    <h2 class="text-center">You have no added RAMs yet!</h2>
+}
+<div class="row">
+    @foreach (var ram in Model.Rams)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_RamPartial.cshtml", ram)
+    }
+</div>
+
+<h4>My Added Storage Drives</h4>
+@if (!Model.Storages.Any())
+{
+    <h2 class="text-center">You have no added Storages yet!</h2>
+}
+<div class="row">
+    @foreach (var storage in Model.Storages)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_StoragePartial.cshtml", storage)
+    }
+</div>

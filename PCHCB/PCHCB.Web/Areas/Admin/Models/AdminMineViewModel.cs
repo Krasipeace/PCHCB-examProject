@@ -1,23 +1,30 @@
 ﻿namespace PCHCB.Web.Areas.Admin.Models
 {
-    using PCHCB.Web.ViewModels.Home;
+    using PCHCB.Web.ViewModels.Case;
+    using PCHCB.Web.ViewModels.Cooler;
+    using PCHCB.Web.ViewModels.Cpu;
+    using PCHCB.Web.ViewModels.Gpu;
+    using PCHCB.Web.ViewModels.Motherboard;
+    using PCHCB.Web.ViewModels.Psu;
+    using PCHCB.Web.ViewModels.Ram;
+    using PCHCB.Web.ViewModels.Storage;
 
     public class AdminMineViewModel
     {
-        public IEnumerable<AllViewModel> Cases { get; set; } = null!;
+        public List<CaseAllViewModel> Cases { get; set; } = new List<CaseAllViewModel>();
 
-        public IEnumerable<AllViewModel> Coolers { get; set; } = null!;
+        public List<CpuAllViewModel> Cpus { get; set; } = new List<CpuAllViewModel>();
 
-        public IEnumerable<AllViewModel> Cpus { get; set; } = null!;
+        public List<CoolerAllViewModel> Coolers { get; set; } = new List<CoolerAllViewModel>();
 
-        public IEnumerable<AllViewModel> Gpus { get; set; } = null!;
+        public List<GpuAllViewModel> Gpus { get; set; } = new List<GpuAllViewModel>();
 
-        public IEnumerable<AllViewModel> Motherboards { get; set; } = null!;
+        public List<MotherboardAllViewModel> Motherboards { get; set; } = new List<MotherboardAllViewModel>();
 
-        public IEnumerable<AllViewModel> Psus { get; set; } = null!;
+        public List<PsuAllViewModel> Psus { get; set; } = new List<PsuAllViewModel>();
 
-        public IEnumerable<AllViewModel> Rams { get; set; } = null!;
+        public List<RamAllViewModel> Rams { get; set; } = new List<RamAllViewModel>();
 
-        public IEnumerable<AllViewModel> Storages { get; set; } = null!;
+        public List<StorageAllViewModel> Storages { get; set; } = new List<StorageAllViewModel>();
     }
 }

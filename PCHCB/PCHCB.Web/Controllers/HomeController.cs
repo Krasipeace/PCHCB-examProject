@@ -2,11 +2,18 @@
 {
     using Microsoft.AspNetCore.Mvc;
 
+    using static PCHCB.Common.GeneralAppConstants;
+
     public class HomeController : Controller
     {   
         public IActionResult Index()
         {
-            return View();
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
+            }
+            
+            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

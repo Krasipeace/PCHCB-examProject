@@ -20,6 +20,7 @@
     using static PCHCB.Common.ErrorMessages.General;
     using static PCHCB.Common.ExceptionMessages;
     using static PCHCB.Common.SuccessMessages;
+    using static PCHCB.Common.GeneralAppConstants;
 
     [Authorize]
     public class ProviderController : Controller
@@ -129,6 +130,11 @@
         [HttpGet]
         public async Task<IActionResult> Mine()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Mine", "Home", new { area = "Admin" });
+            }
+
             string userId = this.User.GetId()!;
             bool isProvider = await this.providerService
                 .ProviderExistsByUserIdAsync(userId);

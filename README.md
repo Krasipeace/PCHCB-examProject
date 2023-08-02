@@ -30,6 +30,7 @@ Add your connection string in the `appsettings.json` file in the `PCHCB.Web` pro
 If you start the app in Development you have seeded Administrator with the following credentials:
 - Username/Email: `admin@pchcb.com`
 - Password: `admin123`
+
 As Administrator you will have full access in both client side and admin side(area) of the app.
 
 

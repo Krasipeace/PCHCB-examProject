@@ -10,6 +10,8 @@ namespace PCHCB.Web
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.Infrastructure.ModelBinders;
 
+    using static PCHCB.Common.GeneralAppConstants;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -73,17 +75,36 @@ namespace PCHCB.Web
                 app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
                 app.UseHsts();
             }
-            
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization();                     
+            app.UseAuthorization();
 
-            app.MapDefaultControllerRoute(); // Using default route
-            app.MapRazorPages();
+            if (app.Environment.IsDevelopment())
+            {
+                app.SeedAdministrator(AdminEmail);
+            }
+
+            app.UseEndpoints(config =>
+            {
+                config.MapControllerRoute(
+                    name: "areas",
+                    pattern: "/{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+
+                config.MapControllerRoute(
+                    name: "ProtectingUrlRoute",
+                    pattern: "/{controller}/{action}/{id}/{information}",
+                    defaults: new { Controller = "Home", Action = "Index" });
+
+                config.MapDefaultControllerRoute();
+
+                config.MapRazorPages();
+            });
 
             app.Run();
         }
