@@ -132,7 +132,7 @@
         {
             if (this.User.IsInRole(AdminRoleName))
             {
-                return RedirectToAction("Mine", "Home", new { area = "Admin" });
+                return RedirectToAction("Mine", "Provider", new { area = "Admin" });
             }
 
             string userId = this.User.GetId()!;

@@ -11,7 +11,8 @@ Table of Contents
   - [Overview](#overview)
   - [Features](#features)
   - [Get Started](#get-started)
-  - [Technologies Used](#technologies-used)
+  - [Software/Technologies Used](#softwaretechnologies-used)
+  - [Admin Area](#admin-area)
 
 =================
 
@@ -39,12 +40,21 @@ You can register as new User, then you can register as Provider and change your 
 
 You can also register as new User and/or Provider.
 
-## Technologies Used
+## Software/Technologies Used
 
+- [VS 2022](https://visualstudio.microsoft.com/vs/)
+- [MSSQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 - [ASP.NET Core 6.0](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-6.0)
 - [Entity Framework Core 6.0.16](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/6.0.16)
-- [MSSQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) / [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) / [Bootstrap 5.1](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
 - [JavaScript](https://www.javascript.com/) / [jQuery](https://jquery.com/)
 - [toastr.js](https://github.com/CodeSeven/toastr)
 - [Recaptcha v3](https://developers.google.com/recaptcha/docs/v3)
+
+## Admin Area
+
+The Admin Area is accessible only by the Administrator. It is a separate area of the app, which is not accessible by the regular users. The Admin Area provides the Administrator with full access to the app.
+
+![AdminArea](https://github.com/Krasipeace/PCHCB---ASP.NET-Advanced-Exam-Project/tree/main/PCHCB/PCHCB.Web/wwwroot/images/adminAreaIndex.png)
+![AllUsers](https://github.com/Krasipeace/PCHCB---ASP.NET-Advanced-Exam-Project/tree/main/PCHCB/PCHCB.Web/wwwroot/images/allUsersView.png)
+
