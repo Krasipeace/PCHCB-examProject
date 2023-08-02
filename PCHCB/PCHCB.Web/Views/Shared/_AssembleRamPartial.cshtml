@@ -1,0 +1,18 @@
+﻿@model List<RamDetailsViewModel>
+
+<h4>Select RAM</h4>
+
+<ul>
+    @foreach (var ram in Model)
+    {
+        <li>
+            <input type="radio" name="selectedRamId" value="@ram.Id" />
+            @ram.Name
+            @ram.Capacity
+            @ram.Frequency
+            @ram.Price
+        </li>
+    }
+</ul>
+
+<button type="submit">Next</button>

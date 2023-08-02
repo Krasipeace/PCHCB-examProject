@@ -1,0 +1,17 @@
+﻿@model List<StorageDetailsViewModel>
+
+<h4>Select Storage Device</h4>
+
+<ul>
+    @foreach (var storage in Model)
+    {
+        <li>
+            <input type="radio" name="selectedStorageId" value="@storage.Id" />
+            @storage.Name
+            @storage.Capacity
+            @storage.Price
+        </li>
+    }
+</ul>
+
+<button type="submit">Next</button>

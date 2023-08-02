@@ -1,0 +1,19 @@
+﻿@model List<CaseDetailsViewModel>
+
+<h4>Select a Case</h4>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <input type="radio" name="selectedCaseId" value="@item.Id" />
+            @item.Name
+            @item.MaxGpuLength
+            @item.MaxAirCpuCoolerHeight
+            @item.MaxRadiatorLength
+            @item.Price
+        </li>
+    }
+</ul>
+
+<button type="submit">Next</button>

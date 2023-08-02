@@ -1,9 +1,7 @@
 ﻿@using PCHCB.Services.Data.Contracts;
 @using PCHCB.Web.Infrastructure.Extensions;
-@inject IProviderService ProviderService
 @model MineViewModel
 @{
-    bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
     ViewData["Title"] = "My Hardware";
 }
 

@@ -1,0 +1,19 @@
+﻿@model List<CpuDetailsViewModel>
+
+<h4>Select a CPU</h4>
+
+<ul>
+    @foreach (var cpu in Model)
+    {
+        <li>
+            <input type="radio" name="selectedCpuId" value="@cpu.Id" />
+            @cpu.Name
+            @cpu.Socket
+            @cpu.Frequency
+            @cpu.Cores
+            @cpu.
+        </li>
+    }
+</ul>
+
+<button type="submit">Next</button>

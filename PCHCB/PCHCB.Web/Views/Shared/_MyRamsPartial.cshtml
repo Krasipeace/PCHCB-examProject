@@ -1,13 +1,8 @@
 ﻿@using PCHCB.Services.Data.Contracts;
 @using PCHCB.Web.Infrastructure.Extensions;
-@inject IRamService RamService
-@inject IProviderService ProviderService
 
 @model MineViewModel
-@{
-    bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
-    var rams = await ProviderService.AllRamsByProviderIdAsync(User.GetId()!);
-}
+
 <div class="row">
     @if (Model.Rams.Any())
     {

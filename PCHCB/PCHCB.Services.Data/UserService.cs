@@ -27,6 +27,7 @@
 
             return $"{user.FirstName} {user.LastName}";
         }
+
         public async Task<IEnumerable<UserViewModel>> AllUsersAsync()
         {
             List<UserViewModel> allUsers = await this.dbContext
@@ -56,5 +57,4 @@
             return allUsers;
         }
     }
-
 }

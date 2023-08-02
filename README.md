@@ -55,6 +55,7 @@ You can also register as new User and/or Provider.
 
 The Admin Area is accessible only by the Administrator. It is a separate area of the app, which is not accessible by the regular users. The Admin Area provides the Administrator with full access to the app.
 
-![AdminArea](https://github.com/Krasipeace/PCHCB---ASP.NET-Advanced-Exam-Project/tree/main/PCHCB/PCHCB.Web/wwwroot/images/adminAreaIndex.png)
-![AllUsers](https://github.com/Krasipeace/PCHCB---ASP.NET-Advanced-Exam-Project/tree/main/PCHCB/PCHCB.Web/wwwroot/images/allUsersView.png)
+![AdminArea](https://i.imgur.com/Xu94jnc.png)
+
+![AllUsers](https://i.imgur.com/6PnT3dr.png)
 

@@ -1,0 +1,18 @@
+﻿@model List<GpuDetailsViewModel>
+
+<h4>Select a GPU</h4>
+
+<ul>
+    @foreach (var gpu in Model)
+    {
+        <li>
+            <input type="radio" name="selectedGpuId" value="@gpu.Id" />
+            @gpu.Name
+            @gpu.Memory
+            @gpu.PowerConsumption
+            @gpu.Price
+        </li>
+    }
+</ul>
+
+<button type="submit">Next</button>

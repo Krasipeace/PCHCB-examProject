@@ -1,0 +1,17 @@
+﻿@model List<PsuDetailsViewModel>
+
+<h4>Select a Power Supply Unit</h4>
+
+<ul>
+    @foreach (var psu in Model)
+    {
+        <li>
+            <input type="radio" name="selectedPsuId" value="@psu.Id" />
+            @psu.Name
+            @psu.Wattage
+            @psu.Price
+        </li>
+    }
+</ul>
+
+<button type="submit">Next</button>

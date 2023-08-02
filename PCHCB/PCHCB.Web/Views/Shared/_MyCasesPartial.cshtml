@@ -1,13 +1,8 @@
 ﻿@using PCHCB.Services.Data.Contracts;
 @using PCHCB.Web.Infrastructure.Extensions;
-@inject ICaseService CaseService
-@inject IProviderService ProviderService
 
 @model MineViewModel
-@{
-    bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
-    var cases = await ProviderService.AllCasesByProviderIdAsync(User.GetId()!);
-}
+
 <div class="row">
     @if (Model.Cases.Any())
     {

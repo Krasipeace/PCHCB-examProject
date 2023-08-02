@@ -1,0 +1,17 @@
+﻿@model List<CoolerDetailsViewModel>
+
+<h4>Select a Cooler</h4>
+
+<ul>
+    @foreach (var cooler in Model)
+    {
+        <li>
+            <input type="radio" name="selectedCoolerId" value="@cooler.Id" />
+            @cooler.Name
+            @cooler.Tdp
+            @cooler.Price
+        </li>
+    }
+</ul>
+
+<button type="submit">Next</button>

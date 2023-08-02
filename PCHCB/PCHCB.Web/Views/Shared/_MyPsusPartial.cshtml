@@ -1,13 +1,8 @@
 ﻿@using PCHCB.Services.Data.Contracts;
 @using PCHCB.Web.Infrastructure.Extensions;
-@inject IPsuService PsuService
-@inject IProviderService ProviderService
 
 @model MineViewModel
-@{
-    bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
-    var psus = await ProviderService.AllPsusByProviderIdAsync(User.GetId()!);
-}
+
 <div class="row">
     @if (Model.Psus.Any())
     {

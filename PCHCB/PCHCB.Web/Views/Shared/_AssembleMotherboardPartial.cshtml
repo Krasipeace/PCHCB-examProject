@@ -1,0 +1,18 @@
+﻿@model List<MotherboardDetailsViewModel>
+
+<h4>Select a Motherboard</h4>
+
+<ul>
+    @foreach (var motherboard in Model)
+    {
+        <li>
+            <input type="radio" name="selectedMotherboardId" value="@motherboard.Id" />
+            @motherboard.Name
+            @motherboard.Socket
+            @motherboard.Chipset
+            @motherboard.Price
+        </li>
+    }
+</ul>
+
+<button type="submit">Next</button>

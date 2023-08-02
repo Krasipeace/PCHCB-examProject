@@ -1,13 +1,8 @@
 ﻿@using PCHCB.Services.Data.Contracts;
 @using PCHCB.Web.Infrastructure.Extensions;
-@inject IMotherboardService MotherboardService
-@inject IProviderService ProviderService
 
 @model MineViewModel
-@{
-    bool isUserProvider = await ProviderService.ProviderExistsByUserIdAsync(User.GetId()!);
-    var motherboards = await ProviderService.AllMotherboardsByProviderIdAsync(User.GetId()!);
-}
+
 <div class="row">
     @if (Model.Motherboards.Any())
     {
