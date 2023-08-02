@@ -27,20 +27,14 @@ Personal Computer's Hardware Compatibility Builder is a software application tha
 
 Add your connection string in the `appsettings.json` file in the `PCHCB.Web` project or as secret. Apply Migrations to the `PCHCB.Data` project. Run the `PCHCB.Web` project.
 
-You have Provider for testing purposes with the following credentials:
-- Username: `admin@pchcb.com` 
+If you start the app in Development you have seeded Administrator with the following credentials:
+- Username/Email: `admin@pchcb.com`
 - Password: `admin123`
-- ID: `028F3802-11CA-4F64-90D8-7BBA2E3A74D5`
-- UserID: `73DF6910-CC0D-4F98-90A0-748C29BBD618`
-
-You can also register this Provider as Administrator by adding the following credentials to ASPNETRoles Table in the database:
-- ID: `028F3802-11CA-4F64-90D8-7BBA2E3A74D5`
-- Name: `Administrator`
-- NormalizedName: `ADMINISTRATOR`
-
 As Administrator you will have full access in both client side and admin side(area) of the app.
 
+
 You can register as new User, then you can register as Provider and change your Id in Providers Table in the database to `E92E7BEB-55D6-4D18-A99D-3ED3411058F5`. This Provider's Id has many seeded components in the database, which you can use for testing purposes.
+
 
 You can also register as new User and/or Provider.
 
