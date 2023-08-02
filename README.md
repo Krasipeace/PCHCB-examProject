@@ -26,17 +26,23 @@ Personal Computer's Hardware Compatibility Builder is a software application tha
 
 ## Get Started 
 
-Add your connection string in the `appsettings.json` file in the `PCHCB.Web` project or as secret. Apply Migrations to the `PCHCB.Data` project. Run the `PCHCB.Web` project.
+Add your connection string in the `appsettings.json` file in the `PCHCB.Web` project or as secret. Example:
 
-If you start the app in Development you have seeded Administrator with the following credentials:
+`{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=CHANGE-ME;Database=CHANGE-ME;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+}`
+
+Apply Migrations to the `PCHCB.Data` project. Run the `PCHCB.Web` project.
+
+Start the app in Development, you have seeded Administrator with the following credentials:
 - Username/Email: `admin@pchcb.com`
 - Password: `admin123`
 
 As Administrator you will have full access in both client side and admin side(area) of the app.
 
-
 You can register as new User, then you can register as Provider and change your Id in Providers Table in the database to `E92E7BEB-55D6-4D18-A99D-3ED3411058F5`. This Provider's Id has many seeded components in the database, which you can use for testing purposes.
-
 
 You can also register as new User and/or Provider.
 

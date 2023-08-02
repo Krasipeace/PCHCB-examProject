@@ -37,13 +37,13 @@
 
             return this.View(cpus);
         }
-
+        // thinking about how to do this
         //[HttpPost]
         //public async Task<IActionResult> SelectMotherboard(int selectedCpuId)
         //{
         //    var selectedCpu = await dbContext.Cpus.FirstOrDefault(c => c.Id == selectedCpuId);
 
-        //    var gpus = await dbContext.Gpus.Where(g => g.Socket == selectedCpu.Socket).ToList();
+        //    var cpus = await dbContext.Cpus.Where(c => c.Socket == selectedCpu.Socket).ToList();
 
         //    return this.View(gpus);
         //}
