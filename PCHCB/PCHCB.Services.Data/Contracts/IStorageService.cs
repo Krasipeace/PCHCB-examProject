@@ -8,7 +8,7 @@
     {
         Task<int> CreateStorageAsync(string providerId, StorageFormModel model);
 
-        public Task<StorageFormModel> GetStorageForEditByIdAsync(int storageId);
+        Task<StorageFormModel> GetStorageForEditByIdAsync(int storageId);
 
         Task EditStorageByIdAndFormModelAsync(int storageId, StorageFormModel model);
 

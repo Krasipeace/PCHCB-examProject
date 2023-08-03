@@ -8,7 +8,7 @@
     {
         Task<int> CreateMotherboardAsync(string providerId, MotherboardFormModel model);
 
-        public Task<MotherboardFormModel> GetMotherboardForEditByIdAsync(int motherboardId);
+        Task<MotherboardFormModel> GetMotherboardForEditByIdAsync(int motherboardId);
 
         Task EditMotherboardByIdAndFormModelAsync(int motherboardId, MotherboardFormModel model);
 

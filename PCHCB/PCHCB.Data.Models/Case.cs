@@ -54,7 +54,7 @@
         /// Case Max Air CPU Cooler Height (in mm)
         /// </summary>
         [Required]
-        public int MaxAirCpuCoolerHeight { get; set; }
+        public double MaxAirCpuCoolerHeight { get; set; }
 
         /// <summary>
         /// PSU Factor (ATX, SFX, etc.)

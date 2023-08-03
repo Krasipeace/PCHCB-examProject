@@ -59,6 +59,12 @@
         public async Task<MotherboardDetailsViewModel> SelectMotherboardForAssemble(int motherboardId, int cpuId)
         {
             Motherboard motherboard = await this.dbContext.Motherboards
+                .AsNoTracking()
+                .Include(m => m.ConfigurationHardwares)
+                .ThenInclude(c => c.Cpu)
+                .Where(m => m.ConfigurationHardwares
+                    .Any(c => c.Cpu.Socket.ToLower()
+                        .Contains(m.Socket.ToLower())))
                 .FirstAsync(m => m.Id == motherboardId);
 
             return new MotherboardDetailsViewModel()
@@ -76,6 +82,11 @@
         public async Task<CaseDetailsViewModel> SelectCaseForAssemble(int caseId, int motherboardId, int gpuId)
         {
             Case @case = await this.dbContext.Cases
+                .AsNoTracking()
+                .Include(c => c.ConfigurationHardwares)
+                .ThenInclude(m => m.Motherboard)
+                .Where(c => c.ConfigurationHardwares
+                    .Any(m => m.Motherboard.FormFactor == c.FormFactor))
                 .FirstAsync(c => c.Id == caseId);
 
             return new CaseDetailsViewModel()
@@ -92,6 +103,23 @@
         {
             Cooler cooler = await this.dbContext.Coolers
                 .FirstAsync(c => c.Id == coolerId);
+
+            if (cooler.Type == 0)
+            {
+                cooler.RadiatorSize = 0;
+
+                cooler = await this.dbContext.Coolers
+                    .Include(c => c.ConfigurationHardwares)
+                    .ThenInclude(cpu => cpu.Cpu)
+                    .Where(c => c.ConfigurationHardwares
+                        .Any(cpu => cpu.Cpu.Socket.ToLower()
+                            .Contains(c.Compatibility.ToLower())))
+                    .Include(c => c.ConfigurationHardwares)
+                    .ThenInclude(ca => ca.Case)
+                        .Where(c => c.ConfigurationHardwares
+                           .Any(ca => ca.Case.MaxAirCpuCoolerHeight >= c.CoolerHeight))
+                    .FirstAsync(c => c.Id == coolerId);
+            }
 
             return new CoolerDetailsViewModel()
             {

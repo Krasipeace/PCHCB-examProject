@@ -6,6 +6,9 @@
         {
             public const string PcPriceMinValue = "500";
             public const string PcPriceMaxValue = "30000";
+
+            public const int PcNameMinLength = 3;
+            public const int PcNameMaxLength = 20;
         }
 
         public static class Component

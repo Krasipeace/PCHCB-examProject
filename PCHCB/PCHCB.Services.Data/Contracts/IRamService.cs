@@ -8,7 +8,7 @@
     {
         Task<int> CreateRamAsync(string providerId, RamFormModel model);
 
-        public Task<RamFormModel> GetRamForEditByIdAsync(int ramId);
+        Task<RamFormModel> GetRamForEditByIdAsync(int ramId);
 
         Task EditRamByIdAndFormModelAsync(int ramId, RamFormModel model);
 

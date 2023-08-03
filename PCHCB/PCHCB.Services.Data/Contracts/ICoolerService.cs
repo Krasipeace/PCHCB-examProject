@@ -8,7 +8,7 @@
     {
         Task<int> CreateCoolerAsync(string providerId, CoolerFormModel model);
 
-        public Task<CoolerFormModel> GetCoolerForEditByIdAsync(int coolerId);
+        Task<CoolerFormModel> GetCoolerForEditByIdAsync(int coolerId);
 
         Task EditCoolerByIdAndFormModelAsync(int coolerId, CoolerFormModel model);
 

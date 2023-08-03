@@ -6,7 +6,6 @@
     using PCHCB.Web.ViewModels.Cpu;
     using PCHCB.Web.ViewModels.Gpu;
     using PCHCB.Web.ViewModels.Motherboard;
-    using PCHCB.Web.ViewModels.PcConfiguration;
     using PCHCB.Web.ViewModels.Psu;
     using PCHCB.Web.ViewModels.Ram;
     using PCHCB.Web.ViewModels.Storage;

@@ -8,9 +8,9 @@
     {
         Task<int> CreateCaseAsync(string providerId, CaseFormModel model);
 
-        public Task<CaseFormModel> GetCaseForEditByIdAsync(int caseId);
+        Task<CaseFormModel> GetCaseForEditByIdAsync(int caseId);
 
-        public Task EditCaseByIdAndFormModelAsync(int caseId, CaseFormModel formModel);
+        Task EditCaseByIdAndFormModelAsync(int caseId, CaseFormModel formModel);
 
         Task<bool> IsCaseExistByIdAsync(int caseId);
 
