@@ -40,9 +40,17 @@
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            GpuFormModel model = new GpuFormModel();
+            try
+            {
+                GpuFormModel model = new GpuFormModel();
 
-            return this.View(model);
+                return this.View(model);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+
         }
 
         [HttpPost]
@@ -72,7 +80,10 @@
 
                 this.TempData[SuccessMessage] = GpuAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Gpu");
+                return this.RedirectToAction("Details", "Gpu", new
+                {
+                    id = gpuId
+                });
             }
             catch (Exception)
             {
@@ -91,7 +102,7 @@
             {
                 TempData[ErrorMessage] = GpuWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Gpu");
             }
 
             bool isUserProvider = await providerService
@@ -141,7 +152,7 @@
             {
                 TempData[ErrorMessage] = GpuWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Gpu");
             }
 
             bool isUserProvider = await providerService
@@ -190,7 +201,7 @@
             {
                 TempData[ErrorMessage] = GpuWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Gpu");
             }
 
             bool isUserProvider = await providerService
@@ -235,7 +246,7 @@
             {
                 TempData[ErrorMessage] = GpuWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Gpu");
             }
 
             bool isUserProvider = await providerService

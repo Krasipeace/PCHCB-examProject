@@ -40,9 +40,17 @@
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            CpuFormModel model = new CpuFormModel();
+            try
+            {
+                CpuFormModel model = new CpuFormModel();
 
-            return this.View(model);
+                return this.View(model);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+
         }
 
         [HttpPost]
@@ -73,7 +81,10 @@
 
                 this.TempData[SuccessMessage] = CpuAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Cpu");
+                return this.RedirectToAction("Details", "Cpu", new
+                {
+                    id = cpuId
+                });
             }
             catch (Exception)
             {
@@ -92,7 +103,7 @@
             {
                 TempData[ErrorMessage] = CpuWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Cpu");
             }
 
             bool isUserProvider = await providerService
@@ -142,7 +153,7 @@
             {
                 TempData[ErrorMessage] = CpuWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Cpu");
             }
 
             bool isUserProvider = await providerService
@@ -191,7 +202,7 @@
             {
                 TempData[ErrorMessage] = CpuWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Cpu");
             }
 
             bool isUserProvider = await providerService
@@ -235,7 +246,7 @@
             {
                 TempData[ErrorMessage] = CpuWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Cpu");
             }
 
             bool isUserProvider = await providerService

@@ -40,9 +40,17 @@
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            StorageFormModel model = new StorageFormModel();
+            try
+            {
+                StorageFormModel model = new StorageFormModel();
 
-            return this.View(model);
+                return this.View(model);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+
         }
 
         [HttpPost]
@@ -72,7 +80,10 @@
 
                 this.TempData[SuccessMessage] = StorageAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Storage");
+                return this.RedirectToAction("Details", "Storage", new
+                {
+                    id = storageId
+                });
             }
             catch (Exception)
             {
@@ -91,7 +102,7 @@
             {
                 TempData[ErrorMessage] = StorageWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Storage");
             }
 
             bool isUserProvider = await providerService
@@ -141,7 +152,7 @@
             {
                 TempData[ErrorMessage] = StorageWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Storage");
             }
 
             bool isUserProvider = await providerService
@@ -191,7 +202,7 @@
             {
                 TempData[ErrorMessage] = StorageWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Storage");
             }
 
             bool isUserProvider = await providerService
@@ -283,7 +294,7 @@
             {
                 TempData[ErrorMessage] = StorageWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Storage");
             }
 
             try

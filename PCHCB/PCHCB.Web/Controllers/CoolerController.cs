@@ -40,9 +40,16 @@
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            CoolerFormModel model = new CoolerFormModel();
+            try
+            {
+                CoolerFormModel model = new CoolerFormModel();
 
-            return this.View(model);
+                return this.View(model);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpPost]
@@ -72,7 +79,10 @@
 
                 this.TempData[SuccessMessage] = CoolerAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Cooler");
+                return this.RedirectToAction("Details", "Cooler", new
+                {
+                    id = coolerId
+                });
             }
             catch (Exception)
             {
@@ -91,7 +101,7 @@
             {
                 TempData[ErrorMessage] = CoolerWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Cooler");
             }
 
             bool isUserProvider = await providerService
@@ -142,7 +152,7 @@
             {
                 TempData[ErrorMessage] = CoolerWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Cooler");
             }
 
             bool isUserProvider = await providerService
@@ -192,7 +202,7 @@
             {
                 TempData[ErrorMessage] = CoolerWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Cooler");
             }
 
             bool isUserProvider = await providerService
@@ -237,7 +247,7 @@
             {
                 TempData[ErrorMessage] = CoolerWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Cooler");
             }
 
             bool isUserProvider = await providerService
@@ -259,7 +269,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCoolerHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Cooler");
             }
 
             try
@@ -286,7 +296,7 @@
             {
                 TempData[ErrorMessage] = CoolerWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Cooler");
             }
 
             try

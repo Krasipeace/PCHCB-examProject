@@ -40,9 +40,16 @@
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            CaseFormModel model = new CaseFormModel();
+            try
+            {
+                CaseFormModel model = new CaseFormModel();
 
-            return this.View(model);
+                return this.View(model);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpPost]
@@ -73,7 +80,10 @@
 
                 this.TempData[SuccessMessage] = CaseAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Case");
+                return this.RedirectToAction("Details", "Case", new
+                {
+                    id = caseId
+                });
             }
             catch (Exception)
             {
@@ -92,7 +102,7 @@
             {
                 TempData[ErrorMessage] = CaseWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Case");
             }
 
             bool isUserProvider = await providerService
@@ -142,7 +152,7 @@
             {
                 TempData[ErrorMessage] = CaseWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Case");
             }
 
             bool isUserProvider = await providerService
@@ -191,7 +201,7 @@
             {
                 TempData[ErrorMessage] = CaseWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Case");
             }
 
             bool isUserProvider = await providerService
@@ -237,7 +247,7 @@
             {
                 TempData[ErrorMessage] = CaseWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Case");
             }
 
             bool isUserProvider = await providerService
@@ -259,7 +269,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCaseHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Case");
             }
 
             try
@@ -285,13 +295,13 @@
             {
                 TempData[ErrorMessage] = CaseWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Case");
             }
 
             try
             {
                 CaseDetailsViewModel viewModel = await caseService
-                    .GetCaseDetailsAsync(id);               
+                    .GetCaseDetailsAsync(id);
 
                 return View(viewModel);
             }
@@ -302,7 +312,7 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> All([FromQuery]AllQueryModel queryModel)
+        public async Task<IActionResult> All([FromQuery] AllQueryModel queryModel)
         {
             SearchResult serviceModel = await caseService.SearchCasesAsync(queryModel);
 

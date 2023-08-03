@@ -11,6 +11,6 @@
 
         public const string AdminAreaName = "Admin";
         public const string AdminRoleName = "Administrator";
-        public const string AdminEmail = "admin@pchcb.com";
+        public const string AdminEmail = "admin@pchcb.com"; 
     }
 }

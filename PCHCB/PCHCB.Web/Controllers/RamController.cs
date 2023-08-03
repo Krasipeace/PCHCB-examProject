@@ -40,9 +40,17 @@
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            RamFormModel model = new RamFormModel();
+            try
+            {
+                RamFormModel model = new RamFormModel();
 
-            return this.View(model);
+                return this.View(model);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+
         }
 
         [HttpPost]
@@ -73,7 +81,10 @@
 
                 this.TempData[SuccessMessage] = RamAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Ram");
+                return this.RedirectToAction("Details", "Ram", new
+                {
+                    id = ramId
+                });
             }
             catch (Exception)
             {
@@ -92,7 +103,7 @@
             {
                 TempData[ErrorMessage] = RamWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Ram");
             }
 
             bool isUserProvider = await providerService
@@ -142,7 +153,7 @@
             {
                 TempData[ErrorMessage] = RamWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Ram");
             }
 
             bool isUserProvider = await providerService
@@ -191,7 +202,7 @@
             {
                 TempData[ErrorMessage] = RamWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Ram");
             }
 
             bool isUserProvider = await providerService
@@ -236,7 +247,7 @@
             {
                 TempData[ErrorMessage] = RamWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Ram");
             }
 
             bool isUserProvider = await providerService
@@ -283,7 +294,7 @@
             {
                 TempData[ErrorMessage] = RamWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Ram");
             }
 
             try

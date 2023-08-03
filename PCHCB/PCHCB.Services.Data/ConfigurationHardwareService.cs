@@ -15,6 +15,8 @@
     using PCHCB.Web.ViewModels.Ram;
     using PCHCB.Web.ViewModels.Storage;
 
+    using static PCHCB.Common.ComponentsWattageConstants.Cooler;
+
     public class ConfigurationHardwareService : IConfigurationHardwareService
     {
         private readonly PCHCBDbContext dbContext;
@@ -31,7 +33,7 @@
 
             return new CpuDetailsViewModel()
             {
-                Name = cpu.Name, 
+                Name = cpu.Name,
                 Tdp = cpu.Tdp,
                 Socket = cpu.Socket,
                 Frequency = cpu.Frequency,
@@ -56,7 +58,7 @@
             };
         }
 
-        public async Task<MotherboardDetailsViewModel> SelectMotherboardForAssemble(int motherboardId, int cpuId)
+        public async Task<MotherboardDetailsViewModel> SelectMotherboardForAssemble(int motherboardId)
         {
             Motherboard motherboard = await this.dbContext.Motherboards
                 .AsNoTracking()
@@ -79,7 +81,7 @@
             };
         }
 
-        public async Task<CaseDetailsViewModel> SelectCaseForAssemble(int caseId, int motherboardId, int gpuId)
+        public async Task<CaseDetailsViewModel> SelectCaseForAssemble(int caseId)
         {
             Case @case = await this.dbContext.Cases
                 .AsNoTracking()
@@ -99,40 +101,73 @@
             };
         }
 
-        public async Task<CoolerDetailsViewModel> SelectCoolerForAssemble(int coolerId, int caseId, int cpuId)
+        public async Task<CoolerDetailsViewModel> SelectCoolerForAssemble(int coolerId)
         {
             Cooler cooler = await this.dbContext.Coolers
+                .AsNoTracking()
                 .FirstAsync(c => c.Id == coolerId);
 
             if (cooler.Type == 0)
             {
-                cooler.RadiatorSize = 0;
+                cooler = await this.dbContext.Coolers
+                    .Include(c => c.ConfigurationHardwares)
+                    .ThenInclude(cpu => cpu.Cpu)
+                    .Where(c => c.ConfigurationHardwares
+                        .Any(cpu => cpu.Cpu.Socket.ToLower()
+                            .Contains(c.Compatibility.ToLower()) && c.Tdp >= (CoolerSecureTDPMultiplierValue * cpu.Cpu.Tdp)))
+                    .Include(c => c.ConfigurationHardwares)
+                    .ThenInclude(ca => ca.Case)
+                    .Where(c => c.ConfigurationHardwares
+                           .Any(ca => ca.Case.MaxAirCpuCoolerHeight >= c.CoolerHeight))
+                    .FirstAsync(c => c.Id == coolerId);
+            }
+            else
+            {
+                int radiatorLength = 0;
+                if ((int)cooler.RadiatorSize == 0)
+                {
+                    radiatorLength = 120;
+                }
+                else if ((int)cooler.RadiatorSize == 1)
+                {
+                    radiatorLength = 240;
+                }
+                else if ((int)cooler.RadiatorSize == 2)
+                {
+                    radiatorLength = 360;
+                }
+                else if ((int)cooler.RadiatorSize == 3)
+                {
+                    radiatorLength = 280;
+                }
+                else if ((int)cooler.RadiatorSize == 4)
+                {
+                    radiatorLength = 420;
+                }
 
                 cooler = await this.dbContext.Coolers
                     .Include(c => c.ConfigurationHardwares)
                     .ThenInclude(cpu => cpu.Cpu)
                     .Where(c => c.ConfigurationHardwares
                         .Any(cpu => cpu.Cpu.Socket.ToLower()
-                            .Contains(c.Compatibility.ToLower())))
+                            .Contains(c.Compatibility.ToLower()) && c.Tdp >= (CoolerSecureTDPMultiplierValue * cpu.Cpu.Tdp)))
                     .Include(c => c.ConfigurationHardwares)
                     .ThenInclude(ca => ca.Case)
-                        .Where(c => c.ConfigurationHardwares
-                           .Any(ca => ca.Case.MaxAirCpuCoolerHeight >= c.CoolerHeight))
+                    .Where(c => c.ConfigurationHardwares
+                        .Any(ca => ca.Case.MaxRadiatorLength >= radiatorLength))
                     .FirstAsync(c => c.Id == coolerId);
             }
 
             return new CoolerDetailsViewModel()
             {
                 Name = cooler.Name,
-                CoolerHeight = cooler.CoolerHeight,
-                RadiatorSize = (int)cooler.RadiatorSize,
                 Compatibility = cooler.Compatibility,
                 Tdp = cooler.Tdp,
                 Price = cooler.Price,
             };
         }
 
-        public async Task<RamDetailsViewModel> SelectRamForAssemble(int ramId, int motherboardId, int cpuId)
+        public async Task<RamDetailsViewModel> SelectRamForAssemble(int ramId)
         {
             Ram ram = await this.dbContext.Rams
                 .FirstAsync(r => r.Id == ramId);
@@ -148,7 +183,7 @@
             };
         }
 
-        public async Task<StorageDetailsViewModel> SelectStorageForAssemble(int storageId, int motherboardId)
+        public async Task<StorageDetailsViewModel> SelectStorageForAssemble(int storageId)
         {
             Storage storage = await this.dbContext.Storages
                 .FirstAsync(s => s.Id == storageId);
@@ -162,7 +197,7 @@
             };
         }
 
-        public async Task<PsuDetailsViewModel> SelectPsuForAssemble(int psuId, int caseId)
+        public async Task<PsuDetailsViewModel> SelectPsuForAssemble(int psuId)
         {
             Psu psu = await this.dbContext.Psus
                 .FirstAsync(p => p.Id == psuId);

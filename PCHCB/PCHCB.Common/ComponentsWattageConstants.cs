@@ -1,5 +1,5 @@
 ﻿namespace PCHCB.Common
-{   
+{
     /// <summary>
     /// Max Possible Wattage for Components
     /// </summary>
@@ -43,6 +43,8 @@
         {
             public const double AirWattage = 12;
             public const double WaterWattage = 13.56;
+
+            public const int CoolerSecureTDPMultiplierValue = 2;
         }
     }
 }

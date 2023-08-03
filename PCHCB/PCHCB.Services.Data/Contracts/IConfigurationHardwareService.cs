@@ -12,21 +12,21 @@
 
     public interface IConfigurationHardwareService
     {
-        Task<CaseDetailsViewModel> SelectCaseForAssemble(int caseId, int motherboardId, int gpuId);
+        Task<CaseDetailsViewModel> SelectCaseForAssemble(int caseId);
 
         Task<CpuDetailsViewModel> SelectCpuForAssemble(int cpuId);
 
-        Task<CoolerDetailsViewModel> SelectCoolerForAssemble(int coolerId, int caseId, int cpuId);
+        Task<CoolerDetailsViewModel> SelectCoolerForAssemble(int coolerId);
 
-        Task<MotherboardDetailsViewModel> SelectMotherboardForAssemble(int motherboardId, int cpuId);
+        Task<MotherboardDetailsViewModel> SelectMotherboardForAssemble(int motherboardId);
 
-        Task<RamDetailsViewModel> SelectRamForAssemble(int ramId, int motherboardId, int cpuId); 
+        Task<RamDetailsViewModel> SelectRamForAssemble(int ramId); 
 
-        Task<StorageDetailsViewModel> SelectStorageForAssemble(int storageId, int motherboardId);
+        Task<StorageDetailsViewModel> SelectStorageForAssemble(int storageId);
 
         Task<GpuDetailsViewModel> SelectGpuForAssemble(int gpuId);
 
-        Task<PsuDetailsViewModel> SelectPsuForAssemble(int psuId, int caseId);
+        Task<PsuDetailsViewModel> SelectPsuForAssemble(int psuId);
 
         Task<double> CalculateWattage(int cpuId, int gpuId, int motherboardId, int coolerId, int storageId);
 

@@ -40,9 +40,17 @@
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            MotherboardFormModel model = new MotherboardFormModel();
+            try
+            {
+                MotherboardFormModel model = new MotherboardFormModel();
 
-            return this.View(model);
+                return this.View(model);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+
         }
 
         [HttpPost]
@@ -72,7 +80,10 @@
 
                 this.TempData[SuccessMessage] = MotherboardAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Motherboard");
+                return this.RedirectToAction("Details", "Motherboard", new
+                {
+                    id = motherboardId
+                });
             }
             catch (Exception)
             {
@@ -91,7 +102,7 @@
             {
                 TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Motherboard");
             }
 
             bool isUserProvider = await providerService
@@ -141,7 +152,7 @@
             {
                 TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Motherboard");
             }
 
             bool isUserProvider = await providerService
@@ -190,7 +201,7 @@
             {
                 TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Motherboard");
             }
 
             bool isUserProvider = await providerService
@@ -235,7 +246,7 @@
             {
                 TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Motherboard");
             }
 
             bool isUserProvider = await providerService
@@ -282,7 +293,7 @@
             {
                 TempData[ErrorMessage] = MotherboardWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Motherboard");
             }
 
             try

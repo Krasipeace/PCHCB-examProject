@@ -40,9 +40,16 @@
                 return this.RedirectToAction("BecomeProvider", "Provider");
             }
 
-            PsuFormModel model = new PsuFormModel();
+            try
+            {
+                PsuFormModel model = new PsuFormModel();
 
-            return this.View(model);
+                return this.View(model);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpPost]
@@ -72,7 +79,10 @@
 
                 this.TempData[SuccessMessage] = PowerSupplyAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Psu");
+                return this.RedirectToAction("Details", "Psu", new
+                {
+                    id = psuId
+                });
             }
             catch (Exception)
             {
@@ -91,7 +101,7 @@
             {
                 TempData[ErrorMessage] = PsuWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Psu");
             }
 
             bool isUserProvider = await providerService
@@ -141,7 +151,7 @@
             {
                 TempData[ErrorMessage] = PsuWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Psu");
             }
 
             bool isUserProvider = await providerService
@@ -190,7 +200,7 @@
             {
                 TempData[ErrorMessage] = PsuWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Psu");
             }
 
             bool isUserProvider = await providerService
@@ -235,7 +245,7 @@
             {
                 TempData[ErrorMessage] = PsuWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Psu");
             }
 
             bool isUserProvider = await providerService
@@ -282,7 +292,7 @@
             {
                 TempData[ErrorMessage] = PsuWithIdDoesNotExist;
 
-                return RedirectToAction("Mine", "Provider");
+                return RedirectToAction("All", "Psu");
             }
 
             try
