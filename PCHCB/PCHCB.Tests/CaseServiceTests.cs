@@ -1,4 +1,4 @@
-﻿namespace PCHCB.UnitTests.Controllers
+﻿namespace PCHCB.Tests
 {
     using Microsoft.EntityFrameworkCore;
     using NUnit.Framework;
@@ -16,18 +16,18 @@
     {
         private PCHCBDbContext dbContext;
         private ICaseService caseService;
-        private const string providerId = "3f900985-864b-484d-8612-7e20b74613fb";
+        private const string testProviderId = "3f900985-864b-484d-8612-7e20b74613fb";
 
         [SetUp]
         public void Setup()
         {
             var options = new DbContextOptionsBuilder<PCHCBDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .UseInMemoryDatabase(databaseName: "PCHCBTestsDB")
                 .Options;
-            this.dbContext = new PCHCBDbContext(options);
-            this.caseService = new CaseService(this.dbContext);
+            dbContext = new PCHCBDbContext(options);
+            caseService = new CaseService(dbContext);
 
-            this.dbContext.Cases.AddAsync(new Data.Models.Case()
+            dbContext.Cases.AddAsync(new Data.Models.Case()
             {
                 Name = "Case1",
                 Price = 100,
@@ -40,9 +40,9 @@
                 MaxRadiatorLength = 400,
                 Description = "Description1Description1Description1",
                 AddedOn = DateTime.Now,
-                ProviderId = Guid.Parse(providerId)
+                ProviderId = Guid.Parse(testProviderId)
             });
-            this.dbContext.Cases.AddAsync(new Data.Models.Case()
+            dbContext.Cases.AddAsync(new Data.Models.Case()
             {
                 Name = "Case2",
                 Price = 150,
@@ -58,7 +58,7 @@
                 ProviderId = Guid.Parse("f1605898-5dc5-485e-9893-9306626a4b53")
             });
 
-            this.dbContext.SaveChanges();
+            dbContext.SaveChanges();
         }
 
         [Test]
@@ -75,22 +75,35 @@
                 PsuFactor = 1,
                 ImageUrl = "test/image/url",
                 MaxRadiatorLength = 240,
-                Description = "This is a test case."
+                Description = "This is a test case.",
             };
-            var initialTotalCaseCount = await this.dbContext.Cases.CountAsync();
+            var initialTotalCaseCount = await dbContext.Cases.CountAsync();
 
-            await this.caseService.CreateCaseAsync(providerId, caseFormModel);
+            await caseService.CreateCaseAsync(testProviderId, caseFormModel);
 
-            var newTotalCaseCount = await this.dbContext.Cases.CountAsync();
+            var newTotalCaseCount = await dbContext.Cases.CountAsync();
             Assert.IsTrue(newTotalCaseCount > initialTotalCaseCount);
+
+            var newCase = await dbContext.Cases.FirstAsync(c => c.Name == "Test Case 1");
+            Assert.IsNotNull(newCase);
+            Assert.That(newCase.Name, Is.EqualTo("Test Case 1"));
+            Assert.That(newCase.Price, Is.EqualTo(120));
+            Assert.That(newCase.CaseSize, Is.EqualTo(CaseSize.FullTower));
+            Assert.That(newCase.FormFactor, Is.EqualTo(MbFormFactor.MicroATX));
+            Assert.That(newCase.MaxGpuLength, Is.EqualTo(350));
+            Assert.That(newCase.MaxAirCpuCoolerHeight, Is.EqualTo(125));
+            Assert.That(newCase.PsuFactor, Is.EqualTo(PsuFactor.Lfx));
+            Assert.That(newCase.ImageUrl, Is.EqualTo("test/image/url"));
+            Assert.That(newCase.MaxRadiatorLength, Is.EqualTo(240));
+            Assert.That(newCase.Description, Is.EqualTo("This is a test case."));
         }
 
         [Test]
         public async Task GetCaseForEditByIdReturnsCorrectData()
         {
-            var caseId = (await this.dbContext.Cases.FirstAsync(c => c.Name == "Case1")).Id;
+            var caseId = (await dbContext.Cases.FirstAsync(c => c.Name == "Case1")).Id;
 
-            var result = await this.caseService.GetCaseForEditByIdAsync(caseId);
+            var result = await caseService.GetCaseForEditByIdAsync(caseId);
 
             Assert.That(result.Name, Is.EqualTo("Case1"));
             Assert.That(result.Price, Is.EqualTo(100));
@@ -107,7 +120,7 @@
         [Test]
         public async Task EditCaseByIdAndFormModelUpdatesExistingCaseInDbContext()
         {
-            var caseId = (await this.dbContext.Cases.FirstAsync(c => c.Name == "Case1")).Id;
+            var caseId = (await dbContext.Cases.FirstAsync(c => c.Name == "Case1")).Id;
             var caseFormModel = new CaseFormModel()
             {
                 Name = "Case1 Updated",
@@ -122,9 +135,9 @@
                 Description = "This is an updated case"
             };
 
-            await this.caseService.EditCaseByIdAndFormModelAsync(caseId, caseFormModel);
+            await caseService.EditCaseByIdAndFormModelAsync(caseId, caseFormModel);
 
-            var updatedCase = await this.dbContext.Cases.FirstAsync(c => c.Id == caseId);
+            var updatedCase = await dbContext.Cases.FirstAsync(c => c.Id == caseId);
             Assert.That(updatedCase?.Name, Is.EqualTo("Case1 Updated"));
             Assert.That(updatedCase.Price, Is.EqualTo(90));
             Assert.That(updatedCase.CaseSize, Is.EqualTo(CaseSize.MidTower));
@@ -140,9 +153,9 @@
         [Test]
         public async Task IsCaseExistByIdReturnsTrueIfCaseExistsInDbContext()
         {
-            var caseId = (await this.dbContext.Cases.FirstAsync(c => c.Name == "Case1")).Id;
+            var caseId = (await dbContext.Cases.FirstAsync(c => c.Name == "Case1")).Id;
 
-            var result = await this.caseService.IsCaseExistByIdAsync(caseId);
+            var result = await caseService.IsCaseExistByIdAsync(caseId);
 
             Assert.IsTrue(result);
         }
@@ -150,9 +163,9 @@
         [Test]
         public async Task IsCaseExistByIdReturnsFalseIfCaseDoesNotExistInDbContext()
         {
-            var caseId = -1; 
+            var caseId = -1;
 
-            var result = await this.caseService.IsCaseExistByIdAsync(caseId);
+            var result = await caseService.IsCaseExistByIdAsync(caseId);
 
             Assert.IsFalse(result);
         }
@@ -160,10 +173,10 @@
         [Test]
         public async Task IsProviderIdOwnerOfCaseIdReturnsFalseIfCaseIsOwnedByProviderWithProviderId()
         {
-            var testProviderId = providerId;
-            var caseId = (await this.dbContext.Cases.FirstAsync(c => c.Name == "Case1")).Id;
+            var providerId = testProviderId;
+            var caseId = (await dbContext.Cases.FirstAsync(c => c.Name == "Case1")).Id;
 
-            var result = await this.caseService.IsProviderIdOwnerOfCaseIdAsync(testProviderId, caseId);
+            var result = await caseService.IsProviderIdOwnerOfCaseIdAsync(providerId, caseId);
 
             Assert.IsFalse(result);
         }
@@ -172,9 +185,9 @@
         public async Task IsProviderIdOwnerOfCaseIdReturnsFalseIfCaseIsNotOwnedByProviderWithProvidedProviderId()
         {
             var providerId = "f1605898-5dc5-485e-9893-9306626a4b53";
-            var caseId = (await this.dbContext.Cases.FirstAsync(c => c.Name == "Case1")).Id;
+            var caseId = (await dbContext.Cases.FirstAsync(c => c.Name == "Case1")).Id;
 
-            var result = await this.caseService.IsProviderIdOwnerOfCaseIdAsync(providerId.ToString(), caseId);
+            var result = await caseService.IsProviderIdOwnerOfCaseIdAsync(providerId.ToString(), caseId);
 
             Assert.IsFalse(result);
         }
@@ -182,18 +195,18 @@
         [Test]
         public async Task DeleteCaseByIdRemovesCaseFromDbContext()
         {
-            var caseId = (await this.dbContext.Cases.FirstAsync(c => c.Name == "Case1")).Id;
+            var caseId = (await dbContext.Cases.FirstAsync(c => c.Name == "Case1")).Id;
 
-            await this.caseService.DeleteCaseByIdAsync(caseId);
+            await caseService.DeleteCaseByIdAsync(caseId);
 
-            var result = await this.dbContext.Cases.FirstOrDefaultAsync(c => c.Id == caseId);
+            var result = await dbContext.Cases.FirstOrDefaultAsync(c => c.Id == caseId);
             Assert.Null(result);
         }
 
         [Test]
         public async Task GetAllCasesAsyncReturnsAllCasesFromDbContext()
         {
-            var result = (await this.caseService.GetAllCasesAsync());
+            var result = await caseService.GetAllCasesAsync();
 
             Assert.That(result.Count(), Is.EqualTo(8));
         }
@@ -209,7 +222,7 @@
                 SearchTerm = "Case1"
             };
 
-            var result = (await this.caseService.SearchCasesAsync(queryModel));
+            var result = await caseService.SearchCasesAsync(queryModel);
 
             Assert.That(result.TotalComponents, Is.EqualTo(9));
         }
