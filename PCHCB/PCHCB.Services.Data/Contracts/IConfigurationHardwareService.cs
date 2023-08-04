@@ -26,10 +26,10 @@
 
         Task<GpuDetailsViewModel> SelectGpuForAssemble(int gpuId);
 
-        Task<PsuDetailsViewModel> SelectPsuForAssemble(int psuId);
+        Task<PsuDetailsViewModel> SelectPsuForAssemble(int psuId, int cpuId, int gpuId, int motherboardId, int coolerId, int storageId, int ramId);
 
-        Task<double> CalculateWattage(int cpuId, int gpuId, int motherboardId, int coolerId, int storageId);
+        Task<double> CalculateWattage(int cpuId, int gpuId, int motherboardId, int coolerId, int storageId, int ramId);
 
-        Task<IEnumerable<AssembleConfigurationFormModel>> AssemblePcConfiguration(int pcConfigurationId);
+        Task<int> AssemblePcConfiguration(int pcConfigurationId);
     }
 }

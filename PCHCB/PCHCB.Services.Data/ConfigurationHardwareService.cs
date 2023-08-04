@@ -17,6 +17,9 @@
 
     using static PCHCB.Common.ComponentsWattageConstants.Cooler;
     using static PCHCB.Common.EntityValidationConstants.Ram;
+    using static PCHCB.Common.ComponentsWattageConstants.Motherboard;
+    using static PCHCB.Common.ComponentsWattageConstants.Storage;
+    using static PCHCB.Common.ComponentsWattageConstants.Ram;
 
     public class ConfigurationHardwareService : IConfigurationHardwareService
     {
@@ -62,7 +65,6 @@
         public async Task<MotherboardDetailsViewModel> SelectMotherboardForAssemble(int motherboardId)
         {
             Motherboard motherboard = await this.dbContext.Motherboards
-                .AsNoTracking()
                 .Include(m => m.ConfigurationHardwares)
                 .ThenInclude(c => c.Cpu)
                 .Where(m => m.ConfigurationHardwares
@@ -171,10 +173,13 @@
         public async Task<RamDetailsViewModel> SelectRamForAssemble(int ramId, int coolerId, int motherboardId)
         {
             Ram ram = await this.dbContext.Rams
+                .AsNoTracking()
                 .FirstAsync(r => r.Id == ramId);
             Cooler cooler = await this.dbContext.Coolers
+                .AsNoTracking()
                 .FirstAsync(c => c.Id == coolerId);
             Motherboard motherboard = await this.dbContext.Motherboards
+                .AsNoTracking()
                 .FirstAsync(m => m.Id == motherboardId);
 
             // Current Problem: RAM might hit the air cooler, Cooler Width is not clear solution to the problem of ram hitting the cooler... for now i will check if the ram height is lower or equal than the standard for RAM Clearance = 32mm
@@ -214,19 +219,60 @@
         public async Task<StorageDetailsViewModel> SelectStorageForAssemble(int storageId)
         {
             Storage storage = await this.dbContext.Storages
+                .AsNoTracking()
                 .FirstAsync(s => s.Id == storageId);
+
+            if ((int)storage.Type == 0 || (int)storage.Type == 1)
+            {
+                storage = await this.dbContext.Storages
+                    .Include(s => s.ConfigurationHardwares)
+                    .ThenInclude(c => c.Case)
+                    .Where(s => s.ConfigurationHardwares
+                        .Any(c => c.Case.MaxStorageDevices > 0))
+                    .FirstAsync(s => s.Id == storageId);
+            }
+            else if ((int)storage.Type == 2)
+            {
+                storage = await this.dbContext.Storages
+                    .Include(s => s.ConfigurationHardwares)
+                    .ThenInclude(m => m.Motherboard)
+                    .Where(s => s.ConfigurationHardwares
+                        .Any(m => m.Motherboard.M2Slots > 0))
+                    .FirstAsync(s => s.Id == storageId);
+            }
 
             return new StorageDetailsViewModel()
             {
                 Name = storage.Name,
                 Capacity = storage.Capacity,
-                Type = (int)storage.Type,
                 Price = storage.Price,
             };
         }
 
-        public async Task<PsuDetailsViewModel> SelectPsuForAssemble(int psuId)
+
+        public async Task<PsuDetailsViewModel> SelectPsuForAssemble(int psuId, int cpuId, int gpuId, int motherboardId, int coolerId, int storageId, int ramId)
         {
+            Cpu cpu = await this.dbContext.Cpus
+                .AsNoTracking()
+                .FirstAsync(c => c.Id == cpuId);
+            Gpu gpu = await this.dbContext.Gpus
+                .AsNoTracking()
+                .FirstAsync(g => g.Id == gpuId);
+            Motherboard motherboard = await this.dbContext.Motherboards
+                .AsNoTracking()
+                .FirstAsync(m => m.Id == motherboardId);
+            Cooler cooler = await this.dbContext.Coolers
+                .AsNoTracking()
+                .FirstAsync(c => c.Id == coolerId);
+            Storage storage = await this.dbContext.Storages
+                .AsNoTracking()
+                .FirstAsync(s => s.Id == storageId);
+            Ram ram = await this.dbContext.Rams
+                .AsNoTracking()
+                .FirstAsync(r => r.Id == ramId);
+
+            double ConfigurationWattage = await CalculateWattage(cpuId, motherboardId, gpuId, storageId, ramId, coolerId);
+
             Psu psu = await this.dbContext.Psus
                 .FirstAsync(p => p.Id == psuId);
 
@@ -239,14 +285,131 @@
             };
         }
 
-        public Task<IEnumerable<AssembleConfigurationFormModel>> AssemblePcConfiguration(int pcConfigurationId)
+        public Task<int> AssemblePcConfiguration(int pcConfigurationId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<double> CalculateWattage(int cpuId, int gpuId, int motherboardId, int coolerId, int storageId)
+        /// <summary>
+        /// This Calculator is not Science-Proven, it is just a simple calculator that will calculate the wattage of the pc configuration in this app.
+        /// </summary>
+        /// <param name="cpuId"></param>
+        /// <param name="gpuId"></param>
+        /// <param name="motherboardId"></param>
+        /// <param name="coolerId"></param>
+        /// <param name="storageId"></param>
+        /// <param name="ramId"></param>
+        /// <returns></returns>
+        public async Task<double> CalculateWattage(int cpuId, int gpuId, int motherboardId, int coolerId, int storageId, int ramId)
         {
-            throw new NotImplementedException();
+            Cpu cpu = await this.dbContext.Cpus
+                .AsNoTracking()
+                .FirstAsync(c => c.Id == cpuId);
+            Gpu gpu = await this.dbContext.Gpus
+                .AsNoTracking()
+                .FirstAsync(g => g.Id == gpuId);
+            Motherboard motherboard = await this.dbContext.Motherboards
+                .AsNoTracking()
+                .FirstAsync(m => m.Id == motherboardId);
+            Cooler cooler = await this.dbContext.Coolers
+                .AsNoTracking()
+                .FirstAsync(c => c.Id == coolerId);
+            Storage storage = await this.dbContext.Storages
+                .AsNoTracking()
+                .FirstAsync(s => s.Id == storageId);
+            Ram ram = await this.dbContext.Rams
+                .AsNoTracking()
+                .FirstAsync(r => r.Id == ramId);
+
+            double motherboardWattage = GetMotherboardWattage(motherboard);
+            double coolerWattage = GetCoolerWattage(cooler);
+            double storageWattage = GetStorageWattage(storage);
+            double ramWattage = GetRamWattage(ram);
+
+            double totalWattage = (cpu.Tdp * CoolerSecureTDPMultiplierValue) +
+                                  gpu.PowerConsumption +
+                                  motherboardWattage +
+                                  coolerWattage +
+                                  storageWattage +
+                                  ramWattage;
+
+            return totalWattage;
+        }
+
+        private static double GetMotherboardWattage(Motherboard motherboard)
+        {
+            double motherboardWattage = 0;
+            if ((int)motherboard.FormFactor == 0)
+            {
+                motherboardWattage = AtxWattage;
+            }
+            else if ((int)motherboard.FormFactor == 1)
+            {
+                motherboardWattage = MicroAtxWattage;
+            }
+            else if ((int)motherboard.FormFactor == 2)
+            {
+                motherboardWattage = MiniItxWattage;
+            }
+            else if ((int)motherboard.FormFactor == 3)
+            {
+                motherboardWattage = ExtendedAtxWattage;
+            }
+
+            return motherboardWattage;
+        }
+
+        private static double GetCoolerWattage(Cooler cooler)
+        {
+            double coolerWattage = 0;
+            if ((int)cooler.Type == 0)
+            {
+                coolerWattage = AirWattage;
+            }
+            else if ((int)cooler.Type == 1)
+            {
+                coolerWattage = WaterWattage;
+            }
+
+            return coolerWattage;
+        }
+
+        private static double GetStorageWattage(Storage storage)
+        {
+            double storageWattage = 0;
+            if ((int)storage.Type == 0)
+            {
+                storageWattage = HddWattage;
+            }
+            else if ((int)storage.Type == 1)
+            {
+                storageWattage = SsdWattage;
+            }
+            else if ((int)storage.Type == 2)
+            {
+                storageWattage = M2Wattage;
+            }
+
+            return storageWattage;
+        }
+
+        private static double GetRamWattage(Ram ram)
+        {
+            double ramWattage = 0;
+            if ((int)ram.Type == 0)
+            {
+                ramWattage = Ddr3Wattage;
+            }
+            else if ((int)ram.Type == 1)
+            {
+                ramWattage = Ddr4Wattage;
+            }
+            else if ((int)ram.Type == 2)
+            {
+                ramWattage = Ddr5Wattage;
+            }
+
+            return ramWattage;
         }
     }
 }
