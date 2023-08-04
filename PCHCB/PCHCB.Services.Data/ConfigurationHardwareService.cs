@@ -274,6 +274,7 @@
             double ConfigurationWattage = await CalculateWattage(cpuId, motherboardId, gpuId, storageId, ramId, coolerId);
 
             Psu psu = await this.dbContext.Psus
+                .Where(p => p.Wattage >= ConfigurationWattage)
                 .FirstAsync(p => p.Id == psuId);
 
             return new PsuDetailsViewModel()
@@ -291,7 +292,7 @@
         }
 
         /// <summary>
-        /// This Calculator is not Science-Proven, it is just a simple calculator that will calculate the wattage of the pc configuration in this app.
+        /// This Method is not Science-Proven, it is just a simple calculation that will sum up the wattage of the pc components in a pc configuration that will put all pc components performance to the max.
         /// </summary>
         /// <param name="cpuId"></param>
         /// <param name="gpuId"></param>
