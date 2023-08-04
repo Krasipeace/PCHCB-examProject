@@ -138,8 +138,7 @@
 
         public async Task<SearchResult> SearchPsusAsync(AllQueryModel queryModel)
         {
-            IQueryable<Psu> psuQuery = dbContext
-                 .Psus
+            IQueryable<Psu> psuQuery = dbContext.Psus
                  .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))

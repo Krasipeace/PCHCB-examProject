@@ -16,6 +16,7 @@
     using PCHCB.Web.ViewModels.Storage;
 
     using static PCHCB.Common.ComponentsWattageConstants.Cooler;
+    using static PCHCB.Common.EntityValidationConstants.Ram;
 
     public class ConfigurationHardwareService : IConfigurationHardwareService
     {
@@ -167,17 +168,44 @@
             };
         }
 
-        public async Task<RamDetailsViewModel> SelectRamForAssemble(int ramId)
+        public async Task<RamDetailsViewModel> SelectRamForAssemble(int ramId, int coolerId, int motherboardId)
         {
             Ram ram = await this.dbContext.Rams
                 .FirstAsync(r => r.Id == ramId);
+            Cooler cooler = await this.dbContext.Coolers
+                .FirstAsync(c => c.Id == coolerId);
+            Motherboard motherboard = await this.dbContext.Motherboards
+                .FirstAsync(m => m.Id == motherboardId);
+
+            // Current Problem: RAM might hit the air cooler, Cooler Width is not clear solution to the problem of ram hitting the cooler... for now i will check if the ram height is lower or equal than the standard for RAM Clearance = 32mm
+            if (cooler.Type == 0)
+            {
+                ram = await this.dbContext.Rams
+                    .Include(r => r.ConfigurationHardwares)
+                    .ThenInclude(m => m.Motherboard)
+                    .Where(r => r.ConfigurationHardwares
+                        .Any(m => m.Motherboard.RamType == r.Type))
+                    .Include(r => r.ConfigurationHardwares)
+                    .ThenInclude(cool => cool.Cooler)
+                    .Where(r => r.ConfigurationHardwares
+                        .Any(r => r.Ram.Height <= RamClearanceValue))
+                    .FirstAsync();
+            }
+            else if ((int)cooler.Type == 1)
+            {
+                ram = await this.dbContext.Rams
+                    .Include(r => r.ConfigurationHardwares)
+                    .ThenInclude(m => m.Motherboard)
+                    .Where(r => r.ConfigurationHardwares
+                        .Any(m => m.Motherboard.RamType == r.Type))
+                    .FirstAsync();
+            }
 
             return new RamDetailsViewModel()
             {
                 Name = ram.Name,
                 Frequency = ram.Frequency,
                 Capacity = ram.Capacity,
-                Type = (int)ram.Type,
                 Height = ram.Height,
                 Price = ram.Price,
             };

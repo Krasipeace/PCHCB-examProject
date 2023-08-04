@@ -156,8 +156,7 @@
 
         public async Task<SearchResult> SearchMotherboardsAsync(AllQueryModel queryModel)
         {
-            IQueryable<Motherboard> motherboardQuery = dbContext
-                 .Motherboards
+            IQueryable<Motherboard> motherboardQuery = dbContext.Motherboards
                  .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))

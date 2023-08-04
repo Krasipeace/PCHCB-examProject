@@ -144,8 +144,7 @@
 
         public async Task<SearchResult> SearchRamsAsync(AllQueryModel queryModel)
         {
-            IQueryable<Ram> ramQuery = dbContext
-                 .Rams
+            IQueryable<Ram> ramQuery = dbContext.Rams
                  .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))

@@ -150,8 +150,7 @@
 
         public async Task<SearchResult> SearchCoolersAsync(AllQueryModel queryModel)
         {
-            IQueryable<Cooler> coolerQuery = dbContext
-                .Coolers
+            IQueryable<Cooler> coolerQuery = dbContext.Coolers
                 .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))

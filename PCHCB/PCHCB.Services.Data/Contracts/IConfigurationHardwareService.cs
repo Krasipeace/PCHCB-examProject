@@ -20,7 +20,7 @@
 
         Task<MotherboardDetailsViewModel> SelectMotherboardForAssemble(int motherboardId);
 
-        Task<RamDetailsViewModel> SelectRamForAssemble(int ramId); 
+        Task<RamDetailsViewModel> SelectRamForAssemble(int ramId, int coolerId, int motherboardId); 
 
         Task<StorageDetailsViewModel> SelectStorageForAssemble(int storageId);
 

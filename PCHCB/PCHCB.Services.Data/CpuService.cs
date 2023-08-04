@@ -156,8 +156,7 @@
 
         public async Task<SearchResult> SearchCpusAsync(AllQueryModel queryModel)
         {
-            IQueryable<Cpu> cpuQuery = dbContext
-                 .Cpus
+            IQueryable<Cpu> cpuQuery = dbContext.Cpus
                  .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))

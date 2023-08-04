@@ -135,8 +135,7 @@
 
         public async Task<SearchResult> SearchStoragesAsync(AllQueryModel queryModel)
         {
-            IQueryable<Storage> storageQuery = dbContext
-                 .Storages
+            IQueryable<Storage> storageQuery = dbContext.Storages
                  .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))

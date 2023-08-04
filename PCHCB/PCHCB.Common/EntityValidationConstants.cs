@@ -195,6 +195,8 @@
 
             public const int ModelNumberMinLengthValue = 4;
             public const int ModelNumberMaxLengthValue = 30;
+
+            public const double RamClearanceValue = 32;
         }
 
         public static class Storage

@@ -147,8 +147,7 @@
 
         public async Task<SearchResult> SearchGpusAsync(AllQueryModel queryModel)
         {
-            IQueryable<Gpu> gpuQuery = dbContext
-                 .Gpus
+            IQueryable<Gpu> gpuQuery = dbContext.Gpus
                  .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
