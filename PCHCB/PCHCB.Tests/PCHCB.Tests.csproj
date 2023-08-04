@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -20,7 +20,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PCHCB.Common\PCHCB.Common.csproj" />
+    <ProjectReference Include="..\PCHCB.Data.Models\PCHCB.Data.Models.csproj" />
+    <ProjectReference Include="..\PCHCB.Data\PCHCB.Data.csproj" />
     <ProjectReference Include="..\PCHCB.Services.Data\PCHCB.Services.Data.csproj" />
+    <ProjectReference Include="..\PCHCB.Web.Infrastructure\PCHCB.Web.Infrastructure.csproj" />
+    <ProjectReference Include="..\PCHCB.Web.ViewModels\PCHCB.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\PCHCB.Web\PCHCB.Web.csproj" />
   </ItemGroup>
 
 </Project>

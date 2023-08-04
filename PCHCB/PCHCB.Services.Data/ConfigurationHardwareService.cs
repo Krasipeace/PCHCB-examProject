@@ -6,7 +6,6 @@
     using PCHCB.Data.Models;
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.ViewModels.Case;
-    using PCHCB.Web.ViewModels.ConfigurationHardware;
     using PCHCB.Web.ViewModels.Cooler;
     using PCHCB.Web.ViewModels.Cpu;
     using PCHCB.Web.ViewModels.Gpu;
@@ -248,7 +247,6 @@
                 Price = storage.Price,
             };
         }
-
 
         public async Task<PsuDetailsViewModel> SelectPsuForAssemble(int psuId, int cpuId, int gpuId, int motherboardId, int coolerId, int storageId, int ramId)
         {
