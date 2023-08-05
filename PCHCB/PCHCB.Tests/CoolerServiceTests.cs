@@ -9,7 +9,6 @@
     using PCHCB.Data.Models.Enums;
     using PCHCB.Data.Models;
     using PCHCB.Web.ViewModels.Cooler;
-    using System.Runtime.Intrinsics.Arm;
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Enums;
 
@@ -82,12 +81,12 @@
                 Description = "Description3Description3Description3",
             };
 
-            var initialTotalCaseCount = await dbContext.Coolers.CountAsync();
+            var initialTotalCoolerCount = await dbContext.Coolers.CountAsync();
 
             var result = await coolerService.CreateCoolerAsync(testProviderId, model);
 
-            var newTotalCaseCount = await dbContext.Coolers.CountAsync();
-            Assert.IsTrue(newTotalCaseCount > initialTotalCaseCount);
+            var newTotalCoolerCount = await dbContext.Coolers.CountAsync();
+            Assert.IsTrue(newTotalCoolerCount > initialTotalCoolerCount);
 
             var cooler = await dbContext.Coolers.FirstAsync(c => c.Id == result);
             Assert.IsNotNull(cooler);
@@ -160,7 +159,7 @@
         }
 
         [Test]
-        public async Task IsProviderIdOwnerOfCaseIdReturnsFalseIfCaseIsOwnedByProviderWithProviderId()
+        public async Task IsProviderIdOwnerOfCoolerIdReturnsFalseIfCoolerIsOwnedByProviderWithProviderId()
         {
             var providerId = testProviderId;
             var coolerId = (await dbContext.Coolers.FirstAsync(c => c.Name == "Cooler1")).Id;
@@ -181,6 +180,16 @@
         }
 
         [Test]
+        public async Task IsCoolerExistByIdReturnsTrueIfDoesntExistInDb()
+        {
+            int coolerId = 2;
+
+            var result = await coolerService.IsCoolerExistByIdAsync(coolerId);
+
+            Assert.That(result, Is.True);
+        }
+
+        [Test]
         public async Task GetAllCoolersAsyncReturnsAllCoolersFromDb()
         {
             var result = await coolerService.GetAllCoolersAsync();
@@ -190,7 +199,7 @@
         }
 
         [Test]
-        public async Task SearchCoolersAsyncReturnsMatchingCases()
+        public async Task SearchCoolersAsyncReturnsMatchingCoolers()
         {
             var queryModel = new AllQueryModel()
             {

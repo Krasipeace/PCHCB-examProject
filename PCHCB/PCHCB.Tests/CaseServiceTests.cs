@@ -171,6 +171,16 @@
         }
 
         [Test]
+        public async Task IsCaseExistByIdReturnsTrueIfCaseDoesExistInDbContext()
+        {
+            var caseId = 1;
+
+            var result = await caseService.IsCaseExistByIdAsync(caseId);
+
+            Assert.IsFalse(result);
+        }
+
+        [Test]
         public async Task IsProviderIdOwnerOfCaseIdReturnsFalseIfCaseIsOwnedByProviderWithProviderId()
         {
             var providerId = testProviderId;
@@ -217,7 +227,7 @@
         {
             var queryModel = new AllQueryModel()
             {
-                ComponentsPerPage = 10,
+                ComponentsPerPage = 8,
                 CurrentPage = 1,
                 Sorting = GeneralSorting.Newest,
                 SearchTerm = "Case1"
