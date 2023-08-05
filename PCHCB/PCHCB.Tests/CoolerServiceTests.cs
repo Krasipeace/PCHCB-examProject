@@ -15,7 +15,6 @@
     [TestFixture]
     public class CoolerServiceTests
     {
-
         private PCHCBDbContext dbContext;
         private ICoolerService coolerService;
         private const string testProviderId = "3f900985-864b-484d-8612-7e20b74613fb";
