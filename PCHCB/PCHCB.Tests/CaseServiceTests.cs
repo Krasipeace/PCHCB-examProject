@@ -207,8 +207,9 @@
         public async Task GetAllCasesAsyncReturnsAllCasesFromDbContext()
         {
             var result = await caseService.GetAllCasesAsync();
+            var actualResult = await dbContext.Cases.CountAsync();
 
-            Assert.That(result.Count(), Is.EqualTo(8));
+            Assert.That(result.Count(), Is.EqualTo(actualResult));
         }
 
         [Test]
@@ -223,8 +224,9 @@
             };
 
             var result = await caseService.SearchCasesAsync(queryModel);
+            var actualResult = await dbContext.Cases.Where(c => c.Name.Contains(queryModel.SearchTerm)).CountAsync();
 
-            Assert.That(result.TotalComponents, Is.EqualTo(9));
+            Assert.That(result.TotalComponents, Is.EqualTo(actualResult));
         }
     }
 }
