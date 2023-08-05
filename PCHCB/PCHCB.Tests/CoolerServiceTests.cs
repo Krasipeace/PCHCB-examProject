@@ -61,6 +61,8 @@
                 AddedOn = DateTime.UtcNow,
                 ProviderId = Guid.NewGuid()
             });
+
+            dbContext.SaveChanges();
         }
 
         [Test]

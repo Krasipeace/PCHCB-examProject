@@ -43,6 +43,8 @@
                 AddedOn = DateTime.UtcNow,
                 ProviderId = Guid.Parse(testProviderId)
             });
+
+            dbContext.SaveChanges();
         }
 
         [Test]
