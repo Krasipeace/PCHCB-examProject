@@ -183,6 +183,19 @@
         }
 
         [Test]
+        public async Task GetPsuForDeleteByIdAsync()
+        {
+            int psuId = (await dbContext.Psus.FirstAsync(c => c.Name == "Psu1")).Id;
+
+            var result = await psuService.GetPsuForDeleteByIdAsync(psuId);
+
+            Assert.IsNotNull(result);
+            Assert.That(result.Name, Is.EqualTo("Psu1"));
+            Assert.That(result.ImageUrl, Is.EqualTo("http://ImageUrl1ImageUrl1.com"));
+            Assert.That(result.Description, Is.EqualTo("Description1Description1Description1"));
+        }
+
+        [Test]
         public async Task DeletePsuByIdAsyncRemovesPsuFromDbContext()
         {
             int psuId = (await dbContext.Psus.FirstAsync(p => p.Name == "Psu2")).Id;

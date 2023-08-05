@@ -18,6 +18,7 @@
     {
         private PCHCBDbContext dbContext;
         private IRamService ramService;
+        private IProviderService providerService;
         private const string testProviderId = "3f900985-864b-484d-8612-7e20b74613fb";
 
         [SetUp]
@@ -28,6 +29,7 @@
                 .Options;
             dbContext = new PCHCBDbContext(option);
             ramService = new RamService(dbContext);
+            providerService = new ProviderService(dbContext);
 
             dbContext.Rams.AddAsync(new Ram()
             {
@@ -138,7 +140,7 @@
 
         [Test]
         public async Task IsProviderIdOwnerOfRamIdReturnsFalseIfProviderIdIsOwner()
-        {  
+        {
             var providerId = testProviderId.ToUpper();
             int ramId = (await dbContext.Rams.FirstAsync(c => c.Name == "Ram1")).Id;
 
@@ -193,6 +195,19 @@
 
             Assert.IsNotNull(result);
             Assert.That(result.TotalComponents, Is.EqualTo(actualCount));
+        }
+
+        [Test]
+        public async Task GetRamForDeleteByIdAsync()
+        {
+            int ramId = (await dbContext.Rams.FirstAsync(c => c.Name == "Ram1")).Id;
+
+            var result = await ramService.GetRamForDeleteByIdAsync(ramId);
+
+            Assert.IsNotNull(result);
+            Assert.That(result.Name, Is.EqualTo("Ram1"));
+            Assert.That(result.ImageUrl, Is.EqualTo("http://ImageUrl1ImageUrl1.com/image.png"));
+            Assert.That(result.Description, Is.EqualTo("Description1Description1Description1"));
         }
 
         [Test]

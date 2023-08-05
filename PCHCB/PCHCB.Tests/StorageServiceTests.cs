@@ -178,6 +178,19 @@
         }
 
         [Test]
+        public async Task GetStorageForDeleteByIdAsync()
+        {
+            int storageId = (await dbContext.Storages.FirstAsync(c => c.Name == "Storage1")).Id;
+
+            var result = await storageService.GetStorageForDeleteByIdAsync(storageId);
+
+            Assert.IsNotNull(result);
+            Assert.That(result.Name, Is.EqualTo("Storage1"));
+            Assert.That(result.ImageUrl, Is.EqualTo("http://ImageUrl1ImageUrl1.com/image.png"));
+            Assert.That(result.Description, Is.EqualTo("Description1Description1Description1"));
+        }
+
+        [Test]
         public async Task DeleteStorageByIdAsyncRemovesStorageFromDbContext()
         {
             int storageId = (await dbContext.Storages.FirstAsync(s => s.Name == "Storage1")).Id;

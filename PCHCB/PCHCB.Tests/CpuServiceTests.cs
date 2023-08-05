@@ -123,7 +123,7 @@
         public async Task EditCpuByIdAndFormModelUpdatesExistingCpuInDbContext()
         {
             int cpuId = (await dbContext.Cpus.FirstAsync(c => c.Name == "Cpu1")).Id;
-            
+
             var model = new CpuFormModel()
             {
                 Name = "Cpu1Edit",
@@ -176,7 +176,7 @@
         public async Task IsCpuExistsByIdReturnsTrueIfExistsInDbContext()
         {
             int cpuId = 1;
-            
+
             var result = await cpuService.IsCpuExistByIdAsync(cpuId);
 
             Assert.IsTrue(result);
@@ -218,6 +218,19 @@
 
             Assert.IsNotNull(result);
             Assert.That(result.TotalComponents, Is.EqualTo(actualCount));
+        }
+
+        [Test]
+        public async Task GetCpuForDeleteByIdAsync()
+        {
+            int cpuId = (await dbContext.Cpus.FirstAsync(c => c.Name == "Cpu1")).Id;
+
+            var result = await cpuService.GetCpuForDeleteByIdAsync(cpuId);
+
+            Assert.IsNotNull(result);
+            Assert.That(result.Name, Is.EqualTo("Cpu1"));
+            Assert.That(result.ImageUrl, Is.EqualTo("http://ImageUrl1ImageUrl1.com"));
+            Assert.That(result.Description, Is.EqualTo("Description1Description1Description1"));
         }
 
         [Test]

@@ -10,6 +10,7 @@
     using PCHCB.Web.ViewModels.Case;
     using PCHCB.Web.ViewModels.Enums;
     using PCHCB.Web.ViewModels.Home;
+    using PCHCB.Data.Models;
 
     [TestFixture]
     public class CaseServiceTests
@@ -27,7 +28,7 @@
             dbContext = new PCHCBDbContext(options);
             caseService = new CaseService(dbContext);
 
-            dbContext.Cases.AddAsync(new Data.Models.Case()
+            dbContext.Cases.AddAsync(new Case()
             {
                 Name = "Case1",
                 Price = 100,
@@ -42,7 +43,7 @@
                 AddedOn = DateTime.Now,
                 ProviderId = Guid.Parse(testProviderId)
             });
-            dbContext.Cases.AddAsync(new Data.Models.Case()
+            dbContext.Cases.AddAsync(new Case()
             {
                 Name = "Case2",
                 Price = 150,
@@ -200,6 +201,19 @@
             var result = await caseService.IsProviderIdOwnerOfCaseIdAsync(providerId.ToString(), caseId);
 
             Assert.IsFalse(result);
+        }
+
+        [Test]
+        public async Task GetCaseForDeleteByIdAsync()
+        {
+            int caseId = (await dbContext.Cases.FirstAsync(c => c.Name == "Case1")).Id;
+
+            var result = await caseService.GetCaseForDeleteByIdAsync(caseId);
+
+            Assert.IsNotNull(result);
+            Assert.That(result.Name, Is.EqualTo("Case1"));
+            Assert.That(result.ImageUrl, Is.EqualTo("http://image.url"));
+            Assert.That(result.Description, Is.EqualTo("Description1Description1Description1"));
         }
 
         [Test]

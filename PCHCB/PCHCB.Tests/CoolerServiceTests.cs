@@ -217,6 +217,19 @@
         }
 
         [Test]
+        public async Task GetCoolerForDeleteByIdAsync()
+        {
+            int coolerId = (await dbContext.Coolers.FirstAsync(c => c.Name == "Cooler1")).Id;
+
+            var result = await coolerService.GetCoolerForDeleteByIdAsync(coolerId);
+
+            Assert.IsNotNull(result);
+            Assert.That(result.Name, Is.EqualTo("Cooler1"));
+            Assert.That(result.ImageUrl, Is.EqualTo("http://ImageUrl1ImageUrl1"));
+            Assert.That(result.Description, Is.EqualTo("Description1Description1Description1"));
+        }
+
+        [Test]
         public async Task DeleteCoolerByIdAsyncDeletesCoolerFromDb()
         {
             var coolerId = (await dbContext.Coolers.FirstAsync(c => c.Name == "Cooler1")).Id;

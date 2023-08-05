@@ -200,6 +200,19 @@
         }
 
         [Test]
+        public async Task GetGpuForDeleteByIdAsync()
+        {
+            int gpuId = (await dbContext.Gpus.FirstAsync(c => c.Name == "Gpu1")).Id;
+
+            var result = await gpuService.GetGpuForDeleteByIdAsync(gpuId);
+
+            Assert.IsNotNull(result);
+            Assert.That(result.Name, Is.EqualTo("Gpu1"));
+            Assert.That(result.ImageUrl, Is.EqualTo("http://ImageUrl1ImageUrl1.com"));
+            Assert.That(result.Description, Is.EqualTo("Description1Description1Description1"));
+        }
+
+        [Test]
         public async Task DeleteGpuByIdAsyncRemovesGpuFromDbContext()
         {
             int gpuId = (await dbContext.Gpus.FirstAsync(g => g.Name == "Gpu2")).Id;

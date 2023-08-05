@@ -221,6 +221,19 @@
         }
 
         [Test]
+        public async Task GetMotherboardForDeleteByIdAsync()
+        {
+            int motherboardId = (await dbContext.Motherboards.FirstAsync(c => c.Name == "Motherboard1")).Id;
+
+            var result = await motherboardService.GetMotherboardForDeleteByIdAsync(motherboardId);
+
+            Assert.IsNotNull(result);
+            Assert.That(result.Name, Is.EqualTo("Motherboard1"));
+            Assert.That(result.ImageUrl, Is.EqualTo("http://ImageUrl1ImageUrl1.com"));
+            Assert.That(result.Description, Is.EqualTo("Description1Description1Description1"));
+        }
+
+        [Test]
         public async Task DeleteMotherboardByIdAsyncRemovesMotherboardFromDbContext()
         {
             int motherboardId = (await dbContext.Motherboards.FirstAsync(m => m.Name == "Motherboard2")).Id;
