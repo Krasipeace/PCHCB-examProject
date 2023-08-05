@@ -117,7 +117,7 @@
             bool isProviderOwner = await gpuService
                 .IsProviderIdOwnerOfGpuIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditGpuHeDoesNotOwnErrorMessage;
 
@@ -168,7 +168,7 @@
             bool isProviderOwner = await gpuService
                 .IsProviderIdOwnerOfGpuIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditGpuHeDoesNotOwnErrorMessage;
 
@@ -216,7 +216,7 @@
                 .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await gpuService
                 .IsProviderIdOwnerOfGpuIdAsync(providerId!, id);
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteGpuHeDoesNotOwnErrorMessage;
 
@@ -261,7 +261,7 @@
                 .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await gpuService
                 .IsProviderIdOwnerOfGpuIdAsync(providerId!, id);
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteGpuHeDoesNotOwnErrorMessage;
 

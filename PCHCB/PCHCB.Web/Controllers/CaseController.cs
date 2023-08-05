@@ -118,7 +118,7 @@
             bool isProviderOwner = await caseService
                 .IsProviderIdOwnerOfCaseIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditCaseHeDoesNotOwnErrorMessage;
 
@@ -169,7 +169,7 @@
             bool isProviderOwner = await caseService
                 .IsProviderIdOwnerOfCaseIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditCaseHeDoesNotOwnErrorMessage;
 
@@ -218,7 +218,7 @@
             bool isProviderOwner = await caseService
                 .IsProviderIdOwnerOfCaseIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCaseHeDoesNotOwnErrorMessage;
 
@@ -265,7 +265,7 @@
             bool isProviderOwner = await caseService
                 .IsProviderIdOwnerOfCaseIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCaseHeDoesNotOwnErrorMessage;
 

@@ -61,7 +61,7 @@ You can also register as new User and/or Provider.
 
 The Admin Area is accessible only by the Administrator. It is a separate area of the app, which is not accessible by the regular users. The Admin Area provides the Administrator with full access to the app.
 
-![AdminArea](https://i.imgur.com/Xu94jnc.png)
+![AdminArea](https://i.imgur.com/gtAI2VW.png)
 
-![AllUsers](https://i.imgur.com/6PnT3dr.png)
+![AllUsers](https://i.imgur.com/PwIWqxZ.png)
 

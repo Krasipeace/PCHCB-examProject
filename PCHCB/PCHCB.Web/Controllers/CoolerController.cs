@@ -118,7 +118,7 @@
             bool isProviderOwner = await coolerService
                 .IsProviderIdOwnerOfCoolerIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditCoolerHeDoesNotOwnErrorMessage;
 
@@ -169,7 +169,7 @@
             bool isProviderOwner = await coolerService
                 .IsProviderIdOwnerOfCoolerIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditCoolerHeDoesNotOwnErrorMessage;
 
@@ -218,7 +218,7 @@
                 await providerService.GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await coolerService
                 .IsProviderIdOwnerOfCoolerIdAsync(providerId!, id);
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCoolerHeDoesNotOwnErrorMessage;
 
@@ -265,7 +265,7 @@
             bool isProviderOwner = await coolerService
                 .IsProviderIdOwnerOfCoolerIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCoolerHeDoesNotOwnErrorMessage;
 

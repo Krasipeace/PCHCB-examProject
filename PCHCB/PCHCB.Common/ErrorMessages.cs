@@ -5,6 +5,8 @@
         public static class General
         {
             public const string SomethingWentWrong = "Oops, something went wrong! Try again later or contact administrator!";
+
+            public const string AreaUnderConstruction = "Unfortunately this area is still under construction!";
         }
 
         public static class Provider

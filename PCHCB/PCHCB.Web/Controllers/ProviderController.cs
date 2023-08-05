@@ -132,7 +132,9 @@
         {
             if (this.User.IsInRole(AdminRoleName))
             {
-                return RedirectToAction("Mine", "Provider", new { area = "Admin" });
+                this.TempData[InformationMessage] = AreaUnderConstruction;
+
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
 
             string userId = this.User.GetId()!;

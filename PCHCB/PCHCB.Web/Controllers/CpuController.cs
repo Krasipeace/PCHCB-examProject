@@ -118,7 +118,7 @@
             bool isProviderOwner = await cpuService
                 .IsProviderIdOwnerOfCpuIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditCpuHeDoesNotOwnErrorMessage;
 
@@ -169,7 +169,7 @@
             bool isProviderOwner = await cpuService
                 .IsProviderIdOwnerOfCpuIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditCpuHeDoesNotOwnErrorMessage;
 
@@ -217,7 +217,7 @@
                 .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await cpuService
                 .IsProviderIdOwnerOfCpuIdAsync(providerId!, id);
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCpuHeDoesNotOwnErrorMessage;
 
@@ -261,7 +261,7 @@
                 .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await cpuService
                 .IsProviderIdOwnerOfCpuIdAsync(providerId!, id);
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteCpuHeDoesNotOwnErrorMessage;
 

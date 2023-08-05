@@ -117,7 +117,7 @@
             bool isProviderOwner = await psuService
                 .IsProviderIdOwnerOfPsuIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditPowerSupplyHeDoesNotOwnErrorMessage;
 
@@ -168,7 +168,7 @@
             bool isProviderOwner = await psuService
                 .IsProviderIdOwnerOfPsuIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditPowerSupplyHeDoesNotOwnErrorMessage;
 
@@ -216,7 +216,7 @@
                 .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await psuService
                 .IsProviderIdOwnerOfPsuIdAsync(providerId!, id);
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeletePowerSupplyHeDoesNotOwnErrorMessage;
 
@@ -261,7 +261,7 @@
                 .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await psuService
                 .IsProviderIdOwnerOfPsuIdAsync(providerId!, id);
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeletePowerSupplyHeDoesNotOwnErrorMessage;
 

@@ -117,7 +117,7 @@
             bool isProviderOwner = await storageService
                 .IsProviderIdOwnerOfStorageIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditStorageDeviceHeDoesNotOwnErrorMessage;
 
@@ -168,7 +168,7 @@
             bool isProviderOwner = await storageService
                 .IsProviderIdOwnerOfStorageIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditStorageDeviceHeDoesNotOwnErrorMessage;
 
@@ -217,7 +217,7 @@
                 .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await storageService
                 .IsProviderIdOwnerOfStorageIdAsync(providerId!, id);
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteStorageDeviceHeDoesNotOwnErrorMessage;
 
@@ -262,7 +262,7 @@
                 .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await storageService
                 .IsProviderIdOwnerOfStorageIdAsync(providerId!, id);
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteStorageDeviceHeDoesNotOwnErrorMessage;
 

@@ -118,7 +118,7 @@
             bool isProviderOwner = await ramService
                 .IsProviderIdOwnerOfRamIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditRamHeDoesNotOwnErrorMessage;
 
@@ -169,7 +169,7 @@
             bool isProviderOwner = await ramService
                 .IsProviderIdOwnerOfRamIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditRamHeDoesNotOwnErrorMessage;
 
@@ -217,7 +217,7 @@
                 .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await ramService
                 .IsProviderIdOwnerOfRamIdAsync(providerId!, id);
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteRamHeDoesNotOwnErrorMessage;
 
@@ -262,7 +262,7 @@
                 .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await ramService
                 .IsProviderIdOwnerOfRamIdAsync(providerId!, id);
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteRamHeDoesNotOwnErrorMessage;
 

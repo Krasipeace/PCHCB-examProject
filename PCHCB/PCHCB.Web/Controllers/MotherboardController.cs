@@ -117,7 +117,7 @@
             bool isProviderOwner = await motherboardService
                 .IsProviderIdOwnerOfMotherboardIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditMotherboardHeDoesNotOwnErrorMessage;
 
@@ -168,7 +168,7 @@
             bool isProviderOwner = await motherboardService
                 .IsProviderIdOwnerOfMotherboardIdAsync(providerId!, id);
 
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotEditMotherboardHeDoesNotOwnErrorMessage;
 
@@ -216,7 +216,7 @@
                 .GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await motherboardService
                 .IsProviderIdOwnerOfMotherboardIdAsync(providerId!, id);
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteMotherboardHeDoesNotOwnErrorMessage;
 
@@ -261,7 +261,7 @@
                 await providerService.GetProviderByUserIdAsync(User.GetId()!);
             bool isProviderOwner = await motherboardService
                 .IsProviderIdOwnerOfMotherboardIdAsync(providerId!, id);
-            if (!isProviderOwner)
+            if (!isProviderOwner && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = ProviderCannotDeleteMotherboardHeDoesNotOwnErrorMessage;
 
