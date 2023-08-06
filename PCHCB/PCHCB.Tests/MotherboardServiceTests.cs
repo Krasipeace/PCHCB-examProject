@@ -14,7 +14,7 @@
     using PCHCB.Web.ViewModels.Home;
 
     [TestFixture]
-    public class MotherboardServiceTests
+    internal class MotherboardServiceTests
     {
         private PCHCBDbContext dbContext;
         private IMotherboardService motherboardService;
@@ -162,10 +162,10 @@
         [Test]
         public async Task IsProviderIdOwnerOfMotherboardIdReturnsFalseIfProviderIdIsOwner()
         {
-            var providerId = Guid.Parse(testProviderId);
-            int motherboardId = (await dbContext.Motherboards.FirstAsync(c => c.Name == "Motherboard1Edit")).Id;
+            var providerId = testProviderId.ToUpper();
+            int motherboardId = (await dbContext.Motherboards.FirstAsync(c => c.Name == "Motherboard1")).Id;
 
-            var result = await motherboardService.IsProviderIdOwnerOfMotherboardIdAsync(providerId.ToString(), motherboardId);
+            var result = await motherboardService.IsProviderIdOwnerOfMotherboardIdAsync(providerId, motherboardId);
 
             Assert.IsFalse(result);
         }

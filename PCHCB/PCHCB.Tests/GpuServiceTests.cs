@@ -14,7 +14,7 @@
     using PCHCB.Web.ViewModels.Home;
 
     [TestFixture]
-    public class GpuServiceTests
+    internal class GpuServiceTests
     {
         private PCHCBDbContext dbContext;
         private IGpuService gpuService;

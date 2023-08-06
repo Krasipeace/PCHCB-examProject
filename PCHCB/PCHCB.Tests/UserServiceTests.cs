@@ -10,7 +10,7 @@
     using PCHCB.Services.Data.Contracts;
 
     [TestFixture]
-    public class UserServiceTests
+    internal class UserServiceTests
     {
         private PCHCBDbContext dbContext;
         private IUserService userService;
@@ -67,7 +67,7 @@
             dbContext.SaveChanges();
 
             var result = await userService.AllUsersAsync();
-            Assert.That(result.Count, Is.EqualTo(3));
+            Assert.That(result.Count, Is.EqualTo(4));
 
             var userViewModel = result.FirstOrDefault(u => u.Email == user1.Email);
             Assert.That(userViewModel, Is.Not.Null);

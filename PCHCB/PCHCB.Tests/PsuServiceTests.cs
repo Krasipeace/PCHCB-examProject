@@ -14,7 +14,7 @@
     using PCHCB.Web.ViewModels.Home;
 
     [TestFixture]
-    public class PsuServiceTests
+    internal class PsuServiceTests
     {
         private PCHCBDbContext dbContext;
         private IPsuService psuService;
@@ -124,14 +124,14 @@
         }
 
         [Test]
-        public async Task IsProviderIdOwnerOfPsuIdReturnsFalseIfProviderIdIsOwner()
+        public async Task IsProviderIdOwnerOfPsuIdReturnsTrueIfProviderIdIsOwner()
         {
             var providerId = testProviderId;
             int psuId = (await dbContext.Psus.FirstAsync(c => c.Name == "Psu1Edit")).Id;
 
             var result = await psuService.IsProviderIdOwnerOfPsuIdAsync(providerId, psuId);
 
-            Assert.IsFalse(result);
+            Assert.IsTrue(result);
         }
 
         [Test]

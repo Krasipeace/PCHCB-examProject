@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PCHCB.Services.Data", "PCHC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C12970EB-1BDD-4E31-9A2E-F194C6C9DE4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCHCB.Tests", "PCHCB.Tests\PCHCB.Tests.csproj", "{1AE63E91-E695-4D71-AF53-AF5D6E4FB5CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PCHCB.Tests", "PCHCB.Tests\PCHCB.Tests.csproj", "{1AE63E91-E695-4D71-AF53-AF5D6E4FB5CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

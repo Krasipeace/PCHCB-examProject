@@ -13,7 +13,7 @@
     using PCHCB.Web.ViewModels.Enums;
 
     [TestFixture]
-    public class CoolerServiceTests
+    internal class CoolerServiceTests
     {
         private PCHCBDbContext dbContext;
         private ICoolerService coolerService;

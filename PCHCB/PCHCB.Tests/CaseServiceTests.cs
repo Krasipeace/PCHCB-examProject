@@ -13,7 +13,7 @@
     using PCHCB.Data.Models;
 
     [TestFixture]
-    public class CaseServiceTests
+    internal class CaseServiceTests
     {
         private PCHCBDbContext dbContext;
         private ICaseService caseService;

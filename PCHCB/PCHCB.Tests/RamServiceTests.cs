@@ -14,7 +14,7 @@
     using PCHCB.Web.ViewModels.Home;
 
     [TestFixture]
-    public class RamServiceTests
+    internal class RamServiceTests
     {
         private PCHCBDbContext dbContext;
         private IRamService ramService;
@@ -139,14 +139,14 @@
         }
 
         [Test]
-        public async Task IsProviderIdOwnerOfRamIdReturnsFalseIfProviderIdIsOwner()
+        public async Task IsProviderIdOwnerOfRamIdReturnsTrueIfProviderIdIsOwner()
         {
             var providerId = testProviderId.ToUpper();
             int ramId = (await dbContext.Rams.FirstAsync(c => c.Name == "Ram1")).Id;
 
             var result = await ramService.IsProviderIdOwnerOfRamIdAsync(providerId, ramId);
 
-            Assert.IsFalse(result);
+            Assert.IsTrue(result);
         }
 
         [Test]

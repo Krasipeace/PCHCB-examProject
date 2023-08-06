@@ -14,7 +14,7 @@
     using PCHCB.Web.ViewModels.Home;
 
     [TestFixture]
-    public class StorageServiceTests
+    internal class StorageServiceTests
     {
         private PCHCBDbContext dbContext;
         private IStorageService storageService;
@@ -119,14 +119,14 @@
         }
 
         [Test]
-        public async Task IsProviderIdOwnerOfStorageIdReturnsFalseIfProviderIdIsOwner()
+        public async Task IsProviderIdOwnerOfStorageIdReturnsTrueIfProviderIdIsOwner()
         {
             var providerId = testProviderId.ToUpper();
             int storageId = (await dbContext.Storages.FirstAsync(c => c.Name == "Storage1")).Id;
 
             var result = await storageService.IsProviderIdOwnerOfStorageIdAsync(providerId, storageId);
 
-            Assert.IsFalse(result);
+            Assert.IsTrue(result);
         }
 
         [Test]

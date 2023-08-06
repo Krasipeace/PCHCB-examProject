@@ -14,7 +14,7 @@
     using PCHCB.Web.ViewModels.Home;
 
     [TestFixture]
-    public class CpuServiceTests
+    internal class CpuServiceTests
     {
         private PCHCBDbContext dbContext;
         private ICpuService cpuService;
