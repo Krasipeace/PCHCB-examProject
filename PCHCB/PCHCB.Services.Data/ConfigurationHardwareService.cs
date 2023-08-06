@@ -325,7 +325,7 @@
             double storageWattage = GetStorageWattage(storage);
             double ramWattage = GetRamWattage(ram);
 
-            double totalWattage = (cpu.Tdp * CoolerSecureTDPMultiplierValue) +
+            double totalWattage = cpu.Tdp +
                                   gpu.PowerConsumption +
                                   motherboardWattage +
                                   coolerWattage +

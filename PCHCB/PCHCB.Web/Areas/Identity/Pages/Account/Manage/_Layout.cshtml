@@ -1,0 +1,30 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "Views/Shared/_Layout.cshtml";
+    }
+    ViewData["Title"] = "Manage your account";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+<div class="row">
+    <section class="align-content-center">
+        <h5>Change your account settings</h5>
+        <div class="row">
+            <div class="col-md-3">
+                <partial name="_ManageNav" />
+            </div>
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
+        </div>
+    </section>
+</div>
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
