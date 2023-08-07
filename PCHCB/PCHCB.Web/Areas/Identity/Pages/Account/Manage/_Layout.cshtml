@@ -1,11 +1,19 @@
-﻿@{
+﻿@using PCHCB.Web.Infrastructure.Extensions;
+@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
     {
         Layout = parentLayout.ToString();
     }
     else
     {
-        Layout = "Views/Shared/_Layout.cshtml";
+        if (User.IsAdmin())
+        {
+            Layout = "Areas/Views/Shared/_AdminLayout.cshtml";
+        }
+        else
+        {
+            Layout = "Views/Shared/_Layout.cshtml";
+        }
     }
     ViewData["Title"] = "Manage your account";
 }

@@ -5,7 +5,6 @@
 
     using PCHCB.Services.Data.Contracts;
 
-    [AllowAnonymous]
     public class ConfigurationHardwareController : Controller
     {
         private readonly IConfigurationHardwareService configurationHardwareService;

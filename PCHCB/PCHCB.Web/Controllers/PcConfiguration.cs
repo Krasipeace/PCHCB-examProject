@@ -6,7 +6,7 @@
     [Authorize]
     public class PcConfiguration : Controller
     {
-        public IActionResult Mine()
+        public IActionResult Index()
         {
             return View();
         }

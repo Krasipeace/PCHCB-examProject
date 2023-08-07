@@ -5,6 +5,7 @@
 @inject IProviderService providerService
 @{
     bool isUserProvider = await this.providerService.ProviderExistsByUserIdAsync(this.User.GetId()!);
+    bool isUserAdmin = this.User.IsAdmin();
 }
 
 <!DOCTYPE html>
@@ -53,9 +54,12 @@
                             </li>
                             @if (isUserProvider)
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="" asp-controller="Provider" asp-action="Mine">My Hardware</a>
-                                </li>
+                                @if (!isUserAdmin)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Provider" asp-action="Mine">My Hardware</a>
+                                    </li>
+                                }
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Add Component
@@ -72,12 +76,9 @@
                                     </ul>
                                 </li>
                             }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="" asp-controller="PcConfiguration" asp-action="Index">My PC Builds</a>
-                                </li>
-                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="PcConfiguration" asp-action="Index">My PC Builds</a>
+                            </li>
                         }
                     </ul>
                     <partial name="_LoginPartial" />

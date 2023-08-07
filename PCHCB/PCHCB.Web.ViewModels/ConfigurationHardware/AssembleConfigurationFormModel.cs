@@ -4,6 +4,8 @@
 
     public class AssembleConfigurationFormModel
     {
+        public int PcConfigurationId { get; set; }
+
         public int CaseId { get; set; }
 
         public int CoolerId { get; set; }
