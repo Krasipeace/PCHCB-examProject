@@ -1,17 +1,13 @@
 ﻿namespace PCHCB.Tests
 {
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     using Moq;
-
-    using NUnit.Framework.Interfaces;
 
     using PCHCB.Data;
     using PCHCB.Data.Models;
     using PCHCB.Services.Data;
     using PCHCB.Services.Data.Contracts;
-    using PCHCB.Web.ViewModels.Case;
     using PCHCB.Web.ViewModels.Provider;
 
     internal class ProviderServiceMockTests

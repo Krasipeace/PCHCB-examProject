@@ -13,12 +13,14 @@
     using PCHCB.Web.ViewModels.Psu;
     using PCHCB.Web.ViewModels.Ram;
     using PCHCB.Web.ViewModels.Storage;
+    using PCHCB.Web.ViewModels.ConfigurationHardware;
 
     using static PCHCB.Common.ComponentsWattageConstants.Cooler;
     using static PCHCB.Common.EntityValidationConstants.Ram;
     using static PCHCB.Common.ComponentsWattageConstants.Motherboard;
     using static PCHCB.Common.ComponentsWattageConstants.Storage;
     using static PCHCB.Common.ComponentsWattageConstants.Ram;
+    using PCHCB.Data.Models.Enums;
 
     public class ConfigurationHardwareService : IConfigurationHardwareService
     {
@@ -284,9 +286,22 @@
             };
         }
 
-        public Task<int> AssemblePcConfiguration(int pcConfigurationId)
+        public async Task<int> AssemblePcConfiguration(AssembleConfigurationFormModel buildConfiguration)
         {
-            throw new NotImplementedException();
+            dbContext.ConfigurationHardwares.Add(new ConfigurationHardware
+            {
+                PcConfigurationId = buildConfiguration.PcConfigurationId,
+                CpuId = buildConfiguration.CpuId,
+                GpuId = buildConfiguration.GpuId,
+                MotherboardId = buildConfiguration.MotherboardId,
+                CoolerId = buildConfiguration.CoolerId,
+                StorageId = buildConfiguration.StorageId,
+                RamId = buildConfiguration.RamId,
+                CaseId = buildConfiguration.CaseId,
+                PsuId = buildConfiguration.PsuId,
+            });
+
+            return await dbContext.SaveChangesAsync();
         }
 
         /// <summary>

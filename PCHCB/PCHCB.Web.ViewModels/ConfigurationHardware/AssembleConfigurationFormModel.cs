@@ -7,6 +7,7 @@
         public int PcConfigurationId { get; set; }
 
         public int CaseId { get; set; }
+        public string CaseName { get; set; } = null!;
 
         public int CoolerId { get; set; }
 
@@ -16,7 +17,7 @@
 
         public int MotherboardId { get; set; }
 
-        public int PowerSupplyId { get; set; }
+        public int PsuId { get; set; }
 
         public int RamId { get; set; }
 

@@ -30,6 +30,6 @@
 
         Task<double> CalculateWattage(int cpuId, int gpuId, int motherboardId, int coolerId, int storageId, int ramId);
 
-        Task<int> AssemblePcConfiguration(int pcConfigurationId);
+        Task<int> AssemblePcConfiguration(AssembleConfigurationFormModel buildConfiguration);
     }
 }
