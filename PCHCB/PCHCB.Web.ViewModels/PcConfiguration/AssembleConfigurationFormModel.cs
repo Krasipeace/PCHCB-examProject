@@ -1,13 +1,13 @@
-﻿namespace PCHCB.Web.ViewModels.ConfigurationHardware
+﻿namespace PCHCB.Web.ViewModels.PcConfiguration
 {
-    using PCHCB.Web.ViewModels.PcConfiguration;
 
     public class AssembleConfigurationFormModel
     {
+        public int Id { get; set; }
+
         public int PcConfigurationId { get; set; }
 
         public int CaseId { get; set; }
-        public string CaseName { get; set; } = null!;
 
         public int CoolerId { get; set; }
 
@@ -21,8 +21,6 @@
 
         public int RamId { get; set; }
 
-        public int StorageId { get; set;}
-
-        public SaveConfigurationFormModel SaveConfigurationFormModel { get; set; } = null!;
+        public int StorageId { get; set; }
     }
 }
