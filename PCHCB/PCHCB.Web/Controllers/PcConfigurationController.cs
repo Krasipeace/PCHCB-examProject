@@ -1,20 +1,16 @@
 ﻿namespace PCHCB.Web.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using PCHCB.Common;
-    using PCHCB.Services.Data;
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Infrastructure.Extensions;
+    using PCHCB.Web.ViewModels.PcConfiguration;
     using PCHCB.Web.ViewModels.Case;
     using PCHCB.Web.ViewModels.Cooler;
     using PCHCB.Web.ViewModels.Cpu;
     using PCHCB.Web.ViewModels.Gpu;
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Motherboard;
-    using PCHCB.Web.ViewModels.PcConfiguration;
-    using PCHCB.Web.ViewModels.Provider;
     using PCHCB.Web.ViewModels.Psu;
     using PCHCB.Web.ViewModels.Ram;
     using PCHCB.Web.ViewModels.Storage;
@@ -22,18 +18,14 @@
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ExceptionMessages;
     using static PCHCB.Common.ErrorMessages.User;
-    using static PCHCB.Common.GeneralAppConstants;
-    using Microsoft.Extensions.Configuration.UserSecrets;
 
     public class PcConfigurationController : Controller
     {
         private readonly IPcConfigurationService pcConfigurationService;
-        private readonly IProviderService providerService;
 
-        public PcConfigurationController(IPcConfigurationService pcConfigurationService, IProviderService providerService)
+        public PcConfigurationController(IPcConfigurationService pcConfigurationService)
         {
             this.pcConfigurationService = pcConfigurationService;
-            this.providerService = providerService;
         }
 
         public async Task<IActionResult> Assemble(AssembleConfigurationFormModel model)
@@ -76,12 +68,7 @@
 
                 return this.RedirectToAction("Index", "Home");
             }
-
-            if (this.User.IsInRole(AdminRoleName))
-            {
-                return this.RedirectToAction("Index", "PcConfiguration", new { Area = AdminAreaName });
-            }
-
+            
             List<PcConfigurationViewModel> pcBuilds =
                 new List<PcConfigurationViewModel>();
 

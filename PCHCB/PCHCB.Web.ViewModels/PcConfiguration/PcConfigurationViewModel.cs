@@ -4,6 +4,9 @@
 
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Pc Configuration Short Info Model
+    /// </summary>
     public class PcConfigurationViewModel
     {
         public PcConfigurationViewModel()

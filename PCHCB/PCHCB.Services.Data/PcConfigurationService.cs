@@ -290,7 +290,32 @@
             //await dbContext.PcConfigurations.AddAsync(newPcBuild.Id);
             await dbContext.SaveChangesAsync();
 
-            return newPcBuild.Id;
+            return new AssembleConfigurationFormModel()
+            {
+                CpuId = newPcBuild.CpuId,
+                GpuId = newPcBuild.GpuId,
+                MotherboardId = newPcBuild.MotherboardId,
+                CoolerId = newPcBuild.CoolerId,
+                StorageId = newPcBuild.StorageId,
+                RamId = newPcBuild.RamId,
+                PsuId = newPcBuild.PsuId,
+                CaseId = newPcBuild.CaseId,
+            }.PcConfigurationId;
+        }
+
+        public async Task<IEnumerable<PcConfigurationViewModel>> GetMyBuilds(string builderId)
+        {
+            IEnumerable<PcConfigurationViewModel> myBuilds = await dbContext.PcConfigurations
+                .Where(p => p.BuilderId.ToString()!.ToUpper() == builderId.ToUpper())
+                .Select(r => new PcConfigurationViewModel()
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Price = r.Price,
+                })
+                .ToListAsync();
+
+            return myBuilds;
         }
 
         /// <summary>
@@ -333,7 +358,7 @@
             return totalWattage;
         }
 
-        private static double GetMotherboardWattage(Motherboard motherboard)
+        public double GetMotherboardWattage(Motherboard motherboard)
         {
             double motherboardWattage = 0;
             if ((int)motherboard.FormFactor == 0)
@@ -356,7 +381,7 @@
             return motherboardWattage;
         }
 
-        private static double GetCoolerWattage(Cooler cooler)
+        public double GetCoolerWattage(Cooler cooler)
         {
             double coolerWattage = 0;
             if ((int)cooler.Type == 0)
@@ -371,7 +396,7 @@
             return coolerWattage;
         }
 
-        private static double GetStorageWattage(Storage storage)
+        public double GetStorageWattage(Storage storage)
         {
             double storageWattage = 0;
             if ((int)storage.Type == 0)
@@ -390,7 +415,7 @@
             return storageWattage;
         }
 
-        private static double GetRamWattage(Ram ram)
+        public double GetRamWattage(Ram ram)
         {
             double ramWattage = 0;
             if ((int)ram.Type == 0)
@@ -412,21 +437,6 @@
         public async Task<decimal> CalculatePcConfigurationPrice(int pcConfigurationId)
         {
             return 0m;
-        }
-
-        public async Task<IEnumerable<PcConfigurationViewModel>> GetMyBuilds(string builderId)
-        {
-            IEnumerable<PcConfigurationViewModel> myBuilds = await dbContext.PcConfigurations
-                .Where(p => p.BuilderId.ToString()!.ToUpper() == builderId.ToUpper())
-                .Select(r => new PcConfigurationViewModel()
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    Price = r.Price,
-                })
-                .ToListAsync();
-
-            return myBuilds;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
+    using PCHCB.Data.Models;
     using PCHCB.Web.ViewModels.Case;
     using PCHCB.Web.ViewModels.Cooler;
     using PCHCB.Web.ViewModels.Cpu;
@@ -35,5 +36,13 @@
         Task<int> AssemblePcConfiguration(AssembleConfigurationFormModel buildConfiguration);
 
         Task<IEnumerable<PcConfigurationViewModel>> GetMyBuilds(string builderId);
+
+        double GetRamWattage(Ram Ram);
+
+        double GetMotherboardWattage(Motherboard Motherboard);
+
+        double GetCoolerWattage(Cooler Cooler);
+
+        double GetStorageWattage(Storage Storage);
     }
 }

@@ -5,6 +5,9 @@
     using static PCHCB.Common.EntityValidationConstants.PcConfiguration;
     using static PCHCB.Common.InputValidationDataMessages.General;
 
+    /// <summary>
+    /// Save Pc Configuration Form Model
+    /// </summary>
     public class SaveConfigurationFormModel
     {
         public int Id { get; set; }

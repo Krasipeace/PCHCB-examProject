@@ -1,9 +1,10 @@
 ﻿namespace PCHCB.Web.ViewModels.PcConfiguration
 {
+    /// <summary>
+    /// Assemble Pc Configuration Form Model
+    /// </summary>
     public class AssembleConfigurationFormModel
     {
-        public int Id { get; set; }
-
         public int PcConfigurationId { get; set; }
 
         public int CaseId { get; set; }
