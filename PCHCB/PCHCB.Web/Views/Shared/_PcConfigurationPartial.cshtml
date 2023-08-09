@@ -1,0 +1,27 @@
+﻿@model List<PcConfigurationViewModel>
+
+<div class="row">
+    @if (Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-3">
+@*                    <img class="card-img-top img-thumbnail" src="@item.ImageUrl" alt="image">
+*@                    <div class="card-body text-center">
+                        <p>@item.Name</p>
+                        <p>$@($"{item.Price:f2}")</p>
+@*                      <p><a class="btn btn-outline-info" asp-area="" asp-controller="PcConfiguration" asp-action="Details" asp-route-id="@item.Id">Details</a></p>
+*@                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="mt-2">
+            You dont have any Pc Builds Yet! Create more to be able to view them!
+            <a class="btn btn-outline-primary" asp-area="" asp-controller="PcConfiguration" asp-action="Assemble">Start a new Build!</a>
+        </p>
+    }
+</div>

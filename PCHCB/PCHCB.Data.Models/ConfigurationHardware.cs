@@ -5,8 +5,6 @@
     /// </summary>
     public class ConfigurationHardware
     {
-        public int Id { get; set; }
-
         public int PcConfigurationId { get; set; }
 
         public PcConfiguration PcConfiguration { get; set; } = null!;

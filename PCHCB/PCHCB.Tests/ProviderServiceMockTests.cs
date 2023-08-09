@@ -107,7 +107,6 @@
         [Test]
         public async Task GetAllCasesAsyncByProviderIdShouldReturnCorrectData()
         {
-
             var providerId = Guid.NewGuid();
             var expectedCase = new Case()
             {
@@ -136,7 +135,6 @@
         [Test]
         public async Task GetAllCpusAsyncByProviderIdShouldReturnCorrectData()
         {
-
             var providerId = Guid.NewGuid();
             var expectedCpu = new Cpu()
             {
@@ -166,7 +164,6 @@
         [Test]
         public async Task GetAllCoolersAsyncByProviderIdShouldReturnCorrectData()
         {
-
             var providerId = Guid.NewGuid();
             var expectedCooler = new Cooler()
             {
@@ -196,7 +193,6 @@
         [Test]
         public async Task GetAllMotherboardsAsyncByProviderIdShouldReturnCorrectData()
         {
-
             var providerId = Guid.NewGuid();
             var expectedMotherboard = new Motherboard()
             {
@@ -227,7 +223,6 @@
         [Test]
         public async Task GetAllGpusAsyncByProviderIdShouldReturnCorrectData()
         {
-
             var providerId = Guid.NewGuid();
             var expectedGpu = new Gpu()
             {
@@ -256,7 +251,6 @@
         [Test]
         public async Task GetAllPsusAsyncByProviderIdShouldReturnCorrectData()
         {
-
             var providerId = Guid.NewGuid();
             var expectedPsu = new Psu()
             {
@@ -285,7 +279,6 @@
         [Test]
         public async Task GetAllRamAsyncByProviderIdShouldReturnCorrectData()
         {
-
             var providerId = Guid.NewGuid();
             var expectedRam = new Ram()
             {
@@ -315,7 +308,6 @@
         [Test]
         public async Task GetAllStoragesAsyncByProviderIdShouldReturnCorrectData()
         {
-
             var providerId = Guid.NewGuid();
             var expectedStorage = new Storage()
             {
@@ -342,4 +334,3 @@
         }
     }
 }
-

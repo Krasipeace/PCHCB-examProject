@@ -1,6 +1,5 @@
 ﻿namespace PCHCB.Web.ViewModels.PcConfiguration
 {
-
     public class AssembleConfigurationFormModel
     {
         public int Id { get; set; }

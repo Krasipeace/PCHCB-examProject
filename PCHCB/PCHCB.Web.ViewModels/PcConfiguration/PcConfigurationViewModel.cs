@@ -1,5 +1,9 @@
 ﻿namespace PCHCB.Web.ViewModels.PcConfiguration
 {
+    using PCHCB.Web.ViewModels.Home;
+
+    using System.Collections.Generic;
+
     public class PcConfigurationViewModel
     {
         public PcConfigurationViewModel()
@@ -21,6 +25,8 @@
         public decimal Price { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public List<AllViewModel> PcBuilds { get; set; } = new List<AllViewModel>();
 
         //public CaseViewModel Case { get; set; }
 

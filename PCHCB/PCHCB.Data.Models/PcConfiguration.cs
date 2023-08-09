@@ -4,7 +4,6 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using static PCHCB.Common.EntityValidationConstants.Component;
-    using static PCHCB.Common.EntityValidationConstants.PcConfiguration;
 
     /// <summary>
     /// Pc Configuration
@@ -34,6 +33,10 @@
         /// PC Configuration Date of Creation
         /// </summary>
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+
+        public Guid? BuilderId { get; set; }
+
+        public virtual ApplicationUser? Builder { get; set; } 
 
         public ICollection<ConfigurationHardware> ConfigurationHardwares { get; set; } = new HashSet<ConfigurationHardware>();
     }

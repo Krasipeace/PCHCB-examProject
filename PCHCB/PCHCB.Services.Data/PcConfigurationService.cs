@@ -87,7 +87,6 @@
         public async Task<CaseDetailsViewModel> SelectCaseForAssemble(int caseId)
         {
             Case @case = await this.dbContext.Cases
-                .AsNoTracking()
                 .Include(c => c.ConfigurationHardwares)
                 .ThenInclude(m => m.Motherboard)
                 .Where(c => c.ConfigurationHardwares
@@ -107,7 +106,6 @@
         public async Task<CoolerDetailsViewModel> SelectCoolerForAssemble(int coolerId)
         {
             Cooler cooler = await this.dbContext.Coolers
-                .AsNoTracking()
                 .FirstAsync(c => c.Id == coolerId);
 
             if (cooler.Type == 0)
@@ -173,13 +171,10 @@
         public async Task<RamDetailsViewModel> SelectRamForAssemble(int ramId, int coolerId, int motherboardId)
         {
             Ram ram = await this.dbContext.Rams
-                .AsNoTracking()
                 .FirstAsync(r => r.Id == ramId);
             Cooler cooler = await this.dbContext.Coolers
-                .AsNoTracking()
                 .FirstAsync(c => c.Id == coolerId);
             Motherboard motherboard = await this.dbContext.Motherboards
-                .AsNoTracking()
                 .FirstAsync(m => m.Id == motherboardId);
 
             // Current Problem: RAM might hit the air cooler, Cooler Width is not clear solution to the problem of ram hitting the cooler... for now i will check if the ram height is lower or equal than the standard for RAM Clearance = 32mm
@@ -219,7 +214,6 @@
         public async Task<StorageDetailsViewModel> SelectStorageForAssemble(int storageId)
         {
             Storage storage = await this.dbContext.Storages
-                .AsNoTracking()
                 .FirstAsync(s => s.Id == storageId);
 
             if ((int)storage.Type == 0 || (int)storage.Type == 1)
@@ -252,22 +246,16 @@
         public async Task<PsuDetailsViewModel> SelectPsuForAssemble(int psuId, int cpuId, int gpuId, int motherboardId, int coolerId, int storageId, int ramId)
         {
             Cpu cpu = await this.dbContext.Cpus
-                .AsNoTracking()
                 .FirstAsync(c => c.Id == cpuId);
             Gpu gpu = await this.dbContext.Gpus
-                .AsNoTracking()
                 .FirstAsync(g => g.Id == gpuId);
             Motherboard motherboard = await this.dbContext.Motherboards
-                .AsNoTracking()
                 .FirstAsync(m => m.Id == motherboardId);
             Cooler cooler = await this.dbContext.Coolers
-                .AsNoTracking()
                 .FirstAsync(c => c.Id == coolerId);
             Storage storage = await this.dbContext.Storages
-                .AsNoTracking()
                 .FirstAsync(s => s.Id == storageId);
             Ram ram = await this.dbContext.Rams
-                .AsNoTracking()
                 .FirstAsync(r => r.Id == ramId);
 
             double ConfigurationWattage = await CalculateWattage(cpuId, motherboardId, gpuId, storageId, ramId, coolerId);
@@ -287,11 +275,7 @@
 
         public async Task<int> AssemblePcConfiguration(AssembleConfigurationFormModel buildConfiguration)
         {
-            PcConfiguration newPcBuild = await this.dbContext.PcConfigurations
-                .Include(p => p.Id)
-                .FirstAsync(p => p.Id == buildConfiguration.PcConfigurationId);
-
-            newPcBuild.ConfigurationHardwares.Add(new ConfigurationHardware()
+            AssembleConfigurationFormModel newPcBuild = new AssembleConfigurationFormModel()
             {
                 CpuId = buildConfiguration.CpuId,
                 GpuId = buildConfiguration.GpuId,
@@ -301,9 +285,10 @@
                 RamId = buildConfiguration.RamId,
                 PsuId = buildConfiguration.PsuId,
                 CaseId = buildConfiguration.CaseId,
-            });
+            };
 
-            await this.dbContext.SaveChangesAsync();
+            //await dbContext.PcConfigurations.AddAsync(newPcBuild.Id);
+            await dbContext.SaveChangesAsync();
 
             return newPcBuild.Id;
         }
@@ -321,22 +306,16 @@
         public async Task<double> CalculateWattage(int cpuId, int gpuId, int motherboardId, int coolerId, int storageId, int ramId)
         {
             Cpu cpu = await this.dbContext.Cpus
-                .AsNoTracking()
                 .FirstAsync(c => c.Id == cpuId);
             Gpu gpu = await this.dbContext.Gpus
-                .AsNoTracking()
                 .FirstAsync(g => g.Id == gpuId);
             Motherboard motherboard = await this.dbContext.Motherboards
-                .AsNoTracking()
                 .FirstAsync(m => m.Id == motherboardId);
             Cooler cooler = await this.dbContext.Coolers
-                .AsNoTracking()
                 .FirstAsync(c => c.Id == coolerId);
             Storage storage = await this.dbContext.Storages
-                .AsNoTracking()
                 .FirstAsync(s => s.Id == storageId);
             Ram ram = await this.dbContext.Rams
-                .AsNoTracking()
                 .FirstAsync(r => r.Id == ramId);
 
             double motherboardWattage = GetMotherboardWattage(motherboard);
@@ -432,15 +411,22 @@
 
         public async Task<decimal> CalculatePcConfigurationPrice(int pcConfigurationId)
         {
-            //decimal totalPrice = 0;
-            //var components = await dbContext.PcConfigurations
-            //    .Where(c => c.ConfigurationHardwares.First().PcConfigurationId == pcConfigurationId).ToListAsync();
-            //foreach (var component in components)
-            //{
-            //    totalPrice += component.Price;
-            //}
-            //return totalPrice;
             return 0m;
+        }
+
+        public async Task<IEnumerable<PcConfigurationViewModel>> GetMyBuilds(string builderId)
+        {
+            IEnumerable<PcConfigurationViewModel> myBuilds = await dbContext.PcConfigurations
+                .Where(p => p.BuilderId.ToString()!.ToUpper() == builderId.ToUpper())
+                .Select(r => new PcConfigurationViewModel()
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Price = r.Price,
+                })
+                .ToListAsync();
+
+            return myBuilds;
         }
     }
 }

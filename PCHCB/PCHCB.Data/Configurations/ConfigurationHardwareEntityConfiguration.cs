@@ -11,7 +11,6 @@
         {
             builder
                 .HasKey(ch => new { 
-                    ch.Id,
                     ch.PcConfigurationId, 
                     ch.CaseId,
                     ch.CoolerId,

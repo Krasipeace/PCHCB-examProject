@@ -5,6 +5,7 @@
     using PCHCB.Web.ViewModels.Cpu;
     using PCHCB.Web.ViewModels.Gpu;
     using PCHCB.Web.ViewModels.Motherboard;
+    using PCHCB.Web.ViewModels.PcConfiguration;
     using PCHCB.Web.ViewModels.Psu;
     using PCHCB.Web.ViewModels.Ram;
 
@@ -44,5 +45,7 @@
         public List<RamAllViewModel> Rams { get; set; } = new List<RamAllViewModel>();
 
         public List<StorageAllViewModel> Storages { get; set; } = new List<StorageAllViewModel>();
+
+        public List<PcConfigurationViewModel> PcConfigurations { get; set; } = new List<PcConfigurationViewModel>();
     }
 }
