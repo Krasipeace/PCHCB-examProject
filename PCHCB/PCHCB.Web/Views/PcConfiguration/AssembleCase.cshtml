@@ -1,8 +1,13 @@
-﻿@model List<CaseDetailsViewModel>
+﻿@model AssembleConfigurationFormModel
 
-<h4>Select a Case</h4>
+@{
+    ViewData["Title"] = "Select PC Case";
+}
 
-<ul>
+<h3 class="text-center">@ViewData["Title"]</h3>
+<hr />
+
+@*<ul>
     @foreach (var item in Model)
     {
         <li>
@@ -14,6 +19,6 @@
             @item.Price
         </li>
     }
-</ul>
+</ul>*@
 
 <button type="submit">Next</button>

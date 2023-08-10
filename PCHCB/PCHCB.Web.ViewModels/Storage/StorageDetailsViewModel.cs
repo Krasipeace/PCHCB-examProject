@@ -1,5 +1,6 @@
 ﻿namespace PCHCB.Web.ViewModels.Storage
 {
+    using PCHCB.Web.ViewModels.PcConfiguration;
     using PCHCB.Web.ViewModels.Provider;
 
     /// <summary>
@@ -12,5 +13,7 @@
         public int Type { get; set; }
 
         public ProviderInfoViewModel Provider { get; set; } = null!;
+
+        public AssembleConfigurationFormModel Assemble { get; set; } = null!;
     }
 }

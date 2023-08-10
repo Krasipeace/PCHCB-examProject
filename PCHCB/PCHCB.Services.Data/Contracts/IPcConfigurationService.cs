@@ -5,6 +5,7 @@
     using PCHCB.Web.ViewModels.Cooler;
     using PCHCB.Web.ViewModels.Cpu;
     using PCHCB.Web.ViewModels.Gpu;
+    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Motherboard;
     using PCHCB.Web.ViewModels.PcConfiguration;
     using PCHCB.Web.ViewModels.Psu;
@@ -44,5 +45,9 @@
         double GetCoolerWattage(Cooler Cooler);
 
         double GetStorageWattage(Storage Storage);
+
+        Task<IEnumerable<GpuDetailsViewModel>> GetGpusAsync();
+
+        Task<IEnumerable<CpuDetailsViewModel>> GetCpusAsync();
     }
 }

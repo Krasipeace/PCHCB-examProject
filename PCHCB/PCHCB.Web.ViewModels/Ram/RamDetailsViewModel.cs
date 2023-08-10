@@ -1,5 +1,6 @@
 ﻿namespace PCHCB.Web.ViewModels.Ram
 {
+    using PCHCB.Web.ViewModels.PcConfiguration;
     using PCHCB.Web.ViewModels.Provider;
 
     /// <summary>
@@ -18,5 +19,7 @@
         public string ModelNumber { get; set; } = null!;
 
         public ProviderInfoViewModel Provider { get; set; } = null!;
+
+        public AssembleConfigurationFormModel Assemble { get; set; } = null!;
     }
 }

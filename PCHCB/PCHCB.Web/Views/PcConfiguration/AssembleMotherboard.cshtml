@@ -1,18 +1,10 @@
-﻿@model List<MotherboardDetailsViewModel>
+﻿@model AssembleConfigurationFormModel
+@{
+    ViewData["Title"] = "Select Motherboard";
+}
 
-<h4>Select a Motherboard</h4>
+<h3 class="text-center">@ViewData["Title"]</h3>
+<hr />
 
-<ul>
-    @foreach (var motherboard in Model)
-    {
-        <li>
-            <input type="radio" name="selectedMotherboardId" value="@motherboard.Id" />
-            @motherboard.Name
-            @motherboard.Socket
-            @motherboard.Chipset
-            @motherboard.Price
-        </li>
-    }
-</ul>
 
 <button type="submit">Next</button>

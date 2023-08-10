@@ -1,5 +1,6 @@
 ﻿namespace PCHCB.Web.ViewModels.Motherboard
 {
+    using PCHCB.Web.ViewModels.PcConfiguration;
     using PCHCB.Web.ViewModels.Provider;
 
     /// <summary>
@@ -28,5 +29,7 @@
         public int M2Slots { get; set; }
 
         public ProviderInfoViewModel Provider { get; set; } = null!;
+
+        public AssembleConfigurationFormModel Assemble { get; set; } = null!;
     }
 }

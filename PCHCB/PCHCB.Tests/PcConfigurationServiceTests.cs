@@ -37,7 +37,6 @@
         [Test]
         public void CalculateWattageShouldReturnCorrectResult()
         {
-
             var cpu = new Cpu { Id = 1, Tdp = 100 };
             var gpu = new Gpu { Id = 1, PowerConsumption = 100 };
             var motherboard = new Motherboard { Id = 1, FormFactor = MbFormFactor.ATX };
@@ -53,7 +52,6 @@
             double result = 100 + 100 + AtxWattage + SsdWattage + Ddr4Wattage + AirWattage;
 
             Assert.That(result, Is.EqualTo(motherboardWatts + storageWatts + ramWatts + coolerWatts + cpu.Tdp + gpu.PowerConsumption));
-
         }
 
         [Test]

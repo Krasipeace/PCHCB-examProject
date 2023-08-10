@@ -1,8 +1,14 @@
-﻿@model List<PsuDetailsViewModel>
+﻿@model AssembleConfigurationFormModel
+@{
+    ViewData["Title"] = "Select Power Supply Unit";
+}
+
+<h3 class="text-center">@ViewData["Title"]</h3>
+<hr />
 
 <h4>Select a Power Supply Unit</h4>
 
-<ul>
+@*<ul>
     @foreach (var psu in Model)
     {
         <li>
@@ -12,6 +18,6 @@
             @psu.Price
         </li>
     }
-</ul>
+</ul>*@
 
 <button type="submit">Next</button>

@@ -1,6 +1,9 @@
 ﻿namespace PCHCB.Web.ViewModels.Gpu
 {
+    using PCHCB.Web.ViewModels.PcConfiguration;
     using PCHCB.Web.ViewModels.Provider;
+
+    using System;
 
     /// <summary>
     /// Full info about GPU
@@ -20,5 +23,7 @@
         public bool NvidiaConnector { get; set; }
 
         public ProviderInfoViewModel Provider { get; set; } = null!;
+
+        public AssembleConfigurationFormModel Assemble { get; set; } = null!;
     }
 }

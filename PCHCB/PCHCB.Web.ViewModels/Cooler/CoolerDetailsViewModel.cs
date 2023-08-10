@@ -1,5 +1,6 @@
 ﻿namespace PCHCB.Web.ViewModels.Cooler
 {
+    using PCHCB.Web.ViewModels.PcConfiguration;
     using PCHCB.Web.ViewModels.Provider;
 
     /// <summary>
@@ -22,5 +23,7 @@
         public int Width { get; set; }
 
         public ProviderInfoViewModel Provider { get; set; } = null!;
+
+        public AssembleConfigurationFormModel Assemble { get; set; } = null!;
     }
 }

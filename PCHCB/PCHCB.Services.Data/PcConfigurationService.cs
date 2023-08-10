@@ -14,12 +14,14 @@
     using PCHCB.Web.ViewModels.Ram;
     using PCHCB.Web.ViewModels.Storage;
     using PCHCB.Web.ViewModels.PcConfiguration;
+    using PCHCB.Web.ViewModels.Home;
 
     using static PCHCB.Common.ComponentsWattageConstants.Cooler;
     using static PCHCB.Common.EntityValidationConstants.Ram;
     using static PCHCB.Common.ComponentsWattageConstants.Motherboard;
     using static PCHCB.Common.ComponentsWattageConstants.Storage;
     using static PCHCB.Common.ComponentsWattageConstants.Ram;
+    using static PCHCB.Common.GeneralAppConstants;
 
     public class PcConfigurationService : IPcConfigurationService
     {
@@ -43,6 +45,10 @@
                 Frequency = cpu.Frequency,
                 Cores = cpu.Cores,
                 Price = cpu.Price,
+                Assemble = new AssembleConfigurationFormModel()
+                {
+                    CpuId = cpu.Id,
+                }
             };
         }
 
@@ -59,6 +65,10 @@
                 NvidiaConnector = gpu.NvidiaConnector,
                 Interface = (int)gpu.Interface,
                 Price = gpu.Price,
+                Assemble = new AssembleConfigurationFormModel()
+                {
+                    GpuId = gpu.Id,
+                }
             };
         }
 
@@ -81,6 +91,10 @@
                 M2Slots = motherboard.M2Slots,
                 FormFactor = (int)motherboard.FormFactor,
                 Price = motherboard.Price,
+                Assemble = new AssembleConfigurationFormModel()
+                {
+                    MotherboardId = motherboard.Id,
+                }
             };
         }
 
@@ -100,6 +114,10 @@
                 FormFactor = (int)@case.FormFactor,
                 PsuFactor = (int)@case.PsuFactor,
                 Price = @case.Price,
+                Assemble = new AssembleConfigurationFormModel()
+                {
+                    CaseId = @case.Id,
+                }
             };
         }
 
@@ -165,6 +183,10 @@
                 Compatibility = cooler.Compatibility,
                 Tdp = cooler.Tdp,
                 Price = cooler.Price,
+                Assemble = new AssembleConfigurationFormModel()
+                {
+                    CoolerId = cooler.Id,
+                }
             };
         }
 
@@ -206,6 +228,10 @@
                 Capacity = ram.Capacity,
                 Height = ram.Height,
                 Price = ram.Price,
+                Assemble = new AssembleConfigurationFormModel()
+                {
+                    RamId = ram.Id,
+                }
             };
         }
 
@@ -238,6 +264,10 @@
                 Name = storage.Name,
                 Capacity = storage.Capacity,
                 Price = storage.Price,
+                Assemble = new AssembleConfigurationFormModel()
+                {
+                    StorageId = storage.Id,
+                }
             };
         }
 
@@ -268,6 +298,10 @@
                 Wattage = psu.Wattage,
                 NvidiaConnector = psu.NvidiaConnector,
                 Price = psu.Price,
+                Assemble = new AssembleConfigurationFormModel()
+                {
+                    PsuId = psu.Id
+                }
             };
         }
 
@@ -430,6 +464,34 @@
             }
 
             return ramWattage;
+        }
+
+        public async Task<IEnumerable<GpuDetailsViewModel>> GetGpusAsync()
+        {
+            return await this.dbContext.Gpus
+                .Where(g => g.Name != ComponentUnavailable)
+                .Select(g => new GpuDetailsViewModel()
+                {
+                    Id = g.Id,
+                    Name = g.Name,
+                    Price = g.Price,
+                    ImageUrl = g.ImageUrl,
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<CpuDetailsViewModel>> GetCpusAsync()
+        {
+            return await this.dbContext.Cpus
+                .Where(c => c.Name != ComponentUnavailable)
+                .Select(c => new CpuDetailsViewModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Socket = c.Socket,
+                    Price = c.Price,
+                })
+                .ToListAsync();
         }
     }
 }
