@@ -20,7 +20,5 @@
         public decimal Price { get; set; }
 
         public DateTime CreatedOn { get; set; }
-
-        public AssembleConfigurationFormModel BuildPc { get; set; } = null!;
     }
 }

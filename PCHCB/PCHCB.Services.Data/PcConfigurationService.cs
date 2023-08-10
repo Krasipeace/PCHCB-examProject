@@ -168,14 +168,12 @@
             };
         }
 
-        public async Task<RamDetailsViewModel> SelectRamForAssemble(int ramId, int coolerId, int motherboardId)
+        public async Task<RamDetailsViewModel> SelectRamForAssemble(int ramId, int coolerId)
         {
             Ram ram = await this.dbContext.Rams
                 .FirstAsync(r => r.Id == ramId);
             Cooler cooler = await this.dbContext.Coolers
                 .FirstAsync(c => c.Id == coolerId);
-            Motherboard motherboard = await this.dbContext.Motherboards
-                .FirstAsync(m => m.Id == motherboardId);
 
             // Current Problem: RAM might hit the air cooler, Cooler Width is not clear solution to the problem of ram hitting the cooler... for now i will check if the ram height is lower or equal than the standard for RAM Clearance = 32mm
             if (cooler.Type == 0)
@@ -258,7 +256,7 @@
             Ram ram = await this.dbContext.Rams
                 .FirstAsync(r => r.Id == ramId);
 
-            double ConfigurationWattage = await CalculateWattage(cpuId, motherboardId, gpuId, storageId, ramId, coolerId);
+            double ConfigurationWattage = await CalculateWattage(cpu.Id, gpu.Id, motherboard.Id, cooler.Id, storage.Id, ram.Id);
 
             Psu psu = await this.dbContext.Psus
                 .Where(p => p.Wattage >= ConfigurationWattage)
@@ -432,11 +430,6 @@
             }
 
             return ramWattage;
-        }
-
-        public async Task<decimal> CalculatePcConfigurationPrice(int pcConfigurationId)
-        {
-            return 0m;
         }
     }
 }

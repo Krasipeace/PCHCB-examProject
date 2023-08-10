@@ -28,14 +28,16 @@
             this.pcConfigurationService = pcConfigurationService;
         }
 
+
+
         public async Task<IActionResult> Assemble(AssembleConfigurationFormModel model)
         {
-            var @case = pcConfigurationService.SelectCaseForAssemble(model.CaseId);
-            var cooler = pcConfigurationService.SelectCoolerForAssemble(model.CoolerId);
             var cpu = pcConfigurationService.SelectCpuForAssemble(model.CpuId);
             var gpu = pcConfigurationService.SelectGpuForAssemble(model.GpuId);
             var motherboard = pcConfigurationService.SelectMotherboardForAssemble(model.MotherboardId);
-            var ram = pcConfigurationService.SelectRamForAssemble(model.RamId, cooler.Id, motherboard.Id);
+            var @case = pcConfigurationService.SelectCaseForAssemble(model.CaseId);
+            var cooler = pcConfigurationService.SelectCoolerForAssemble(model.CoolerId);
+            var ram = pcConfigurationService.SelectRamForAssemble(model.RamId, cooler.Id);
             var storage = pcConfigurationService.SelectStorageForAssemble(model.StorageId);
             var powerSupply = pcConfigurationService.SelectPsuForAssemble(model.PsuId, cpu.Id, gpu.Id, motherboard.Id, cooler.Id, storage.Id, ram.Id);
 

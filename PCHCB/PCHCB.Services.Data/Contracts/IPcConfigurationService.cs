@@ -13,7 +13,7 @@
 
     public interface IPcConfigurationService
     {
-        Task<decimal> CalculatePcConfigurationPrice(int pcConfigurationId);
+        //Task<decimal> CalculatePcConfigurationPrice(int pcConfigurationId);
 
         Task<CaseDetailsViewModel> SelectCaseForAssemble(int caseId);
 
@@ -23,7 +23,7 @@
 
         Task<MotherboardDetailsViewModel> SelectMotherboardForAssemble(int motherboardId);
 
-        Task<RamDetailsViewModel> SelectRamForAssemble(int ramId, int coolerId, int motherboardId);
+        Task<RamDetailsViewModel> SelectRamForAssemble(int ramId, int coolerId);
 
         Task<StorageDetailsViewModel> SelectStorageForAssemble(int storageId);
 

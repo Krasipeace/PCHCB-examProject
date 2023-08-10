@@ -22,5 +22,7 @@
         public int RamId { get; set; }
 
         public int StorageId { get; set; }
+
+        public SaveConfigurationFormModel SaveBuild { get; set; } = null!;
     }
 }

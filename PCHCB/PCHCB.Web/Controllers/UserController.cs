@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+
     using Griesoft.AspNetCore.ReCaptcha;
 
     using PCHCB.Data.Models;
@@ -48,8 +49,7 @@
             await userManager.SetEmailAsync(user, model.Email);
             await userManager.SetUserNameAsync(user, model.Email);
 
-            IdentityResult result =
-                await userManager.CreateAsync(user, model.Password);
+            IdentityResult result = await userManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {

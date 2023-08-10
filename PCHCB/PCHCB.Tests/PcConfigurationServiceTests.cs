@@ -2,6 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
 
+    using Newtonsoft.Json;
     using NUnit.Framework;
 
     using PCHCB.Data.Models.Enums;
@@ -9,6 +10,7 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Data.Models;
     using PCHCB.Services.Data;
+    using PCHCB.Web.ViewModels.PcConfiguration;
 
     using static PCHCB.Common.ComponentsWattageConstants.Ram;
     using static PCHCB.Common.ComponentsWattageConstants.Storage;
@@ -35,6 +37,7 @@
         [Test]
         public void CalculateWattageShouldReturnCorrectResult()
         {
+
             var cpu = new Cpu { Id = 1, Tdp = 100 };
             var gpu = new Gpu { Id = 1, PowerConsumption = 100 };
             var motherboard = new Motherboard { Id = 1, FormFactor = MbFormFactor.ATX };
@@ -50,6 +53,49 @@
             double result = 100 + 100 + AtxWattage + SsdWattage + Ddr4Wattage + AirWattage;
 
             Assert.That(result, Is.EqualTo(motherboardWatts + storageWatts + ramWatts + coolerWatts + cpu.Tdp + gpu.PowerConsumption));
+
+        }
+
+        [Test]
+        public async Task GetMyBuildsReturnCorrectResults()
+        {
+            var builderId = "90F49AD2-7511-4938-96E7-0F00E07E631E";
+            IEnumerable<PcConfigurationViewModel> expectedBuilds = new List<PcConfigurationViewModel>();
+            using (var context = new PCHCBDbContext(dbContext))
+            {
+                var builder = new ApplicationUser
+                {
+                    Id = Guid.Parse(builderId),
+                    FirstName = "Builder",
+                    LastName = "Builderov",
+                    Email = "builder@builders.com"
+                };
+
+                var pcConfiguration = new PcConfiguration
+                {
+                    Id = 1,
+                    Name = "PC Config 1",
+                    Price = 1000,
+                    BuilderId = builder.Id
+                };
+
+                var pcConfigurationViewModel = new PcConfigurationViewModel
+                {
+                    Id = pcConfiguration.Id,
+                    Name = pcConfiguration.Name,
+                    Price = pcConfiguration.Price,
+                };
+
+                context.Users.Add(builder);
+                context.PcConfigurations.Add(pcConfiguration);
+                context.SaveChanges();
+
+                expectedBuilds = new List<PcConfigurationViewModel> { pcConfigurationViewModel };
+            }
+
+            var result = await service.GetMyBuilds(builderId);
+
+            Assert.That(JsonConvert.SerializeObject(result), Is.EqualTo(JsonConvert.SerializeObject(expectedBuilds)));
         }
 
         [Test]
@@ -73,7 +119,7 @@
         }
 
         [Test]
-        public void TestGetStorageWattageReturnsCorrectResult()
+        public void GetStorageWattageReturnsCorrectResult()
         {
             var storage = new Storage { Type = StorageType.SSD };
 
