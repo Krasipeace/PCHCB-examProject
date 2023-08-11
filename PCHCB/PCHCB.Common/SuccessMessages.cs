@@ -35,5 +35,7 @@
         public const string StorageDeletedSuccessfully = "Storage has been deleted successfully";
 
         public const string ProviderCreatedSuccessfully = "You are now a provider!";
+
+        public const string PcBuildedSuccessfully = "Your Configuration is assembled successfully!";
     }
 }

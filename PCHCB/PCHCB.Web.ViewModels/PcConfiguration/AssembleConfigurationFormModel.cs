@@ -16,6 +16,8 @@
     {
         public int PcConfigurationId { get; set; }
 
+        public string Name { get; set; } = null!;
+
         public int CaseId { get; set; }
 
         public int CoolerId { get; set; }
@@ -32,22 +34,20 @@
 
         public int StorageId { get; set; }
 
-        public CaseDetailsViewModel Case { get; set; } = null!;
+        public List<CaseDetailsViewModel> Cases { get; set; } = new List<CaseDetailsViewModel>();
 
-        public CoolerDetailsViewModel Cooler { get; set; } = null!;
+        public List<CpuDetailsViewModel> Cpus { get; set; } = new List<CpuDetailsViewModel>();
 
-        public CpuDetailsViewModel Cpu { get; set; } = null!;
+        public List<CoolerDetailsViewModel> Coolers { get; set; } = new List<CoolerDetailsViewModel>();
 
-        public GpuDetailsViewModel Gpu { get; set; } = null!;
+        public List<GpuDetailsViewModel> Gpus { get; set; } = new List<GpuDetailsViewModel>();
 
-        public MotherboardDetailsViewModel Motherboard { get; set; } = null!;
+        public List<MotherboardDetailsViewModel> Motherboards { get; set; } = new List<MotherboardDetailsViewModel>();
 
-        public PsuDetailsViewModel Psu { get; set; } = null!;
+        public List<PsuDetailsViewModel> Psus { get; set; } = new List<PsuDetailsViewModel>();
 
-        public RamDetailsViewModel Ram { get; set; } = null!;
+        public List<RamDetailsViewModel> Rams { get; set; } = new List<RamDetailsViewModel>();
 
-        public StorageDetailsViewModel Storage { get; set; } = null!;
-
-        public SaveConfigurationFormModel SaveBuild { get; set; } = null!;
+        public List<StorageDetailsViewModel> Storages { get; set; } = new List<StorageDetailsViewModel>();
     }
 }

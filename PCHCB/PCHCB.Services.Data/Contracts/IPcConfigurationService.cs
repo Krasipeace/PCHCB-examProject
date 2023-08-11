@@ -45,9 +45,5 @@
         double GetCoolerWattage(Cooler Cooler);
 
         double GetStorageWattage(Storage Storage);
-
-        Task<IEnumerable<GpuDetailsViewModel>> GetGpusAsync();
-
-        Task<IEnumerable<CpuDetailsViewModel>> GetCpusAsync();
     }
 }

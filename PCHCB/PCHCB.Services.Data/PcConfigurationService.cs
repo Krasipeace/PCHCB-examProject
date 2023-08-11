@@ -14,7 +14,6 @@
     using PCHCB.Web.ViewModels.Ram;
     using PCHCB.Web.ViewModels.Storage;
     using PCHCB.Web.ViewModels.PcConfiguration;
-    using PCHCB.Web.ViewModels.Home;
 
     using static PCHCB.Common.ComponentsWattageConstants.Cooler;
     using static PCHCB.Common.EntityValidationConstants.Ram;
@@ -464,34 +463,6 @@
             }
 
             return ramWattage;
-        }
-
-        public async Task<IEnumerable<GpuDetailsViewModel>> GetGpusAsync()
-        {
-            return await this.dbContext.Gpus
-                .Where(g => g.Name != ComponentUnavailable)
-                .Select(g => new GpuDetailsViewModel()
-                {
-                    Id = g.Id,
-                    Name = g.Name,
-                    Price = g.Price,
-                    ImageUrl = g.ImageUrl,
-                })
-                .ToListAsync();
-        }
-
-        public async Task<IEnumerable<CpuDetailsViewModel>> GetCpusAsync()
-        {
-            return await this.dbContext.Cpus
-                .Where(c => c.Name != ComponentUnavailable)
-                .Select(c => new CpuDetailsViewModel()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Socket = c.Socket,
-                    Price = c.Price,
-                })
-                .ToListAsync();
         }
     }
 }

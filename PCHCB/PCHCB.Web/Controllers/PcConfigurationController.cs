@@ -5,16 +5,6 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.ViewModels.PcConfiguration;
-    using PCHCB.Data.Models;
-    using PCHCB.Web.ViewModels.Case;
-    using PCHCB.Web.ViewModels.Cooler;
-    using PCHCB.Web.ViewModels.Cpu;
-    using PCHCB.Web.ViewModels.Gpu;
-    using PCHCB.Web.ViewModels.Home;
-    using PCHCB.Web.ViewModels.Motherboard;
-    using PCHCB.Web.ViewModels.Psu;
-    using PCHCB.Web.ViewModels.Ram;
-    using PCHCB.Web.ViewModels.Storage;
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ExceptionMessages;
@@ -47,13 +37,13 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> AssembleGpu(int gpuId)
+        public IActionResult Assemble()
         {
             try
             {
-                var gpus = await this.pcConfigurationService.GetGpusAsync();        
+                AssembleConfigurationFormModel model = new AssembleConfigurationFormModel();
 
-                return this.View(gpus);
+                return this.View(model);
             }
             catch (Exception)
             {
@@ -62,67 +52,38 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> AssembleGpu(ConfigurationHardware model, int gpuId)
+        public async Task<IActionResult> Assemble(AssembleConfigurationFormModel model, int cpuId, int gpuId, int motherboardId, int caseId, int coolerId, int ramId, int storageId, int powersupplyId)
         {
-            if (!this.ModelState.IsValid)
+            var gpu = pcConfigurationService.SelectGpuForAssemble(model.GpuId);
+            var cpu = pcConfigurationService.SelectCpuForAssemble(model.CpuId);
+            var motherboard = pcConfigurationService.SelectMotherboardForAssemble(model.MotherboardId);
+            var @case = pcConfigurationService.SelectCaseForAssemble(model.CaseId);
+            var cooler = pcConfigurationService.SelectCoolerForAssemble(model.CoolerId);
+            var ram = pcConfigurationService.SelectRamForAssemble(model.RamId, cooler.Id);
+            var storage = pcConfigurationService.SelectStorageForAssemble(model.StorageId);
+            var powerSupply = pcConfigurationService.SelectPsuForAssemble(model.PsuId, cpu.Id, gpu.Id, motherboard.Id, cooler.Id, storage.Id, ram.Id);
+
+            var buildConfiguration = new AssembleConfigurationFormModel()
             {
-                return this.View(model);
-            }
+                CaseId = @case.Id,
+                CoolerId = cooler.Id,
+                CpuId = cpu.Id,
+                GpuId = gpu.Id,
+                MotherboardId = motherboard.Id,
+                PsuId = powerSupply.Id,
+                RamId = ram.Id,
+                StorageId = storage.Id,
+            };
 
-            try
+            int buildPc = await this.pcConfigurationService.AssemblePcConfiguration(buildConfiguration);
+
+            this.TempData[SuccessMessage] = PcBuildedSuccessfully;
+
+            return this.RedirectToAction("Index", "PcConfiguration", new
             {
-                var selectedGpu = await this.pcConfigurationService.SelectGpuForAssemble(gpuId);
-
-                ConfigurationHardware ch = new ConfigurationHardware()
-                {
-                    GpuId = selectedGpu.Id,
-                };
-
-                this.TempData[SuccessMessage] = GpuAddedSuccessfully;
-
-                return this.RedirectToAction("AssembleCpu", "PcConfiguration", new
-                {
-                    GpuId = selectedGpu
-                });
-            }
-            catch (Exception)
-            {
-                this.ModelState.AddModelError(string.Empty, GeneralErrorMessage);
-
-                return this.View(model);
-            }
+                Id = buildPc,
+            });
         }
-
-        //public async Task<IActionResult> Assemble(AssembleConfigurationFormModel model)
-        //{
-        //    var cpu = pcConfigurationService.SelectCpuForAssemble(model.CpuId);
-        //    var gpu = pcConfigurationService.SelectGpuForAssemble(model.GpuId);
-        //    var motherboard = pcConfigurationService.SelectMotherboardForAssemble(model.MotherboardId);
-        //    var @case = pcConfigurationService.SelectCaseForAssemble(model.CaseId);
-        //    var cooler = pcConfigurationService.SelectCoolerForAssemble(model.CoolerId);
-        //    var ram = pcConfigurationService.SelectRamForAssemble(model.RamId, cooler.Id);
-        //    var storage = pcConfigurationService.SelectStorageForAssemble(model.StorageId);
-        //    var powerSupply = pcConfigurationService.SelectPsuForAssemble(model.PsuId, cpu.Id, gpu.Id, motherboard.Id, cooler.Id, storage.Id, ram.Id);
-
-        //    var buildConfiguration = new AssembleConfigurationFormModel()
-        //    {
-        //        CaseId = @case.Id,
-        //        CoolerId = cooler.Id,
-        //        CpuId = cpu.Id,
-        //        GpuId = gpu.Id,
-        //        MotherboardId = motherboard.Id,
-        //        PsuId = powerSupply.Id,
-        //        RamId = ram.Id,
-        //        StorageId = storage.Id,
-        //    };
-
-        //    int buildPc = await this.pcConfigurationService.AssemblePcConfiguration(buildConfiguration);
-
-        //    return this.RedirectToAction("Index", "PcConfiguration", new
-        //    {
-        //        Id = buildPc,
-        //    });
-        //}
 
         public async Task<IActionResult> Index()
         {
