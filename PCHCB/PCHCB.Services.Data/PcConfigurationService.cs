@@ -464,10 +464,5 @@
 
             return ramWattage;
         }
-
-        Task<IEnumerable<GpuDetailsViewModel>> IPcConfigurationService.SelectGpuForAssemble(int gpuId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -9,20 +9,21 @@ Table of Contents
 - [PC's Hardware Compatibility Builder](#pcs-hardware-compatibility-builder)
 - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
-  - [Features](#features)
   - [Get Started](#get-started)
   - [Software/Technologies Used](#softwaretechnologies-used)
   - [Admin Area](#admin-area)
+  - [Add Component](#add-component)
+  - [View Component in Details](#view-component-in-details)
+  - [View All Components by Type](#view-all-components-by-type)
+  - [View All Components by Provider](#view-all-components-by-provider)
+  - [Assemble PC Configuration](#assemble-pc-configuration)
+  - [License](#license)
 
 =================
 
 ## Overview
 
-Personal Computer's Hardware Compatibility Builder is a software application that allows users to configure a custom PC configuration based on their specific needs and requirements. The app provides a user-friendly interface that guides users through the process of selecting the components they need for their PC, including the CPU, GPU, RAM, storage, case, motherboard, power supply, and cooling solutions. The app also provides users to become providers of Pc components and add them to the app's database. 
-
-## Features
-
-.. to be filled in
+Personal Computer's Hardware Compatibility Builder is a software application that allows users to configure a custom PC configuration based on their specific needs and requirements. The app provides a user-friendly interface that guides users through the process of selecting the components they need for their PC, including the CPU, GPU, RAM, storage, case, motherboard, power supply, and cooling solutions. The app also provides users to become providers of Pc components and add them to the app's database.
 
 ## Get Started 
 
@@ -30,7 +31,7 @@ Add your connection string in the `appsettings.json` file in the `PCHCB.Web` pro
 
 `{
   "ConnectionStrings": {
-    "DefaultConnection": "Server=CHANGE-ME;Database=CHANGE-ME;Trusted_Connection=True;MultipleActiveResultSets=true"
+    "DefaultConnection": "Server=CHANGE-ME;Database=PCHCBDB;Trusted_Connection=True;MultipleActiveResultSets=true"
   }
 }`
 
@@ -65,3 +66,49 @@ The Admin Area is accessible only by the Administrator. It is a separate area of
 
 ![AllUsers](https://i.imgur.com/PwIWqxZ.png)
 
+
+
+## Add Component
+
+Every Provider can add up to eight types of PC components:
+
+- `CPU`
+- `GPU`
+- `RAM`
+- `Storage`
+- `Case`
+- `Motherboard`
+- `Power Supply`
+- `Cooling Solution`
+
+![Component](https://i.imgur.com/P1Lq4Ph.png)
+
+## View Component in Details
+
+Every Component has its own `Details` page, which provides the user with more information about the component. If you are provider of the component, you can edit or delete it. You can also see additional information about the `Provider`
+
+![Details](https://i.imgur.com/bu6D2dJ.png)
+
+## View All Components by Type
+
+Every user can view all components by their type. Use the search bar to find desired component. 
+
+![AllComponents](https://i.imgur.com/ZPal9UT.png)
+
+## View All Components by Provider
+
+Every provider can view his own Hardware.
+
+![providerComponents](https://i.imgur.com/VGmYnw0.png)
+
+## Assemble PC Configuration
+
+Every user can build his own PC Configuration with the provided hardware.
+
+![assemble](https://i.imgur.com/cUnYqIj.png)
+
+## License 
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE)
+
+[Back to top](#)

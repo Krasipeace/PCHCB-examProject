@@ -28,12 +28,12 @@
                             <option value="@item.Id">@item.Name - @item.Socket - @item.Frequency @item.Price</option>
                         }
                     </select>
-
                     <div class="row mt-2">
                         <span asp-validation-for="Cpus" class="text-danger"></span>
                     </div>
                     <div class="text-center">
-                        <input class="btn btn-primary mt-4" type="submit" value="Add CPU and GPU" />
+@*                        <p><a class="btn btn-outline-info" type="submit" asp-area="" asp-controller="PcConfiguiration" asp-action="AssembleCpuAndGpu" >Add CPU and GPU</a></p>
+*@                        <input class="btn btn-primary mt-4" type="submit" value="Add CPU and GPU" />
                     </div>
                 </div>
             </div>

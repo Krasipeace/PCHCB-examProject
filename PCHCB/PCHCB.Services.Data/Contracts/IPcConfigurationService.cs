@@ -28,7 +28,7 @@
 
         Task<StorageDetailsViewModel> SelectStorageForAssemble(int storageId);
 
-        Task<IEnumerable<GpuDetailsViewModel>> SelectGpuForAssemble(int gpuId);
+        Task<GpuDetailsViewModel> SelectGpuForAssemble(int gpuId);
 
         Task<PsuDetailsViewModel> SelectPsuForAssemble(int psuId, int cpuId, int gpuId, int motherboardId, int coolerId, int storageId, int ramId);
 
