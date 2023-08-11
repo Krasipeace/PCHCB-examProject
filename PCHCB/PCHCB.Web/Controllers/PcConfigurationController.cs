@@ -10,6 +10,7 @@
     using static PCHCB.Common.ExceptionMessages;
     using static PCHCB.Common.ErrorMessages.User;
     using static PCHCB.Common.SuccessMessages;
+    using PCHCB.Web.ViewModels.Case;
 
     public class PcConfigurationController : Controller
     {
@@ -41,7 +42,7 @@
         {
             try
             {
-                AssembleConfigurationFormModel model = new AssembleConfigurationFormModel();
+                var model = new AssembleConfigurationFormModel();
 
                 return this.View(model);
             }
@@ -52,7 +53,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Assemble(AssembleConfigurationFormModel model, int cpuId, int gpuId, int motherboardId, int caseId, int coolerId, int ramId, int storageId, int powersupplyId)
+        public async Task<IActionResult> Assemble(AssembleConfigurationFormModel model)
         {
             var gpu = pcConfigurationService.SelectGpuForAssemble(model.GpuId);
             var cpu = pcConfigurationService.SelectCpuForAssemble(model.CpuId);

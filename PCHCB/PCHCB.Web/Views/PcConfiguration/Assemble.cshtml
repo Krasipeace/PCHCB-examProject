@@ -5,15 +5,11 @@
 
 <h3 class="text-center">@ViewData["Title"]</h3>
 <hr />
+
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form method="post">
             <div class="row mt-2">
-                <div class="form-group mt-2">
-                    <label asp-for="Name"></label>
-                    <input asp-for="Name" class="form-control" placeholder="Name...">
-                    <span asp-validation-for="Name" class="small text-danger"></span>
-                </div>
                 <div class="form-group mt-2">
                     <label asp-for="Gpus"></label>
                     <select asp-for="Gpus" class="form-control">
@@ -32,18 +28,39 @@
                             <option value="@item.Id">@item.Name - @item.Socket - @item.Frequency @item.Price</option>
                         }
                     </select>
-                    <span asp-validation-for="Cpus" class="text-danger"></span>
+
+                    <div class="row mt-2">
+                        <span asp-validation-for="Cpus" class="text-danger"></span>
+                    </div>
+                    <div class="text-center">
+                        <input class="btn btn-primary mt-4" type="submit" value="Add CPU and GPU" />
+                    </div>
                 </div>
-                <div class="form-group mt-2">
-                    <label asp-for="Motherboards"></label>
-                    <select asp-for="Motherboards" class="form-control">
-                        @foreach (var item in Model.Motherboards)
-                        {
-                            <option value="item.Id">@item.Name - @item.Socket - @item.Chipset - @item.Price</option>
-                        }
-                    </select>
-                    <span asp-validation-for="Motherboards" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group mt-2">
+                <label asp-for="Motherboards"></label>
+                <select asp-for="Motherboards" class="form-control">
+                    @foreach (var item in Model.Motherboards)
+                    {
+                        <option value="item.Id">@item.Name - @item.Socket - @item.Chipset - @item.Price</option>
+                    }
+                </select>
+                <span asp-validation-for="Motherboards" class="text-danger"></span>
+                <div class="text-center">
+                    <input class="btn btn-primary mt-4" type="submit" value="Add Motherboard" />
                 </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="row mt-2">
                 <div class="form-group mt-2">
                     <label asp-for="Cases"></label>
                     <select asp-for="Cases" class="form-control">
@@ -53,7 +70,17 @@
                         }
                     </select>
                     <span asp-validation-for="Cases" class="text-danger"></span>
+                    <div class="text-center">
+                        <input class="btn btn-primary mt-4" type="submit" value="Add Case" />
+                    </div>
                 </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="row mt-2">
                 <div class="form-group mt-2">
                     <label asp-for="Coolers"></label>
                     <select asp-for="Coolers" class="form-control">
@@ -63,7 +90,16 @@
                         }
                     </select>
                     <span asp-validation-for="Coolers" class="text-danger"></span>
+                    <div class="text-center">
+                        <input class="btn btn-primary mt-4" type="submit" value="Add Cooler" />
+                    </div>
                 </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="row mt-2">
                 <div class="form-group mt-2">
                     <label asp-for="Rams"></label>
                     <select asp-for="Rams" class="form-control">
@@ -73,7 +109,16 @@
                         }
                     </select>
                     <span asp-validation-for="Rams" class="text-danger"></span>
+                    <div class="text-center">
+                        <input class="btn btn-primary mt-4" type="submit" value="Add RAM" />
+                    </div>
                 </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="row mt-2">
                 <div class="form-group mt-2">
                     <label asp-for="Storages"></label>
                     <select asp-for="Storages" class="form-control">
@@ -83,7 +128,16 @@
                         }
                     </select>
                     <span asp-validation-for="Storages" class="text-danger"></span>
+                    <div class="text-center">
+                        <input class="btn btn-primary mt-4" type="submit" value="Add Storage" />
+                    </div>
                 </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="row mt-2">
                 <div class="form-group mt-2">
                     <label asp-for="Psus"></label>
                     <select asp-for="Psus" class="form-control">
@@ -93,16 +147,27 @@
                         }
                     </select>
                     <span asp-validation-for="Psus" class="text-danger"></span>
+                    <div class="text-center">
+                        <input class="btn btn-primary mt-4" type="submit" value="Add Power Supply" />
+                    </div>
                 </div>
             </div>
+        </form>
+    </div>
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post" asp-action="Assemble" asp-controller="PcConfiguration">
+            <div class="form-group mt-2">
+                <label for="inputName">Name</label>
+                <input type="text" class="form-control" id="inputName" name="Name">
+            </div>
             <div class="text-center">
-                <input class="btn btn-primary mt-4" type="submit" value="Assemble" />
+                <button type="submit" class="btn btn-primary mt-4">Assemble</button>
             </div>
         </form>
     </div>
 </div>
 
 @section Scripts
-{
+    {
     <partial name="_ValidationScriptsPartial" />
 }

@@ -149,7 +149,7 @@
         public async Task<SearchResult> SearchCasesAsync(AllQueryModel queryModel)
         {
             IQueryable<Case> casesQuery = dbContext.Cases
-                .AsQueryable();           
+                .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
             {

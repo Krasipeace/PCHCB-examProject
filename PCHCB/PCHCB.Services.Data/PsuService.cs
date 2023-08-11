@@ -136,6 +136,23 @@
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<PsuDetailsViewModel>> GetAllDetailsPsusAsync()
+        {
+            return await this.dbContext.Psus
+                .Where(p => p.Name != ComponentUnavailable)
+                .Select(p => new PsuDetailsViewModel
+                {
+                    Name = p.Name,
+                    Price = p.Price,
+                    Wattage = p.Wattage,
+                    Factor = (int)p.Factor,
+                    NvidiaConnector = p.NvidiaConnector,
+                    ImageUrl = p.ImageUrl,
+                    Description = p.Description
+                })
+                .ToListAsync();
+        }
+
         public async Task<SearchResult> SearchPsusAsync(AllQueryModel queryModel)
         {
             IQueryable<Psu> psuQuery = dbContext.Psus
