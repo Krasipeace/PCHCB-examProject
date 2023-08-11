@@ -5,12 +5,13 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.ViewModels.PcConfiguration;
+    using PCHCB.Web.ViewModels.Gpu;
+    using PCHCB.Web.ViewModels.Cpu;
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ExceptionMessages;
     using static PCHCB.Common.ErrorMessages.User;
     using static PCHCB.Common.SuccessMessages;
-    using PCHCB.Web.ViewModels.Case;
 
     public class PcConfigurationController : Controller
     {
@@ -38,13 +39,20 @@
         }
 
         [HttpGet]
-        public IActionResult Assemble()
+        public async Task<IActionResult> Assemble()
         {
             try
             {
-                var model = new AssembleConfigurationFormModel();
+                ViewData["Gpus"] = await this.gpuService.GetAllGpusAsync();
+                ViewData["Cpus"] = await this.cpuService.GetAllCpusAsync();
+                ViewData["Motherboards"] = await this.motherboardService.GetAllMotherboardsAsync();
+                ViewData["Cases"] = await this.caseService.GetAllCasesAsync();
+                ViewData["Coolers"] = await this.coolerService.GetAllCoolersAsync();
+                ViewData["Rams"] = await this.ramService.GetAllRamsAsync();
+                ViewData["Storages"] = await this.storageService.GetAllStoragesAsync();
+                ViewData["Psus"] = await this.psuService.GetAllPsusAsync();
 
-                return this.View(model);
+                return this.View();
             }
             catch (Exception)
             {

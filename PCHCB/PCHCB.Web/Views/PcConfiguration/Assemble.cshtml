@@ -1,9 +1,10 @@
-﻿@model AssembleConfigurationFormModel
-@{
-    ViewData["Title"] = "Assemble PC";
+﻿@*@model AssembleConfigurationFormModel
+*@@{
+    ViewBag.Title = "Assemble";
+    ViewData["Title2"] = "Assemble PC";
 }
 
-<h3 class="text-center">@ViewData["Title"]</h3>
+<h3 class="text-center">@ViewData["Title2"]</h3>
 <hr />
 
 <div class="row">
@@ -11,25 +12,23 @@
         <form method="post">
             <div class="row mt-2">
                 <div class="form-group mt-2">
-                    <label asp-for="Gpus"></label>
-                    <select asp-for="Gpus" class="form-control">
-                        @foreach (var item in Model.Gpus)
+                    <label>Graphic Cards:</label>
+                    <select  class="form-control">
+                        @foreach (var item in (ViewBag.Gpus))
                         {
-                            <option value="@item.Id">@item.Name - @item.Memory - @item.Price</option>
+                            <option value="@item.Id">@item.Name - $@item.Price</option>
                         }
                     </select>
-                    <span asp-validation-for="Gpus" class="text-danger"></span>
                 </div>
                 <div class="form-group mt-2">
-                    <label asp-for="Cpus"></label>
-                    <select asp-for="Cpus" class="form-control">
-                        @foreach (var item in Model.Cpus)
+                    <label>CPUs</label>
+                    <select class="form-control">
+                        @foreach (var item in ViewBag.Cpus)
                         {
-                            <option value="@item.Id">@item.Name - @item.Socket - @item.Frequency @item.Price</option>
+                            <option value="@item.Id">@item.Name - $@item.Price</option>
                         }
                     </select>
                     <div class="row mt-2">
-                        <span asp-validation-for="Cpus" class="text-danger"></span>
                     </div>
                     <div class="text-center">
 @*                        <p><a class="btn btn-outline-info" type="submit" asp-area="" asp-controller="PcConfiguiration" asp-action="AssembleCpuAndGpu" >Add CPU and GPU</a></p>
@@ -43,14 +42,13 @@
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form method="post">
             <div class="form-group mt-2">
-                <label asp-for="Motherboards"></label>
-                <select asp-for="Motherboards" class="form-control">
-                    @foreach (var item in Model.Motherboards)
+                <label>Motherboards</label>
+                <select class="form-control">
+                    @foreach (var item in ViewBag.Motherboards)
                     {
-                        <option value="item.Id">@item.Name - @item.Socket - @item.Chipset - @item.Price</option>
+                        <option value="item.Id">@item.Name - $@item.Price</option>
                     }
                 </select>
-                <span asp-validation-for="Motherboards" class="text-danger"></span>
                 <div class="text-center">
                     <input class="btn btn-primary mt-4" type="submit" value="Add Motherboard" />
                 </div>
@@ -62,14 +60,13 @@
         <form method="post">
             <div class="row mt-2">
                 <div class="form-group mt-2">
-                    <label asp-for="Cases"></label>
-                    <select asp-for="Cases" class="form-control">
-                        @foreach (var item in Model.Cases)
+                    <label>Cases</label>
+                    <select class="form-control">
+                        @foreach (var item in ViewBag.Cases)
                         {
-                            <option value="item.Id">@item.Name - @item.Price</option>
+                            <option value="item.Id">@item.Name - $@item.Price</option>
                         }
                     </select>
-                    <span asp-validation-for="Cases" class="text-danger"></span>
                     <div class="text-center">
                         <input class="btn btn-primary mt-4" type="submit" value="Add Case" />
                     </div>
@@ -82,14 +79,13 @@
         <form method="post">
             <div class="row mt-2">
                 <div class="form-group mt-2">
-                    <label asp-for="Coolers"></label>
-                    <select asp-for="Coolers" class="form-control">
-                        @foreach (var item in Model.Coolers)
+                    <label>Coolers</label>
+                    <select class="form-control">
+                        @foreach (var item in ViewBag.Coolers)
                         {
-                            <option value="item.Id">@item.Name - @item.Tdp - @item.Price</option>
+                            <option value="item.Id">@item.Name - $@item.Price</option>
                         }
                     </select>
-                    <span asp-validation-for="Coolers" class="text-danger"></span>
                     <div class="text-center">
                         <input class="btn btn-primary mt-4" type="submit" value="Add Cooler" />
                     </div>
@@ -101,14 +97,13 @@
         <form method="post">
             <div class="row mt-2">
                 <div class="form-group mt-2">
-                    <label asp-for="Rams"></label>
-                    <select asp-for="Rams" class="form-control">
-                        @foreach (var item in Model.Rams)
+                    <label>Rams</label>
+                    <select class="form-control">
+                        @foreach (var item in ViewBag.Rams)
                         {
-                            <option value="@item.Id">@item.Name - @item.Frequency - @item.Capacity - @item.Price</option>
+                            <option value="@item.Id">@item.Name $@item.Price</option>
                         }
                     </select>
-                    <span asp-validation-for="Rams" class="text-danger"></span>
                     <div class="text-center">
                         <input class="btn btn-primary mt-4" type="submit" value="Add RAM" />
                     </div>
@@ -120,14 +115,13 @@
         <form method="post">
             <div class="row mt-2">
                 <div class="form-group mt-2">
-                    <label asp-for="Storages"></label>
-                    <select asp-for="Storages" class="form-control">
-                        @foreach (var item in Model.Storages)
+                    <label>Storages</label>
+                    <select class="form-control">
+                        @foreach (var item in ViewBag.Storages)
                         {
-                            <option value="@item.Id">@item.Name - @item.Capacity - @item.Price</option>
+                            <option value="@item.Id">@item.Name - $@item.Capacity - @item.Price</option>
                         }
                     </select>
-                    <span asp-validation-for="Storages" class="text-danger"></span>
                     <div class="text-center">
                         <input class="btn btn-primary mt-4" type="submit" value="Add Storage" />
                     </div>
@@ -139,14 +133,13 @@
         <form method="post">
             <div class="row mt-2">
                 <div class="form-group mt-2">
-                    <label asp-for="Psus"></label>
-                    <select asp-for="Psus" class="form-control">
-                        @foreach (var item in Model.Psus)
+                    <label>Power Supplies</label>
+                    <select class="form-control">
+                        @foreach (var item in ViewBag.Psus)
                         {
-                            <option value="@item.Id">@item.Name - @item.Wattage - @item.Price</option>
+                            <option value="@item.Id">@item.Name - $@item.Price</option>
                         }
                     </select>
-                    <span asp-validation-for="Psus" class="text-danger"></span>
                     <div class="text-center">
                         <input class="btn btn-primary mt-4" type="submit" value="Add Power Supply" />
                     </div>

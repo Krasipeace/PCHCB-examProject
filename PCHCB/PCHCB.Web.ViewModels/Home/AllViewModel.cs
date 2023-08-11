@@ -30,6 +30,22 @@
 
         public string ProviderId { get; set; } = null!;
 
+        public int Memory { get; set; }
+
+        public int Frequency { get; set; }
+
+        public int FormFactor { get; set; }
+
+        public int CaseSize { get; set; }
+
+        public int PsuFactor { get; set; }
+
+        public string Socket { get; set; } = null!;
+
+        public int Capacity { get; set; }
+
+        public int Wattage { get; set; }
+
         public List<CaseAllViewModel> Cases { get; set; } = new List<CaseAllViewModel>();
 
         public List<CpuAllViewModel> Cpus { get; set; } = new List<CpuAllViewModel>();

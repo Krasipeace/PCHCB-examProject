@@ -5,7 +5,6 @@
     using PCHCB.Web.ViewModels.Cooler;
     using PCHCB.Web.ViewModels.Cpu;
     using PCHCB.Web.ViewModels.Gpu;
-    using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Motherboard;
     using PCHCB.Web.ViewModels.PcConfiguration;
     using PCHCB.Web.ViewModels.Psu;

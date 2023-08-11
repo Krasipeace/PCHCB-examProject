@@ -20,7 +20,6 @@
     using static PCHCB.Common.ComponentsWattageConstants.Motherboard;
     using static PCHCB.Common.ComponentsWattageConstants.Storage;
     using static PCHCB.Common.ComponentsWattageConstants.Ram;
-    using static PCHCB.Common.GeneralAppConstants;
 
     public class PcConfigurationService : IPcConfigurationService
     {
