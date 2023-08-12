@@ -15,7 +15,6 @@
         /// <summary>
         /// PC Case Id in app's database
         /// </summary>
-        [Key]
         public int Id { get; set; }
 
         /// <summary>

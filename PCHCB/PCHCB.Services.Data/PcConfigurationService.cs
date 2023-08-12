@@ -15,8 +15,8 @@
     using PCHCB.Web.ViewModels.Storage;
     using PCHCB.Web.ViewModels.PcConfiguration;
 
-    using static PCHCB.Common.ComponentsWattageConstants.Cooler;
     using static PCHCB.Common.EntityValidationConstants.Ram;
+    using static PCHCB.Common.ComponentsWattageConstants.Cooler;
     using static PCHCB.Common.ComponentsWattageConstants.Motherboard;
     using static PCHCB.Common.ComponentsWattageConstants.Storage;
     using static PCHCB.Common.ComponentsWattageConstants.Ram;
