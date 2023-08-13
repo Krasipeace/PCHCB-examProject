@@ -25,5 +25,7 @@
         Task<SearchResult> SearchPsusAsync(AllQueryModel queryModel);
 
         Task<PsuDetailsViewModel> GetPsuDetailsAsync(int psuId);
+
+        Task<IEnumerable<PsuDetailsViewModel>> GetAllPsusDetailsAsync();
     }
 }

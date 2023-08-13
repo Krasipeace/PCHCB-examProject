@@ -5,8 +5,6 @@
     using PCHCB.Services.Data.Contracts;
     using PCHCB.Web.Infrastructure.Extensions;
     using PCHCB.Web.ViewModels.PcConfiguration;
-    using PCHCB.Web.ViewModels.Gpu;
-    using PCHCB.Web.ViewModels.Cpu;
 
     using static PCHCB.Common.NotificationMessages;
     using static PCHCB.Common.ExceptionMessages;
@@ -43,14 +41,14 @@
         {
             try
             {
-                ViewData["Gpus"] = await this.gpuService.GetAllGpusAsync();
-                ViewData["Cpus"] = await this.cpuService.GetAllCpusAsync();
-                ViewData["Motherboards"] = await this.motherboardService.GetAllMotherboardsAsync();
-                ViewData["Cases"] = await this.caseService.GetAllCasesAsync();
-                ViewData["Coolers"] = await this.coolerService.GetAllCoolersAsync();
-                ViewData["Rams"] = await this.ramService.GetAllRamsAsync();
-                ViewData["Storages"] = await this.storageService.GetAllStoragesAsync();
-                ViewData["Psus"] = await this.psuService.GetAllPsusAsync();
+                ViewData["Gpus"] = await this.gpuService.GetAllGpusDetailsAsync();
+                ViewData["Cpus"] = await this.cpuService.GetAllCpusDetailsAsync();
+                ViewData["Motherboards"] = await this.motherboardService.GetAllMotherboardsDetailsAsync();
+                ViewData["Cases"] = await this.caseService.GetAllCasesDetailsAsync();
+                ViewData["Coolers"] = await this.coolerService.GetAllCoolersDetailsAsync();
+                ViewData["Rams"] = await this.ramService.GetAllRamsDetailsAsync();
+                ViewData["Storages"] = await this.storageService.GetAllStoragesDetailsAsync();
+                ViewData["Psus"] = await this.psuService.GetAllPsusDetailsAsync();
 
                 return this.View();
             }

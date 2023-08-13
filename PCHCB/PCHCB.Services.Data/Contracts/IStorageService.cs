@@ -25,5 +25,7 @@
         Task<SearchResult> SearchStoragesAsync(AllQueryModel queryModel);
 
         Task<StorageDetailsViewModel> GetStorageDetailsAsync(int storageId);
+
+        Task<IEnumerable<StorageDetailsViewModel>> GetAllStoragesDetailsAsync();
     }
 }

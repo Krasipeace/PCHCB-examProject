@@ -154,6 +154,30 @@
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<CpuDetailsViewModel>> GetAllCpusDetailsAsync()
+        {
+            return await this.dbContext.Cpus
+                .Where(c => c.Name != ComponentUnavailable)
+                .Select(c => new CpuDetailsViewModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Price = c.Price,
+                    Socket = c.Socket,
+                    Cores = c.Cores,
+                    Threads = c.Threads,
+                    Frequency = c.Frequency,
+                    TurboFrequency = c.TurboFrequency,
+                    Cache = c.Cache,
+                    Tdp = c.Tdp,
+                    RamFrequency = c.RamFrequency,
+                    RamType = (int)c.RamType,
+                    ImageUrl = c.ImageUrl,
+                    Description = c.Description,
+                })
+                .ToListAsync();
+        }      
+
         public async Task<SearchResult> SearchCpusAsync(AllQueryModel queryModel)
         {
             IQueryable<Cpu> cpuQuery = dbContext.Cpus

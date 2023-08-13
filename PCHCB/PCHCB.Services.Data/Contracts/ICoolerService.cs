@@ -1,7 +1,6 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
     using PCHCB.Web.ViewModels.Cooler;
-    using PCHCB.Web.ViewModels.Cpu;
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
 
@@ -26,5 +25,7 @@
         Task<SearchResult> SearchCoolersAsync(AllQueryModel queryModel);
 
         Task<CoolerDetailsViewModel> GetCoolerDetailsAsync(int coolerId);
+
+        Task<IEnumerable<CoolerDetailsViewModel>> GetAllCoolersDetailsAsync();
     }
 }

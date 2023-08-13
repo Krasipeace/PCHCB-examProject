@@ -1,6 +1,5 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
-    using PCHCB.Web.ViewModels.Cpu;
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Motherboard;
     using PCHCB.Web.ViewModels.Provider;
@@ -26,5 +25,7 @@
         Task<SearchResult> SearchMotherboardsAsync(AllQueryModel queryModel);
 
         Task<MotherboardDetailsViewModel> GetMotherboardDetailsAsync(int motherboardId);
+
+        Task<IEnumerable<MotherboardDetailsViewModel>> GetAllMotherboardsDetailsAsync();
     }
 }

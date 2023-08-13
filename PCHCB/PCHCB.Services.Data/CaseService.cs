@@ -147,6 +147,27 @@
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<CaseDetailsViewModel>> GetAllCasesDetailsAsync()
+        {
+            return await this.dbContext.Cases
+                .Where(c => c.Name != ComponentUnavailable)
+                .Select(c => new CaseDetailsViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Price = c.Price,
+                    CaseSize = (int)c.CaseSize,
+                    FormFactor = (int)c.FormFactor,
+                    MaxGpuLength = c.MaxGpuLength,
+                    MaxAirCpuCoolerHeight = c.MaxAirCpuCoolerHeight,
+                    PsuFactor = (int)c.PsuFactor,
+                    ImageUrl = c.ImageUrl,
+                    MaxRadiatorLength = c.MaxRadiatorLength,
+                    Description = c.Description
+                })
+                .ToListAsync();
+        }
+
         public async Task<SearchResult> SearchCasesAsync(AllQueryModel queryModel)
         {
             IQueryable<Case> casesQuery = dbContext.Cases

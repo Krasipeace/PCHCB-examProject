@@ -105,7 +105,7 @@ Every provider can view his own Hardware.
 
 Every user can build his own PC Configuration with the provided hardware.
 
-![assemble](https://i.imgur.com/5tDxp7o.png)
+![assemble](https://i.imgur.com/nOPJE68.png)
 
 ## License 
 

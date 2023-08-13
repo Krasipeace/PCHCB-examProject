@@ -1,6 +1,5 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
-    using PCHCB.Web.ViewModels.Cpu;
     using PCHCB.Web.ViewModels.Gpu;
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
@@ -26,5 +25,7 @@
         Task<SearchResult> SearchGpusAsync(AllQueryModel queryModel);
 
         Task<GpuDetailsViewModel> GetGpuDetailsAsync(int gpuId);
+
+        Task<IEnumerable<GpuDetailsViewModel>> GetAllGpusDetailsAsync();
     }
 }

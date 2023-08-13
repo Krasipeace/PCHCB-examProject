@@ -16,7 +16,7 @@
                     <select  class="form-control">
                         @foreach (var item in (ViewBag.Gpus))
                         {
-                            <option value="@item.Id">@item.Name - $@item.Price</option>
+                            <option value="@item.Id">@item.Name - @item.Memory GB - $@item.Price</option>
                         }
                     </select>
                 </div>
@@ -25,7 +25,7 @@
                     <select class="form-control">
                         @foreach (var item in ViewBag.Cpus)
                         {
-                            <option value="@item.Id">@item.Name - $@item.Price</option>
+                            <option value="@item.Id">@item.Name - @item.Cores/@item.Threads - @item.Frequency/@item.TurboFrequency MHz - @item.Cache MB - @item.Socket - $@item.Price</option>
                         }
                     </select>
                     <div class="row mt-2">
@@ -46,7 +46,7 @@
                 <select class="form-control">
                     @foreach (var item in ViewBag.Motherboards)
                     {
-                        <option value="item.Id">@item.Name - $@item.Price</option>
+                        <option value="item.Id">@item.Name - @item.Chipset - @item.Socket - $@item.Price</option>
                     }
                 </select>
                 <div class="text-center">
@@ -83,7 +83,7 @@
                     <select class="form-control">
                         @foreach (var item in ViewBag.Coolers)
                         {
-                            <option value="item.Id">@item.Name - $@item.Price</option>
+                            <option value="item.Id">@item.Name - TDP: @item.Tdp W - $@item.Price</option>
                         }
                     </select>
                     <div class="text-center">
@@ -101,7 +101,7 @@
                     <select class="form-control">
                         @foreach (var item in ViewBag.Rams)
                         {
-                            <option value="@item.Id">@item.Name $@item.Price</option>
+                            <option value="@item.Id">@item.Name - @item.Frequency MHz - @item.ModelNumber - $@item.Price</option>
                         }
                     </select>
                     <div class="text-center">
@@ -119,7 +119,7 @@
                     <select class="form-control">
                         @foreach (var item in ViewBag.Storages)
                         {
-                            <option value="@item.Id">@item.Name - $@item.Capacity - @item.Price</option>
+                            <option value="@item.Id">@item.Name - @item.Capacity GB - $@item.Price</option>
                         }
                     </select>
                     <div class="text-center">
@@ -137,7 +137,7 @@
                     <select class="form-control">
                         @foreach (var item in ViewBag.Psus)
                         {
-                            <option value="@item.Id">@item.Name - $@item.Price</option>
+                            <option value="@item.Id">@item.Name - @item.Wattage W - $@item.Price</option>
                         }
                     </select>
                     <div class="text-center">

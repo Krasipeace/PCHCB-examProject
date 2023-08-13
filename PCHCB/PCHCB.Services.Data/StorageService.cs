@@ -133,6 +133,23 @@
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<StorageDetailsViewModel>> GetAllStoragesDetailsAsync()
+        {
+            return await this.dbContext.Storages
+                .Where(s => s.Name != ComponentUnavailable)
+                .Select(s => new StorageDetailsViewModel
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Price = s.Price,
+                    Capacity = s.Capacity,
+                    Type = (int)s.Type,
+                    ImageUrl = s.ImageUrl,
+                    Description = s.Description
+                })
+                .ToListAsync();
+        }
+
         public async Task<SearchResult> SearchStoragesAsync(AllQueryModel queryModel)
         {
             IQueryable<Storage> storageQuery = dbContext.Storages

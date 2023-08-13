@@ -148,6 +148,27 @@
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<CoolerDetailsViewModel>> GetAllCoolersDetailsAsync()
+        {
+            return await this.dbContext.Coolers
+                .Select(c => new CoolerDetailsViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Price = c.Price,
+                    Type = (int)c.Type,
+                    Compatibility = c.Compatibility,
+                    RadiatorSize = (int)c.RadiatorSize,
+                    FanSize = c.FanSize,
+                    CoolerHeight = c.CoolerHeight,
+                    Tdp = c.Tdp,
+                    Width = c.Width,
+                    ImageUrl = c.ImageUrl,
+                    Description = c.Description,
+                })
+                .ToListAsync();
+        }
+
         public async Task<SearchResult> SearchCoolersAsync(AllQueryModel queryModel)
         {
             IQueryable<Cooler> coolerQuery = dbContext.Coolers

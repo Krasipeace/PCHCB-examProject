@@ -226,8 +226,7 @@
 
             try
             {
-                DeleteDetailsViewModel viewModel =
-                    await ramService.GetRamForDeleteByIdAsync(id);
+                DeleteDetailsViewModel viewModel = await ramService.GetRamForDeleteByIdAsync(id);
 
                 return View(viewModel);
             }

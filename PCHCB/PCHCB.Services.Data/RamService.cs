@@ -142,6 +142,26 @@
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<RamDetailsViewModel>> GetAllRamsDetailsAsync()
+        {
+            return await this.dbContext.Rams
+                .Where(r => r.Name != ComponentUnavailable)
+                .Select(r => new RamDetailsViewModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Price = r.Price,
+                    ImageUrl = r.ImageUrl,
+                    Description = r.Description,
+                    Type = (int)r.Type,
+                    Frequency = r.Frequency,
+                    Capacity = r.Capacity,
+                    Height = r.Height,
+                    ModelNumber = r.ModelNumber,
+                })
+                .ToListAsync();           
+        }
+
         public async Task<SearchResult> SearchRamsAsync(AllQueryModel queryModel)
         {
             IQueryable<Ram> ramQuery = dbContext.Rams

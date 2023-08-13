@@ -136,7 +136,7 @@
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<PsuDetailsViewModel>> GetAllDetailsPsusAsync()
+        public async Task<IEnumerable<PsuDetailsViewModel>> GetAllPsusDetailsAsync()
         {
             return await this.dbContext.Psus
                 .Where(p => p.Name != ComponentUnavailable)

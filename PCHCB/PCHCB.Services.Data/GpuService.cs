@@ -145,6 +145,27 @@
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<GpuDetailsViewModel>> GetAllGpusDetailsAsync()
+        {
+            return await this.dbContext.Gpus
+                .Where(g => g.Name != ComponentUnavailable)
+                .Select(g => new GpuDetailsViewModel()
+                {
+                    Id = g.Id,
+                    Name = g.Name,
+                    Price = g.Price,
+                    ImageUrl = g.ImageUrl,
+                    Description = g.Description,
+                    Memory = g.Memory,
+                    Interface = (int)g.Interface,
+                    Length = g.Length,
+                    SlotsRequired = g.SlotsRequired,
+                    PowerConsumption = g.PowerConsumption,
+                    NvidiaConnector = g.NvidiaConnector,
+                })
+                .ToListAsync();
+        }
+
         public async Task<SearchResult> SearchGpusAsync(AllQueryModel queryModel)
         {
             IQueryable<Gpu> gpuQuery = dbContext.Gpus

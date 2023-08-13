@@ -25,5 +25,7 @@
         Task<SearchResult> SearchRamsAsync(AllQueryModel queryModel);
 
         Task<RamDetailsViewModel> GetRamDetailsAsync(int ramId);
+
+        Task<IEnumerable<RamDetailsViewModel>> GetAllRamsDetailsAsync();
     }
 }

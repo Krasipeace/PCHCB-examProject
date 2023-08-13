@@ -1,7 +1,6 @@
 ﻿namespace PCHCB.Services.Data.Contracts
 {
     using PCHCB.Web.ViewModels.Case;
-    using PCHCB.Web.ViewModels.Cpu;
     using PCHCB.Web.ViewModels.Home;
     using PCHCB.Web.ViewModels.Provider;
 
@@ -26,5 +25,7 @@
         Task<SearchResult> SearchCasesAsync(AllQueryModel queryModel);
 
         Task<CaseDetailsViewModel> GetCaseDetailsAsync(int caseId);
+
+        Task<IEnumerable<CaseDetailsViewModel>> GetAllCasesDetailsAsync();
     }
 }

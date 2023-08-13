@@ -154,6 +154,30 @@
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<MotherboardDetailsViewModel>> GetAllMotherboardsDetailsAsync()
+        {
+            return await this.dbContext.Motherboards
+                .Where(m => m.Name != ComponentUnavailable)
+                .Select(m => new MotherboardDetailsViewModel
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                    Price = m.Price,
+                    FormFactor = (int)m.FormFactor,
+                    Socket = m.Socket,
+                    Chipset = m.Chipset,
+                    RamType = (int)m.RamType,
+                    RamSlots = m.RamSlots,
+                    RamCapacity = m.RamCapacity,
+                    SataSlots = m.SataSlots,
+                    PcieType = (int)m.PcieType,
+                    M2Slots = m.M2Slots,
+                    ImageUrl = m.ImageUrl,
+                    Description = m.Description,
+                })
+                .ToListAsync();
+        }
+
         public async Task<SearchResult> SearchMotherboardsAsync(AllQueryModel queryModel)
         {
             IQueryable<Motherboard> motherboardQuery = dbContext.Motherboards
