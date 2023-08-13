@@ -165,6 +165,15 @@
         }
 
         [Test]
+        public async Task GetAllPsusDetailsReturnsAllPsusDetailsFromDbContext()
+        {
+            var expected = await psuService.GetAllPsusDetailsAsync();
+            int actual = await dbContext.Psus.CountAsync();
+
+            Assert.That(expected.Count, Is.EqualTo(actual));
+        }
+
+        [Test]
         public async Task SearchPsusAsyncReturnsMatchingPsus()
         {
             var queryModel = new AllQueryModel()

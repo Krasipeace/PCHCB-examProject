@@ -182,6 +182,15 @@
         }
 
         [Test]
+        public async Task GetAllGpusDetailsAsyncReturnsAllGpusDetailsFromDbContext()
+        {
+            var expected = await gpuService.GetAllGpusDetailsAsync();
+            int actual = await dbContext.Gpus.CountAsync();
+
+            Assert.That(expected.Count(), Is.EqualTo(actual));
+        }
+
+        [Test]
         public async Task SearchAllGpusAsyncReturnsMatchingGpus()
         {
             var queryModel = new AllQueryModel

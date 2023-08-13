@@ -200,6 +200,15 @@
         }
 
         [Test]
+        public async Task GetAllCoolersAsyncReturnsAllCoolersFromDbContext()
+        {
+            var expected = await coolerService.GetAllCoolersDetailsAsync();
+            int actual = await dbContext.Coolers.CountAsync();
+
+            Assert.That(expected.Count(), Is.EqualTo(actual));
+        }
+
+        [Test]
         public async Task SearchCoolersAsyncReturnsMatchingCoolers()
         {
             var queryModel = new AllQueryModel()

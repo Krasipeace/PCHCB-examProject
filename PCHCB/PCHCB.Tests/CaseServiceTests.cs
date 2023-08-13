@@ -237,6 +237,15 @@
         }
 
         [Test]
+        public async Task GetAllCasesDetailsAsyncReturnsAllCasesDetailsFromDbContext()
+        {
+            var expected = await caseService.GetAllCasesDetailsAsync();
+            var actual = await dbContext.Cases.CountAsync();
+
+            Assert.That(expected.Count(), Is.EqualTo(actual));
+        }
+
+        [Test]
         public async Task SearchCasesAsyncReturnsMatchingCases()
         {
             var queryModel = new AllQueryModel()

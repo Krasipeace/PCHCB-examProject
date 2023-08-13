@@ -203,6 +203,16 @@
         }
 
         [Test]
+        public async Task GetAllCpusDetailsAsyncReturnsAllCpusFromDbContext()
+        {
+            var expected = await cpuService.GetAllCpusDetailsAsync();
+            int actual = await dbContext.Cpus.CountAsync();
+
+            Assert.IsNotNull(expected);
+            Assert.That(expected.Count, Is.EqualTo(actual));
+        }
+
+        [Test]
         public async Task SearchCpusAsyncReturnsMatchingCpus()
         {
             var queryModel = new AllQueryModel()

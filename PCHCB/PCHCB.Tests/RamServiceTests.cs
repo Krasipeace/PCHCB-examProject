@@ -180,6 +180,15 @@
         }
 
         [Test]
+        public async Task GetAllRamsDetailsAsyncReturnsAllRamsDetailsFromDbContext()
+        {
+            var expected = await ramService.GetAllRamsDetailsAsync();
+            int actual = await dbContext.Rams.CountAsync();
+
+            Assert.That(expected.Count, Is.EqualTo(actual));
+        }
+
+        [Test]
         public async Task SearchRamsAsyncReturnsMatchingRams()
         {
             var queryModel = new AllQueryModel()

@@ -160,6 +160,15 @@
         }
 
         [Test]
+        public async Task GetAllStoragesDetailsReturnsAllStoragesFromDbContext()
+        {
+            var expected = await storageService.GetAllStoragesDetailsAsync();
+            int actual = await dbContext.Storages.CountAsync();
+
+            Assert.That(expected.Count, Is.EqualTo(actual));
+        }
+
+        [Test]
         public async Task SearchStoragesAsyncReturnsMatchingStorages()
         {
             var queryModel = new AllQueryModel()

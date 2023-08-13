@@ -201,6 +201,15 @@
         }
 
         [Test]
+        public async Task GetAllMotherboardsDetailsAsyncReturnsAllMotherboardsDetailsFromDbContext()
+        {
+            var expected = await motherboardService.GetAllMotherboardsDetailsAsync();
+            int actual = await dbContext.Motherboards.CountAsync();
+
+            Assert.That(expected.Count, Is.EqualTo(actual));
+        }
+
+        [Test]
         public async Task SearchAllMotherboardsAsyncReturnsMatchingMotherboards()
         {
             var queryModel = new AllQueryModel()
