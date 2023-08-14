@@ -14,7 +14,6 @@
     using static PCHCB.Common.ErrorMessages.Cooler;
     using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
-    using Microsoft.VisualBasic;
 
     [Authorize]
     public class CoolerController : Controller
