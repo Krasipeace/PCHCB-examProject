@@ -23,7 +23,7 @@ Table of Contents
 
 ## Overview
 
-Personal Computer's Hardware Compatibility Builder is a software application that allows users to configure a custom PC configuration based on their specific needs and requirements. The app provides a user-friendly interface that guides users through the process of selecting the components they need for their PC, including the CPU, GPU, RAM, storage, case, motherboard, power supply, and cooling solutions. The app also provides users to become providers of Pc components and add them to the app's database.
+Personal Computer's Hardware Compatibility Builder is a web application that allows users to configure a custom PC configuration based on their specific needs and requirements. The app provides a user-friendly interface that guides users through the process of selecting the components they need for their PC, including the CPU, GPU, RAM, storage, case, motherboard, power supply, and cooling solutions. The app also provides users to register as providers of Pc components and add them to the app's database.
 
 ## Get Started 
 
@@ -68,7 +68,7 @@ The Admin Area is accessible only by the Administrator. It is a separate area of
 
 
 
-## Add Component
+## Add/Edit/Delete Component
 
 Every Provider can add up to eight types of PC components:
 
