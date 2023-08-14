@@ -1,5 +1,7 @@
 ﻿namespace PCHCB.Web.ViewModels.PcConfiguration
 {
+    using PCHCB.Web.ViewModels.Contracts;
+
     using System.ComponentModel.DataAnnotations;
 
     using static PCHCB.Common.EntityValidationConstants.PcConfiguration;
@@ -8,7 +10,7 @@
     /// <summary>
     /// Pc Configuration Short Info Model
     /// </summary>
-    public class PcConfigurationViewModel
+    public class PcConfigurationViewModel : IProtectedUrlsModel
     {
         public int Id { get; set; }
 
@@ -20,5 +22,7 @@
         public decimal Price { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public string Parameter => Name;
     }
 }

@@ -14,6 +14,7 @@
     using static PCHCB.Common.ErrorMessages.Cooler;
     using static PCHCB.Common.SuccessMessages;
     using static PCHCB.Common.ExceptionMessages;
+    using Microsoft.VisualBasic;
 
     [Authorize]
     public class CoolerController : Controller
@@ -288,7 +289,7 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             bool coolerExists = await coolerService
                 .IsCoolerExistByIdAsync(id);
@@ -302,7 +303,12 @@
             try
             {
                 CoolerDetailsViewModel viewModel = await coolerService
-                    .GetCoolerDetailsAsync(id);
+                .GetCoolerDetailsAsync(id);
+
+                if (viewModel.GetUrlInformation() != information)
+                {
+                    return RedirectToAction("Error", "Home", StatusCode(404));
+                }
 
                 return View(viewModel);
             }

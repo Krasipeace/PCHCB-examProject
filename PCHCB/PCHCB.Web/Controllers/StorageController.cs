@@ -285,7 +285,7 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             bool storageExists = await storageService
                 .IsStorageExistByIdAsync(id);
@@ -300,6 +300,11 @@
             {
                 StorageDetailsViewModel viewModel = await storageService
                     .GetStorageDetailsAsync(id);
+
+                if (viewModel.GetUrlInformation() != information)
+                {
+                    return RedirectToAction("Error", "Home", StatusCode(404));
+                }
 
                 return View(viewModel);
             }

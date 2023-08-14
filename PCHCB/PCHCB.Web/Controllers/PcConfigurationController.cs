@@ -23,7 +23,15 @@
         private readonly IRamService ramService;
         private readonly IStorageService storageService;
 
-        public PcConfigurationController(IPcConfigurationService pcConfigurationService, ICaseService caseService, ICoolerService coolerService, ICpuService cpuService, IGpuService gpuService, IMotherboardService motherboardService, IPsuService psuService, IRamService ramService, IStorageService storageService)
+        public PcConfigurationController(IPcConfigurationService pcConfigurationService, 
+                                        ICaseService caseService, 
+                                        ICoolerService coolerService, 
+                                        ICpuService cpuService, 
+                                        IGpuService gpuService, 
+                                        IMotherboardService motherboardService, 
+                                        IPsuService psuService, 
+                                        IRamService ramService, 
+                                        IStorageService storageService)
         {
             this.pcConfigurationService = pcConfigurationService;
             this.caseService = caseService;

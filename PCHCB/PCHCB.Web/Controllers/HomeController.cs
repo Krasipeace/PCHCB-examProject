@@ -19,9 +19,9 @@
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(int statusCode)
         {
-            if (statusCode == 400 || statusCode == 404)
+            if (statusCode == 400)
             {
-                return this.View("Error404");
+                return this.View("Error400");
             }
 
             if (statusCode == 401)
@@ -32,6 +32,11 @@
             if (statusCode == 403)
             {
                 return this.View("Error403");
+            }
+
+            if (statusCode == 404)
+            {
+                return this.View("Error404");
             }
 
             return this.View();

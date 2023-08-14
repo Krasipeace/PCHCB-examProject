@@ -1,5 +1,6 @@
 ﻿namespace PCHCB.Web.ViewModels.Ram
 {
+    using PCHCB.Web.ViewModels.Contracts;
     using PCHCB.Web.ViewModels.PcConfiguration;
     using PCHCB.Web.ViewModels.Provider;
 

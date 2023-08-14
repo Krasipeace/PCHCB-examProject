@@ -36,7 +36,7 @@
                 {
                     Id = u.Id.ToString(),
                     Email = u.Email,
-                    FullName = u.FirstName + " " + u.LastName
+                    FullName = ($"{u.FirstName} {u.LastName}")
                 })
                 .ToListAsync();
             foreach (UserViewModel user in allUsers)

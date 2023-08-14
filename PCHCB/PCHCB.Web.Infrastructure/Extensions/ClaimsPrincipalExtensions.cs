@@ -16,6 +16,11 @@
             return user.FindFirstValue(ClaimTypes.NameIdentifier);
         }
 
+        /// <summary>
+        /// Extension method to check if the user is an admin
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public static bool IsAdmin(this ClaimsPrincipal user)
         {
             return user.IsInRole(AdminRoleName);

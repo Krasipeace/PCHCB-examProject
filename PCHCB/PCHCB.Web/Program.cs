@@ -99,7 +99,7 @@ namespace PCHCB.Web
                 config.MapControllerRoute(
                     name: "ProtectingUrlRoute",
                     pattern: "/{controller}/{action}/{id}/{information}",
-                    defaults: new { Controller = "Home", Action = "Index" });
+                    defaults: new { Controller = "Case", Action = "Details" });
 
                 config.MapDefaultControllerRoute();
 

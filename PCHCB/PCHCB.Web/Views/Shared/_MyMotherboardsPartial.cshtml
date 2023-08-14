@@ -16,7 +16,7 @@
                     <div class="card-body text-center">
                         <p>@item.Name</p>
                         <p>$@($"{item.Price:f2}")</p>
-                        <p><a class="btn btn-outline-info" asp-area="" asp-controller="Motherboard" asp-action="Details" asp-route-id="@item.Id">Details</a></p>
+                        <p><a class="btn btn-outline-info" asp-area="" asp-controller="Motherboard" asp-action="Details" asp-route-information="@item.GetUrlInformation()" asp-route-id="@item.Id">Details</a></p>
                     </div>
                 </div>
             </div>

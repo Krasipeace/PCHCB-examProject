@@ -287,7 +287,7 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             bool caseExists = await caseService
                 .IsCaseExistByIdAsync(id);
@@ -302,6 +302,11 @@
             {
                 CaseDetailsViewModel viewModel = await caseService
                     .GetCaseDetailsAsync(id);
+
+                if (viewModel.GetUrlInformation() != information)
+                {
+                    return RedirectToAction("Error", "Home", StatusCode(404));
+                }
 
                 return View(viewModel);
             }

@@ -10,7 +10,7 @@
             <p>Description: <b>@Model.Description</b></p>
             <p>Price:<b>$@($"{Model.Price:f2}")</b></p>
             <br />
-            <a asp-area="" asp-controller="Gpu" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-info">Details</a>
+            <a asp-area="" asp-controller="Gpu" asp-action="Details" asp-route-id="@Model.Id" asp-route-information="@Model.GetUrlInformation()" class="btn btn-outline-info">Details</a>
         </div>
     </div>
 </div>

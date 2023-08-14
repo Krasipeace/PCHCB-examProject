@@ -284,7 +284,7 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             bool motherboardExists = await motherboardService
                 .IsMotherboardExistByIdAsync(id);
@@ -299,6 +299,11 @@
             {
                 MotherboardDetailsViewModel viewModel = await motherboardService
                     .GetMotherboardDetailsAsync(id);
+
+                if (viewModel.GetUrlInformation() != information)
+                {
+                    return RedirectToAction("Error", "Home", StatusCode(404));
+                }
 
                 return View(viewModel);
             }

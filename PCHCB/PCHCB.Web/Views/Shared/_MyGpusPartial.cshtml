@@ -17,7 +17,7 @@
                         <p>@item.Name</p>
                         <p>$@($"{item.Price:f2}")</p>
                         <p><img src="@item.ImageUrl" class="img-thumbnail" alt="image"></p>
-                        <p><a class="btn btn-outline-info" asp-area="" asp-controller="Gpu" asp-action="Details" asp-route-id="@item.Id">Details</a></p>
+                        <p><a class="btn btn-outline-info" asp-area="" asp-controller="Gpu" asp-action="Details" asp-route-information="@item.GetUrlInformation()" asp-route-id="@item.Id">Details</a></p>
                     </div>
                 </div>
             </div>

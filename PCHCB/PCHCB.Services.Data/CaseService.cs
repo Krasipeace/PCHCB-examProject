@@ -12,7 +12,6 @@
     using PCHCB.Web.ViewModels.Enums;
 
     using static PCHCB.Common.GeneralAppConstants;
-    using PCHCB.Web.ViewModels.Cpu;
 
     public class CaseService : ICaseService
     {

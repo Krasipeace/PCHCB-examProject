@@ -1,6 +1,7 @@
 ﻿namespace PCHCB.Web.ViewModels.Home
 {
     using PCHCB.Web.ViewModels.Case;
+    using PCHCB.Web.ViewModels.Contracts;
     using PCHCB.Web.ViewModels.Cooler;
     using PCHCB.Web.ViewModels.Cpu;
     using PCHCB.Web.ViewModels.Gpu;
@@ -14,7 +15,7 @@
     /// <summary>
     /// ViewModel for All
     /// </summary>
-    public class AllViewModel
+    public class AllViewModel : IProtectedUrlsModel
     {
         public int Id { get; set; }
 
@@ -47,5 +48,7 @@
         public List<StorageAllViewModel> Storages { get; set; } = new List<StorageAllViewModel>();
 
         public List<PcConfigurationViewModel> PcConfigurations { get; set; } = new List<PcConfigurationViewModel>();
+
+        public string Parameter => Name;
     }
 }

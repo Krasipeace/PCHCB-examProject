@@ -51,7 +51,7 @@
 <div class="row mt-4">
     @foreach (var cooler in Model.Coolers)
     {
-        <partial name="_CoolerPartial" model="@cooler" />
+        <partial name="_CoolerPartial" model="@cooler" asp-route-information="" />
     }
 </div>
 <div class="row">

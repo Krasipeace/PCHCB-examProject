@@ -284,7 +284,7 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             bool psuExists = await psuService
                 .IsPsuExistByIdAsync(id);
@@ -299,6 +299,11 @@
             {
                 PsuDetailsViewModel viewModel = await psuService
                     .GetPsuDetailsAsync(id);
+
+                if (viewModel.GetUrlInformation() != information)
+                {
+                    return RedirectToAction("Error", "Home", StatusCode(404));
+                }
 
                 return View(viewModel);
             }
