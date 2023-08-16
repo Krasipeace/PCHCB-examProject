@@ -121,7 +121,7 @@
             {
                 TempData[ErrorMessage] = ProviderCannotEditMotherboardHeDoesNotOwnErrorMessage;
 
-                return RedirectToAction("Mine", "Motherboard");
+                return RedirectToAction("Mine", "Provider");
             }
 
             try

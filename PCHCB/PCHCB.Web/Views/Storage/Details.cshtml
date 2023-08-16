@@ -16,7 +16,9 @@
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
-<div class="container" style="display:inline">
+<a class="btn btn-outline-success" asp-controller="Storage" asp-action="All">&lt;&lt; Back to Storages</a>
+
+<div class="container mt-2" style="display:inline">
     <div class="row">
         <div class="col-4">
             <img class="card-img-top" style="width: 20rem;"
@@ -50,7 +52,7 @@
             </div>
 
             <p>Price: <b>@($"{Model.Price:f2}") $</b></p>
-            <div class="form-inline">
+            <div class="form-inline mt-2">
                 @if (User.Identity?.IsAuthenticated ?? false)
                 {
                     @if (isUserProvider && !isProviderOwnerOfStorage)

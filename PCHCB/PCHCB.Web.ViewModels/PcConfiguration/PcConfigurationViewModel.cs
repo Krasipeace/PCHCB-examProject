@@ -1,8 +1,8 @@
 ﻿namespace PCHCB.Web.ViewModels.PcConfiguration
 {
-    using PCHCB.Web.ViewModels.Contracts;
-
     using System.ComponentModel.DataAnnotations;
+
+    using PCHCB.Web.ViewModels.Contracts;
 
     using static PCHCB.Common.EntityValidationConstants.PcConfiguration;
     using static PCHCB.Common.InputValidationDataMessages.General;

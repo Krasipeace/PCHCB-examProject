@@ -39,6 +39,11 @@
                 return this.View("Error404");
             }
 
+            if (statusCode == 500)
+            {
+                return this.View("Error500");
+            }
+
             return this.View();
         }
     }
