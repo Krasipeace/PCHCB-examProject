@@ -91,6 +91,7 @@
             cpu.ImageUrl = model.ImageUrl;
             cpu.Description = model.Description;
 
+            this.dbContext.Update(cpu);
             await this.dbContext.SaveChangesAsync();
         }
 

@@ -79,6 +79,7 @@
             ram.ImageUrl = model.ImageUrl;
             ram.Description = model.Description;
 
+            this.dbContext.Rams.Update(ram);
             await this.dbContext.SaveChangesAsync();
         }
 

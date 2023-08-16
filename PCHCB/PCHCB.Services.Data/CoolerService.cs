@@ -85,6 +85,7 @@
             cooler.ImageUrl = model.ImageUrl;
             cooler.Description = model.Description;
 
+            this.dbContext.Coolers.Update(cooler);
             await this.dbContext.SaveChangesAsync();
         }
 

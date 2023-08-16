@@ -85,6 +85,7 @@
             @case.MaxRadiatorLength = formModel.MaxRadiatorLength;
             @case.Description = formModel.Description;
 
+            this.dbContext.Cases.Update(@case);
             await this.dbContext.SaveChangesAsync();
         }
 

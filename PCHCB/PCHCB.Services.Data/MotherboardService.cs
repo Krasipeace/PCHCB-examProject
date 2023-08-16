@@ -94,6 +94,7 @@
             motherboard.ImageUrl = model.ImageUrl;
             motherboard.Description = model.Description;
 
+            this.dbContext.Motherboards.Update(motherboard);
             await this.dbContext.SaveChangesAsync();
         }
 

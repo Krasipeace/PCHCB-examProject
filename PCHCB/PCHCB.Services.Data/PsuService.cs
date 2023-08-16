@@ -73,6 +73,7 @@
             psu.ImageUrl = model.ImageUrl;
             psu.Description = model.Description;
 
+            this.dbContext.Psus.Update(psu);
             await this.dbContext.SaveChangesAsync();
         }
 

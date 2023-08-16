@@ -82,6 +82,7 @@
             gpu.ImageUrl = model.ImageUrl;
             gpu.Description = model.Description;
 
+            this.dbContext.Gpus.Update(gpu);
             await this.dbContext.SaveChangesAsync();
         }
 

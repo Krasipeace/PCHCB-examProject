@@ -70,6 +70,7 @@
             storage.ImageUrl = model.ImageUrl;
             storage.Description = model.Description;
 
+            this.dbContext.Storages.Update(storage);
             await this.dbContext.SaveChangesAsync();
         }
 
