@@ -94,13 +94,13 @@
 
             this.TempData[SuccessMessage] = PcBuildedSuccessfully;
 
-            return this.RedirectToAction("Index", "PcConfiguration", new
+            return this.RedirectToAction("MyBuilds", "PcConfiguration", new
             {
                 Id = buildPc,
             });
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> MyBuilds()
         {
             string userId = this.User.GetId()!;
             if (userId == null)

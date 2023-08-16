@@ -16,9 +16,10 @@
 
         [Required]
         [StringLength(PcNameMaxLength, MinimumLength = PcNameMinLength, ErrorMessage = NameLengthErrorMessage)]
-        [Display(Name = "Configuration Name")]
+        [Display(Name = "Name")]
         public string Name { get; set; } = null!;
 
+        [Display(Name = "Price")]
         public decimal Price { get; set; }
 
         public DateTime CreatedOn { get; set; }
