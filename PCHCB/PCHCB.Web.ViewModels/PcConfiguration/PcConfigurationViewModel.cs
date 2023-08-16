@@ -23,7 +23,5 @@
         public decimal Price { get; set; }
 
         public DateTime CreatedOn { get; set; }
-
-        public string Parameter => Name;
     }
 }
