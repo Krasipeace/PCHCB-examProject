@@ -6,7 +6,7 @@
     {
         public static string GetUrlInformation(this IProtectedUrlsModel model)
         {
-            return model.Parameter.Replace(" ", "-");
+            return model.Name.Replace(" ", "-");
         }
     }
 }

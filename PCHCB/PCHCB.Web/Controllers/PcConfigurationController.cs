@@ -97,7 +97,7 @@
             return this.RedirectToAction("MyBuilds", "PcConfiguration", new
             {
                 Id = buildPc,
-            });
+            }, nameof(buildConfiguration.Name));
         }
 
         public async Task<IActionResult> MyBuilds()

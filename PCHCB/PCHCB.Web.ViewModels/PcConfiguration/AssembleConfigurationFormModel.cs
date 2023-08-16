@@ -1,6 +1,7 @@
 ﻿namespace PCHCB.Web.ViewModels.PcConfiguration
 {
     using PCHCB.Web.ViewModels.Case;
+    using PCHCB.Web.ViewModels.Contracts;
     using PCHCB.Web.ViewModels.Cooler;
     using PCHCB.Web.ViewModels.Cpu;
     using PCHCB.Web.ViewModels.Gpu;
@@ -12,7 +13,7 @@
     /// <summary>
     /// Assemble Pc Configuration Form Model
     /// </summary>
-    public class AssembleConfigurationFormModel
+    public class AssembleConfigurationFormModel : IProtectedUrlsModel
     {
         public int PcConfigurationId { get; set; }
 

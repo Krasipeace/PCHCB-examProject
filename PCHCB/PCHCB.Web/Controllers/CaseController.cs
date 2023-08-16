@@ -80,7 +80,7 @@
 
                 this.TempData[SuccessMessage] = CaseAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Case", new
+                return this.RedirectToAction("Add", "Case", new
                 {
                     id = caseId
                 });
@@ -189,7 +189,7 @@
 
             TempData[SuccessMessage] = CaseEditedSuccessfully;
 
-            return RedirectToAction("Details", "Case", new { id });
+            return RedirectToAction("Edit", "Case", new { id });
         }
 
         [HttpGet]

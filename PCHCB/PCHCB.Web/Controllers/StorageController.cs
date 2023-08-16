@@ -79,7 +79,7 @@
 
                 this.TempData[SuccessMessage] = StorageAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Storage", new
+                return this.RedirectToAction("Add", "Storage", new
                 {
                     id = storageId
                 });
@@ -189,7 +189,7 @@
 
             TempData[SuccessMessage] = StorageEditedSuccessfully;
 
-            return RedirectToAction("Details", "Storage", new { id });
+            return RedirectToAction("Edit", "Storage", new { id });
         }
 
         [HttpGet]

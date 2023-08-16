@@ -80,7 +80,7 @@
 
                 this.TempData[SuccessMessage] = RamAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Ram", new
+                return this.RedirectToAction("Add", "Ram", new
                 {
                     id = ramId
                 });
@@ -189,7 +189,7 @@
 
             TempData[SuccessMessage] = RamEditedSuccessfully;
 
-            return RedirectToAction("Details", "Ram", new { id });
+            return RedirectToAction("Edit", "Ram", new { id });
         }
 
         [HttpGet]

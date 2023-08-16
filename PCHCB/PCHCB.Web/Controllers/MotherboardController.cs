@@ -79,7 +79,7 @@
 
                 this.TempData[SuccessMessage] = MotherboardAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Motherboard", new
+                return this.RedirectToAction("Add", "Motherboard", new
                 {
                     id = motherboardId
                 });
@@ -188,7 +188,7 @@
 
             TempData[SuccessMessage] = MotherboardEditedSuccessfully;
 
-            return RedirectToAction("Details", "Motherboard", new { id });
+            return RedirectToAction("Edit", "Motherboard", new { id });
         }
 
         [HttpGet]

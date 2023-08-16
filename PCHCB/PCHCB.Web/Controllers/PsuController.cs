@@ -79,7 +79,7 @@
 
                 this.TempData[SuccessMessage] = PowerSupplyAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Psu", new
+                return this.RedirectToAction("Add", "Psu", new
                 {
                     id = psuId
                 });
@@ -188,7 +188,7 @@
 
             TempData[SuccessMessage] = PowerSupplyEditedSuccessfully;
 
-            return RedirectToAction("Details", "Psu", new { id });
+            return RedirectToAction("Edit", "Psu", new { id });
         }
 
         [HttpGet]

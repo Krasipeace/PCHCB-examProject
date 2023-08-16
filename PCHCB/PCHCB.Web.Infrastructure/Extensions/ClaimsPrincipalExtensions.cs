@@ -17,7 +17,7 @@
         }
 
         /// <summary>
-        /// Extension method to check if the user is an admin
+        /// Extension method to check if the user is an `admin`
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>

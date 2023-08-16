@@ -36,6 +36,7 @@
                 RamCapacity = model.RamCapacity,
                 SataSlots = model.SataSlots,
                 PcieType = (InterfaceType)model.PcieType,
+                PcieSlots = model.PcieSlots,
                 M2Slots = model.M2Slots,
                 ImageUrl = model.ImageUrl,
                 Description = model.Description,
@@ -66,6 +67,7 @@
                 RamCapacity = motherboard.RamCapacity,
                 SataSlots = motherboard.SataSlots,
                 PcieType = (int)motherboard.PcieType,
+                PcieSlots = motherboard.PcieSlots,
                 M2Slots = motherboard.M2Slots,
                 ImageUrl = motherboard.ImageUrl,
                 Description = motherboard.Description,
@@ -87,6 +89,7 @@
             motherboard.RamCapacity = model.RamCapacity;
             motherboard.SataSlots = model.SataSlots;
             motherboard.PcieType = (InterfaceType)model.PcieType;
+            motherboard.PcieSlots = model.PcieSlots;
             motherboard.M2Slots = model.M2Slots;
             motherboard.ImageUrl = model.ImageUrl;
             motherboard.Description = model.Description;
@@ -171,6 +174,7 @@
                     RamCapacity = m.RamCapacity,
                     SataSlots = m.SataSlots,
                     PcieType = (int)m.PcieType,
+                    PcieSlots = m.PcieSlots,
                     M2Slots = m.M2Slots,
                     ImageUrl = m.ImageUrl,
                     Description = m.Description,
@@ -248,6 +252,7 @@
                 RamCapacity = motherboard.RamCapacity,
                 SataSlots = motherboard.SataSlots,
                 PcieType = (int)motherboard.PcieType,
+                PcieSlots = motherboard.PcieSlots,
                 M2Slots = motherboard.M2Slots,
                 ImageUrl = motherboard.ImageUrl,
                 Description = motherboard.Description,

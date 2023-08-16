@@ -48,7 +48,5 @@
         public List<StorageAllViewModel> Storages { get; set; } = new List<StorageAllViewModel>();
 
         public List<PcConfigurationViewModel> PcConfigurations { get; set; } = new List<PcConfigurationViewModel>();
-
-        public string Parameter => Name;
     }
 }

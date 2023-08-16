@@ -2,6 +2,6 @@
 {
     public interface IProtectedUrlsModel
     {
-        public string Parameter { get; }
+        public string Name { get; }
     }
 }

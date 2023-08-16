@@ -79,7 +79,7 @@
 
                 this.TempData[SuccessMessage] = CoolerAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Cooler", new
+                return this.RedirectToAction("Add", "Cooler", new
                 {
                     id = coolerId
                 });
@@ -190,7 +190,7 @@
 
             TempData[SuccessMessage] = CoolerEditedSuccessfully;
 
-            return RedirectToAction("Details", "Cooler", new { id });
+            return RedirectToAction("Edit", "Cooler", new { id });
         }
 
         [HttpGet]

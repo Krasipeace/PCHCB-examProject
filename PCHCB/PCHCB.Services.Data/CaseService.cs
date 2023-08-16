@@ -32,6 +32,7 @@
                 FormFactor = (MbFormFactor)model.FormFactor,
                 MaxGpuLength = model.MaxGpuLength,
                 MaxAirCpuCoolerHeight = (int)model.MaxAirCpuCoolerHeight,
+                MaxStorageDevices = model.MaxStorageDevices,
                 PsuFactor = (PsuFactor)model.PsuFactor,
                 ImageUrl = model.ImageUrl,
                 MaxRadiatorLength = model.MaxRadiatorLength,
@@ -59,6 +60,7 @@
                 FormFactor = (int)@case.FormFactor,
                 MaxGpuLength = @case.MaxGpuLength,
                 MaxAirCpuCoolerHeight = (int)@case.MaxAirCpuCoolerHeight,
+                MaxStorageDevices = @case.MaxStorageDevices,
                 PsuFactor = (int)@case.PsuFactor,
                 ImageUrl = @case.ImageUrl,
                 MaxRadiatorLength = @case.MaxRadiatorLength,
@@ -77,6 +79,7 @@
             @case.FormFactor = (MbFormFactor)formModel.FormFactor;
             @case.MaxGpuLength = formModel.MaxGpuLength;
             @case.MaxAirCpuCoolerHeight = (int)formModel.MaxAirCpuCoolerHeight;
+            @case.MaxStorageDevices = formModel.MaxStorageDevices;
             @case.PsuFactor = (PsuFactor)formModel.PsuFactor;
             @case.ImageUrl = formModel.ImageUrl;
             @case.MaxRadiatorLength = formModel.MaxRadiatorLength;
@@ -159,6 +162,7 @@
                     FormFactor = (int)c.FormFactor,
                     MaxGpuLength = c.MaxGpuLength,
                     MaxAirCpuCoolerHeight = c.MaxAirCpuCoolerHeight,
+                    MaxStorageDevices = c.MaxStorageDevices,
                     PsuFactor = (int)c.PsuFactor,
                     ImageUrl = c.ImageUrl,
                     MaxRadiatorLength = c.MaxRadiatorLength,
@@ -234,6 +238,7 @@
                 FormFactor = (int)@case.FormFactor,
                 MaxGpuLength = @case.MaxGpuLength,
                 MaxAirCpuCoolerHeight = @case.MaxAirCpuCoolerHeight,
+                MaxStorageDevices = @case.MaxStorageDevices,
                 PsuFactor = (int)@case.PsuFactor,
                 ImageUrl = @case.ImageUrl,
                 MaxRadiatorLength = @case.MaxRadiatorLength,

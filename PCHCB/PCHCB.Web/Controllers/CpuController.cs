@@ -80,7 +80,7 @@
 
                 this.TempData[SuccessMessage] = CpuAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Cpu", new
+                return this.RedirectToAction("Add", "Cpu", new
                 {
                     id = cpuId
                 });
@@ -189,7 +189,7 @@
 
             TempData[SuccessMessage] = CpuEditedSuccessfully;
 
-            return RedirectToAction("Details", "Cpu", new { id });
+            return RedirectToAction("Edit", "Cpu", new { id });
         }
 
         [HttpGet]

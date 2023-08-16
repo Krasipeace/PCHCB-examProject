@@ -79,7 +79,7 @@
 
                 this.TempData[SuccessMessage] = GpuAddedSuccessfully;
 
-                return this.RedirectToAction("Details", "Gpu", new
+                return this.RedirectToAction("Add", "Gpu", new
                 {
                     id = gpuId
                 });
@@ -188,7 +188,7 @@
 
             TempData[SuccessMessage] = GpuEditedSuccessfully;
 
-            return RedirectToAction("Details", "Gpu", new { id });
+            return RedirectToAction("Edit", "Gpu", new { id });
         }
 
         [HttpGet]
