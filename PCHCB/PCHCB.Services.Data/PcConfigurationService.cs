@@ -303,34 +303,19 @@
             };
         }
 
-        public async Task<int> AssemblePcConfiguration(AssembleConfigurationFormModel buildConfiguration)
+        public async Task<int> AssemblePcConfiguration(AssembleConfigurationFormModel buildConfiguration, string builderId)
         {
-            AssembleConfigurationFormModel newPcBuild = new AssembleConfigurationFormModel()
+            PcConfiguration newPcBuild = new PcConfiguration()
             {
-                CpuId = buildConfiguration.CpuId,
-                GpuId = buildConfiguration.GpuId,
-                MotherboardId = buildConfiguration.MotherboardId,
-                CoolerId = buildConfiguration.CoolerId,
-                StorageId = buildConfiguration.StorageId,
-                RamId = buildConfiguration.RamId,
-                PsuId = buildConfiguration.PsuId,
-                CaseId = buildConfiguration.CaseId,
+                Id = buildConfiguration.Id,
+                CreatedOn = DateTime.UtcNow,
+                BuilderId = Guid.Parse(builderId),
             };
 
-            //await dbContext.PcConfigurations.AddAsync(newPcBuild.Id);
+            await dbContext.PcConfigurations.AddAsync(newPcBuild);
             await dbContext.SaveChangesAsync();
 
-            return new AssembleConfigurationFormModel()
-            {
-                CpuId = newPcBuild.CpuId,
-                GpuId = newPcBuild.GpuId,
-                MotherboardId = newPcBuild.MotherboardId,
-                CoolerId = newPcBuild.CoolerId,
-                StorageId = newPcBuild.StorageId,
-                RamId = newPcBuild.RamId,
-                PsuId = newPcBuild.PsuId,
-                CaseId = newPcBuild.CaseId,
-            }.PcConfigurationId;
+            return newPcBuild.Id;
         }
 
         public async Task<IEnumerable<PcConfigurationViewModel>> GetMyBuilds(string builderId)

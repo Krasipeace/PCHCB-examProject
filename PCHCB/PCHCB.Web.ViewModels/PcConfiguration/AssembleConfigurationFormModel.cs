@@ -15,7 +15,7 @@
     /// </summary>
     public class AssembleConfigurationFormModel : IProtectedUrlsModel
     {
-        public int PcConfigurationId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; } = null!;
 
@@ -34,6 +34,8 @@
         public int RamId { get; set; }
 
         public int StorageId { get; set; }
+
+        public Guid BuilderId { get; set; }
 
         public List<CaseDetailsViewModel> Cases { get; set; } = new List<CaseDetailsViewModel>();
 

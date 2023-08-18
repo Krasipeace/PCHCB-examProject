@@ -9,11 +9,11 @@
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post">
+        <form method="post" asp-action="Assemble" asp-controller="PcConfiguration">
             <div class="row mt-2">
                 <div class="form-group mt-2">
                     <label>Graphic Cards:</label>
-                    <select  class="form-control">
+                    <select class="form-control">
                         @foreach (var item in (ViewBag.Gpus))
                         {
                             <option value="@item.Id">@item.Name - @item.Memory GB - $@item.Price</option>
@@ -29,18 +29,15 @@
                         }
                     </select>
                     <div class="row mt-2">
-                    </div>
-                    <div class="text-center">
-@*                        <p><a class="btn btn-outline-info" type="submit" asp-area="" asp-controller="PcConfiguiration" asp-action="AssembleCpuAndGpu" >Add CPU and GPU</a></p>
-*@                        <input class="btn btn-primary mt-4" type="submit" value="Add CPU and GPU" />
+                        @*                    </div>
+                        <div class="text-center">
+                        <p><a class="btn btn-outline-info" type="submit" asp-area="" asp-controller="PcConfiguiration" asp-action="AssembleCpuAndGpu" >Add CPU and GPU</a></p>
+                        <input class="btn btn-primary mt-4" type="submit" value="Add CPU and GPU" />
+                        </div>*@
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
 
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post">
             <div class="form-group mt-2">
                 <label>Motherboards</label>
                 <select class="form-control">
@@ -49,15 +46,11 @@
                         <option value="item.Id">@item.Name - @item.Chipset - @item.Socket - $@item.Price</option>
                     }
                 </select>
-                <div class="text-center">
+@*                <div class="text-center">
                     <input class="btn btn-primary mt-4" type="submit" value="Add Motherboard" />
-                </div>
+                </div>*@
             </div>
-        </form>
-    </div>
 
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post">
             <div class="row mt-2">
                 <div class="form-group mt-2">
                     <label>Cases</label>
@@ -67,16 +60,12 @@
                             <option value="item.Id">@item.Name - $@item.Price</option>
                         }
                     </select>
-                    <div class="text-center">
+@*                    <div class="text-center">
                         <input class="btn btn-primary mt-4" type="submit" value="Add Case" />
-                    </div>
+                    </div>*@
                 </div>
             </div>
-        </form>
-    </div>
 
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post">
             <div class="row mt-2">
                 <div class="form-group mt-2">
                     <label>Coolers</label>
@@ -86,15 +75,11 @@
                             <option value="item.Id">@item.Name - TDP: @item.Tdp W - $@item.Price</option>
                         }
                     </select>
-                    <div class="text-center">
+@*                    <div class="text-center">
                         <input class="btn btn-primary mt-4" type="submit" value="Add Cooler" />
-                    </div>
+                    </div>*@
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post">
             <div class="row mt-2">
                 <div class="form-group mt-2">
                     <label>Rams</label>
@@ -104,15 +89,11 @@
                             <option value="@item.Id">@item.Name - @item.Frequency MHz - @item.ModelNumber - $@item.Price</option>
                         }
                     </select>
-                    <div class="text-center">
+@*                    <div class="text-center">
                         <input class="btn btn-primary mt-4" type="submit" value="Add RAM" />
-                    </div>
+                    </div>*@
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post">
             <div class="row mt-2">
                 <div class="form-group mt-2">
                     <label>Storages</label>
@@ -122,15 +103,11 @@
                             <option value="@item.Id">@item.Name - @item.Capacity GB - $@item.Price</option>
                         }
                     </select>
-                    <div class="text-center">
+@*                    <div class="text-center">
                         <input class="btn btn-primary mt-4" type="submit" value="Add Storage" />
-                    </div>
+                    </div>*@
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post">
             <div class="row mt-2">
                 <div class="form-group mt-2">
                     <label>Power Supplies</label>
@@ -140,15 +117,11 @@
                             <option value="@item.Id">@item.Name - @item.Wattage W - $@item.Price</option>
                         }
                     </select>
-                    <div class="text-center">
+@*                    <div class="text-center">
                         <input class="btn btn-primary mt-4" type="submit" value="Add Power Supply" />
-                    </div>
+                    </div>*@
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post" asp-action="Assemble" asp-controller="PcConfiguration">
             <div class="form-group mt-2">
                 <label for="inputName">Name</label>
                 <input type="text" class="form-control" id="inputName" name="Name">
@@ -163,4 +136,4 @@
 @section Scripts
     {
     <partial name="_ValidationScriptsPartial" />
-}
+    }

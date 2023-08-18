@@ -22,6 +22,7 @@
         private readonly IPsuService psuService;
         private readonly IRamService ramService;
         private readonly IStorageService storageService;
+        private readonly IUserService userService;
 
         public PcConfigurationController(IPcConfigurationService pcConfigurationService, 
                                         ICaseService caseService, 
@@ -31,7 +32,8 @@
                                         IMotherboardService motherboardService, 
                                         IPsuService psuService, 
                                         IRamService ramService, 
-                                        IStorageService storageService)
+                                        IStorageService storageService,
+                                        IUserService userService)
         {
             this.pcConfigurationService = pcConfigurationService;
             this.caseService = caseService;
@@ -42,6 +44,7 @@
             this.psuService = psuService;
             this.ramService = ramService;
             this.storageService = storageService;
+            this.userService = userService;
         }
 
         [HttpGet]
@@ -67,7 +70,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Assemble(AssembleConfigurationFormModel model)
+        public async Task<IActionResult> Assemble(AssembleConfigurationFormModel model, string builderId)
         {
             var gpu = pcConfigurationService.SelectGpuForAssemble(model.GpuId);
             var cpu = pcConfigurationService.SelectCpuForAssemble(model.CpuId);
@@ -88,16 +91,14 @@
                 PsuId = powerSupply.Id,
                 RamId = ram.Id,
                 StorageId = storage.Id,
+                BuilderId = Guid.Parse(builderId)
             };
 
-            int buildPc = await this.pcConfigurationService.AssemblePcConfiguration(buildConfiguration);
+            await this.pcConfigurationService.AssemblePcConfiguration(buildConfiguration, builderId);
 
             this.TempData[SuccessMessage] = PcBuildedSuccessfully;
 
-            return this.RedirectToAction("MyBuilds", "PcConfiguration", new
-            {
-                Id = buildPc,
-            }, nameof(buildConfiguration.Name));
+            return this.RedirectToAction("MyBuilds", "PcConfiguration");
         }
 
         public async Task<IActionResult> MyBuilds()
