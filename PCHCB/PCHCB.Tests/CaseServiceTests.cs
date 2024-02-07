@@ -83,10 +83,9 @@
             await caseService.CreateCaseAsync(testProviderId, caseFormModel);
 
             var newTotalCaseCount = await dbContext.Cases.CountAsync();
-            Assert.IsTrue(newTotalCaseCount > initialTotalCaseCount);
+            Assert.That(newTotalCaseCount > initialTotalCaseCount);
 
             var newCase = await dbContext.Cases.FirstAsync(c => c.Name == "Test Case 1");
-            Assert.IsNotNull(newCase);
             Assert.That(newCase.Name, Is.EqualTo("Test Case 1"));
             Assert.That(newCase.Price, Is.EqualTo(120));
             Assert.That(newCase.CaseSize, Is.EqualTo(CaseSize.FullTower));
@@ -158,7 +157,7 @@
 
             var result = await caseService.IsCaseExistByIdAsync(caseId);
 
-            Assert.IsTrue(result);
+            Assert.That(result);
         }
 
         [Test]
@@ -210,7 +209,6 @@
 
             var result = await caseService.GetCaseForDeleteByIdAsync(caseId);
 
-            Assert.IsNotNull(result);
             Assert.That(result.Name, Is.EqualTo("Case1"));
             Assert.That(result.ImageUrl, Is.EqualTo("http://image.url"));
             Assert.That(result.Description, Is.EqualTo("Description1Description1Description1"));
@@ -219,12 +217,15 @@
         [Test]
         public async Task DeleteCaseByIdRemovesCaseFromDbContext()
         {
+            // Arrange
             var caseId = (await dbContext.Cases.FirstAsync(c => c.Name == "Case1")).Id;
 
+            // Act
             await caseService.DeleteCaseByIdAsync(caseId);
 
+            // Assert
             var result = await dbContext.Cases.FirstOrDefaultAsync(c => c.Id == caseId);
-            Assert.Null(result);
+            Assert.IsNull(result);
         }
 
         [Test]
