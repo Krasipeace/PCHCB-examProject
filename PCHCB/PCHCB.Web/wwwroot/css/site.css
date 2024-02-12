@@ -1,20 +1,17 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 #btn-back-to-top {
@@ -37,10 +34,10 @@ body {
     transition: all ease-in-out 0.1s;
 }
 
-#btn-back-to-top:hover {
-    background-color: rebeccapurple;
-    color: goldenrod;
-}
+    #btn-back-to-top:hover {
+        background-color: rebeccapurple;
+        color: goldenrod;
+    }
 
 .img-thumbnail {
     height: 100px;
@@ -52,9 +49,9 @@ body {
         flex-direction: column;
     }
 
-    .navbar-nav .nav-item {
-        margin-bottom: 10px;
-    }
+        .navbar-nav .nav-item {
+            margin-bottom: 10px;
+        }
 }
 
 @media (max-width: 576px) {
@@ -62,7 +59,7 @@ body {
         flex-direction: column;
     }
 
-    .navbar-nav .nav-item {
-        margin-bottom: 10px;
-    }
+        .navbar-nav .nav-item {
+            margin-bottom: 10px;
+        }
 }
