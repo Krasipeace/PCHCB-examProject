@@ -24,7 +24,7 @@
 
         public async Task<int> CreateGpuAsync(string providerId, GpuFormModel model)
         {
-            Gpu gpu = new Gpu()
+            Gpu gpu = new ()
             {
                 Name = model.Name,
                 Price = model.Price,

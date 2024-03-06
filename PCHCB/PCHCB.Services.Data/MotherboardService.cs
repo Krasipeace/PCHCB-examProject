@@ -24,7 +24,7 @@
 
         public async Task<int> CreateMotherboardAsync(string providerId, MotherboardFormModel model)
         {
-            Motherboard motherboard = new Motherboard()
+            Motherboard motherboard = new ()
             {
                 Name = model.Name,
                 Price = model.Price,
@@ -52,8 +52,7 @@
 
         public async Task<MotherboardFormModel> GetMotherboardForEditByIdAsync(int motherboardId)
         {
-            Motherboard motherboard = await this.dbContext.Motherboards
-                .FirstAsync(m => m.Id == motherboardId);
+            Motherboard motherboard = await this.dbContext.Motherboards.FirstAsync(m => m.Id == motherboardId);
 
             return new MotherboardFormModel()
             {
@@ -76,8 +75,7 @@
 
         public async Task EditMotherboardByIdAndFormModelAsync(int motherboardId, MotherboardFormModel model)
         {
-            Motherboard motherboard = await this.dbContext.Motherboards
-                .FirstAsync(m => m.Id == motherboardId);
+            Motherboard motherboard = await this.dbContext.Motherboards.FirstAsync(m => m.Id == motherboardId);
 
             motherboard.Name = model.Name;
             motherboard.Price = model.Price;
@@ -122,8 +120,7 @@
 
         public async Task<DeleteDetailsViewModel> GetMotherboardForDeleteByIdAsync(int motherboardId)
         {
-            Motherboard motherboard = await dbContext.Motherboards
-                .FirstAsync(m => m.Id == motherboardId);
+            Motherboard motherboard = await dbContext.Motherboards.FirstAsync(m => m.Id == motherboardId);
 
             return new DeleteDetailsViewModel
             {
@@ -135,8 +132,7 @@
 
         public async Task DeleteMotherboardByIdAsync(int motherboardId)
         {
-            Motherboard motherboard = await this.dbContext.Motherboards
-                .FirstAsync(m => m.Id == motherboardId);
+            Motherboard motherboard = await this.dbContext.Motherboards.FirstAsync(m => m.Id == motherboardId);
 
             motherboard.Name = ComponentUnavailable;
             this.dbContext.Motherboards.Remove(motherboard);
@@ -185,8 +181,7 @@
 
         public async Task<SearchResult> SearchMotherboardsAsync(AllQueryModel queryModel)
         {
-            IQueryable<Motherboard> motherboardQuery = dbContext.Motherboards
-                 .AsQueryable();
+            IQueryable<Motherboard> motherboardQuery = dbContext.Motherboards.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
             {
@@ -199,16 +194,11 @@
 
             motherboardQuery = queryModel.Sorting switch
             {
-                GeneralSorting.Newest => motherboardQuery
-                    .OrderByDescending(m => m.AddedOn),
-                GeneralSorting.Oldest => motherboardQuery
-                    .OrderBy(m => m.AddedOn),
-                GeneralSorting.PriceAscending => motherboardQuery
-                    .OrderBy(m => m.Price),
-                GeneralSorting.PriceDescending => motherboardQuery
-                    .OrderByDescending(m => m.Price),
-                _ => motherboardQuery
-                    .OrderByDescending(m => m.Id)
+                GeneralSorting.Newest => motherboardQuery.OrderByDescending(m => m.AddedOn),
+                GeneralSorting.Oldest => motherboardQuery.OrderBy(m => m.AddedOn),
+                GeneralSorting.PriceAscending => motherboardQuery.OrderBy(m => m.Price),
+                GeneralSorting.PriceDescending => motherboardQuery.OrderByDescending(m => m.Price),
+                _ => motherboardQuery.OrderByDescending(m => m.Id)
             };
 
             IEnumerable<AllViewModel> allMotherboards = await motherboardQuery

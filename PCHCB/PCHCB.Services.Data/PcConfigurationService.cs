@@ -32,8 +32,7 @@
 
         public async Task<CpuDetailsViewModel> SelectCpuForAssemble(int cpuId)
         {
-            Cpu cpu = await this.dbContext.Cpus
-                .FirstAsync(c => c.Id == cpuId);
+            Cpu cpu = await this.dbContext.Cpus.FirstAsync(c => c.Id == cpuId);
 
             return new CpuDetailsViewModel()
             {
@@ -52,8 +51,7 @@
 
         public async Task<GpuDetailsViewModel> SelectGpuForAssemble(int gpuId)
         {
-            Gpu gpu = await this.dbContext.Gpus
-                .FirstAsync(g => g.Id == gpuId);
+            Gpu gpu = await this.dbContext.Gpus.FirstAsync(g => g.Id == gpuId);
 
             return new GpuDetailsViewModel()
             {
@@ -121,8 +119,7 @@
 
         public async Task<CoolerDetailsViewModel> SelectCoolerForAssemble(int coolerId)
         {
-            Cooler cooler = await this.dbContext.Coolers
-                .FirstAsync(c => c.Id == coolerId);
+            Cooler cooler = await this.dbContext.Coolers.FirstAsync(c => c.Id == coolerId);
 
             if (cooler.Type == 0)
             {
@@ -190,10 +187,8 @@
 
         public async Task<RamDetailsViewModel> SelectRamForAssemble(int ramId, int coolerId)
         {
-            Ram ram = await this.dbContext.Rams
-                .FirstAsync(r => r.Id == ramId);
-            Cooler cooler = await this.dbContext.Coolers
-                .FirstAsync(c => c.Id == coolerId);
+            Ram ram = await this.dbContext.Rams.FirstAsync(r => r.Id == ramId);
+            Cooler cooler = await this.dbContext.Coolers.FirstAsync(c => c.Id == coolerId);
 
             // Current Problem: RAM might hit the air cooler, Cooler Width is not clear solution to the problem of ram hitting the cooler... for now i will check if the ram height is lower or equal than the standard for RAM Clearance = 32mm
             if (cooler.Type == 0)
@@ -235,8 +230,7 @@
 
         public async Task<StorageDetailsViewModel> SelectStorageForAssemble(int storageId)
         {
-            Storage storage = await this.dbContext.Storages
-                .FirstAsync(s => s.Id == storageId);
+            Storage storage = await this.dbContext.Storages.FirstAsync(s => s.Id == storageId);
 
             if ((int)storage.Type == 0 || (int)storage.Type == 1)
             {
@@ -271,18 +265,12 @@
 
         public async Task<PsuDetailsViewModel> SelectPsuForAssemble(int psuId, int cpuId, int gpuId, int motherboardId, int coolerId, int storageId, int ramId)
         {
-            Cpu cpu = await this.dbContext.Cpus
-                .FirstAsync(c => c.Id == cpuId);
-            Gpu gpu = await this.dbContext.Gpus
-                .FirstAsync(g => g.Id == gpuId);
-            Motherboard motherboard = await this.dbContext.Motherboards
-                .FirstAsync(m => m.Id == motherboardId);
-            Cooler cooler = await this.dbContext.Coolers
-                .FirstAsync(c => c.Id == coolerId);
-            Storage storage = await this.dbContext.Storages
-                .FirstAsync(s => s.Id == storageId);
-            Ram ram = await this.dbContext.Rams
-                .FirstAsync(r => r.Id == ramId);
+            Cpu cpu = await this.dbContext.Cpus.FirstAsync(c => c.Id == cpuId);
+            Gpu gpu = await this.dbContext.Gpus.FirstAsync(g => g.Id == gpuId);
+            Motherboard motherboard = await this.dbContext.Motherboards.FirstAsync(m => m.Id == motherboardId);
+            Cooler cooler = await this.dbContext.Coolers.FirstAsync(c => c.Id == coolerId);
+            Storage storage = await this.dbContext.Storages.FirstAsync(s => s.Id == storageId);
+            Ram ram = await this.dbContext.Rams.FirstAsync(r => r.Id == ramId);
 
             double ConfigurationWattage = await CalculateWattage(cpu.Id, gpu.Id, motherboard.Id, cooler.Id, storage.Id, ram.Id);
 
@@ -305,7 +293,7 @@
 
         public async Task<int> AssemblePcConfiguration(AssembleConfigurationFormModel buildConfiguration, string builderId)
         {
-            PcConfiguration newPcBuild = new PcConfiguration()
+            PcConfiguration newPcBuild = new()
             {
                 Id = buildConfiguration.Id,
                 CreatedOn = DateTime.UtcNow,
@@ -345,18 +333,12 @@
         /// <returns></returns>
         public async Task<double> CalculateWattage(int cpuId, int gpuId, int motherboardId, int coolerId, int storageId, int ramId)
         {
-            Cpu cpu = await this.dbContext.Cpus
-                .FirstAsync(c => c.Id == cpuId);
-            Gpu gpu = await this.dbContext.Gpus
-                .FirstAsync(g => g.Id == gpuId);
-            Motherboard motherboard = await this.dbContext.Motherboards
-                .FirstAsync(m => m.Id == motherboardId);
-            Cooler cooler = await this.dbContext.Coolers
-                .FirstAsync(c => c.Id == coolerId);
-            Storage storage = await this.dbContext.Storages
-                .FirstAsync(s => s.Id == storageId);
-            Ram ram = await this.dbContext.Rams
-                .FirstAsync(r => r.Id == ramId);
+            Cpu cpu = await this.dbContext.Cpus.FirstAsync(c => c.Id == cpuId);
+            Gpu gpu = await this.dbContext.Gpus.FirstAsync(g => g.Id == gpuId);
+            Motherboard motherboard = await this.dbContext.Motherboards.FirstAsync(m => m.Id == motherboardId);
+            Cooler cooler = await this.dbContext.Coolers.FirstAsync(c => c.Id == coolerId);
+            Storage storage = await this.dbContext.Storages.FirstAsync(s => s.Id == storageId);
+            Ram ram = await this.dbContext.Rams.FirstAsync(r => r.Id == ramId);
 
             double motherboardWattage = GetMotherboardWattage(motherboard);
             double coolerWattage = GetCoolerWattage(cooler);

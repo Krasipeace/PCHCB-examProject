@@ -8,11 +8,39 @@
 <h3 class="text-center">@ViewData["Title"]</h3>
 <hr />
 
-<partial name="_MyCasesPartial" />
-<partial name="_MyCoolersPartial" />
-<partial name="_MyCpusPartial" />
-<partial name="_MyGpusPartial" />
-<partial name="_MyMotherboardsPartial" />
-<partial name="_MyPsusPartial" />
-<partial name="_MyRamsPartial" />
-<partial name="_MyStoragesPartial" />
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-cases-tab" data-bs-toggle="pill" data-bs-target="#pills-cases" type="button" role="tab" aria-controls="pills-cases" aria-selected="true">Cases</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-coolers-tab" data-bs-toggle="pill" data-bs-target="#pills-coolers" type="button" role="tab" aria-controls="pills-coolers" aria-selected="false">Coolers</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-cpus-tab" data-bs-toggle="pill" data-bs-target="#pills-cpus" type="button" role="tab" aria-controls="pills-cpus" aria-selected="false">CPUs</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-gpus-tab" data-bs-toggle="pill" data-bs-target="#pills-gpus" type="button" role="tab" aria-controls="pills-gpus" aria-selected="false">GPUs</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-motherboards-tab" data-bs-toggle="pill" data-bs-target="#pills-motherboards" type="button" role="tab" aria-controls="pills-motherboards" aria-selected="false">Motherboards</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-psus-tab" data-bs-toggle="pill" data-bs-target="#pills-psus" type="button" role="tab" aria-controls="pills-psus" aria-selected="false">Power Supplies</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-rams-tab" data-bs-toggle="pill" data-bs-target="#pills-rams" type="button" role="tab" aria-controls="pills-rams" aria-selected="false">Memory Sticks</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-storages-tab" data-bs-toggle="pill" data-bs-target="#pills-storages" type="button" role="tab" aria-controls="pills-storages" aria-selected="false">Storages</button>
+    </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-cases" role="tabpanel" aria-labelledby="pills-cases-tab"><partial name="_MyCasesPartial" /></div>
+    <div class="tab-pane fade" id="pills-coolers" role="tabpanel" aria-labelledby="pills-coolers-tab"><partial name="_MyCoolersPartial" /></div>
+    <div class="tab-pane fade" id="pills-cpus" role="tabpanel" aria-labelledby="pills-cpus-tab"><partial name="_MyCpusPartial" /></div>
+    <div class="tab-pane fade" id="pills-gpus" role="tabpanel" aria-labelledby="pills-gpus-tab"><partial name="_MyGpusPartial" /></div>
+    <div class="tab-pane fade" id="pills-motherboards" role="tabpanel" aria-labelledby="pills-motherboards-tab"><partial name="_MyMotherboardsPartial" /></div>
+    <div class="tab-pane fade" id="pills-psus" role="tabpanel" aria-labelledby="pills-psus-tab"><partial name="_MyPsusPartial" /></div>
+    <div class="tab-pane fade" id="pills-rams" role="tabpanel" aria-labelledby="pills-rams-tab"><partial name="_MyRamsPartial" /></div>
+    <div class="tab-pane fade" id="pills-storages" role="tabpanel" aria-labelledby="pills-storages-tab"><partial name="_MyStoragesPartial" /></div>
+</div>

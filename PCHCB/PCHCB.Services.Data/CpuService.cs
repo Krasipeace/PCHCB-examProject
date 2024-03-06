@@ -24,7 +24,7 @@
 
         public async Task<int> CreateCpuAsync(string providerId, CpuFormModel model)
         {
-            Cpu cpu = new Cpu()
+            Cpu cpu = new ()
             {
                 Name = model.Name,
                 Price = model.Price,
@@ -51,8 +51,7 @@
 
         public async Task<CpuFormModel> GetCpuForEditByIdAsync(int cpuId)
         {
-            Cpu cpu = await this.dbContext.Cpus
-                .FirstAsync(c => c.Id == cpuId);
+            Cpu cpu = await this.dbContext.Cpus.FirstAsync(c => c.Id == cpuId);
 
             return new CpuFormModel()
             {
@@ -74,8 +73,7 @@
 
         public async Task EditCpuByIdAndFormModelAsync(int cpuId, CpuFormModel model)
         {
-            Cpu cpu = await this.dbContext.Cpus
-                .FirstAsync(c => c.Id == cpuId);
+            Cpu cpu = await this.dbContext.Cpus.FirstAsync(c => c.Id == cpuId);
 
             cpu.Name = model.Name;
             cpu.Price = model.Price;
@@ -97,8 +95,7 @@
 
         public async Task<bool> IsCpuExistByIdAsync(int cpuId)
         {
-            bool result = await this.dbContext.Cpus
-                .AnyAsync(c => c.Id == cpuId);
+            bool result = await this.dbContext.Cpus.AnyAsync(c => c.Id == cpuId);
 
             return result;
         }
@@ -119,8 +116,7 @@
 
         public async Task<DeleteDetailsViewModel> GetCpuForDeleteByIdAsync(int cpuId)
         {
-            Cpu cooler = await dbContext.Cpus
-                .FirstAsync(c => c.Id == cpuId);
+            Cpu cooler = await dbContext.Cpus.FirstAsync(c => c.Id == cpuId);
 
             return new DeleteDetailsViewModel
             {
@@ -132,8 +128,7 @@
 
         public async Task DeleteCpuByIdAsync(int cpuId)
         {
-            Cpu cpu = await this.dbContext.Cpus
-                .FirstAsync(c => c.Id == cpuId);
+            Cpu cpu = await this.dbContext.Cpus.FirstAsync(c => c.Id == cpuId);
 
             cpu.Name = ComponentUnavailable;
             this.dbContext.Cpus.Remove(cpu);
@@ -181,8 +176,7 @@
 
         public async Task<SearchResult> SearchCpusAsync(AllQueryModel queryModel)
         {
-            IQueryable<Cpu> cpuQuery = dbContext.Cpus
-                 .AsQueryable();
+            IQueryable<Cpu> cpuQuery = dbContext.Cpus.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
             {
@@ -195,16 +189,11 @@
 
             cpuQuery = queryModel.Sorting switch
             {
-                GeneralSorting.Newest => cpuQuery
-                    .OrderByDescending(c => c.AddedOn),
-                GeneralSorting.Oldest => cpuQuery
-                    .OrderBy(c => c.AddedOn),
-                GeneralSorting.PriceAscending => cpuQuery
-                    .OrderBy(c => c.Price),
-                GeneralSorting.PriceDescending => cpuQuery
-                    .OrderByDescending(c => c.Price),
-                _ => cpuQuery
-                    .OrderByDescending(c => c.Id)
+                GeneralSorting.Newest => cpuQuery.OrderByDescending(c => c.AddedOn),
+                GeneralSorting.Oldest => cpuQuery.OrderBy(c => c.AddedOn),
+                GeneralSorting.PriceAscending => cpuQuery.OrderBy(c => c.Price),
+                GeneralSorting.PriceDescending => cpuQuery.OrderByDescending(c => c.Price),
+                _ => cpuQuery.OrderByDescending(c => c.Id)
             };
 
             IEnumerable<AllViewModel> allCpus = await cpuQuery

@@ -24,7 +24,7 @@
 
         public async Task<int> CreateRamAsync(string providerId, RamFormModel model)
         {
-            Ram ram = new Ram()
+            Ram ram = new ()
             {
                 Name = model.Name,
                 Price = model.Price,
@@ -47,8 +47,7 @@
 
         public async Task<RamFormModel> GetRamForEditByIdAsync(int ramId)
         {
-            Ram ram = await this.dbContext.Rams
-                .FirstAsync(r => r.Id == ramId);
+            Ram ram = await this.dbContext.Rams.FirstAsync(r => r.Id == ramId);
 
             return new RamFormModel()
             {
@@ -66,8 +65,7 @@
 
         public async Task EditRamByIdAndFormModelAsync(int ramId, RamFormModel model)
         {
-            Ram ram = await this.dbContext.Rams
-                .FirstAsync(r => r.Id == ramId);
+            Ram ram = await this.dbContext.Rams.FirstAsync(r => r.Id == ramId);
 
             ram.Name = model.Name;
             ram.Price = model.Price;
@@ -99,16 +97,14 @@
 
         public async Task<bool> IsRamExistByIdAsync(int ramId)
         {
-            bool result = await this.dbContext.Rams
-                .AnyAsync(r => r.Id == ramId);
+            bool result = await this.dbContext.Rams.AnyAsync(r => r.Id == ramId);
 
             return result;
         }
 
         public async Task<DeleteDetailsViewModel> GetRamForDeleteByIdAsync(int ramId)
         {
-            Ram ram = await dbContext.Rams
-                .FirstAsync(r => r.Id == ramId);
+            Ram ram = await dbContext.Rams.FirstAsync(r => r.Id == ramId);
 
             return new DeleteDetailsViewModel
             {
@@ -120,8 +116,7 @@
 
         public async Task DeleteRamByIdAsync(int ramId)
         {
-            Ram ram = await this.dbContext.Rams
-                .FirstAsync(r => r.Id == ramId);
+            Ram ram = await this.dbContext.Rams.FirstAsync(r => r.Id == ramId);
 
             ram.Name = ComponentUnavailable;
             this.dbContext.Rams.Remove(ram);
@@ -165,8 +160,7 @@
 
         public async Task<SearchResult> SearchRamsAsync(AllQueryModel queryModel)
         {
-            IQueryable<Ram> ramQuery = dbContext.Rams
-                 .AsQueryable();
+            IQueryable<Ram> ramQuery = dbContext.Rams.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
             {
@@ -179,16 +173,11 @@
 
             ramQuery = queryModel.Sorting switch
             {
-                GeneralSorting.Newest => ramQuery
-                    .OrderByDescending(r => r.AddedOn),
-                GeneralSorting.Oldest => ramQuery
-                    .OrderBy(r => r.AddedOn),
-                GeneralSorting.PriceAscending => ramQuery
-                    .OrderBy(r => r.Price),
-                GeneralSorting.PriceDescending => ramQuery
-                    .OrderByDescending(r => r.Price),
-                _ => ramQuery
-                    .OrderByDescending(r => r.Id)
+                GeneralSorting.Newest => ramQuery.OrderByDescending(r => r.AddedOn),
+                GeneralSorting.Oldest => ramQuery.OrderBy(r => r.AddedOn),
+                GeneralSorting.PriceAscending => ramQuery.OrderBy(r => r.Price),
+                GeneralSorting.PriceDescending => ramQuery.OrderByDescending(r => r.Price),
+                _ => ramQuery.OrderByDescending(r => r.Id)
             };
 
             IEnumerable<AllViewModel> allRams = await ramQuery

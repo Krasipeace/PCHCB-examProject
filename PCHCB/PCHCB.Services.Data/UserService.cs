@@ -18,8 +18,7 @@
 
         public async Task<string> GetFullNameByEmailAsync(string email)
         {
-            ApplicationUser? user = await dbContext.Users
-                .FirstOrDefaultAsync(u => u.Email == email);
+            ApplicationUser? user = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
             if (user == null)
             {
                 return string.Empty;
@@ -30,8 +29,7 @@
 
         public async Task<IEnumerable<UserViewModel>> AllUsersAsync()
         {
-            List<UserViewModel> allUsers = await this.dbContext
-                .Users
+            List<UserViewModel> allUsers = await this.dbContext.Users
                 .Select(u => new UserViewModel()
                 {
                     Id = u.Id.ToString(),
@@ -41,9 +39,7 @@
                 .ToListAsync();
             foreach (UserViewModel user in allUsers)
             {
-                Provider? provider = this.dbContext
-                    .Providers
-                    .FirstOrDefault(a => a.UserId.ToString() == user.Id);
+                Provider? provider = this.dbContext.Providers.FirstOrDefault(a => a.UserId.ToString() == user.Id);
                 if (provider != null)
                 {
                     user.PhoneNumber = provider.PhoneNumber;

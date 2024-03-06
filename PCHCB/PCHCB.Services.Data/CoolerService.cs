@@ -24,7 +24,7 @@
 
         public async Task<int> CreateCoolerAsync(string providerId, CoolerFormModel model)
         {
-            Cooler cooler = new Cooler()
+            Cooler cooler = new ()
             {
                 Name = model.Name,
                 Price = model.Price,
@@ -49,8 +49,7 @@
 
         public async Task<CoolerFormModel> GetCoolerForEditByIdAsync(int coolerId)
         {
-            Cooler cooler = await this.dbContext.Coolers
-                .FirstAsync(c => c.Id == coolerId);
+            Cooler cooler = await this.dbContext.Coolers.FirstAsync(c => c.Id == coolerId);
 
             return new CoolerFormModel()
             {
@@ -70,8 +69,7 @@
 
         public async Task EditCoolerByIdAndFormModelAsync(int coolerId, CoolerFormModel model)
         {
-            Cooler cooler = await this.dbContext.Coolers
-                .FirstAsync(c => c.Id == coolerId);
+            Cooler cooler = await this.dbContext.Coolers.FirstAsync(c => c.Id == coolerId);
 
             cooler.Name = model.Name;
             cooler.Price = model.Price;
@@ -91,8 +89,7 @@
 
         public async Task<bool> IsCoolerExistByIdAsync(int coolerId)
         {
-            bool result = await this.dbContext.Coolers
-                .AnyAsync(c => c.Id == coolerId);
+            bool result = await this.dbContext.Coolers.AnyAsync(c => c.Id == coolerId);
 
             return result;
         }
@@ -113,8 +110,7 @@
 
         public async Task<DeleteDetailsViewModel> GetCoolerForDeleteByIdAsync(int coolerId)
         {
-            Cooler cooler = await dbContext.Coolers
-                .FirstAsync(c => c.Id == coolerId);
+            Cooler cooler = await dbContext.Coolers.FirstAsync(c => c.Id == coolerId);
 
             return new DeleteDetailsViewModel
             {
@@ -126,8 +122,7 @@
 
         public async Task DeleteCoolerByIdAsync(int coolerId)
         {
-            Cooler cooler = await this.dbContext.Coolers
-                .FirstAsync(c => c.Id == coolerId);
+            Cooler cooler = await this.dbContext.Coolers.FirstAsync(c => c.Id == coolerId);
 
             cooler.Name = ComponentUnavailable;
             this.dbContext.Coolers.Remove(cooler);
@@ -172,8 +167,7 @@
 
         public async Task<SearchResult> SearchCoolersAsync(AllQueryModel queryModel)
         {
-            IQueryable<Cooler> coolerQuery = dbContext.Coolers
-                .AsQueryable();
+            IQueryable<Cooler> coolerQuery = dbContext.Coolers.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
             {
@@ -186,16 +180,11 @@
 
             coolerQuery = queryModel.Sorting switch
             {
-                GeneralSorting.Newest => coolerQuery
-                    .OrderByDescending(c => c.AddedOn),
-                GeneralSorting.Oldest => coolerQuery
-                    .OrderBy(c => c.AddedOn),
-                GeneralSorting.PriceAscending => coolerQuery
-                    .OrderBy(c => c.Price),
-                GeneralSorting.PriceDescending => coolerQuery
-                    .OrderByDescending(c => c.Price),
-                _ => coolerQuery
-                    .OrderByDescending(c => c.Id)
+                GeneralSorting.Newest => coolerQuery.OrderByDescending(c => c.AddedOn),
+                GeneralSorting.Oldest => coolerQuery.OrderBy(c => c.AddedOn),
+                GeneralSorting.PriceAscending => coolerQuery.OrderBy(c => c.Price),
+                GeneralSorting.PriceDescending => coolerQuery.OrderByDescending(c => c.Price),
+                _ => coolerQuery.OrderByDescending(c => c.Id)
             };
 
             IEnumerable<AllViewModel> allCoolers = await coolerQuery

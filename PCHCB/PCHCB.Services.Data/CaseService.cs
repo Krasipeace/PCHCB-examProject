@@ -24,7 +24,7 @@
 
         public async Task<int> CreateCaseAsync(string providerId, CaseFormModel model)
         {
-            Case newCase = new Case
+            Case newCase = new()
             {
                 Name = model.Name,
                 Price = model.Price,
@@ -49,8 +49,7 @@
 
         public async Task<CaseFormModel> GetCaseForEditByIdAsync(int caseId)
         {
-            Case @case = await this.dbContext.Cases
-                .FirstAsync(c => c.Id == caseId);
+            Case @case = await this.dbContext.Cases.FirstAsync(c => c.Id == caseId);
 
             return new CaseFormModel()
             {
@@ -70,8 +69,7 @@
 
         public async Task EditCaseByIdAndFormModelAsync(int caseId, CaseFormModel formModel)
         {
-            Case @case = await this.dbContext.Cases
-                .FirstAsync(c => c.Id == caseId);
+            Case @case = await this.dbContext.Cases.FirstAsync(c => c.Id == caseId);
 
             @case.Name = formModel.Name;
             @case.Price = formModel.Price;
@@ -91,8 +89,7 @@
 
         public async Task<bool> IsCaseExistByIdAsync(int caseId)
         {
-            bool result = await this.dbContext.Cases
-                .AnyAsync(c => c.Id == caseId);
+            bool result = await this.dbContext.Cases.AnyAsync(c => c.Id == caseId);
 
             return result;
         }
@@ -113,8 +110,7 @@
 
         public async Task<DeleteDetailsViewModel> GetCaseForDeleteByIdAsync(int caseId)
         {
-            Case @case = await dbContext.Cases
-                .FirstAsync(c => c.Id == caseId);
+            Case @case = await dbContext.Cases.FirstAsync(c => c.Id == caseId);
 
             return new DeleteDetailsViewModel
             {
@@ -126,8 +122,7 @@
 
         public async Task DeleteCaseByIdAsync(int caseId)
         {
-            Case @case = await this.dbContext.Cases
-                .FirstAsync(c => c.Id == caseId);
+            Case @case = await this.dbContext.Cases.FirstAsync(c => c.Id == caseId);
 
             @case.Name = ComponentUnavailable;
             this.dbContext.Cases.Remove(@case);
@@ -174,8 +169,7 @@
 
         public async Task<SearchResult> SearchCasesAsync(AllQueryModel queryModel)
         {
-            IQueryable<Case> casesQuery = dbContext.Cases
-                .AsQueryable();
+            IQueryable<Case> casesQuery = dbContext.Cases.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
             {
@@ -188,16 +182,11 @@
 
             casesQuery = queryModel.Sorting switch
             {
-                GeneralSorting.Newest => casesQuery
-                    .OrderByDescending(c => c.AddedOn),
-                GeneralSorting.Oldest => casesQuery
-                    .OrderBy(c => c.AddedOn),
-                GeneralSorting.PriceAscending => casesQuery
-                    .OrderBy(c => c.Price),
-                GeneralSorting.PriceDescending => casesQuery
-                    .OrderByDescending(c => c.Price),
-                _ => casesQuery
-                    .OrderByDescending(c => c.Id)
+                GeneralSorting.Newest => casesQuery.OrderByDescending(c => c.AddedOn),
+                GeneralSorting.Oldest => casesQuery.OrderBy(c => c.AddedOn),
+                GeneralSorting.PriceAscending => casesQuery.OrderBy(c => c.Price),
+                GeneralSorting.PriceDescending => casesQuery.OrderByDescending(c => c.Price),
+                _ => casesQuery.OrderByDescending(c => c.Id)
             };
 
             IEnumerable<AllViewModel> allCases = await casesQuery

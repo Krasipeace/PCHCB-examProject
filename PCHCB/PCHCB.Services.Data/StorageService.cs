@@ -24,7 +24,7 @@
 
         public async Task<int> CreateStorageAsync(string providerId, StorageFormModel model)
         {
-            Storage storage = new Storage()
+            Storage storage = new ()
             {
                 Name = model.Name,
                 Price = model.Price,
@@ -44,8 +44,7 @@
 
         public async Task<StorageFormModel> GetStorageForEditByIdAsync(int storageId)
         {
-            Storage storage = await this.dbContext.Storages
-                .FirstAsync(s => s.Id == storageId);
+            Storage storage = await this.dbContext.Storages.FirstAsync(s => s.Id == storageId);
 
             return new StorageFormModel()
             {
@@ -60,8 +59,7 @@
 
         public async Task EditStorageByIdAndFormModelAsync(int storageId, StorageFormModel model)
         {
-            Storage storage = await this.dbContext.Storages
-                .FirstAsync(s => s.Id == storageId);
+            Storage storage = await this.dbContext.Storages.FirstAsync(s => s.Id == storageId);
 
             storage.Name = model.Name;
             storage.Price = model.Price;
@@ -90,16 +88,14 @@
 
         public async Task<bool> IsStorageExistByIdAsync(int storageId)
         {
-            bool result = await this.dbContext.Storages
-                .AnyAsync(s => s.Id == storageId);
+            bool result = await this.dbContext.Storages.AnyAsync(s => s.Id == storageId);
 
             return result;
         }
 
         public async Task<DeleteDetailsViewModel> GetStorageForDeleteByIdAsync(int storageId)
         {
-            Storage storage = await dbContext.Storages
-                .FirstAsync(s => s.Id == storageId);
+            Storage storage = await dbContext.Storages.FirstAsync(s => s.Id == storageId);
 
             return new DeleteDetailsViewModel
             {
@@ -111,8 +107,7 @@
 
         public async Task DeleteStorageByIdAsync(int storageId)
         {
-            Storage storage = await this.dbContext.Storages
-                .FirstAsync(s => s.Id == storageId);
+            Storage storage = await this.dbContext.Storages.FirstAsync(s => s.Id == storageId);
 
             storage.Name = ComponentUnavailable;
             this.dbContext.Storages.Remove(storage);
@@ -153,8 +148,7 @@
 
         public async Task<SearchResult> SearchStoragesAsync(AllQueryModel queryModel)
         {
-            IQueryable<Storage> storageQuery = dbContext.Storages
-                 .AsQueryable();
+            IQueryable<Storage> storageQuery = dbContext.Storages.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
             {
@@ -167,16 +161,11 @@
 
             storageQuery = queryModel.Sorting switch
             {
-                GeneralSorting.Newest => storageQuery
-                    .OrderByDescending(s => s.AddedOn),
-                GeneralSorting.Oldest => storageQuery
-                    .OrderBy(s => s.AddedOn),
-                GeneralSorting.PriceAscending => storageQuery
-                    .OrderBy(s => s.Price),
-                GeneralSorting.PriceDescending => storageQuery
-                    .OrderByDescending(s => s.Price),
-                _ => storageQuery
-                    .OrderByDescending(s => s.Id)
+                GeneralSorting.Newest => storageQuery.OrderByDescending(s => s.AddedOn),
+                GeneralSorting.Oldest => storageQuery.OrderBy(s => s.AddedOn),
+                GeneralSorting.PriceAscending => storageQuery.OrderBy(s => s.Price),
+                GeneralSorting.PriceDescending => storageQuery.OrderByDescending(s => s.Price),
+                _ => storageQuery.OrderByDescending(s => s.Id)
             };
 
             IEnumerable<AllViewModel> allStorages = await storageQuery

@@ -24,7 +24,7 @@
 
         public async Task<int> CreatePsuAsync(string providerId, PsuFormModel model)
         {
-            Psu psu = new Psu()
+            Psu psu = new ()
             {
                 Name = model.Name,
                 Price = model.Price,
@@ -45,8 +45,7 @@
 
         public async Task<PsuFormModel> GetPsuForEditByIdAsync(int psuId)
         {
-            Psu psu = await this.dbContext.Psus
-                .FirstAsync(p => p.Id == psuId);
+            Psu psu = await this.dbContext.Psus.FirstAsync(p => p.Id == psuId);
 
             return new PsuFormModel
             {
@@ -62,8 +61,7 @@
 
         public async Task EditPsuByIdAndFormModelAsync(int psuId, PsuFormModel model)
         {
-            Psu psu = await this.dbContext.Psus
-                .FirstAsync(p => p.Id == psuId);
+            Psu psu = await this.dbContext.Psus.FirstAsync(p => p.Id == psuId);
 
             psu.Name = model.Name;
             psu.Price = model.Price;
@@ -93,16 +91,14 @@
 
         public async Task<bool> IsPsuExistByIdAsync(int psuId)
         {
-            bool result = await this.dbContext.Psus
-                .AnyAsync(p => p.Id == psuId);
+            bool result = await this.dbContext.Psus.AnyAsync(p => p.Id == psuId);
 
             return result;
         }
 
         public async Task<DeleteDetailsViewModel> GetPsuForDeleteByIdAsync(int psuId)
         {
-            Psu psu = await dbContext.Psus
-                .FirstAsync(p => p.Id == psuId);
+            Psu psu = await dbContext.Psus.FirstAsync(p => p.Id == psuId);
 
             return new DeleteDetailsViewModel
             {
@@ -114,8 +110,7 @@
 
         public async Task DeletePsuByIdAsync(int psuId)
         {
-            Psu psu = await this.dbContext.Psus
-                .FirstAsync(p => p.Id == psuId);
+            Psu psu = await this.dbContext.Psus.FirstAsync(p => p.Id == psuId);
 
             psu.Name = ComponentUnavailable;
             this.dbContext.Psus.Remove(psu);
@@ -156,8 +151,7 @@
 
         public async Task<SearchResult> SearchPsusAsync(AllQueryModel queryModel)
         {
-            IQueryable<Psu> psuQuery = dbContext.Psus
-                 .AsQueryable();
+            IQueryable<Psu> psuQuery = dbContext.Psus.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchTerm))
             {
@@ -170,16 +164,11 @@
 
             psuQuery = queryModel.Sorting switch
             {
-                GeneralSorting.Newest => psuQuery
-                    .OrderByDescending(p => p.AddedOn),
-                GeneralSorting.Oldest => psuQuery
-                    .OrderBy(p => p.AddedOn),
-                GeneralSorting.PriceAscending => psuQuery
-                    .OrderBy(p => p.Price),
-                GeneralSorting.PriceDescending => psuQuery
-                    .OrderByDescending(p => p.Price),
-                _ => psuQuery
-                    .OrderByDescending(p => p.Id)
+                GeneralSorting.Newest => psuQuery.OrderByDescending(p => p.AddedOn),
+                GeneralSorting.Oldest => psuQuery.OrderBy(p => p.AddedOn),
+                GeneralSorting.PriceAscending => psuQuery.OrderBy(p => p.Price),
+                GeneralSorting.PriceDescending => psuQuery.OrderByDescending(p => p.Price),
+                _ => psuQuery.OrderByDescending(p => p.Id)
             };
 
             IEnumerable<AllViewModel> allPsus = await psuQuery
