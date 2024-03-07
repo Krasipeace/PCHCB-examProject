@@ -1,7 +1,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/Krasipeace/PCHCB---ASP.NET-Advanced-Exam-Project) ![GitHub repo size](https://img.shields.io/github/repo-size/Krasipeace/PCHCB---ASP.NET-Advanced-Exam-Project) ![GitHub language count](https://img.shields.io/github/languages/count/Krasipeace/PCHCB---ASP.NET-Advanced-Exam-Project) ![GitHub top language](https://img.shields.io/github/languages/top/Krasipeace/PCHCB---ASP.NET-Advanced-Exam-Project) ![License](https://img.shields.io/badge/license-MIT-green) [![CodeFactor](https://www.codefactor.io/repository/github/krasipeace/pchcb)](https://www.codefactor.io/repository/github/krasipeace/pchcb) 
 
 # PC's Hardware Compatibility Builder
-Started as exam project and part of SoftUni [ASP.NET Advanced course at SoftUni](https://github.com/Krasipeace/SoftUni/tree/main/ASP.NET%20Advanced).
+Started as exam project and part of [ASP.NET Advanced course at SoftUni](https://github.com/Krasipeace/SoftUni/tree/main/ASP.NET%20Advanced).
 Now this is an app that I develop from time to time.
 
 Table of Contents
@@ -13,7 +13,7 @@ Table of Contents
   - [Get Started](#get-started)
   - [Software/Technologies Used](#softwaretechnologies-used)
   - [Admin Area](#admin-area)
-  - [Add Component](#add-component)
+  - [Add/Edit/Delete Component](#addeditdelete-component)
   - [View Component in Details](#view-component-in-details)
   - [View All Components by Type](#view-all-components-by-type)
   - [View All Components by Provider](#view-all-components-by-provider)
