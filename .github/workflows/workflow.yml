@@ -24,9 +24,6 @@ jobs:
     - name: Build
       run: dotnet build PCHCB/PCHCB.Tests/PCHCB.Tests.csproj --configuration Release --no-restore
 
-    outputs:
-      dotnet-version: ${{ steps.setup-dotnet.outputs.dotnet-version }}
-
   test:
     needs: build
     runs-on: ubuntu-latest
@@ -37,7 +34,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ needs.build.outputs.dotnet-version }}
+        dotnet-version: 6.0.x
 
     - name: Test
       run: dotnet test PCHCB/PCHCB.Tests/PCHCB.Tests.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
@@ -52,7 +49,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ needs.build.outputs.dotnet-version }}
+        dotnet-version: 6.0.x
 
     - name: Generate Code Coverage Report
       run: |
