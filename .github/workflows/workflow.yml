@@ -1,0 +1,66 @@
+name: CI workflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore PCHCB.Tests/PCHCB.Tests.csproj
+
+    - name: Build
+      run: dotnet build PCHCB.Tests/PCHCB.Tests.csproj --configuration Release --no-restore
+
+    outputs:
+      dotnet-version: ${{ steps.setup-dotnet.outputs.dotnet-version }}
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ needs.build.outputs.dotnet-version }}
+
+    - name: Test
+      run: dotnet test PCHCB.Tests/PCHCB.Tests.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
+
+  code-coverage:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ needs.build.outputs.dotnet-version }}
+
+    - name: Generate Code Coverage Report
+      run: |
+        dotnet tool install --global dotnet-reportgenerator-globaltool
+        reportgenerator "-reports:**/TestResults/*/coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:"Cobertura;HtmlInline_AzurePipelines;HtmlChart"
+      
+    - name: Publish Code Coverage Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: code-coverage-report
+        path: coveragereport/
