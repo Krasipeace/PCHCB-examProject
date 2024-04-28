@@ -40,38 +40,4 @@ jobs:
       run: dotnet restore PCHCB/PCHCB.Tests/PCHCB.Tests.csproj
   
     - name: Test
-      run: dotnet test PCHCB/PCHCB.Tests/PCHCB.Tests.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
-  
-    - name: Upload coverage file
-      uses: actions/upload-artifact@v2
-      with:
-        name: coverage-file
-        path: PCHCB/TestResults/coverage.cobertura.xml
-  
-  coverage:
-    needs: test
-    runs-on: ubuntu-latest
-  
-    steps:
-    - uses: actions/checkout@v2
-  
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 6.0.x
-  
-    - name: Download coverage file
-      uses: actions/download-artifact@v2
-      with:
-        name: coverage-file
-  
-    - name: Generate Code Coverage Report
-      run: |
-        dotnet tool install --global dotnet-reportgenerator-globaltool
-        reportgenerator "-reports:./coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:"Cobertura;HtmlInline_AzurePipelines;HtmlChart"
-      
-    - name: Publish Code Coverage Report
-      uses: actions/upload-artifact@v2
-      with:
-        name: code-coverage-report
-        path: coveragereport/
+      run: dotnet test PCHCB/PCHCB.Tests/PCHCB.Tests.csproj --no-restore --verbosity normal
