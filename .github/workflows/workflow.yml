@@ -36,6 +36,9 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
+    - name: Restore dependencies
+      run: dotnet restore PCHCB/PCHCB.Tests/PCHCB.Tests.csproj
+
     - name: Test
       run: dotnet test PCHCB/PCHCB.Tests/PCHCB.Tests.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
 
