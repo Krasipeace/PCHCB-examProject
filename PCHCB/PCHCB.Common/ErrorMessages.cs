@@ -119,6 +119,8 @@
             public const string LastNameErrorMessage = "The {0} must be at least {2} and at max {1} characters long.";
 
             public const string BuilderErrorMessage = "Only user of his/her own configuration can view it!";
+
+            public const string DisplayNameErrorMessage = "The {0} must be at least {2} and at max {1} characters long.";
         }
     }
 }

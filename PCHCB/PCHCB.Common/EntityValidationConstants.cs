@@ -218,6 +218,9 @@
 
             public const int LastNameMinLength = 2;
             public const int LastNameMaxLength = 20;
+
+            public const int DisplayNameMinLength = 3;
+            public const int DisplayNameMaxLength = 20;
         }
     }
 }
