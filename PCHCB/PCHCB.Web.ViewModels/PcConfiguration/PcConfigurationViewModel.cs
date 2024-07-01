@@ -23,8 +23,5 @@
         public decimal Price { get; set; }
 
         public DateTime CreatedOn { get; set; }
-
-        [Display(Name = "Builded By")]
-        public Guid BuilderId { get; set; }
     }
 }

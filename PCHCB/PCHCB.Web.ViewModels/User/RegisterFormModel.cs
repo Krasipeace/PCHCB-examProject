@@ -30,9 +30,5 @@
         [Required]
         [StringLength(LastNameMaxLength, MinimumLength = LastNameMinLength, ErrorMessage = LastNameErrorMessage)]
         public string LastName { get; set; } = null!;
-
-        //[Required]
-        //[StringLength(DisplayNameMaxLength, MinimumLength = DisplayNameMinLength, ErrorMessage = DisplayNameErrorMessage)]
-        //public string DisplayName { get; set; } = null!;
     }
 }

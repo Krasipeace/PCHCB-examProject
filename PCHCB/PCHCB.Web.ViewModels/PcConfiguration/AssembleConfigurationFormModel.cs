@@ -1,6 +1,14 @@
 ﻿namespace PCHCB.Web.ViewModels.PcConfiguration
 {
+    using PCHCB.Web.ViewModels.Case;
     using PCHCB.Web.ViewModels.Contracts;
+    using PCHCB.Web.ViewModels.Cooler;
+    using PCHCB.Web.ViewModels.Cpu;
+    using PCHCB.Web.ViewModels.Gpu;
+    using PCHCB.Web.ViewModels.Motherboard;
+    using PCHCB.Web.ViewModels.Psu;
+    using PCHCB.Web.ViewModels.Ram;
+    using PCHCB.Web.ViewModels.Storage;
 
     /// <summary>
     /// Assemble Pc Configuration Form Model
@@ -28,5 +36,21 @@
         public int StorageId { get; set; }
 
         public Guid BuilderId { get; set; }
+
+        public List<CaseDetailsViewModel> Cases { get; set; } = new List<CaseDetailsViewModel>();
+
+        public List<CpuDetailsViewModel> Cpus { get; set; } = new List<CpuDetailsViewModel>();
+
+        public List<CoolerDetailsViewModel> Coolers { get; set; } = new List<CoolerDetailsViewModel>();
+
+        public List<GpuDetailsViewModel> Gpus { get; set; } = new List<GpuDetailsViewModel>();
+
+        public List<MotherboardDetailsViewModel> Motherboards { get; set; } = new List<MotherboardDetailsViewModel>();
+
+        public List<PsuDetailsViewModel> Psus { get; set; } = new List<PsuDetailsViewModel>();
+
+        public List<RamDetailsViewModel> Rams { get; set; } = new List<RamDetailsViewModel>();
+
+        public List<StorageDetailsViewModel> Storages { get; set; } = new List<StorageDetailsViewModel>();
     }
 }
